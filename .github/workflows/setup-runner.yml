@@ -1,0 +1,93 @@
+name: Setup Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type "install" to confirm runner installation on Vultr
+        required: true
+
+jobs:
+  install-runner:
+    name: Install GitHub Actions Runner on Vultr
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event.inputs.confirm == 'install'
+
+    steps:
+      - name: Get runner registration token
+        id: token
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const res = await github.rest.actions.createRegistrationTokenForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            core.setSecret(res.data.token)
+            core.setOutput('token', res.data.token)
+
+      - name: Install and start runner on Vultr
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USER }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true
+          envs: RUNNER_TOKEN,REPO_URL
+          script: |
+            set -e
+            RUNNER_TOKEN="${{ steps.token.outputs.token }}"
+            REPO_URL="https://github.com/wawire/cide-group"
+            RUNNER_HOME="$HOME/actions-runner"
+            RUNNER_VERSION="2.322.0"
+
+            # ── Install Node 20 if missing ──────────────────────
+            if ! node --version 2>/dev/null | grep -q "^v20"; then
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            fi
+
+            # ── Install PM2 if missing ──────────────────────────
+            if ! command -v pm2 &>/dev/null; then
+              sudo npm install -g pm2
+              pm2 startup | tail -1 | sudo bash
+            fi
+
+            # ── Stop and remove existing runner ────────────────
+            if [ -d "$RUNNER_HOME" ]; then
+              cd "$RUNNER_HOME"
+              sudo ./svc.sh stop 2>/dev/null || true
+              sudo ./svc.sh uninstall 2>/dev/null || true
+              ./config.sh remove --token "$RUNNER_TOKEN" 2>/dev/null || true
+              cd "$HOME"
+              rm -rf "$RUNNER_HOME"
+            fi
+
+            # ── Download runner ─────────────────────────────────
+            mkdir -p "$RUNNER_HOME" && cd "$RUNNER_HOME"
+            curl -fsSLo actions-runner-linux-x64.tar.gz \
+              "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"
+            tar xzf actions-runner-linux-x64.tar.gz
+            rm actions-runner-linux-x64.tar.gz
+
+            # ── Configure runner ────────────────────────────────
+            ./config.sh \
+              --url "$REPO_URL" \
+              --token "$RUNNER_TOKEN" \
+              --name "vultr-cidegroup" \
+              --labels "self-hosted,linux,x64,cidegroup" \
+              --work "$HOME/runner-work" \
+              --unattended \
+              --replace
+
+            # ── Install as systemd service ──────────────────────
+            sudo ./svc.sh install
+            sudo ./svc.sh start
+            sudo ./svc.sh status
+
+            echo ""
+            echo "✓ Runner installed and running as a systemd service"
+            echo "✓ Labels: self-hosted, linux, x64, cidegroup"

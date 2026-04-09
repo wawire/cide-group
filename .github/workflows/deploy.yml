@@ -1,0 +1,63 @@
+name: Deploy → Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: [self-hosted, linux, x64, cidegroup]
+    timeout-minutes: 30
+    env:
+      APP_DIR: /var/www/cide-group
+      NODE_ENV: production
+      PORT: 3000
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # ── Dependencies ──────────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+
+      # ── Build ─────────────────────────────────────────────────
+      - name: Build
+        run: npm run build
+
+      # ── Zero-downtime reload ──────────────────────────────────
+      - name: Reload with PM2
+        run: |
+          pm2 startOrReload ecosystem.config.cjs --update-env
+          pm2 save
+
+      # ── Health check ──────────────────────────────────────────
+      - name: Health check
+        run: |
+          for i in 1 2 3 4 5; do
+            if curl -fsS http://127.0.0.1:$PORT/api/health; then
+              echo "✓ App is healthy"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 3s..."
+            sleep 3
+          done
+          echo "✗ Health check failed after 5 attempts"
+          pm2 logs cidegroup-web --lines 50 --nostream
+          exit 1
+
+      # ── Rollback on failure ───────────────────────────────────
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Deployment failed — rolling back to previous release"
+          pm2 reload cidegroup-web || true
+          pm2 logs cidegroup-web --lines 30 --nostream || true
