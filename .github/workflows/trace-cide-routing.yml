@@ -1,0 +1,31 @@
+name: Trace CIDE Routing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trace upstream and nginx responses
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USER }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true
+          script: |
+            set -e
+            echo "=== next upstream ==="
+            curl -I -sS http://127.0.0.1:3000/ | head -n 1
+            curl -I -sS http://127.0.0.1:3000/about | head -n 1
+            curl -I -sS http://127.0.0.1:3000/api/health | head -n 1
+            echo "=== nginx local with host header ==="
+            curl -I -sS -H "Host: www.cidegroup.org" http://127.0.0.1/ | head -n 1
+            curl -I -sS -H "Host: www.cidegroup.org" http://127.0.0.1/about | head -n 1
+            curl -k -I -sS -H "Host: www.cidegroup.org" https://127.0.0.1/ | head -n 1
+            curl -k -I -sS -H "Host: www.cidegroup.org" https://127.0.0.1/about | head -n 1
+            echo "=== nginx SNI resolve test ==="
+            curl -k -I -sS --resolve www.cidegroup.org:443:127.0.0.1 https://www.cidegroup.org/ | head -n 1
+            curl -k -I -sS --resolve www.cidegroup.org:443:127.0.0.1 https://www.cidegroup.org/about | head -n 1

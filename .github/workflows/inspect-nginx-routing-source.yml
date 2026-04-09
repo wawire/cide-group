@@ -1,0 +1,32 @@
+name: Inspect Nginx Routing Source
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect nginx files for cidegroup routing
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USER }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          script_stop: true
+          envs: VULTR_PASSWORD
+          script: |
+            set -e
+            echo "=== whoami ==="
+            whoami
+            echo "=== grep cidegroup in nginx dirs ==="
+            grep -Rni "cidegroup.org\|www.cidegroup.org\|CIDEGROUP PROD" /etc/nginx/sites-available /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null || true
+            echo "=== list files in conf.d ==="
+            ls -la /etc/nginx/conf.d || true
+            echo "=== dump cidegroup available file ==="
+            sed -n '1,220p' /etc/nginx/sites-available/cidegroup.org || true
+            echo "=== dump default available file ==="
+            sed -n '1,220p' /etc/nginx/sites-available/default || true
+            echo "=== HTTPS local checks with SNI ==="
+            curl -k -i -sS --resolve www.cidegroup.org:443:127.0.0.1 https://www.cidegroup.org/ | head -n 25
+            curl -k -i -sS --resolve www.cidegroup.org:443:127.0.0.1 https://www.cidegroup.org/about | head -n 25

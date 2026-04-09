@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIDE Group — Complete Website Content Strategy & Work Plan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --green:     #2D6A4F;
+  --green-lt:  #52B788;
+  --green-bg:  #F0F7F3;
+  --red:       #A31E22;
+  --red-bg:    #FDF0F0;
+  --ink:       #111111;
+  --body-text: #2C2C2C;
+  --mid:       #5A5A5A;
+  --muted:     #909090;
+  --rule:      #D8D8D8;
+  --rule-lt:   #EEEEEE;
+  --surface:   #F5F5F5;
+  --white:     #FFFFFF;
+  --f-head:    'DM Serif Display', Georgia, serif;
+  --f-body:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { -webkit-font-smoothing: antialiased; }
+body { font-family: var(--f-body); font-size: 13px; line-height: 1.75; color: var(--body-text); background: var(--white); }
+a { color: var(--green); text-decoration: none; }
+p { margin-bottom: 0; }
+
+/* ── COVER ───────────────────────────────────────────── */
+.cover {
+  background: var(--green);
+  padding: 72px 72px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  border: 60px solid rgba(255,255,255,0.06);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 180px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 40px solid rgba(255,255,255,0.04);
+}
+.cover-kicker {
+  font-family: var(--f-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 28px;
+}
+.cover-tag {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 4px 12px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+.cover h1 {
+  font-family: var(--f-head);
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  max-width: 680px;
+}
+.cover h1 em {
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+}
+.cover-sub {
+  font-size: 14.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  max-width: 580px;
+  line-height: 1.75;
+  margin-bottom: 52px;
+}
+.cover-stats {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 28px;
+}
+.cstat {
+  padding-right: 40px;
+  margin-right: 40px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+.cstat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.cstat-n {
+  font-family: var(--f-head);
+  font-size: 38px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cstat-l {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── TOC ─────────────────────────────────────────────── */
+.toc {
+  padding: 48px 72px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--green-bg);
+}
+.toc-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px 32px;
+}
+.toc-item {
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(45,106,79,0.12);
+  align-items: baseline;
+  font-size: 12px;
+}
+.toc-item .n {
+  font-family: monospace;
+  font-size: 9.5px;
+  color: var(--red);
+  flex-shrink: 0;
+  width: 26px;
+}
+.toc-item .t { color: var(--body-text); }
+
+/* ── SECTIONS ────────────────────────────────────────── */
+.sec { padding: 52px 72px; border-bottom: 1px solid var(--rule); }
+.sec:last-of-type { border-bottom: none; }
+
+.sec-num {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-num::after { content:''; display:block; width:20px; height:1px; background:var(--red); }
+
+h2.sec-title {
+  font-family: var(--f-head);
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.sec-intro {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 680px;
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+
+/* ── SUBSECTIONS ─────────────────────────────────────── */
+.sub-head {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--green);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+.sub-head:first-of-type { margin-top: 0; }
+
+/* ── TABLES ──────────────────────────────────────────── */
+.t { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:24px; }
+.t thead tr { background: var(--ink); }
+.t thead th {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 9px 12px;
+  text-align: left;
+}
+.t tbody tr { border-bottom: 1px solid var(--rule-lt); }
+.t tbody tr:hover { background: var(--green-bg); }
+.t td { padding: 9px 12px; color: var(--body-text); vertical-align: top; line-height: 1.55; }
+.t td:first-child { color: var(--ink); font-weight: 500; }
+.t td.plain { font-weight: 400; color: var(--body-text); }
+.t td.mono { font-family: monospace; font-size: 11px; color: var(--mid); font-weight: 400; }
+.t td.hi { color: var(--green); font-weight: 600; }
+.t td.warn { color: var(--red); font-weight: 600; }
+.t td.dim { color: var(--mid); font-weight: 400; }
+
+/* ── GRID LAYOUTS ────────────────────────────────────── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 24px; }
+
+/* ── CARDS ───────────────────────────────────────────── */
+.card {
+  border: 1px solid var(--rule);
+  padding: 20px 22px;
+  background: var(--white);
+}
+.card h4 {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-lt);
+}
+.card p, .card li {
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.7;
+}
+.card ul { list-style: none; padding: 0; }
+.card ul li { padding: 4px 0; border-bottom: 1px solid var(--rule-lt); display: flex; gap: 8px; }
+.card ul li:last-child { border-bottom: none; }
+.card ul li::before { content: "—"; color: var(--green); flex-shrink: 0; font-weight: 300; }
+
+/* ── CALLOUT ─────────────────────────────────────────── */
+.callout {
+  border-left: 3px solid var(--green);
+  padding: 13px 18px;
+  background: var(--green-bg);
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+.callout strong { color: var(--green); }
+.callout.warn { border-color: var(--red); background: var(--red-bg); }
+.callout.warn strong { color: var(--red); }
+
+/* ── IMAGE PLACEHOLDER ───────────────────────────────── */
+.img-ph {
+  background: var(--surface);
+  border: 1px dashed var(--rule);
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.img-ph .fname { font-family: monospace; font-size: 11px; color: var(--green); font-weight: 600; flex-shrink: 0; min-width: 260px; }
+.img-ph .fdesc { font-size: 12px; color: var(--mid); line-height: 1.5; }
+
+/* ── PHASE CARDS ─────────────────────────────────────── */
+.phases { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+.phase { border: 1px solid var(--rule); padding: 22px 24px; }
+.phase-hd { display: flex; gap: 14px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); align-items: flex-start; }
+.phase-n { font-family: var(--f-head); font-size: 32px; color: var(--green); line-height: 1; flex-shrink: 0; width: 36px; }
+.phase-info h3 { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.phase-info .dur { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
+.phase ul { list-style: none; padding: 0; }
+.phase ul li { font-size: 12px; color: var(--mid); padding: 4px 0; border-bottom: 1px solid var(--rule-lt); line-height: 1.5; display: flex; gap: 8px; }
+.phase ul li::before { content: "—"; color: var(--rule); flex-shrink:0; }
+.phase ul li:last-child { border-bottom: none; }
+
+/* ── GANTT ───────────────────────────────────────────── */
+.gantt { border: 1px solid var(--rule); overflow-x: auto; margin-bottom: 28px; }
+.gantt-hd, .gantt-row { display: grid; grid-template-columns: 210px repeat(14,1fr); min-width: 900px; }
+.gantt-hd { background: var(--ink); }
+.gantt-hd div { padding: 8px 5px; font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-align: center; border-left: 1px solid rgba(255,255,255,0.06); }
+.gantt-hd div:first-child { text-align: left; padding-left: 12px; border-left: none; }
+.gantt-row { border-bottom: 1px solid var(--rule-lt); }
+.gantt-row:last-child { border-bottom: none; }
+.gantt-row:nth-child(even) { background: var(--green-bg); }
+.gantt-task { padding: 9px 12px; border-right: 1px solid var(--rule); }
+.gantt-task strong { display: block; font-size: 12px; color: var(--ink); font-weight: 500; }
+.gantt-task span { font-size: 10px; color: var(--muted); }
+.gantt-cell { border-left: 1px solid var(--rule-lt); padding: 6px 3px; display: flex; align-items: center; justify-content: center; }
+.bar { height: 8px; width: 100%; background: var(--green); border-radius: 2px; opacity: 0.7; }
+.bar.lt { opacity: 0.25; }
+.bar.mk { height: 3px; border-radius: 1px; background: var(--red); opacity: 1; }
+
+/* ── PAGE BRIEF ──────────────────────────────────────── */
+.brief { border: 1px solid var(--rule); margin-bottom: 16px; }
+.brief-hd { background: var(--ink); padding: 11px 20px; display: flex; justify-content: space-between; align-items: center; }
+.brief-hd .pg { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+.brief-hd .pri { font-family: monospace; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
+.brief-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.brief-body .col-head { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.brief-row { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--rule-lt); font-size: 12px; }
+.brief-row:last-child { border-bottom: none; }
+.brief-row .lbl { color: var(--mid); min-width: 130px; flex-shrink: 0; }
+.brief-row .val { color: var(--ink); }
+
+/* ── WORKFLOW ────────────────────────────────────────── */
+.workflow { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 12px; }
+.wf-step { background: var(--white); padding: 14px 12px; text-align: center; }
+.wf-n { font-family: monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 5px; }
+.wf-title { font-size: 11px; font-weight: 600; color: var(--green); margin-bottom: 4px; }
+.wf-desc { font-size: 11px; color: var(--mid); line-height: 1.4; }
+
+/* ── COMPETITOR CARD ─────────────────────────────────── */
+.comp { border: 1px solid var(--rule); padding: 20px 24px; margin-bottom: 16px; }
+.comp-hd { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule-lt); }
+.comp-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.comp-tag { font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--green-bg); color: var(--green); padding: 3px 8px; }
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.comp-col h5 { font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.comp-col p { font-size: 12px; color: var(--mid); line-height: 1.65; }
+
+/* ── STORY / INSIGHT ITEM ────────────────────────────── */
+.insight-item { border: 1px solid var(--rule); padding: 14px 18px; margin-bottom: 8px; }
+.insight-item .it { font-size: 11.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.insight-item .ib { font-size: 12px; color: var(--mid); line-height: 1.6; }
+
+/* ── TECH STACK BLOCK ────────────────────────────────── */
+.stack { background: var(--surface); border: 1px solid var(--rule); padding: 20px 24px; margin-bottom: 20px; }
+.stack-title { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+.stack-row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule-lt); font-size: 12.5px; align-items: baseline; }
+.stack-row:last-child { border-bottom: none; }
+.stack-row .sk { font-weight: 600; color: var(--ink); min-width: 180px; }
+.stack-row .sv { color: var(--mid); }
+
+/* ── DISCLAIMER ──────────────────────────────────────── */
+.disclaimer { border: 1px solid var(--rule); padding: 16px 20px; background: var(--surface); font-size: 12.5px; color: var(--mid); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
+.disclaimer strong { color: var(--ink); font-style: normal; display: block; margin-bottom: 6px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--f-body); font-weight: 600; }
+
+/* ── STATUS DOTS ─────────────────────────────────────── */
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+.dot-done { background: var(--green); }
+.dot-prog { background: var(--muted); }
+.dot-todo { background: var(--rule); border: 1px solid var(--muted); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+.doc-footer {
+  padding: 24px 72px;
+  background: var(--green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.doc-footer .logo-text { font-family: var(--f-head); font-size: 18px; color: var(--white); letter-spacing: 0; text-transform: none; font-weight: 400; }
+
+/* ── MISC ────────────────────────────────────────────── */
+.div { height: 1px; background: var(--rule-lt); margin: 24px 0; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 24px; }
+.kpi { background: var(--white); padding: 18px 20px; text-align: center; }
+.kpi-n { font-family: var(--f-head); font-size: 34px; color: var(--green); line-height: 1; margin-bottom: 4px; }
+.kpi-l { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.green-banner { background: var(--green); color: var(--white); padding: 16px 20px; margin-bottom: 20px; font-size: 12.5px; line-height: 1.7; }
+.green-banner strong { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<!-- ════ COVER ════ -->
+<div class="cover">
+  <div class="cover-kicker">
+    <span class="cover-tag">Internal Strategy Document</span>
+    <span class="cover-tag">Digital &amp; Brand</span>
+    <span class="cover-tag">March 2026 · Version 1.0</span>
+  </div>
+  <h1>CIDE Group Website<br><em>Complete Content Strategy</em><br>&amp; Work Plan</h1>
+  <p class="cover-sub">A full blueprint for the design, build, and launch of www.cidegroup.org — a static site that positions CIDE Group as the pan-African advisory partner of choice across development, humanitarian, and business sectors. From competitive benchmarking to 29-page architecture and post-launch governance.</p>
+  <div class="cover-stats">
+    <div class="cstat"><div class="cstat-n">29</div><div class="cstat-l">Total Pages</div></div>
+    <div class="cstat"><div class="cstat-n">24</div><div class="cstat-l">Strategy Sections</div></div>
+    <div class="cstat"><div class="cstat-n">14</div><div class="cstat-l">Weeks to Launch</div></div>
+    <div class="cstat"><div class="cstat-n">5</div><div class="cstat-l">Competitors Benchmarked</div></div>
+  </div>
+</div>
+
+<!-- ════ TOC ════ -->
+<div class="toc">
+  <div class="toc-label">Contents</div>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="n">01</span><span class="t">Project Overview</span></div>
+    <div class="toc-item"><span class="n">02</span><span class="t">Brand Positioning &amp; Messaging</span></div>
+    <div class="toc-item"><span class="n">03</span><span class="t">Target Audiences</span></div>
+    <div class="toc-item"><span class="n">04</span><span class="t">Site Map &amp; Page Priority (29 pages)</span></div>
+    <div class="toc-item"><span class="n">05</span><span class="t">Content Pillars</span></div>
+    <div class="toc-item"><span class="n">06</span><span class="t">Content Inventory &amp; Gaps</span></div>
+    <div class="toc-item"><span class="n">07</span><span class="t">14-Week Delivery Plan &amp; Gantt</span></div>
+    <div class="toc-item"><span class="n">08</span><span class="t">Static Site Architecture &amp; Tech Stack</span></div>
+    <div class="toc-item"><span class="n">09</span><span class="t">Page-by-Page Copy Briefs</span></div>
+    <div class="toc-item"><span class="n">10</span><span class="t">Knowledge Hub &amp; Thought Leadership</span></div>
+    <div class="toc-item"><span class="n">11</span><span class="t">Team &amp; RACI</span></div>
+    <div class="toc-item"><span class="n">12</span><span class="t">Design Direction</span></div>
+    <div class="toc-item"><span class="n">13</span><span class="t">SEO &amp; Discoverability</span></div>
+    <div class="toc-item"><span class="n">14</span><span class="t">Analytics &amp; Measurement</span></div>
+    <div class="toc-item"><span class="n">15</span><span class="t">Legal &amp; Compliance</span></div>
+    <div class="toc-item"><span class="n">16</span><span class="t">Photography Brief</span></div>
+    <div class="toc-item"><span class="n">17</span><span class="t">Content Governance</span></div>
+    <div class="toc-item"><span class="n">18</span><span class="t">Launch &amp; Communications Plan</span></div>
+    <div class="toc-item"><span class="n">19</span><span class="t">Competitor Benchmarking</span></div>
+    <div class="toc-item"><span class="n">20</span><span class="t">Accessibility Standards</span></div>
+    <div class="toc-item"><span class="n">21</span><span class="t">Forms, CTAs &amp; Conversion</span></div>
+    <div class="toc-item"><span class="n">22</span><span class="t">Navigation &amp; Microcopy</span></div>
+    <div class="toc-item"><span class="n">23</span><span class="t">Localisation Strategy</span></div>
+    <div class="toc-item"><span class="n">24</span><span class="t">Risk Register</span></div>
+  </div>
+</div>
+
+<!-- ════ 01 PROJECT OVERVIEW ════ -->
+<div class="sec">
+  <div class="sec-num">01</div>
+  <h2 class="sec-title">Project Overview</h2>
+  <p class="sec-intro">CIDE Group (registered as COMMUNE IDEE (CIDE) GROUPE LTD) is a pan-African advisory, consulting, and implementation organisation with over a decade of experience across development, humanitarian, and business sectors. Despite this depth of expertise, the organisation lacks a digital presence that reflects it. This project delivers a fully designed and built static website at www.cidegroup.org that positions CIDE as a credible, modern, and compelling advisory partner across Africa and globally.</p>
+
+  <div class="sub-head">Why This Matters Now</div>
+  <div class="callout">
+    <strong>The opportunity is urgent:</strong> In the development advisory sector, a website is a procurement tool as much as a marketing tool. When tender evaluators, donor programme managers, and potential consortium partners look CIDE up before shortlisting — and they do — the current digital absence is a credibility gap that is actively costing opportunities. This project closes that gap.
+  </div>
+
+  <div class="sub-head">Project Scope</div>
+  <table class="t">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Website domain</td><td class="plain">www.cidegroup.org (existing domain — redirect or rebuild)</td></tr>
+      <tr><td>Platform approach</td><td class="plain">Static site — no CMS dependency at launch. HTML/CSS/JS or static site generator (e.g. Hugo, Jekyll, or 11ty). Simple content updates handled by the digital team via code or a lightweight headless CMS post-launch.</td></tr>
+      <tr><td>Total pages at launch (P1)</td><td class="plain">22 pages (homepage, about, team, 8 service pages, focus areas hub, 4 focus area pages, projects, contact, privacy policy, terms, 404)</td></tr>
+      <tr><td>Total pages in full scope (P1 + P2)</td><td class="plain">29 pages (adds knowledge hub, individual articles, partners, careers, news, case study pages, country presence)</td></tr>
+      <tr><td>Primary brand assets</td><td class="plain">Forest Green (#2D6A4F), Deep Red (#A31E22), tagline "Thriving Together"</td></tr>
+      <tr><td>Key contact</td><td class="plain"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89b9795958d96919b998c9197968bd69b919c9d9f8a978d88b89f95999194d69b9795">[email&#160;protected]</a> · +254-745-704-580</td></tr>
+      <tr><td>Target go-live</td><td class="plain">End of Week 14</td></tr>
+      <tr><td>Post-launch platform review</td><td class="plain">Month 3 — assess whether a lightweight headless CMS (e.g. Decap CMS, Netlify CMS) is warranted to enable non-technical content editing</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Why a Static Site?</div>
+  <div class="g2">
+    <div class="card">
+      <h4>Advantages for CIDE</h4>
+      <ul>
+        <li>Zero hosting cost on platforms like GitHub Pages, Netlify, or Vercel</li>
+        <li>Extremely fast — no server-side processing or database queries</li>
+        <li>Highly secure — no CMS login credentials to compromise</li>
+        <li>Version-controlled via Git — every change tracked, every version recoverable</li>
+        <li>Easy to hand to any developer for future updates</li>
+        <li>No licence fees, plugin costs, or CMS subscription overheads</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Constraints to Plan For</h4>
+      <ul>
+        <li>Content updates require a developer or someone comfortable editing code/Markdown</li>
+        <li>Form handling requires a third-party service (e.g. Formspree, Netlify Forms)</li>
+        <li>No built-in blog/CMS — a headless CMS can be added post-launch if needed</li>
+        <li>Dynamic filtering (e.g. project portfolio) requires client-side JavaScript</li>
+        <li>Training the communications team on how to request and review updates is essential</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 02 BRAND POSITIONING ════ -->
+<div class="sec">
+  <div class="sec-num">02</div>
+  <h2 class="sec-title">Brand Positioning &amp; Messaging</h2>
+  <p class="sec-intro">CIDE Group occupies a specific and defensible position in the pan-African advisory market: locally rooted, evidence-based, and multi-disciplinary. The website must not merely describe services — it must communicate why CIDE is the right choice over both international advisory firms (which lack local context) and smaller local consultancies (which lack breadth and systems). Every page must actively reinforce this positioning.</p>
+
+  <div class="sub-head">Core Positioning Statement</div>
+  <div class="green-banner">
+    <strong>Positioning — for internal use only, not direct website copy</strong>
+    CIDE Group is the pan-African advisory partner that combines decade-long continent-wide expertise with genuine local rootedness — delivering practical, evidence-driven solutions that international firms design from distance and local firms cannot scale. We work at the intersection of innovation, policy, enterprise, and community, guided by a 360° model from research through to evaluation.
+  </div>
+
+  <div class="sub-head">Positioning Framework</div>
+  <div class="g2">
+    <div class="card">
+      <h4>Brand Promise</h4>
+      <p>"Thriving Together" — CIDE Group does not deliver to communities; it works with them. Every service, every project, and every intervention is anchored in local knowledge, collaborative design, and a genuine commitment to leaving systems stronger than we found them.</p>
+    </div>
+    <div class="card">
+      <h4>Unique Value Proposition</h4>
+      <p>The only pan-African advisory organisation that offers fully integrated services across strategic communications, ICT, MEL, research, programme design, capacity building, enterprise support, and policy advocacy — all under one roof, guided by a signature 360° methodology.</p>
+    </div>
+    <div class="card">
+      <h4>Tone of Voice</h4>
+      <p>Confident without arrogance. African-rooted without being parochial. Evidence-led without being dry. Every sentence should feel written by a practitioner who has been in the field — not by a marketing team selling from a boardroom. Clear, direct, and solution-focused.</p>
+    </div>
+    <div class="card">
+      <h4>What We Do Not Claim</h4>
+      <p>Avoid superlatives without evidence ("the leading," "the best"). Do not overstate geographic reach without confirmed project presence. Do not use development jargon without explanation for non-specialist audiences. Avoid passive voice — CIDE acts, CIDE delivers, CIDE builds.</p>
+    </div>
+  </div>
+
+  <div class="sub-head">Audience-Specific Messaging</div>
+  <table class="t">
+    <thead><tr><th>Audience</th><th>Core Message</th><th>Supporting Proof Point</th><th>Tone Adjustment</th></tr></thead>
+    <tbody>
+      <tr><td>Development Partners &amp; INGOs</td><td class="plain">"We turn donor investments into measurable, lasting outcomes — backed by rigorous MEL and local presence that international firms cannot replicate."</td><td class="plain">360° approach, decade of programme design, MEL systems built for adaptive management</td><td class="plain">Technical, evidence-forward, results-oriented</td></tr>
+      <tr><td>Governments &amp; Public Institutions</td><td class="plain">"We build the systems, policies, and institutions that enable governments to deliver on their mandates — from strategy to implementation."</td><td class="plain">Policy advisory experience, institutional strengthening, public sector capacity development</td><td class="plain">Formal, systems-focused, accountability-led</td></tr>
+      <tr><td>Private Sector &amp; Corporates</td><td class="plain">"We help businesses navigate Africa's most complex markets, meet ESG commitments, and build the organisational foundations to scale sustainably."</td><td class="plain">ICT and digital solutions, due diligence, ESG advisory, enterprise support</td><td class="plain">Business-oriented, ROI-conscious, strategic</td></tr>
+      <tr><td>Civil Society &amp; NGOs</td><td class="plain">"We amplify your impact by strengthening your organisation from the inside — building the capacity, advocacy, and communications capability to drive lasting change."</td><td class="plain">Capacity development, advocacy support, strategic communications, knowledge management</td><td class="plain">Empowering, collaborative, mission-aligned</td></tr>
+      <tr><td>Consortia &amp; Implementing Partners</td><td class="plain">"We are the local partner that brings technical rigour, pan-African reach, and ground-level trust — making international consortia credible in the communities they serve."</td><td class="plain">Pan-African network, MEL and research, community-led design, GEDSI mainstreaming</td><td class="plain">Partnership-focused, complementary, trustworthy</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Brand Voice Examples</div>
+  <table class="t">
+    <thead><tr><th>Context</th><th>Write This</th><th>Not This</th></tr></thead>
+    <tbody>
+      <tr><td>Homepage hero</td><td class="plain">Africa's development challenges deserve African solutions. For over a decade, CIDE Group has worked with governments, donors, and communities to design and deliver programmes that leave systems stronger.</td><td class="plain">We are a leading advisory firm with extensive experience across Africa's development landscape.</td></tr>
+      <tr><td>Service description</td><td class="plain">We build MEL systems that generate real-time data, support adaptive management, and create the learning documentation your next funding cycle depends on.</td><td class="plain">We provide monitoring, evaluation, and learning services to a variety of clients across Africa.</td></tr>
+      <tr><td>360° model</td><td class="plain">Every engagement moves through four stages — Research, Design, Implement, Evaluate — so that what we build for you is grounded in evidence, tailored to context, and built to last.</td><td class="plain">Our proprietary 360-degree methodology ensures comprehensive service delivery.</td></tr>
+      <tr><td>CTA</td><td class="plain">Tell us about your challenge — and let's build a solution together.</td><td class="plain">Contact us to learn more about our services.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 03 TARGET AUDIENCES ════ -->
+<div class="sec">
+  <div class="sec-num">03</div>
+  <h2 class="sec-title">Target Audiences</h2>
+  <p class="sec-intro">CIDE Group serves a wide range of clients, but not all are equally likely to arrive at the website with the same intent. Understanding who visits, what they are looking for, and what would convince them to make contact is essential to designing navigation paths, CTAs, and service page content that converts visitors into enquiries.</p>
+
+  <table class="t">
+    <thead><tr><th>Audience</th><th>Who They Are</th><th>Why They Visit</th><th>What Convinces Them</th><th>Key Pages</th></tr></thead>
+    <tbody>
+      <tr><td>Development Partners &amp; Donors</td><td class="plain">Programme managers at USAID, EU, DFID/FCDO, GIZ, SIDA, World Bank, UN agencies, bilateral donors. Typically searching for implementing partners, MEL firms, or research sub-contractors for specific tenders.</td><td class="plain">Tender due diligence, vetting before shortlisting, checking specific technical competencies</td><td class="plain">Case studies with named clients and measurable results. Clear MEL and research credentials. Team profiles with relevant experience. Download capability for capability statements.</td><td class="plain">Projects &amp; Impact, MEL, Research, Team, About</td></tr>
+      <tr><td>Government Ministries &amp; Agencies</td><td class="plain">Senior government officials in ministries of health, education, finance, agriculture, environment, and social welfare. County/subnational government staff. Public sector programme teams seeking advisory, policy, or technical support.</td><td class="plain">Searching for advisory partners on specific technical mandates. Policy support, system design, institutional capacity building.</td><td class="plain">Demonstrated public sector advisory experience. Country-specific expertise. Credibility signals (established partners, years of experience, testimonials).</td><td class="plain">Policy Advocacy, Capacity Development, Enterprise Support, About</td></tr>
+      <tr><td>INGO &amp; NGO Programme Teams</td><td class="plain">Country directors, MEL managers, communications officers, and procurement teams at INGOs such as Save the Children, Oxfam, Plan International, IRC, and national NGOs across Africa. Looking for technical service partners, sub-grantees, or consortium members.</td><td class="plain">Sub-contracting needs, MEL support, communications and knowledge management, GEDSI mainstreaming</td><td class="plain">Service breadth, quality of work samples, GEDSI credentials, experience in relevant thematic areas and geographies.</td><td class="plain">Services Hub, MEL, Strategic Comms, GEDSI, Research, Focus Areas</td></tr>
+      <tr><td>Private Sector &amp; Corporates</td><td class="plain">CEOs, HR directors, sustainability/ESG officers at Kenyan and regional corporates. Companies seeking occupational wellness, digital transformation, strategic communications, or social impact advisory.</td><td class="plain">ESG advisory, ICT strategy, enterprise development support, communications strategy</td><td class="plain">Business-language description of services, ROI framing, professional design that signals corporate-calibre quality.</td><td class="plain">ICT &amp; Digital, Strategic Comms, Enterprise Support, Environment/ESG</td></tr>
+      <tr><td>Civil Society Organisations</td><td class="plain">Executive directors and programme managers at local CBOs, advocacy networks, youth and women's organisations, and faith-based organisations seeking capacity development, advocacy support, or organisational strengthening.</td><td class="plain">Capacity development, advocacy strategy, communications support, knowledge management</td><td class="plain">Language that feels collaborative and empowering, not corporate. Demonstrated grassroots engagement. GEDSI and child rights credentials.</td><td class="plain">Capacity Development, Policy Advocacy, Child Rights, GEDSI, Strategic Comms</td></tr>
+      <tr><td>Consortium Leads &amp; Implementing Partners</td><td class="plain">Senior staff at large international advisory firms (Palladium, DAI, Abt, Tetra Tech) seeking local African partners for consortium bids on FCDO, USAID, EU, or AfDB tenders.</td><td class="plain">Assessing CIDE as a potential consortium sub-partner or local lead for a specific country or thematic area</td><td class="plain">Technical depth by sector and geography. Demonstrated partnership experience. Named clients and projects. Downloadable capacity statement.</td><td class="plain">Projects, About, Team, All Services, Contact</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 04 SITE MAP ════ -->
+<div class="sec">
+  <div class="sec-num">04</div>
+  <h2 class="sec-title">Site Map &amp; Page Priority — 29 Pages</h2>
+  <p class="sec-intro">Eight pages is not enough. Benchmarking against peer organisations (see Section 19) shows that credible development advisory firms typically have 25–50 pages at launch. Each service and focus area must have its own dedicated page — not just a summary on a hub page — because SEO, tender due diligence, and audience-specific navigation all require depth. The architecture below delivers 22 pages at P1 launch, expanding to 29 in the months following.</p>
+
+  <table class="t">
+    <thead><tr><th>#</th><th>Page</th><th>Key Content Sections</th><th>URL Path</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td>Homepage</td><td class="plain">Hero, 360° visual, services grid (8 cards), focus areas strip, featured projects (3), partners/clients logos, Knowledge Hub teaser (3 articles), CTA banner</td><td class="mono">/</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>02</td><td>About CIDE</td><td class="plain">Our story, mission/vision/values, why CIDE, the 360° model explainer, country presence map, stats grid, partners &amp; affiliations</td><td class="mono">/about</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>03</td><td>Our Team</td><td class="plain">Team grid with photos, names, titles, brief bios, LinkedIn links. Grouped by leadership / technical / operations.</td><td class="mono">/about/team</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>04</td><td>Services Hub</td><td class="plain">Overview of all 8 services with icons, 2-line descriptions, and links to individual pages. Entry point for procurement officers scanning capability.</td><td class="mono">/services</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>05</td><td>Strategic Communications &amp; KM</td><td class="plain">Service description, offerings list, approach, featured projects, CTA</td><td class="mono">/services/strategic-communications</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>06</td><td>Programme Design &amp; Implementation</td><td class="plain">Service description, offerings list, 360° model integration, featured projects, CTA</td><td class="mono">/services/programme-design</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>07</td><td>ICT &amp; Digital Solutions</td><td class="plain">Service description, AI integration note, offerings list, featured projects, CTA</td><td class="mono">/services/ict-digital</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>08</td><td>Monitoring, Evaluation &amp; Learning</td><td class="plain">Service description, MEL system approach, digital data tools, offerings list, featured projects, CTA</td><td class="mono">/services/monitoring-evaluation-learning</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>09</td><td>Research &amp; Evidence Generation</td><td class="plain">Service description, methodology overview, offerings list, sample outputs, CTA</td><td class="mono">/services/research-evidence</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>10</td><td>Capacity Development</td><td class="plain">Service description, who we support (CBOs, NGOs, MDAs, etc.), training approach, offerings list, CTA</td><td class="mono">/services/capacity-development</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>11</td><td>Enterprise &amp; Organisational Support</td><td class="plain">Service description, governance and strategy angle, offerings list, featured projects, CTA</td><td class="mono">/services/enterprise-support</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>12</td><td>Policy Advocacy &amp; Stakeholder Engagement</td><td class="plain">Service description, coalition and consortium angle, offerings list, featured projects, CTA</td><td class="mono">/services/policy-advocacy</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>13</td><td>Focus Areas Hub</td><td class="plain">8-panel grid of focus areas with short descriptions and links to individual pages. Secondary navigation for thematic specialists.</td><td class="mono">/focus-areas</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>14</td><td>Environment, Climate &amp; Sustainability</td><td class="plain">Thematic context, CIDE approach, practice areas (ESG, FMNR, agroforestry, climate adaptation), relevant services, featured projects</td><td class="mono">/focus-areas/environment-climate</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>15</td><td>Child Rights &amp; Social Justice</td><td class="plain">CRC alignment, safeguarding, child protection in emergencies, IEC materials, relevant services, featured projects</td><td class="mono">/focus-areas/child-rights</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>16</td><td>GEDSI</td><td class="plain">Mainstreaming approach, gender analysis and audit, inclusive design, capacity building, relevant services, featured projects</td><td class="mono">/focus-areas/gedsi</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>17</td><td>Education &amp; Learning</td><td class="plain">Policy and framework development, inclusive education, EiE, life skills and leadership, psychosocial support, relevant services</td><td class="mono">/focus-areas/education</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>18</td><td>Other Thematic Areas</td><td class="plain">WASH, Health &amp; Nutrition, Economic Empowerment, Human Capital Development — consolidated landing page with brief descriptions and contact CTA</td><td class="mono">/focus-areas/other-themes</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>19</td><td>Projects &amp; Impact</td><td class="plain">Portfolio listing with filter by sector, country, and service type. Aggregate impact statistics bar. 3–5 featured case study cards at launch.</td><td class="mono">/projects</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>20</td><td>Contact / Work With Us</td><td class="plain">Primary contact form (proposal/partnership enquiry), email, phone, social links, Nairobi office address, map embed</td><td class="mono">/contact</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>21</td><td>Privacy Policy</td><td class="plain">Data collection, use, retention, data subject rights, Kenya Data Protection Act 2019 reference</td><td class="mono">/privacy-policy</td><td class="hi">P1 — Launch gate</td></tr>
+      <tr><td>22</td><td>404 Error Page</td><td class="plain">Friendly error, links to homepage and contact, email address</td><td class="mono">/404</td><td class="hi">P1 — Launch</td></tr>
+      <tr><td>23</td><td>Knowledge Hub (index)</td><td class="plain">Publications, blog articles, toolkits, policy briefs, news — filterable by category and date</td><td class="mono">/knowledge</td><td class="plain">P2 — Month 1–2</td></tr>
+      <tr><td>24</td><td>Individual Articles / Publications</td><td class="plain">Author, date, category tags, full article body, related resources, CTA</td><td class="mono">/knowledge/{slug}</td><td class="plain">P2 — Ongoing</td></tr>
+      <tr><td>25</td><td>Individual Case Studies</td><td class="plain">Client/partner, country, sector, challenge, CIDE intervention, results, testimonial quote</td><td class="mono">/projects/{slug}</td><td class="plain">P2 — Month 1–2</td></tr>
+      <tr><td>26</td><td>Partners &amp; Clients</td><td class="plain">Logo grid with context per relationship. Grouped by type: Development partners, Government, Private sector, Civil society</td><td class="mono">/partners</td><td class="plain">P2 — Month 2</td></tr>
+      <tr><td>27</td><td>Where We Work</td><td class="plain">Interactive or static Africa map with countries highlighted, country-specific project notes, sector tags per country</td><td class="mono">/where-we-work</td><td class="plain">P2 — Month 2</td></tr>
+      <tr><td>28</td><td>News &amp; Events</td><td class="plain">Press releases, event announcements, media coverage, conference participation, team news</td><td class="mono">/news</td><td class="plain">P2 — Month 2</td></tr>
+      <tr><td>29</td><td>Careers</td><td class="plain">Why join CIDE, our values, current openings (or "No current openings — send a speculative CV" state), application form or email link</td><td class="mono">/careers</td><td class="plain">P2 — Month 3</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 05 CONTENT PILLARS ════ -->
+<div class="sec">
+  <div class="sec-num">05</div>
+  <h2 class="sec-title">Content Pillars</h2>
+  <p class="sec-intro">Every page, paragraph, and CTA on the CIDE Group website must serve one of four purposes. These pillars are not just editorial categories — they are questions to ask about every piece of content before it is written, approved, or published. If content does not clearly serve a pillar, it should be cut or rewritten.</p>
+  <div class="g4">
+    <div class="card">
+      <h4>Credibility &amp; Trust</h4>
+      <ul>
+        <li>Named clients, partners, and project references</li>
+        <li>Measurable results and impact statistics</li>
+        <li>Team profiles with credentials and sector experience</li>
+        <li>Case studies showing problem → approach → outcome</li>
+        <li>Over-a-decade heritage reference</li>
+        <li>360° model as a proof of rigour</li>
+        <li>Knowledge Hub publications and research outputs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Services &amp; Capability Clarity</h4>
+      <ul>
+        <li>Plain-language service descriptions (no jargon)</li>
+        <li>Specific offerings per service (not just categories)</li>
+        <li>Who we serve — audience-specific language per page</li>
+        <li>360° approach integrated into service descriptions</li>
+        <li>Focus area × service combinations (e.g. GEDSI + MEL)</li>
+        <li>Downloadable capability statement</li>
+        <li>FAQs where complex services need explanation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Action &amp; Conversion</h4>
+      <ul>
+        <li>Contact / Work With Us CTA on every service page</li>
+        <li>Partnership and proposal enquiry form</li>
+        <li>Downloadable capability statement (lead magnet)</li>
+        <li>Email address prominent in footer and contact</li>
+        <li>WhatsApp/phone link on mobile for instant contact</li>
+        <li>LinkedIn follow CTA on all pages</li>
+        <li>"Submit a tender enquiry" prompt in header</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Thought Leadership &amp; Visibility</h4>
+      <ul>
+        <li>Monthly blog articles on development themes</li>
+        <li>Policy briefs and research publications</li>
+        <li>Toolkits and practical guides for partners</li>
+        <li>Expert opinions on sector developments</li>
+        <li>Event recaps and conference participation</li>
+        <li>Africa-specific insights that competitors miss</li>
+        <li>SEO-optimised content driving organic discovery</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 06 CONTENT INVENTORY ════ -->
+<div class="sec">
+  <div class="sec-num">06</div>
+  <h2 class="sec-title">Content Inventory &amp; Gaps</h2>
+  <p class="sec-intro">An honest assessment of what exists, what needs writing, and what is missing entirely. Every row in this table represents a content delivery dependency. Pages cannot be designed or built without the content brief being signed off, and cannot be launched without the content being approved. This table should be treated as the master content delivery log throughout the project.</p>
+
+  <table class="t">
+    <thead><tr><th>Page / Asset</th><th>What's Available</th><th>What's Missing</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Company story &amp; overview</td><td class="plain">Company profile (2026 PDF) — good source for adapting</td><td class="plain">Web-optimised rewrite (shorter, active voice, audience-specific)</td><td class="plain">Communications Officer</td><td><span class="dot dot-prog"></span>Partial</td></tr>
+      <tr><td>Mission, Vision &amp; Values</td><td class="plain">Available in company profile — ready to adapt</td><td class="plain">Brief visual treatment description for designer</td><td class="plain">Communications Officer</td><td><span class="dot dot-done"></span>Available</td></tr>
+      <tr><td>8 × Service page copy</td><td class="plain">Summary descriptions in company profile (1–2 paragraphs each)</td><td class="plain">Full-length service page copy (400–600 words each), client-specific angles, FAQ per service</td><td class="plain">Copywriter + SMEs</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+      <tr><td>4 × Focus area page copy</td><td class="plain">Brief descriptions in company profile</td><td class="plain">Expanded thematic context (300–400 words each), cross-links to services</td><td class="plain">Copywriter + SMEs</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+      <tr><td>Team profiles &amp; bios</td><td class="plain">None</td><td class="plain">Name, title, qualifications, 80–120 word bio per team member, professional headshot</td><td class="plain">HR / Management</td><td><span class="dot dot-todo"></span>Critical gap</td></tr>
+      <tr><td>Project portfolio (3–5 case studies)</td><td class="plain">None — this is the most critical content gap</td><td class="plain">For each project: client name, country, sector, challenge, CIDE intervention, results/impact (500–700 words + image)</td><td class="plain">Programme Leads</td><td><span class="dot dot-todo"></span>Critical gap</td></tr>
+      <tr><td>Impact statistics</td><td class="plain">None confirmed</td><td class="plain">4–6 headline numbers (years of experience, countries worked, projects delivered, organisations supported, beneficiaries reached)</td><td class="plain">MEL Officer / Management</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+      <tr><td>Brand assets (logo, colours)</td><td class="plain">Logo used in company profile. Colour codes confirmed.</td><td class="plain">High-resolution logo files (SVG + PNG). Logo variants (white-on-green, green-on-white, monochrome).</td><td class="plain">Design Team</td><td><span class="dot dot-prog"></span>Partial</td></tr>
+      <tr><td>Photography (field &amp; team)</td><td class="plain">Some field photography visible in company profile</td><td class="plain">High-resolution originals. Additional team and office photography. Permission to use all images.</td><td class="plain">Communications Officer</td><td><span class="dot dot-prog"></span>Partial</td></tr>
+      <tr><td>Partner/client logos</td><td class="plain">None</td><td class="plain">Written permission + high-resolution logos from each partner organisation</td><td class="plain">Business Dev Team</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+      <tr><td>Client testimonials</td><td class="plain">None</td><td class="plain">2–3 testimonial quotes (50–80 words each) with name, title, organisation</td><td class="plain">Business Dev Team</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+      <tr><td>Publications &amp; research outputs</td><td class="plain">Unknown — inventory needed</td><td class="plain">List all existing publications, reports, toolkits. Confirm which can be uploaded publicly.</td><td class="plain">Knowledge Officer</td><td><span c profile PDF exists</td><td class="plain">A designed, print-ready 2-page capability statement for download by tender evaluators and consortium leads</td><td class="plain">Design Team</td><td><span class="dot dot-todo"></span>Not started</td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn"><strong>Most Critical Gaps:</strong> Team profiles and project case studies are the two items that development partners and consortium leads look for first. Without them, the website will look complete visually but will fail its primary commercial purpose. These must be collected in parallel with the design phase — do not wait until the build is underway.</div>
+</div>
+
+<!-- ════ 07 DELIVERY PLAN ════ -->
+<div class="sec">
+  <div class="sec-num">07</div>
+  <h2 class="sec-title">14-Week Delivery Plan</h2>
+  <p class="sec-intro">The project runs across five phases over 14 weeks. Content collection is the critical path — without approved copy, team bios, case studies, and images, no page can be built or launched. The design and technical development phases can proceed in parallel with content collection, but content population cannot begin until briefs are signed off. All timelines assume content delivery is completed by the end of Week 4.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-hd"><div class="phase-n">1</div><div class="phase-info"><h3>Discovery, Strategy &amp; Architecture</h3><div class="dur">Weeks 1–2 · Owner: Communications Officer + Lead</div></div></div>
+      <ul>
+        <li>Confirm final site map, 29-page architecture, and URL structure</li>
+        <li>Audience and competitor research (Section 19) reviewed and approved</li>
+        <li>Brand audit — confirm logo files, colour hex codes, typography</li>
+        <li>Assign content owners per page (see Section 06)</li>
+        <li>Commission or brief copywriter for all web copy</li>
+        <li>Brief photographer — confirm shoot dates for office and field</li>
+        <li>Collect team bios, headshots, and credentials — begin immediately</li>
+        <li>Identify 3–5 project case study candidates and begin drafting</li>
+        <li>Set up project management workspace (Notion or Trello)</li>
+        <li>Finalise content delivery deadline: end of Week 4</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-hd"><div class="phase-n">2</div><div class="phase-info"><h3>Content Production</h3><div class="dur">Weeks 2–6 · Owner: Copywriter + Communications Officer</div></div></div>
+      <ul>
+        <li>Write homepage copy (hero, services overview, focus areas, impact stats)</li>
+        <li>Write About and Team page copy</li>
+        <li>Write all 8 service page copies (400–600 words each)</li>
+        <li>Write all focus area page copies (4 dedicated + 1 combined)</li>
+        <li>Draft 3–5 project case studies with programme leads</li>
+        <li>Collect impact statistics (countries, projects, organisations, beneficiaries)</li>
+        <li>Source and obtain permission for partner/client logos</li>
+        <li>Source 2–3 client testimonials with approval</li>
+        <li>Write 3 launch Knowledge Hub articles (800–1,000 words each)</li>
+        <li>Content review and approval by CIDE leadership (Week 5–6)</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-hd"><div class="phase-n">3</div><div class="phase-info"><h3>Design</h3><div class="dur">Weeks 3–7 · Owner: Designer + Communications Officer</div></div></div>
+      <ul>
+        <li>Design system: colour tokens, typography scale, spacing, components</li>
+        <li>Homepage wireframe (desktop + mobile)</li>
+        <li>Homepage full visual mockup — client review milestone (Week 5)</li>
+        <li>Service page template design (2–3 variants)</li>
+        <li>Focus area page template design</li>
+        <li>Projects/Impact page and case study template</li>
+        <li>Knowledge Hub index and article templates</li>
+        <li>Team page, About page, Contact page designs</li>
+        <li>Icon set for 8 services and 8 focus areas</li>
+        <li>Design sign-off (Week 7)</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-hd"><div class="phase-n">4</div><div class="phase-info"><h3>Development &amp; Content Build</h3><div class="dur">Weeks 7–12 · Owner: Developer + Communications Officer</div></div></div>
+      <ul>
+        <li>Static site generator setup (Hugo / 11ty / plain HTML) and hosting (Netlify)</li>
+        <li>Build homepage</li>
+        <li>Build About, Team, Contact pages</li>
+        <li>Build all 8 service pages</li>
+        <li>Build Focus Areas hub and all focus area pages</li>
+        <li>Build Projects page with filterable portfolio</li>
+        <li>Build Knowledge Hub index and launch articles</li>
+        <li>Build Privacy Policy, 404 pages</li>
+        <li>Set up contact form via Formspree/Netlify Forms</li>
+        <li>Configure Google Analytics 4 + Search Console, SEO meta tags</li>
+        <li>Mobile responsiveness and cross-browser QA</li>
+        <li>Internal Review 2 (Week 11) — full team session</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-hd"><div class="phase-n">5</div><div class="phase-info"><h3>QA, Launch &amp; Handover</h3><div class="dur">Weeks 12–14 · Owner: Developer + CIDE Lead</div></div></div>
+      <ul>
+        <li>Cross-browser and device testing (Chrome, Firefox, Safari, iOS, Android)</li>
+        <li>Content proofread of all 22 P1 pages</li>
+        <li>Accessibility review (WCAG 2.1 AA) — Section 20</li>
+        <li>Final sign-off from CIDE leadership</li>
+        <li>DNS switch — go live on www.cidegroup.org</li>
+        <li>Submit sitemap to Google Search Console</li>
+        <li>Day 1 monitoring checklist (Section 18)</li>
+        <li>CMS or content update training for communications team</li>
+        <li>Handover documentation and maintenance guide</li>
+        <li>30-day post-launch support begins</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-head">Project Gantt — 14 Weeks</div>
+  <div class="gantt">
+    <div class="gantt-hd">
+      <div>Task</div>
+      <div>W1</div><div>W2</div><div>W3</div><div>W4</div><div>W5</div><div>W6</div><div>W7</div>
+      <div>W8</div><div>W9</div><div>W10</div><div>W11</div><div>W12</div><div>W13</div><div>W14</div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Discovery &amp; Architecture</strong><span>Communications Officer</span></div>
+      <div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Content Collection</strong><span>SMEs + Copywriter</span></div>
+      <div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Copywriting (all pages)</strong><span>Copywriter</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Photography Shoot</strong><span>Photographer</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Design System &amp; Templates</strong><span>Designer</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Design Review 1</strong><span>CIDE Leadership</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar mk"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Site Build (all pages)</strong><span>Developer</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>SEO &amp; Analytics Setup</strong><span>Developer</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Internal Review 2</strong><span>Full Team</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar mk"></div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>QA &amp; Accessibility</strong><span>Developer + Comms</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar"></div></div><div class="gantt-cell"><div class="bar"></div></div>
+      <div class="gantt-cell"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task"><strong>Go-Live — DNS Switch</strong><span>Developer + CIDE Lead</span></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"><div class="bar mk"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 08 STATIC SITE ARCHITECTURE ════ -->
+<div class="sec">
+  <div class="sec-num">08</div>
+  <h2 class="sec-title">Static Site Architecture &amp; Tech Stack</h2>
+  <p class="sec-intro">The website will be built as a static site — HTML, CSS, and JavaScript with no server-side database or CMS dependency at launch. This is the right approach for CIDE at this stage: zero ongoing infrastructure cost, high performance, easy version control, and a simple path to adding a lightweight headless CMS in Phase 2 if non-technical content editing becomes a priority. The recommended stack below is production-proven for development sector websites of this scale.</p>
+
+  <div class="sub-head">Recommended Technology Stack</div>
+  <div class="stack">
+    <div class="stack-title">Core Build Stack</div>
+    <div class="stack-row"><span class="sk">Static Site Generator</span><span class="sv">Hugo (recommended) or Eleventy (11ty) — both are fast, free, and well-supported. Hugo compiles the full site in under 1 second. Templates are written in HTML with simple data injection via Markdown files. No Node.js runtime in production.</span></div>
+    <div class="stack-row"><span class="sk">Styling</span><span class="sv">Plain CSS or SCSS — no CSS framework dependency. Tailwind CSS is acceptable if the developer prefers it. Avoid Bootstrap — too heavy and too generic for a distinctive brand site.</span></div>
+    <div class="stack-row"><span class="sk">JavaScript</span><span class="sv">Vanilla JS only — no React, Vue, or Angular. Portfolio filter, accordion FAQ, mobile nav, and scroll animations can all be achieved in under 50KB of vanilla JS.</span></div>
+    <div class="stack-row"><span class="sk">Hosting</span><span class="sv">Netlify (recommended) — free tier supports CIDE's traffic volume, includes SSL, CDN, form handling (Netlify Forms), and Git-based continuous deployment. Vercel is an equivalent alternative.</span></div>
+    <div class="stack-row"><span class="sk">Version Control</span><span class="sv">GitHub — private repository. All code changes committed via pull request. Every version of the site is recoverable. The communications team can review and approve changes before they go live.</span></div>
+    <div class="stack-row"><span class="sk">Domain / DNS</span><span class="sv">www.cidegroup.org — confirm registrar and DNS access. Point CNAME to Netlify. SSL certificate auto-provisioned via Let's Encrypt on Netlify. Zero cost.</span></div>
+    <div class="stack-row"><span class="sk">Contact Forms</span><span class="sv">Netlify Forms (if hosting on Netlify — free for up to 100 submissions/month) or Formspree (free tier: 50 submissions/month, paid: $10/month). All form submissions delivered to communications.cidegroup@gmail.com or a dedicated @cidegroup.org address.</span></div>
+    <div class="stack-row"><span class="sk">Analytics</span><span class="sv">Google Analytics 4 — implemented via gtag.js with a cookie consent gate. Google Search Console for keyword and indexation monitoring. Both free.</span></div>
+    <div class="stack-row"><span class="sk">Image Optimisation</span><span class="sv">Hugo's built-in image processing pipeline, or manual optimisation via Squoosh.app. All images served as WebP with JPEG fallback. Lazy loading on all below-fold images.</span></div>
+    <div class="stack-row"><span class="sk">Professional Email</span><span class="sv">Migrate from communications.cidegroup@gmail.com to a @cidegroup.org address. Zoho Mail (free for up to 5 users) or Google Workspace ($6/user/month). Critical for credibility with development partners and tender evaluators.</span></div>
+  </div>
+
+  <div class="sub-head">Phase 2 — Adding a Headless CMS (Month 3 Evaluation)</div>
+  <div class="callout">
+    <strong>If non-technical content editing is needed post-launch:</strong> Decap CMS (formerly Netlify CMS) or CloudCannon can be added to the Hugo site without any redevelopment. Editors get a simple browser-based interface for editing Markdown content files — no code required. The static site architecture is preserved, and there is no additional hosting cost on the free tier. This decision should be made at the Month 3 review based on how often the communications team needs to update content and whether they are comfortable with Git-based workflows.
+  </div>
+
+  <div class="sub-head">File &amp; Folder Structure</div>
+  <table class="t">
+    <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">/content/</td><td class="plain">All page content in Markdown files. One file per page. Organised by section: /services/, /focus-areas/, /projects/, /knowledge/</td></tr>
+      <tr><td class="mono">/layouts/</td><td class="plain">HTML templates. One base layout, one template per page type: service.html, focus-area.html, project.html, article.html</td></tr>
+      <tr><td class="mono">/assets/css/</td><td class="plain">Stylesheet files. main.scss (or main.css), components/, utilities/</td></tr>
+      <tr><td class="mono">/assets/js/</td><td class="plain">JavaScript files. nav.js (mobile nav), filter.js (portfolio filter), accordion.js (FAQs)</td></tr>
+      <tr><td class="mono">/static/images/</td><td class="plain">All image assets. Organised: /hero/, /team/, /projects/, /services/, /focus-areas/, /partners/</td></tr>
+      <tr><td class="mono">/static/docs/</td><td class="plain">Downloadable PDFs: capability statement, publications, toolkits</td></tr>
+      <tr><td class="mono">/data/</td><td class="plain">Structured data in JSON/YAML: team.json, partners.json, stats.json, services.json</td></tr>
+      <tr><td class="mono">netlify.toml</td><td class="plain">Deployment config, redirect rules (301s), form settings, header security config</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 09 PAGE-BY-PAGE COPY BRIEFS ════ -->
+<div class="sec">
+  <div class="sec-num">09</div>
+  <h2 class="sec-title">Page-by-Page Copy Briefs</h2>
+  <p class="sec-intro">The following briefs define the exact content required per priority page — word counts, confirmed data, tone notes, and image requirements. These briefs are the working documents for the copywriter and the content owners. No page proceeds to design or development without its brief being signed off by CIDE leadership.</p>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Page 01 — Homepage</span><span class="pri">P1 — Required at launch</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Copy Sections</div>
+        <div class="brief-row"><span class="lbl">Hero heading</span><span class="val">"Africa's challenges deserve African solutions." — confirm with leadership. Max 8 words. Bold, declarative, not corporate.</span></div>
+        <div class="brief-row"><span class="lbl">Hero subtext</span><span class="val">30–40 words. Who CIDE is, what they do, and for whom. Reference the decade of experience and the 360° model.</span></div>
+        <div class="brief-row"><span class="lbl">Primary CTAs</span><span class="val">Explore Our Work (leads to /projects) · Work With Us (leads to /contact)</span></div>
+        <div class="brief-row"><span class="lbl">360° model strip</span><span class="val">4 × 20-word descriptions of Research, Design, Implement, Evaluate stages. Linked to About page.</span></div>
+        <div class="brief-row"><span class="lbl">Services grid</span><span class="val">8 × 25-word service summaries. One per service. Client-outcome framing ("We help you…"), not capability listing.</span></div>
+        <div class="brief-row"><span class="lbl">Impact stats bar</span><span class="val">4–6 headline numbers: years of experience, countries, projects, organisations supported. Confirm with MEL team.</span></div>
+        <div class="brief-row"><span class="lbl">Featured projects</span><span class="val">3 project cards: project name, country, sector tag, 15-word outcome statement. Source from case studies.</span></div>
+        <div class="brief-row"><span class="lbl">Partners strip</span><span class="val">Logo grid of 6–10 key partner organisations. Written permissions required before use.</span></div>
+        <div class="brief-row"><span class="lbl">Knowledge Hub teaser</span><span class="val">3 most recent articles: title, date, category tag, 20-word excerpt. Pulls from /knowledge section.</span></div>
+        <div class="brief-row"><span class="lbl">Footer CTA</span><span class="val">"Ready to build impact together?" — CTA to /contact. Email and phone visible in footer on all pages.</span></div>
+      </div>
+      <div>
+        <div class="col-head">Image Placeholders</div>
+        <div class="img-ph"><span class="fname">cide-hero-homepage.jpg</span><span class="fdesc">Full-bleed hero. Field team in action — community setting or collaborative meeting. Min 1920×1080. Leave space for text overlay (left or centre).</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-icon-[service].svg × 8</span><span class="fdesc">Icon set for 8 services. Simple, consistent stroke icons. Green (#2D6A4F) on transparent. To be designed as a set.</span></div>
+        <div class="img-ph"><span class="fname">cide-project-featured-[01–03].jpg</span><span class="fdesc">Featured project cards. Community/programme photography. 800×500 landscape crop.</span></div>
+        <div class="img-ph"><span class="fname">cide-partners-[orgname].png × 10</span><span class="fdesc">Partner logos. White background or transparent. Min 300px width. Permission required before use.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Page 02 — About CIDE</span><span class="pri">P1 — Required at launch</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Copy Sections</div>
+        <div class="brief-row"><span class="lbl">Our story</span><span class="val">300–400 words. When CIDE was founded, the challenge it set out to address, how it has grown, and what makes it distinct today. Active voice. First person plural ("We believe…"). Avoid founding date unless confirmed.</span></div>
+        <div class="brief-row"><span class="lbl">Mission</span><span class="val">To empower organisations and enterprises with innovative, sustainable solutions that inspire change and deliver lasting impact. (confirmed from profile — may refine for web)</span></div>
+        <div class="brief-row"><span class="lbl">Vision</span><span class="val">To be a trusted leader in delivering practical, evidence-based solutions that strengthen systems to enable communities thrive. (confirmed)</span></div>
+        <div class="brief-row"><span class="lbl">Values display</span><span class="val">6 values: Compassion, Integrity, Dependability, Empowerment, Innovation, Professionalism. Each with 10–15 word description. Visual treatment — not a plain list.</span></div>
+        <div class="brief-row"><span class="lbl">Why CIDE section</span><span class="val">4 differentiators from company profile (pan-African expertise, local insight, partnership-driven, 360° model). 30–40 words each. Outcome-focused.</span></div>
+        <div class="brief-row"><span class="lbl">Stats grid</span><span class="val">Same 4–6 impact stats as homepage. Can be reused component.</span></div>
+        <div class="brief-row"><span class="lbl">Country presence</span><span class="val">Static Africa map with highlighted countries where CIDE has worked. Confirm country list with programme team.</span></div>
+      </div>
+      <div>
+        <div class="col-head">Image Placeholders</div>
+        <div class="img-ph"><span class="fname">cide-about-hero.jpg</span><span class="fdesc">About page hero. Team in meeting or field. Warm, collaborative. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-africa-map.svg</span><span class="fdesc">SVG Africa map with countries highlighted where CIDE has worked. Green (#2D6A4F) for active countries, light grey for others. Developer to create or source.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Page 03 — Our Team</span><span class="pri">P1 — Required at launch</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Copy Sections</div>
+        <div class="brief-row"><span class="lbl">Page intro</span><span class="val">30–40 words. Our team is our greatest asset — local expertise, continental reach, and sector depth in every engagement.</span></div>
+        <div class="brief-row"><span class="lbl">Leadership profiles</span><span class="val">For each: name, title, qualifications, 80–120-word bio highlighting relevant sector expertise and geographic experience. LinkedIn URL. Headshot required.</span></div>
+        <div class="brief-row"><span class="lbl">Technical team</span><span class="val">Same template as leadership, slightly shorter bios (60–80 words). Focus on technical expertise and sectors.</span></div>
+        <div class="brief-row"><span class="lbl">Expert network note</span><span class="val">Brief statement about CIDE's wider network of associate experts across the continent. 30 words. Links to /contact for partnership enquiries.</span></div>
+      </div>
+      <div>
+        <div class="col-head">Image Placeholders</div>
+        <div class="img-ph"><span class="fname">cide-team-[firstname-lastname].jpg</span><span class="fdesc">Professional headshot per team member. Square 400×400 crop. Professional background — white, grey, or outdoor. All photos same aspect ratio and crop style for consistency.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Pages 05–12 — Service Pages (template)</span><span class="pri">P1 — All 8 required at launch</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Standard Template Per Service</div>
+        <div class="brief-row"><span class="lbl">Hero heading</span><span class="val">Service name as H1. 1 line. E.g. "Strategic Communications &amp; Knowledge Management"</span></div>
+        <div class="brief-row"><span class="lbl">Lead paragraph</span><span class="val">40–50 words. What this service is, for whom, and why it matters. Client-outcome framing. No bullet points here.</span></div>
+        <div class="brief-row"><span class="lbl">Our approach</span><span class="val">80–100 words describing how CIDE delivers this service. Reference the 360° model where relevant. Practical and specific.</span></div>
+        <div class="brief-row"><span class="lbl">What we offer</span><span class="val">Bulleted list of 6–12 specific services from company profile. Plain language. No jargon without explanation.</span></div>
+        <div class="brief-row"><span class="lbl">Who we serve</span><span class="val">2–4 audience types for this specific service. 1 sentence each. Helps visitors self-identify quickly.</span></div>
+        <div class="brief-row"><span class="lbl">Related focus areas</span><span class="val">2–3 tags linking to relevant focus area pages. E.g. MEL service → Child Rights, GEDSI, Environment.</span></div>
+        <div class="brief-row"><span class="lbl">Featured project</span><span class="val">1 case study card from /projects. Most relevant to this service. Brief result statement.</span></div>
+        <div class="brief-row"><span class="lbl">CTA</span><span class="val">"Let's talk about [service name]" — leads to /contact. Prominent, at end of page.</span></div>
+      </div>
+      <div>
+        <div class="col-head">Service Hero Images (one per service)</div>
+        <div class="img-ph"><span class="fname">cide-svc-strategic-comms.jpg</span><span class="fdesc">Communications / storytelling in the field. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-programme-design.jpg</span><span class="fdesc">Programme planning session — workshop or community meeting. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-ict-digital.jpg</span><span class="fdesc">Technology in use — mobile data collection, laptop in field setting. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-mel.jpg</span><span class="fdesc">Data review or evaluation session. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-research.jpg</span><span class="fdesc">Research team conducting survey or interview. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-capacity.jpg</span><span class="fdesc">Training or capacity building session. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-enterprise.jpg</span><span class="fdesc">Strategic planning or organisational development context. 1600×700.</span></div>
+        <div class="img-ph"><span class="fname">cide-svc-policy.jpg</span><span class="fdesc">Policy forum, stakeholder engagement, or advocacy setting. 1600×700.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Page 19 — Projects &amp; Impact</span><span class="pri">P1 — Required at launch (min 3 case studies)</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Copy Sections</div>
+        <div class="brief-row"><span class="lbl">Page intro</span><span class="val">30 words. Our work spans governments, development partners, civil society, and the private sector — here is what we have delivered.</span></div>
+        <div class="brief-row"><span class="lbl">Impact stats bar</span><span class="val">Same 4–6 numbers as homepage. Reused component. Confirms scale to tender evaluators.</span></div>
+        <div class="brief-row"><span class="lbl">Portfolio filters</span><span class="val">Sector filter: Governance, Education, Health, Environment, ICT, Gender, Livelihoods, Humanitarian. Country filter: list all countries. Service filter: all 8 services.</span></div>
+        <div class="brief-row"><span class="lbl">Project cards</span><span class="val">Each card: project title, country flag/name, sector tag, service tag, 15-word outcome, "Read case study" link. Minimum 3 at launch, target 8–10.</span></div>
+        <div class="brief-row"><span class="lbl">Case study template</span><span class="val">Per project page: client (named or "confidential"), country, period, services delivered, challenge (100w), CIDE approach (150w), results/impact (100w), partner testimonial quote (optional).</span></div>
+        <div class="brief-row"><span class="lbl">Download CTA</span><span class="val">Capability statement download in the sidebar or footer of projects page. "Download our capability statement (PDF)"</span></div>
+      </div>
+      <div>
+        <div class="col-head">Image &amp; Data Requirements</div>
+        <div class="img-ph"><span class="fname">cide-project-[slug]-hero.jpg</span><span class="fdesc">Per case study: relevant field photography. Community, team, or programme activity. 1200×600 landscape. Min 3 at launch.</span></div>
+        <div class="img-ph"><span class="fname">cide-capability-statement.pdf</span><span class="fdesc">2–4 page designed capability statement. Cover, services summary, selected projects, team overview, contact. Must be ready at launch.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <div class="brief-hd"><span class="pg">Page 20 — Contact / Work With Us</span><span class="pri">P1 — Required at launch</span></div>
+    <div class="brief-body">
+      <div>
+        <div class="col-head">Copy Sections</div>
+        <div class="brief-row"><span class="lbl">Primary email</span><span class="val">Confirm @cidegroup.org address. Migrate from Gmail before launch for credibility.</span></div>
+        <div class="brief-row"><span class="lbl">Phone</span><span class="val">+254-745-704-580 (confirmed from company profile)</span></div>
+        <div class="brief-row"><span class="lbl">Office address</span><span class="val">Confirm full Nairobi office address and Google Maps coordinates from CIDE leadership</span></div>
+        <div class="brief-row"><span class="lbl">Intro copy</span><span class="val">25–30 words. Invite the visitor — whether a development partner, government agency, or new client — to start a conversation.</span></div>
+        <div class="brief-row"><span class="lbl">Social links</span><span class="val">LinkedIn (CIDE Group), confirm other active channels (Twitter/X, Facebook) — only link to channels that are actively maintained</span></div>
+        <div class="brief-row"><span class="lbl">Form fields</span><span class="val">See Section 21 for full field specification. Name, organisation, role, email, phone, nature of enquiry (dropdown), message, privacy consent.</span></div>
+      </div>
+      <div>
+        <div class="col-head">Image Placeholders</div>
+        <div class="img-ph"><span class="fname">cide-contact-hero.jpg</span><span class="fdesc">Contact page hero. Collaborative or welcoming — team discussion, handshake, or Nairobi office. 1600×400.</span></div>
+        <div class="img-ph"><span class="fname">Google Maps embed</span><span class="fdesc">Embedded Google Map showing Nairobi office location. Requires confirmed GPS coordinates before launch.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 10 KNOWLEDGE HUB ════ -->
+<div class="sec">
+  <div class="sec-num">10</div>
+  <h2 class="sec-title">Knowledge Hub &amp; Thought Leadership</h2>
+  <p class="sec-intro">The Knowledge Hub is the single most powerful long-term driver of organic traffic, credibility, and inbound enquiries on the CIDE Group website. Development partners, government officials, and consortium leads regularly search for sector expertise — and consistently finding CIDE's name attached to high-quality research and analysis builds the kind of brand authority that no advertising budget can replicate.</p>
+
+  <div class="sub-head">Content Categories</div>
+  <div class="g3">
+    <div class="card">
+      <h4>Publications &amp; Reports</h4>
+      <p>Downloadable PDFs of CIDE-authored or co-authored research reports, evaluation summaries, and sector analyses. Each publication gets a landing page with abstract, key findings summary, and download button. Gating with an email address is optional but can build a newsletter list.</p>
+    </div>
+    <div class="card">
+      <h4>Blog / Insights</h4>
+      <p>800–1,200-word articles on development themes, authored by named CIDE experts. These are the primary SEO traffic drivers. Publish at least one per month at launch, growing to two per month by Month 6. Target keyword-driven titles: "How to design a MEL system for a USAID-funded programme" outperforms "Our approach to MEL."</p>
+    </div>
+    <div class="card">
+      <h4>Toolkits &amp; Resources</h4>
+      <p>Practical guides, templates, and frameworks that CIDE has developed or uses. Examples: a GEDSI mainstreaming checklist, a Theory of Change template, an MEL framework guide for NGOs. These are extremely high-value for civil society and NGO audiences — and generate backlinks and shares that boost SEO.</p>
+    </div>
+    <div class="card">
+      <h4>Policy Briefs</h4>
+      <p>2–4 page concise documents on specific policy issues in CIDE's thematic areas — climate adaptation in East Africa, child protection in humanitarian settings, digital transformation for African governments. Well-formatted PDFs with key recommendations. Primary audience: government officials and development partners.</p>
+    </div>
+    <div class="card">
+      <h4>News &amp; Events</h4>
+      <p>Press releases, event announcements, conference participation updates, team appointments, and media coverage. Lower editorial bar than Insights — these can be shorter (150–300 words) and more frequent. Build a consistent rhythm of presence and activity.</p>
+    </div>
+    <div class="card">
+      <h4>Case Study Stories</h4>
+      <p>A subset of the Projects section formatted as narrative stories — "how we helped" rather than a dry project summary. These are the most shareable format on LinkedIn and the most persuasive content for undecided clients. 600–1,000 words, one clear outcome, one client or partner quote.</p>
+    </div>
+  </div>
+
+  <div class="sub-head">Launch Content Requirements (P1)</div>
+  <div class="callout">
+    <strong>Minimum launch content:</strong> The Knowledge Hub should launch with at least 3 published articles, 1 downloadable toolkit, and 1 policy brief. Launching with an empty Knowledge Hub is worse than not having one — it signals inactivity. The 3 launch articles should be drafted during the content production phase (Weeks 2–6) and be ready before the site goes live.
+  </div>
+
+  <div class="sub-head">Suggested Launch Articles</div>
+  <div class="insight-item"><div class="it">Article 01 — "Five things development partners get wrong about locally-led implementation in Africa"</div><div class="ib">Audience: INGO programme managers, donor staff. 900 words. Draws on CIDE's decade of experience. Positions CIDE's locally-rooted model against international advisory approaches. High SEO value for "locally-led development Africa" searches. Author: CIDE Senior Advisor.</div></div>
+  <div class="insight-item"><div class="it">Article 02 — "What does a good MEL system actually look like for a community-based programme?"</div><div class="ib">Audience: NGO and CBO programme officers, MEL staff. 800 words. Practical, actionable, not theoretical. Covers real-time data collection, adaptive management loops, and learning documentation. SEO target: "MEL system design NGO Kenya." Author: CIDE MEL Expert.</div></div>
+  <div class="insight-item"><div class="it">Article 03 — "GEDSI mainstreaming is not a checklist — why most programmes still get it wrong"</div><div class="ib">Audience: Development partners, INGO programme leads, government. 900 words. Argues for genuine integration vs. box-ticking. Positions CIDE's GEDSI advisory approach. SEO target: "GEDSI mainstreaming Africa." Author: CIDE GEDSI Specialist.</div></div>
+
+  <div class="sub-head">Post-Launch Content Calendar</div>
+  <table class="t">
+    <thead><tr><th>Frequency</th><th>Content Type</th><th>Owner</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Monthly</td><td class="plain">1 × Insights blog article (800–1,200 words)</td><td class="plain">Rotating CIDE expert authors, edited by Communications Officer</td><td class="plain">Keyword-researched title. Approved 2 weeks before publish date.</td></tr>
+      <tr><td>Quarterly</td><td class="plain">1 × New case study added to /projects</td><td class="plain">Programme lead + Communications Officer</td><td class="plain">Client permission required before publication.</td></tr>
+      <tr><td>Quarterly</td><td class="plain">1 × Policy brief or toolkit</td><td class="plain">Technical expert + Communications Officer</td><td class="plain">Designed PDF + landing page. High SEO value.</td></tr>
+      <tr><td>As needed</td><td class="plain">News &amp; Events updates</td><td class="plain">Communications Officer</td><td class="plain">No minimum, but aim for at least 1 per month to show activity.</td></tr>
+      <tr><td>Annually</td><td class="plain">Impact report page / annual review</td><td class="plain">MEL Officer + Communications Officer</td><td class="plain">Aggregate results for the year. Key achievements. Highly shareable.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 11 TEAM & RACI ════ -->
+<div class="sec">
+  <div class="sec-num">11</div>
+  <h2 class="sec-title">Team &amp; RACI</h2>
+  <p class="sec-intro">Website projects fail most often not because of technical problems but because of unclear ownership — content that never gets written, approvals that never come, and decisions that get deferred indefinitely. This RACI makes every deliverable's accountability explicit from day one. Every content delivery row has one Accountable person and one clear deadline.</p>
+
+  <table class="t">
+    <thead><tr><th>Role</th><th>Responsibilities</th><th>Key Deliverables</th><th>Timeline Gate</th></tr></thead>
+    <tbody>
+      <tr><td>CIDE Project Lead (Director/CEO)</td><td class="plain">Overall sign-off authority. Approves site architecture, design, and final content. Makes go/no-go decision. Provides strategic input on positioning and messaging.</td><td class="plain">Architecture approval (Week 2), design sign-off (Week 7), final content approval (Week 12), go-live authorisation (Week 14)</td><td class="plain">Must be available for review sessions at Weeks 2, 5, 7, 11, and 14</td></tr>
+      <tr><td>Communications Officer</td><td class="plain">Day-to-day project management. Coordinates all content collection. Briefs copywriter. Manages photography. Collects partner permissions. First reviewer of all copy. Manages post-launch content calendar.</td><td class="plain">Content briefs (Week 2), partner permissions (Week 4), content delivery to developer (Week 6), post-launch calendar (Week 14)</td><td class="plain">This is a near full-time role during Weeks 1–8. Must be resourced accordingly.</td></tr>
+      <tr><td>Technical SMEs (Programme Leads)</td><td class="plain">Provide service and focus area copy inputs. Draft case studies with programme details and results. Review technical accuracy of all service pages before launch.</td><td class="plain">Service page inputs (Week 3), case study drafts (Week 4–5), technical accuracy review (Week 10)</td><td class="plain">Hard deadline: all SME inputs by end of Week 4. No exceptions — design cannot proceed without this.</td></tr>
+      <tr><td>Copywriter (external)</td><td class="plain">Write all web copy: homepage, about, 8 service pages, 4 focus area pages, projects, contact, 3 Knowledge Hub articles. Edit for brand voice and web readability.</td><td class="plain">First drafts of all P1 pages (Weeks 2–5), revised drafts incorporating feedback (Week 6), final approved copy (Week 7)</td><td class="plain">Brief issued Week 1. First drafts due Week 5 at latest.</td></tr>
+      <tr><td>Graphic Designer (external)</td><td class="plain">Design system, all page mockups, icon set for services and focus areas, capability statement PDF, social media launch assets.</td><td class="plain">Design system (Week 4), homepage mockup (Week 5), all page templates (Week 7), final sign-off assets (Week 8)</td><td class="plain">Cannot begin page mockups without confirmed brand assets and copy briefs. Brief by Week 2.</td></tr>
+      <tr><td>Web Developer (external)</td><td class="plain">Set up Hugo/static site, build all 22 P1 pages to approved design, configure Netlify hosting, implement contact form, SEO meta tags, GA4, responsive QA.</td><td class="plain">Site framework (Week 7), core pages built (Week 9–10), all P1 pages complete (Week 12), QA complete (Week 13), go-live (Week 14)</td><td class="plain">Cannot begin build without finalised design. Brief by Week 5. Designs by Week 7.</td></tr>
+      <tr><td>Photographer (external)</td><td class="plain">Team headshots, office photography, field/programme photography. All images delivered web-optimised (WebP/JPG) and print-quality (RAW) with model releases.</td><td class="plain">Shoot dates confirmed (Week 2), photography delivered (Week 4–5), images to developer (Week 6)</td><td class="plain">Book by Week 2. All images must be available before build begins in Week 7.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn"><strong>Risk: Content delays cascade to design and build.</strong> Every week of delay in content delivery pushes the entire project timeline back. The Communications Officer must enforce the Week 4 content deadline with the same urgency as the go-live date itself. If content is not delivered on time, the Project Lead must be notified immediately — not after the deadline has passed.</div>
+</div>
+
+<!-- ════ 12 DESIGN DIRECTION ════ -->
+<div class="sec">
+  <div class="sec-num">12</div>
+  <h2 class="sec-title">Design Direction</h2>
+  <p class="sec-intro">The CIDE Group website must feel distinctly African, credibly advisory, and genuinely modern. It should not look like a template. It should not look like a Western development agency with Africa photography bolted on. The design brief is: confident, rooted, editorial. Think less brochure-ware and more the Economist meets an African practice journal — rigorous, readable, and quietly impressive.</p>
+
+  <div class="sub-head">Typography</div>
+  <table class="t">
+    <thead><tr><th>Role</th><th>Font</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td>Display / Headings</td><td class="plain">DM Serif Display (free, Google Fonts) — elegant, authoritative serif for page titles, hero headlines, section heads. Conveys institutional credibility and depth without corporate stiffness.</td><td class="plain">H1, H2, hero headlines, pull quotes, large feature text. Never used for body copy or UI labels.</td></tr>
+      <tr><td>Body / UI</td><td class="plain">DM Sans (free, Google Fonts) — geometric, modern, excellent legibility at small sizes. A natural pairing with DM Serif. Clean, contemporary, and legible on all devices.</td><td class="plain">All body copy, navigation labels, button text, form labels, table content, captions, metadata.</td></tr>
+      <tr><td>Mono / Data</td><td class="plain">IBM Plex Mono (free, Google Fonts) — used sparingly for URL strings, code, statistics, and figure labels. Adds technical credibility to data presentation without looking developer-coded.</td><td class="plain">Project statistics, URL examples, data labels, version numbers.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Colour Palette</div>
+  <table class="t">
+    <thead><tr><th>Colour</th><th>Hex</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td>Forest Green (Primary)</td><td class="mono">#2D6A4F</td><td class="plain">Section backgrounds, header/footer, hero overlays, CTA buttons, headings, progress indicators, icon fills. CIDE's signature colour — dominant and consistent across all pages.</td></tr>
+      <tr><td>Deep Red (Accent)</td><td class="mono">#A31E22</td><td class="plain">Section number labels, secondary CTAs, alert states, tag labels, hover accents, selected filter states. Used sparingly — one red element per section maximum.</td></tr>
+      <tr><td>Ink (Text)</td><td class="mono">#111111</td><td class="plain">All primary headings and body text on white backgrounds. Maximum legibility.</td></tr>
+      <tr><td>Dark Slate</td><td class="mono">#1E3A2F</td><td class="plain">Alternative dark hero background. Dark green that is on-brand without being pure black. Used for homepage hero and footer.</td></tr>
+      <tr><td>Body Grey</td><td class="mono">#444444</td><td class="plain">Secondary text, supporting copy, table content, form placeholder text.</td></tr>
+      <tr><td>Green Tint</td><td class="mono">#F0F7F3</td><td class="plain">Alternating section backgrounds, card backgrounds, hover states on white. Subtle brand reinforcement without heaviness.</td></tr>
+      <tr><td>Light Green Accent</td><td class="mono">#52B788</td><td class="plain">Used exclusively for positive status indicators, success states, and "active/completed" tags in the portfolio filter. Not used decoratively.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Design Principles</div>
+  <div class="g2">
+    <div class="card">
+      <h4>Non-Negotiable Elements</h4>
+      <ul>
+        <li>Mobile-first — design for 375px width before desktop</li>
+        <li>Photography over illustration — real people, real places, not stock art</li>
+        <li>White space used generously — not every pixel needs content</li>
+        <li>One primary CTA per page — not three competing for attention</li>
+        <li>Loading speed under 2 seconds on 4G — image optimisation is non-negotiable</li>
+        <li>The 360° model visualised on every page where relevant, not just About</li>
+        <li>Email and phone in the footer on every single page</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Visual Differentiation from Competitors</h4>
+      <ul>
+        <li>Serif display font — most advisory sites use sans-serif only. Serif gives editorial authority.</li>
+        <li>Green-dominant palette — most development sector sites are blue or grey. Green is distinctive and meaningful for CIDE.</li>
+        <li>Section numbering with editorial precision — shows rigour and structure</li>
+        <li>Impact statistics displayed prominently — not buried in an About page</li>
+        <li>Photography in landscape wide-shots (field context) not studio portraits</li>
+        <li>Case studies that show results, not just describe activities</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 13 SEO ════ -->
+<div class="sec">
+  <div class="sec-num">13</div>
+  <h2 class="sec-title">SEO &amp; Discoverability</h2>
+  <p class="sec-intro">The primary SEO opportunity for CIDE Group is in the development advisory sector — a space where most competitors have poor SEO discipline. Getting CIDE onto page 1 of Google for five or six high-intent keywords within 6 months of launch is a realistic and achievable goal if the technical foundations and content strategy are executed correctly from day one.</p>
+
+  <div class="sub-head">Target Keywords by Page</div>
+  <table class="t">
+    <thead><tr><th>Page</th><th>Primary Keyword</th><th>Secondary Keywords</th><th>Search Intent</th></tr></thead>
+    <tbody>
+      <tr><td>Homepage</td><td class="plain">CIDE Group advisory Kenya</td><td class="plain">pan-African consulting firm, development advisory Kenya, advisory organisation Africa</td><td class="plain">Navigational / Brand</td></tr>
+      <tr><td>About</td><td class="plain">development advisory organisation Kenya</td><td class="plain">development consulting firm Nairobi, pan-African advisory firm</td><td class="plain">Informational</td></tr>
+      <tr><td>MEL Service</td><td class="plain">monitoring evaluation learning Africa</td><td class="plain">MEL consultants Kenya, impact evaluation Africa, MEL system design NGO</td><td class="plain">Transactional / Commercial</td></tr>
+      <tr><td>Research &amp; Evidence</td><td class="plain">development research firm Kenya</td><td class="plain">evidence generation Africa, baseline study Africa, KAP assessment Kenya</td><td class="plain">Commercial Investigation</td></tr>
+      <tr><td>Strategic Comms</td><td class="plain">strategic communications Africa development</td><td class="plain">behaviour change communication Africa, knowledge management NGO, communications strategy Africa</td><td class="plain">Transactional</td></tr>
+      <tr><td>ICT &amp; Digital</td><td class="plain">ICT advisory Africa development</td><td class="plain">digital transformation NGO Africa, mobile data collection Kenya, ICT for development</td><td class="plain">Commercial Investigation</td></tr>
+      <tr><td>Capacity Development</td><td class="plain">capacity building Africa NGO</td><td class="plain">organisational development Kenya, training for CBOs Africa, NGO capacity building</td><td class="plain">Transactional</td></tr>
+      <tr><td>GEDSI</td><td class="plain">GEDSI mainstreaming consultants Africa</td><td class="plain">gender equality advisory Kenya, social inclusion Africa, gender analysis consultancy</td><td class="plain">Commercial Investigation</td></tr>
+      <tr><td>Environment &amp; Climate</td><td class="plain">climate advisory Africa</td><td class="plain">ESG advisory Kenya, agroforestry consulting Africa, nature-based solutions Kenya</td><td class="plain">Informational / Commercial</td></tr>
+      <tr><td>Projects &amp; Impact</td><td class="plain">development projects Kenya Africa</td><td class="plain">CIDE Group projects, advisory case studies Africa</td><td class="plain">Navigational / Trust</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Meta Title &amp; Description Templates</div>
+  <table class="t">
+    <thead><tr><th>Page</th><th>Meta Title (max 60 chars)</th><th>Meta Description (max 155 chars)</th></tr></thead>
+    <tbody>
+      <tr><td>Homepage</td><td class="plain">CIDE Group — Thriving Together | Pan-African Advisory</td><td class="plain">Pan-African advisory, consulting, and implementation firm. Governments, donors, NGOs, and business — we turn African challenges into African solutions. Nairobi, Kenya.</td></tr>
+      <tr><td>MEL</td><td class="plain">MEL &amp; Reporting Services | CIDE Group Africa</td><td class="plain">Monitoring, evaluation &amp; learning systems for development programmes. Real-time data, evaluation frameworks, and learning documentation. CIDE Group, Nairobi.</td></tr>
+      <tr><td>Research</td><td class="plain">Research &amp; Evidence Generation | CIDE Group</td><td class="plain">Rigorous qualitative and quantitative research for development programmes. Baseline studies, KAP assessments, impact evaluations. CIDE Group, Kenya and Africa.</td></tr>
+      <tr><td>Capacity Dev</td><td class="plain">Capacity Development | CIDE Group Africa</td><td class="plain">Practical capacity building for CBOs, NGOs, MDAs and enterprises. Leadership, technical, and operational training tailored to your context. CIDE Group.</td></tr>
+      <tr><td>GEDSI</td><td class="plain">GEDSI Advisory Services | CIDE Group</td><td class="plain">Gender equality, disability and social inclusion mainstreaming for development programmes. Gender analysis, inclusive design, GAP development. CIDE Group.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Technical SEO Requirements — Static Site</div>
+  <div class="g3">
+    <div class="card">
+      <h4>Core Web Vitals</h4>
+      <p>Static sites are naturally fast. Target: LCP under 2.5s, CLS under 0.1, INP under 200ms. Achieve this by: serving all images as WebP with explicit width/height attributes to prevent CLS, lazy-loading images below the fold, and using a CDN (Netlify's default). Monitor in Google Search Console and PageSpeed Insights post-launch.</p>
+    </div>
+    <div class="card">
+      <h4>Schema Markup</h4>
+      <p>Apply Organization schema to the homepage and About page (name, url, logo, contactPoint, areaServed: Africa). Apply Article schema to all Knowledge Hub articles. Apply BreadcrumbList on all service and focus area pages. This improves rich snippet appearance in search results and builds trust signals in Google's knowledge graph.</p>
+    </div>
+    <div class="card">
+      <h4>XML Sitemap &amp; Robots</h4>
+      <p>Hugo auto-generates sitemap.xml. Verify all 22 P1 pages are included before go-live. Submit to Google Search Console on launch day. Configure robots.txt to allow all pages. Set canonical tags on all pages to prevent duplicate content. Check for crawl errors in Search Console weekly for the first month.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 14 ANALYTICS ════ -->
+<div class="sec">
+  <div class="sec-num">14</div>
+  <h2 class="sec-title">Analytics &amp; Measurement</h2>
+  <p class="sec-intro">The website's performance must be tracked from day one. These KPIs and event definitions ensure that CIDE Group can measure whether the website is doing its job — generating contact enquiries, building credibility, and driving inbound interest from the right audiences.</p>
+
+  <div class="sub-head">Primary KPIs</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-n">50</div><div class="kpi-l">Contact enquiries / Month 3 target</div></div>
+    <div class="kpi"><div class="kpi-n">5k</div><div class="kpi-l">Monthly sessions / Month 6 target</div></div>
+    <div class="kpi"><div class="kpi-n">20</div><div class="kpi-l">Target keyword positions tracked</div></div>
+    <div class="kpi"><div class="kpi-n">100</div><div class="kpi-l">Capability statement downloads / Month 6</div></div>
+  </div>
+
+  <table class="t">
+    <thead><tr><th>KPI</th><th>GA4 Measurement</th><th>Month 1 Target</th><th>Month 6 Target</th></tr></thead>
+    <tbody>
+      <tr><td>Contact form submissions</td><td class="plain">form_submit event (form_id: contact)</td><td class="plain">10</td><td class="plain">50</td></tr>
+      <tr><td>Unique sessions</td><td class="plain">GA4 sessions metric</td><td class="plain">500</td><td class="plain">5,000</td></tr>
+      <tr><td>Service page visits</td><td class="plain">page_view on /services/* paths</td><td class="plain">200 combined</td><td class="plain">1,500 combined</td></tr>
+      <tr><td>Capability statement downloads</td><td class="plain">file_download event on capability PDF</td><td class="plain">10</td><td class="plain">100</td></tr>
+      <tr><td>Projects page visits</td><td class="plain">page_view on /projects</td><td class="plain">100</td><td class="plain">600</td></tr>
+      <tr><td>Average engagement time</td><td class="plain">GA4 engagement_time per session</td><td class="plain">&gt;75 seconds</td><td class="plain">&gt;2 minutes</td></tr>
+      <tr><td>LinkedIn referral sessions</td><td class="plain">session_source = linkedin.com</td><td class="plain">50</td><td class="plain">400</td></tr>
+      <tr><td>Organic search sessions</td><td class="plain">session_default_channel_group = Organic</td><td class="plain">100</td><td class="plain">1,500</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">GA4 Event Configuration</div>
+  <table class="t">
+    <thead><tr><th>Event Name</th><th>Trigger</th><th>Custom Parameters</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">contact_form_submit</td><td class="plain">Successful contact form submission</td><td class="mono">enquiry_type, page_location</td></tr>
+      <tr><td class="mono">file_download</td><td class="plain">Click on any PDF download link</td><td class="mono">file_name, page_location</td></tr>
+      <tr><td class="mono">cta_click</td><td class="plain">Click on any "Work With Us" or "Get in Touch" CTA</td><td class="mono">cta_text, page_location, section_name</td></tr>
+      <tr><td class="mono">project_view</td><td class="plain">Page view on /projects/{slug}</td><td class="mono">project_name, sector, country</td></tr>
+      <tr><td class="mono">article_read_complete</td><td class="plain">80% scroll depth on /knowledge/* pages</td><td class="mono">article_title, category</td></tr>
+      <tr><td class="mono">email_click</td><td class="plain">Click on mailto: links anywhere on site</td><td class="mono">page_location</td></tr>
+      <tr><td class="mono">phone_click</td><td class="plain">Click on tel: links (mobile)</td><td class="mono">page_location</td></tr>
+      <tr><td class="mono">portfolio_filter</td><td class="plain">Click on portfolio filter on /projects</td><td class="mono">filter_type, filter_value</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 15 LEGAL ════ -->
+<div class="sec">
+  <div class="sec-num">15</div>
+  <h2 class="sec-title">Legal &amp; Compliance</h2>
+  <p class="sec-intro">Publishing a website that collects user data (contact forms, analytics cookies) without a compliant privacy framework is a risk under the Kenya Data Protection Act 2019. The following legal pages and disclaimers are P1 launch gates — the website does not go live without them in place.</p>
+
+  <div class="callout warn"><strong>Kenya Data Protection Act 2019:</strong> CIDE Group is subject to the KDPA 2019 as a data controller collecting personal data via contact forms and analytics. A Privacy Policy must be live before any form goes live on the website. A cookie consent banner must be in place before GA4 can collect data. These are not optional post-launch enhancements.</div>
+
+  <div class="sub-head">Required Legal Pages</div>
+  <table class="t">
+    <thead><tr><th>Page</th><th>Required Content</th><th>Owner</th><th>Launch Gate</th></tr></thead>
+    <tbody>
+      <tr><td>Privacy Policy</td><td class="plain">What data CIDE collects (name, email, phone via contact form; anonymised analytics via GA4), how it is used (responding to enquiries, analytics only), retention period, data subject rights under KDPA 2019 (access, rectification, erasure), contact for data requests, date of last review.</td><td class="plain">CIDE Leadership / Legal Advisor</td><td class="plain">Yes — no form may go live without this</td></tr>
+      <tr><td>Cookie Consent Banner</td><td class="plain">Two categories: Essential cookies (no consent needed) and Analytics cookies (GA4 — requires consent). Simple accept/reject toggle. No analytics data collected before consent. Implemented in JavaScript on the static site.</td><td class="plain">Developer</td><td class="plain">Yes — must be live before GA4 tracking begins</td></tr>
+      <tr><td>Form data notice</td><td class="plain">Single line adjacent to the contact form: "CIDE Group processes your data to respond to your enquiry, in line with our Privacy Policy." Link to Privacy Policy.</td><td class="plain">Developer (copy confirmed by Legal)</td><td class="plain">Yes — on every form</td></tr>
+      <tr><td>Website disclaimer</td><td class="plain">Standard footer disclaimer: "The information on this website is for general informational purposes only. CIDE Group makes no representations about the accuracy or completeness of any information on this site." Footer placement, small text.</td><td class="plain">Communications Officer</td><td class="plain">Yes — footer on all pages</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 16 PHOTOGRAPHY ════ -->
+<div class="sec">
+  <div class="sec-num">16</div>
+  <h2 class="sec-title">Photography Brief</h2>
+  <p class="sec-intro">Photography is where CIDE Group's credibility is made or lost. Every competitor in the development advisory sector uses the same stock photography — diverse smiling people, generic community scenes, and conference room photos that could be from anywhere. CIDE's photography should be distinctly its own — real team members, real communities, real field work, in recognisably East African contexts.</p>
+
+  <div class="sub-head">Priority Shot List</div>
+  <table class="t">
+    <thead><tr><th>Asset Name</th><th>Subject Description</th><th>Usage</th><th>Spec</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">cide-hero-homepage.jpg</td><td class="plain">CIDE team member(s) in active field engagement — community meeting, data collection, or training session. Landscapes that read as East African. Wide shot with clear sky or depth for text overlay.</td><td class="plain">Homepage hero</td><td class="plain">Min 1920×1080</td></tr>
+      <tr><td class="mono">cide-about-hero.jpg</td><td class="plain">Team in collaborative setting — working session, planning meeting, or review. Authentic, warm, professional. Not formally posed.</td><td class="plain">About hero</td><td class="plain">Min 1600×700</td></tr>
+      <tr><td class="mono">cide-team-[name].jpg × all staff</td><td class="plain">Professional headshot. Consistent background (white, light grey, or branded green). Business casual attire. Natural light preferred. Square crop 400×400. One per team member.</td><td class="plain">Team page, article author photos</td><td class="plain">400×400 square minimum</td></tr>
+      <tr><td class="mono">cide-svc-[service].jpg × 8</td><td class="plain">One image per service depicting the service in action — communications team filming, MEL officer with tablet in field, training session underway, ICT team on computers, community research interview. Real CIDE staff preferred.</td><td class="plain">Service page heroes</td><td class="plain">Min 1600×700 each</td></tr>
+      <tr><td class="mono">cide-project-[slug].jpg × 5+</td><td class="plain">Photography from actual past CIDE projects — community beneficiaries (with consent), programme activities, field work. Each image should represent a real project deliverable.</td><td class="plain">Portfolio cards, case study pages</td><td class="plain">Min 1200×600 each</td></tr>
+      <tr><td class="mono">cide-field-community.jpg × 5</td><td class="plain">Authentic community engagement scenes — rural and urban. Real interactions, not posed group photos. Include geographic diversity (different regions and countries where CIDE works).</td><td class="plain">Focus area pages, Knowledge Hub</td><td class="plain">Min 1200×700 each</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Photography Principles</div>
+  <div class="g2">
+    <div class="card">
+      <h4>What To Shoot</h4>
+      <ul>
+        <li>Real CIDE staff in field and office settings</li>
+        <li>Real community members and beneficiaries (with signed consent forms)</li>
+        <li>Authentic programme activity — not re-staged for the camera</li>
+        <li>Landscapes and environments that are recognisably African</li>
+        <li>Technology in context (tablets, laptops in field settings)</li>
+        <li>Training and capacity building sessions with visible engagement</li>
+        <li>Documents, data boards, and programme materials in use</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>What To Avoid</h4>
+      <ul>
+        <li>Stock photography of any kind</li>
+        <li>Formally posed group photos that look staged</li>
+        <li>Children's faces without explicit parental written consent</li>
+        <li>Images that could be misidentified as poverty pornography</li>
+        <li>Photos where the CIDE team is clearly more prominent than community members</li>
+        <li>Heavy filters, Instagram-style editing, or oversaturated colours</li>
+        <li>Inconsistent aspect ratios or portrait-orientation images in hero slots</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 17 GOVERNANCE ════ -->
+<div class="sec">
+  <div class="sec-num">17</div>
+  <h2 class="sec-title">Content Governance &amp; Maintenance</h2>
+  <p class="sec-intro">A static website does not update itself. Without a governance plan, clinic hours go stale, team pages reflect people who have left, and case studies sit outdated for years. The following schedule, workflow, and accountability structure ensures the CIDE Group website stays current, accurate, and improving after launch.</p>
+
+  <div class="sub-head">Content Review Schedule</div>
+  <table class="t">
+    <thead><tr><th>Content Type</th><th>Review Frequency</th><th>Owner</th><th>Trigger for Immediate Update</th></tr></thead>
+    <tbody>
+      <tr><td>Team profiles and headshots</td><td class="plain">Every 6 months or on any staff change</td><td class="plain">Communications Officer</td><td class="plain">Team member joins or leaves. Update within 1 week of confirmation.</td></tr>
+      <tr><td>Project portfolio</td><td class="plain">Quarterly — add new projects, archive outdated ones</td><td class="plain">Communications Officer + Programme Leads</td><td class="plain">Major project completion or new multi-year contract signed.</td></tr>
+      <tr><td>Service page copy</td><td class="plain">Every 12 months</td><td class="plain">Communications Officer + SMEs</td><td class="plain">New service added, service discontinued, or significant change in approach.</td></tr>
+      <tr><td>Contact details and address</td><td class="plain">Quarterly check</td><td class="plain">Communications Officer</td><td class="plain">Any contact detail change — update within 24 hours. Critical for inbound enquiries.</td></tr>
+      <tr><td>Partner logos and relationships</td><td class="plain">Every 12 months</td><td class="plain">Business Development</td><td class="plain">Partnership ends or new major partnership begins. Remove promptly to avoid misrepresentation.</td></tr>
+      <tr><td>Knowledge Hub articles</td><td class="plain">Monthly new article. Review older articles annually for accuracy.</td><td class="plain">Communications Officer</td><td class="plain">Major policy change or sector development makes an article inaccurate.</td></tr>
+      <tr><td>Privacy Policy</td><td class="plain">Annually minimum</td><td class="plain">CIDE Leadership / Legal</td><td class="plain">Change in Kenya Data Protection Act or Google Analytics data practices.</td></tr>
+      <tr><td>Impact statistics</td><td class="plain">Annually — update to reflect latest figures</td><td class="plain">MEL Officer</td><td class="plain">New annual report data available. Never show outdated numbers as if current.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Content Update Workflow — Static Site</div>
+  <div class="workflow">
+    <div class="wf-step"><div class="wf-n">Step 1</div><div class="wf-title">Change Requested</div><div class="wf-desc">Content owner emails Communications Officer with change and deadline</div></div>
+    <div class="wf-step"><div class="wf-n">Step 2</div><div class="wf-title">Edit Made</div><div class="wf-desc">Communications Officer or Developer edits the Markdown/HTML file in the GitHub repo</div></div>
+    <div class="wf-step"><div class="wf-n">Step 3</div><div class="wf-title">PR Created</div><div class="wf-desc">Pull request created — change visible for review before it goes live</div></div>
+    <div class="wf-step"><div class="wf-n">Step 4</div><div class="wf-title">Review &amp; Approve</div><div class="wf-desc">Communications Officer or CIDE Lead reviews the change on the Netlify preview URL</div></div>
+    <div class="wf-step"><div class="wf-n">Step 5</div><div class="wf-title">Merge &amp; Deploy</div><div class="wf-desc">PR merged → Netlify auto-deploys to live site within 60 seconds</div></div>
+  </div>
+  <div class="callout">SLA: routine content changes within 3 working days. Urgent changes (incorrect contact details, team member departures) within 24 hours of confirmed instruction.</div>
+</div>
+
+<!-- ════ 18 LAUNCH PLAN ════ -->
+<div class="sec">
+  <div class="sec-num">18</div>
+  <h2 class="sec-title">Launch &amp; Communications Plan</h2>
+  <p class="sec-intro">The website launch is a significant brand moment for CIDE Group. For an advisory firm whose reputation is built through relationships and networks, the launch is an opportunity to directly re-engage every past client, partner, collaborator, and prospect with a clear statement of CIDE's capability and ambition. The plan below treats the launch as a structured communications campaign, not just a technical DNS switch.</p>
+
+  <div class="sub-head">Day 1 Go-Live Checklist</div>
+  <div class="g3">
+    <div class="card">
+      <h4>Technical</h4>
+      <ul>
+        <li>DNS pointing to Netlify confirmed on all browsers and devices</li>
+        <li>SSL certificate active (HTTPS on all pages)</li>
+        <li>All 22 P1 pages loading without errors</li>
+        <li>Contact form submitting and routing to correct email</li>
+        <li>Capability statement PDF downloadable</li>
+        <li>404 page displaying for broken URLs</li>
+        <li>Sitemap submitted to Google Search Console</li>
+        <li>GA4 receiving events from live site</li>
+        <li>Mobile responsiveness confirmed on iOS and Android</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Content</h4>
+      <ul>
+        <li>All team bios and headshots live and correctly attributed</li>
+        <li>Minimum 3 project case studies published</li>
+        <li>Minimum 3 Knowledge Hub articles live</li>
+        <li>All service pages complete with correct service information</li>
+        <li>Contact details (phone, email, address) confirmed accurate</li>
+        <li>Partner logos displayed with all permissions confirmed</li>
+        <li>Privacy Policy and cookie consent banner live</li>
+        <li>Social media links in footer pointing to active accounts</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Communications</h4>
+      <ul>
+        <li>LinkedIn post from CIDE Group company page</li>
+        <li>Personal posts from all team members on LinkedIn</li>
+        <li>Email to CIDE's full contact database (past clients, partners)</li>
+        <li>WhatsApp broadcast to CIDE's professional network</li>
+        <li>Email signature updated to include website URL for all staff</li>
+        <li>Company profile PDF updated with website URL</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-head">Launch Communications Templates</div>
+  <div class="insight-item">
+    <div class="it">LinkedIn Company Post (Go-live day)</div>
+    <div class="ib">We are proud to launch the CIDE Group website — a new home for over a decade of advisory, consulting, and implementation expertise across Africa. Explore our work, our services, and our team at www.cidegroup.org. Thriving Together. #CIDEGroup #AfricanAdvisory #DevelopmentAfrica</div>
+  </div>
+  <div class="insight-item">
+    <div class="it">Email to Existing Network (Go-live day)</div>
+    <div class="ib">Subject line: "CIDE Group is now online — Thriving Together." Body: We are pleased to share that CIDE Group now has a new digital home at www.cidegroup.org. You will find our full range of services, our project portfolio, and the team behind a decade of pan-African work. We would love to reconnect — explore the site and reach out if you see an opportunity to work together. [CTA: Visit the site]</div>
+  </div>
+</div>
+
+<!-- ════ 19 COMPETITOR BENCHMARKING ════ -->
+<div class="sec">
+  <div class="sec-num">19</div>
+  <h2 class="sec-title">Competitor Benchmarking</h2>
+  <p class="sec-intro">Five organisations have been benchmarked against CIDE Group — ranging from large international advisory firms to locally-focused research consultancies. The analysis below identifies what each does better than their peers digitally, what CIDE can adopt, and where CIDE has the opportunity to outperform all of them on its own terms.</p>
+
+  <div class="comp">
+    <div class="comp-hd"><span class="comp-name">Genesis Analytics — genesis-analytics.com</span><span class="comp-tag">Pan-African Economics Advisory</span></div>
+    <div class="comp-grid">
+      <div class="comp-col"><h5>What They Do Well</h5><p>Sector-organised project database (50+ case studies filterable by sector and country). Individual project pages with named clients, scopes of work, and concrete deliverables. Thought leadership section with detailed publications. Very strong on demonstrating MEL and impact evaluation depth. Team profiles are linked to specific project work.</p></div>
+      <div class="comp-col"><h5>Their Weakness</h5><p>Design is dated — heavy, corporate, not visually distinctive. No clear audience segmentation on the homepage — everything is presented at the same level. Tone is academic and South Africa-centric; lacks warmth and relatability for East African audiences. The homepage is text-heavy without a clear primary CTA or conversion path.</p></div>
+      <div class="comp-col"><h5>CIDE Application</h5><p>Adopt Genesis's project database depth — 50 case studies with filters is the standard CIDE should aspire to. However, CIDE should surpass Genesis on design quality, audience segmentation, and conversational tone. Genesis's academic tone is a weakness CIDE can exploit by writing in plain language that non-specialist clients can navigate easily.</p></div>
+    </div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-hd"><span class="comp-name">Adam Smith International — adamsmithinternational.com</span><span class="comp-tag">Global Development Advisory</span></div>
+    <div class="comp-grid">
+      <div class="comp-col"><h5>What They Do Well</h5><p>Impact storytelling is the centrepiece of the site — "Year Highlights" as an annual web-based report. Individual project stories written as narratives with clear challenge-approach-outcome structure. Strong use of photography across all pages. Navigation is clean and audience-organised (Our Work, Where We Work, Who We Are). Email newsletter with genuine development sector content.</p></div>
+      <div class="comp-col"><h5>Their Weakness</h5><p>As a large international firm, they struggle to communicate local African rootedness — the site reads as British with Africa content. The contact page is buried. Services are broad and hard to evaluate for a specific need. For smaller organisations vetting a new partner, it can feel impersonal and hard to navigate to the right service.</p></div>
+      <div class="comp-col"><h5>CIDE Application</h5><p>Adopt ASI's narrative impact storytelling format for CIDE's project case studies — challenge, approach, outcome, plus one partner quote. This is the most persuasive format for development sector audiences. CIDE's local African rootedness is a direct counter to ASI's perceived distance from the communities it serves — make this explicit in the About and case study copy.</p></div>
+    </div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-hd"><span class="comp-name">Laterite — laterite.com</span><span class="comp-tag">East Africa Research &amp; Data</span></div>
+    <div class="comp-grid">
+      <div class="comp-col"><h5>What They Do Well</h5><p>Country presence pages are excellent — dedicated pages per country with team leads, project examples, and sector focus. Publications section is comprehensive and credible. The "Where We Work" page with per-country detail is a best-practice model for demonstrating genuine local presence. Staff bios are detailed and linked to their specific research output.</p></div>
+      <div class="comp-col"><h5>Their Weakness</h5><p>Laterite is research-only — they have no programme design, ICT, or communications offering. Their design is minimal to the point of feeling underdeveloped. No visible conversion path — there is no CTA on most service pages, and the contact page requires knowing exactly what you want before you can enquire. Primarily self-referential — written for research insiders, not development practitioners broadly.</p></div>
+      <div class="comp-col"><h5>CIDE Application</h5><p>Adopt Laterite's country presence model — a dedicated "Where We Work" page (Page 27 in CIDE's sitemap) with per-country team leads and project examples gives consortium leads exactly the local credibility evidence they need. CIDE's service breadth is a decisive advantage over Laterite — make this explicit in the Services Hub with a clear comparison of how CIDE provides end-to-end support that research-only firms cannot.</p></div>
+    </div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-hd"><span class="comp-name">Dalberg — dalberg.com</span><span class="comp-tag">Global Advisory, Nairobi Office</span></div>
+    <div class="comp-grid">
+      <div class="comp-col"><h5>What They Do Well</h5><p>Thought leadership is the primary traffic driver — the Insights section has 100+ articles well-optimised for development sector searches. Office location pages per city with named team leads. Sector expertise pages are deep and credible. Design is contemporary and visually confident — one of the best-designed advisory firm sites. Partnership/consortium inquiry form is prominently placed.</p></div>
+      <div class="comp-col"><h5>Their Weakness</h5><p>Dalberg's brand is global and expensive — their site reinforces a positioning that can feel inaccessible to civil society organisations and smaller NGOs. As a US/European-headquartered firm with an Africa presence, they have the inverse of CIDE's local rootedness advantage. Services are broad but lightly described — the site tells you what they do but not how they do it, which makes evaluation difficult for a procurement officer.</p></div>
+      <div class="comp-col"><h5>CIDE Application</h5><p>Dalberg's Insights section is the SEO and thought leadership benchmark — CIDE should aim for this level of depth and frequency within 12 months of launch. However, Dalberg's inaccessibility for smaller organisations is CIDE's opportunity: write for CBOs and local NGOs explicitly, use accessible language, and position CIDE as the partner that understands their constraints as well as their goals.</p></div>
+    </div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-hd"><span class="comp-name">Oxford Policy Management (OPM) — opml.co.uk</span><span class="comp-tag">UK-Based, Strong Africa Portfolio</span></div>
+    <div class="comp-grid">
+      <div class="comp-col"><h5>What They Do Well</h5><p>Expert profiles are outstanding — each expert has a page listing their specific technical expertise, thematic areas, geographic experience, and linked publications. Downloadable reports and publications are comprehensive and well-presented. The tender/partnership enquiry process is clearly signposted. Sector and thematic area pages are among the most detailed in the development advisory sector.</p></div>
+      <div class="comp-col"><h5>Their Weakness</h5><p>Extremely UK-centric — the site reads as a British firm doing work in Africa, not an African firm. The design is functional but dated. No compelling visual storytelling. Publications-heavy, which is valuable for technical audiences but creates a steep learning curve for new visitors trying to understand what OPM actually does and whether it's right for them.</p></div>
+      <div class="comp-col"><h5>CIDE Application</h5><p>Adopt OPM's expert profile model — detailed team pages with expertise tags, geographic focus, and linked outputs are exactly what consortium leads and tender evaluators want to see. CIDE's advantage over OPM is obvious: locally rooted African expertise is not what OPM can credibly claim. Make this explicit in every team bio, case study, and About page element — "we are not consulting from a distance."</p></div>
+    </div>
+  </div>
+
+  <div class="sub-head">Key Strategic Conclusions</div>
+  <table class="t">
+    <thead><tr><th>Priority</th><th>Competitive Implication</th><th>CIDE Action</th></tr></thead>
+    <tbody>
+      <tr><td>Project Case Studies</td><td class="plain">Every major competitor has 20–50+ case studies with specific, measurable results. CIDE must have at least 5 at launch and grow to 20+ within 12 months.</td><td class="hi">Critical — begin collecting immediately</td></tr>
+      <tr><td>Team Expert Profiles</td><td class="plain">OPM and Laterite set the standard: detailed, credible, linked to outputs. CIDE's team page must go beyond names and titles to detailed bios with expertise tags.</td><td class="hi">High — collect all bios in Week 2</td></tr>
+      <tr><td>Knowledge Hub Depth</td><td class="plain">Dalberg and Genesis win search traffic via thought leadership. CIDE has a first-mover advantage in East African locally-rooted development advisory content.</td><td class="plain">Medium — begin with 3 articles, grow to 24 in Year 1</td></tr>
+      <tr><td>Design Quality</td><td class="plain">Most competitors have functional but dated design. A contemporary, visually confident site is a genuine differentiator — especially for private sector and corporate audiences.</td><td class="plain">Medium — handled by design brief in Section 12</td></tr>
+      <tr><td>Local Rootedness Narrative</td><td class="plain">No international competitor can credibly claim what CIDE has: decade-long East African presence, community-rooted delivery, African-led team. This is undersaid in the market and should be the central website narrative.</td><td class="hi">Critical — must be explicit on every page</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 20 ACCESSIBILITY ════ -->
+<div class="sec">
+  <div class="sec-num">20</div>
+  <h2 class="sec-title">Accessibility Standards</h2>
+  <p class="sec-intro">The CIDE Group website serves development professionals, government officials, and community organisations across diverse contexts — including users with visual, motor, or cognitive impairments and users on low-bandwidth connections. WCAG 2.1 Level AA compliance is the target at launch.</p>
+
+  <table class="t">
+    <thead><tr><th>Criterion</th><th>Requirement</th><th>Test Method</th></tr></thead>
+    <tbody>
+      <tr><td>Colour contrast (1.4.3)</td><td class="plain">Min 4.5:1 for body text. Min 3:1 for large text. Forest Green (#2D6A4F) on white passes at 6.5:1. Red (#A31E22) on white passes at 5.1:1. Never use light green (#52B788) as text on white — contrast is 2.8:1 (fail).</td><td class="plain">WebAIM Contrast Checker. Check every text/background combination.</td></tr>
+      <tr><td>Image alt text (1.1.1)</td><td class="plain">All content images require descriptive alt text. Decorative images use alt="" (empty string). Team headshots: "Photo of [Name], [Title]." Field photography: describe the activity, not "photo of people."</td><td class="plain">Automated axe scan + manual screen reader test on key pages.</td></tr>
+      <tr><td>Keyboard navigation (2.1.1)</td><td class="plain">All interactive elements — navigation links, CTA buttons, form fields, portfolio filters, FAQ accordions — must be reachable and operable by keyboard only (Tab, Enter, Space, Arrow keys).</td><td class="plain">Manual keyboard-only test on all P1 pages before launch.</td></tr>
+      <tr><td>Focus indicators (2.4.7)</td><td class="plain">Visible focus ring on all interactive elements. The green brand colour (#2D6A4F) makes an excellent visible focus ring. Do not use outline: none without a visible replacement.</td><td class="plain">Visual inspection during keyboard test.</td></tr>
+      <tr><td>Form labels (1.3.1)</td><td class="plain">Every form input has an associated &lt;label&gt; element with matching for/id attributes. Placeholder text alone is insufficient — placeholders disappear on focus and are not read by all screen readers.</td><td class="plain">Inspect element on all form fields.</td></tr>
+      <tr><td>Heading hierarchy (1.3.1)</td><td class="plain">One H1 per page (the page title). H2 for main sections, H3 for sub-sections. Never skip levels. Use heading elements for structure, not visual size.</td><td class="plain">HeadingsMap extension or automated HTML inspector.</td></tr>
+      <tr><td>Mobile usability</td><td class="plain">Tap targets minimum 44×44px. Sufficient spacing between links and buttons to prevent accidental taps. Test on actual iOS and Android devices, not just browser emulation.</td><td class="plain">Manual test on physical devices.</td></tr>
+      <tr><td>Low bandwidth</td><td class="plain">All images under 200KB after WebP optimisation. No auto-playing video or audio. Total page weight under 1MB for the homepage. Critical for users in areas with limited connectivity across Africa.</td><td class="plain">Chrome DevTools Network throttling to "Slow 3G." Google PageSpeed Insights.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 21 FORMS & CTAs ════ -->
+<div class="sec">
+  <div class="sec-num">21</div>
+  <h2 class="sec-title">Forms, CTAs &amp; Conversion Architecture</h2>
+  <p class="sec-intro">Every visit to the CIDE Group website from the right audience should have a clear, low-friction path to making contact. This section defines the primary contact form specification, CTA placement strategy, and the copy standards that ensure the conversion architecture is both effective and aligned with CIDE's brand voice.</p>
+
+  <div class="sub-head">Contact Form — Primary (Contact / Work With Us page)</div>
+  <div class="callout">Form submissions route to: confirm @cidegroup.org address before launch. Response SLA: within 2 business days. Hosting on Netlify means Netlify Forms can handle this at no cost for up to 100 submissions/month.</div>
+  <table class="t">
+    <thead><tr><th>Field</th><th>Type</th><th>Validation</th><th>Required</th></tr></thead>
+    <tbody>
+      <tr><td>Full Name</td><td class="plain">Text input</td><td class="plain">Min 2, max 80 characters</td><td class="plain">Yes</td></tr>
+      <tr><td>Organisation</td><td class="plain">Text input</td><td class="plain">Max 120 characters</td><td class="plain">Yes</td></tr>
+      <tr><td>Role / Title</td><td class="plain">Text input</td><td class="plain">Max 80 characters</td><td class="plain">Yes</td></tr>
+      <tr><td>Email Address</td><td class="plain">Email input</td><td class="plain">Valid email format with domain</td><td class="plain">Yes</td></tr>
+      <tr><td>Phone Number</td><td class="plain">Tel input</td><td class="plain">Min 9 digits. International format accepted.</td><td class="plain">No (preferred)</td></tr>
+      <tr><td>Nature of Enquiry</td><td class="plain">Select dropdown</td><td class="plain">Options: Programme/Project Support, Research &amp; MEL, Capacity Development, ICT &amp; Digital, Strategic Communications, Partnership / Consortium, General Enquiry</td><td class="plain">Yes</td></tr>
+      <tr><td>Country / Region</td><td class="plain">Text input</td><td class="plain">Max 60 characters. Helps route to relevant regional team.</td><td class="plain">No (preferred)</td></tr>
+      <tr><td>Message</td><td class="plain">Textarea</td><td class="plain">Min 20, max 800 characters</td><td class="plain">Yes</td></tr>
+      <tr><td>Privacy consent</td><td class="plain">Checkbox</td><td class="plain">Must be checked before submit. Links to Privacy Policy.</td><td class="plain">Yes</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">Success message: "Thank you, [Name]. Your enquiry has been received. A member of the CIDE Group team will be in touch within 2 business days. In the meantime, explore our work at [link to /projects]."</div>
+
+  <div class="sub-head">CTA Placement Strategy</div>
+  <table class="t">
+    <thead><tr><th>Page</th><th>Primary CTA</th><th>Secondary CTA</th><th>Position</th></tr></thead>
+    <tbody>
+      <tr><td>Homepage</td><td class="plain">Explore Our Work → /projects</td><td class="plain">Work With Us → /contact</td><td class="plain">Hero section. Both CTAs visible above fold on desktop and mobile.</td></tr>
+      <tr><td>All service pages</td><td class="plain">Let's talk about [service name] → /contact</td><td class="plain">Download our capability statement (PDF)</td><td class="plain">After "What we offer" section + sticky bottom bar on mobile.</td></tr>
+      <tr><td>Projects &amp; Impact</td><td class="plain">Work with us on your next project → /contact</td><td class="plain">Download capability statement</td><td class="plain">Top of page + below portfolio grid.</td></tr>
+      <tr><td>About / Team</td><td class="plain">Work With Us → /contact</td><td class="plain">Read our latest insights → /knowledge</td><td class="plain">Bottom of page, after team grid.</td></tr>
+      <tr><td>Knowledge Hub articles</td><td class="plain">Talk to our team → /contact</td><td class="plain">Read more insights → /knowledge</td><td class="plain">End of every article. Never interrupt the reading experience mid-article.</td></tr>
+      <tr><td>All pages (persistent)</td><td class="plain">Email: [email address]</td><td class="plain">Phone: +254-745-704-580</td><td class="plain">Footer — visible on every page without scrolling on desktop.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 22 NAVIGATION & MICROCOPY ════ -->
+<div class="sec">
+  <div class="sec-num">22</div>
+  <h2 class="sec-title">Navigation &amp; Microcopy</h2>
+  <p class="sec-intro">Microcopy — the small words on buttons, navigation items, form labels, and error messages — is where brand voice is either consistent or broken. These specifications eliminate placeholder text and ensure every word on the CIDE Group website has been deliberately chosen.</p>
+
+  <div class="sub-head">Primary Navigation — Approved Labels</div>
+  <table class="t">
+    <thead><tr><th>Nav Item</th><th>Label</th><th>Dropdown Items</th><th>Mobile Label</th></tr></thead>
+    <tbody>
+      <tr><td>About</td><td class="plain">About</td><td class="plain">Our Story, Our Team, Why CIDE, Where We Work</td><td class="plain">About</td></tr>
+      <tr><td>Services</td><td class="plain">Services</td><td class="plain">Strategic Communications, Programme Design, ICT &amp; Digital, MEL, Research &amp; Evidence, Capacity Development, Enterprise Support, Policy Advocacy</td><td class="plain">Services</td></tr>
+      <tr><td>Focus Areas</td><td class="plain">Focus Areas</td><td class="plain">Environment &amp; Climate, Child Rights, GEDSI, Education, Other Themes</td><td class="plain">Focus</td></tr>
+      <tr><td>Our Work</td><td class="plain">Our Work</td><td class="plain">Projects &amp; Impact, Case Studies</td><td class="plain">Work</td></tr>
+      <tr><td>Knowledge</td><td class="plain">Knowledge Hub</td><td class="plain">Insights, Publications, Toolkits, Policy Briefs, News &amp; Events</td><td class="plain">Knowledge</td></tr>
+      <tr><td>Contact</td><td class="plain">Work With Us</td><td class="plain">No dropdown — direct to /contact</td><td class="plain">Contact</td></tr>
+      <tr><td>Primary nav button</td><td class="plain">Work With Us</td><td class="plain">N/A — green button, prominent in header</td><td class="plain">Contact</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Button &amp; Link Copy Standards</div>
+  <table class="t">
+    <thead><tr><th>Context</th><th>Approved Copy</th><th>Do Not Use</th></tr></thead>
+    <tbody>
+      <tr><td>Service page CTA</td><td class="plain">Let's talk about [service name] / Talk to our team</td><td class="plain">Submit, Click here, Get started, Find out more</td></tr>
+      <tr><td>Project card link</td><td class="plain">Read the case study / Explore this project</td><td class="plain">Read more, Learn more, Continue</td></tr>
+      <tr><td>Knowledge article link</td><td class="plain">Read the article / Read [Author]'s insight</td><td class="plain">Read more, Continue reading, Full article</td></tr>
+      <tr><td>Download link</td><td class="plain">Download [Document Name] (PDF)</td><td class="plain">Download here, Get PDF, Click to download</td></tr>
+      <tr><td>Homepage primary CTA</td><td class="plain">Explore Our Work</td><td class="plain">Learn More, See Our Services, Find Out More</td></tr>
+      <tr><td>Homepage secondary CTA</td><td class="plain">Work With Us</td><td class="plain">Contact Us, Reach Out, Get In Touch</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Error &amp; System Copy</div>
+  <div class="g3">
+    <div class="card"><h4>404 — Page Not Found</h4><p>Heading: "This page seems to have moved." Body: "The page you're looking for may have been updated or relocated. Return to our homepage or send us a message — we're happy to help you find what you need." CTAs: "Go to Homepage" (primary), "Work With Us" (secondary).</p></div>
+    <div class="card"><h4>Form Success State</h4><p>Display inline — do not redirect: "Thank you, [Name]. We've received your enquiry and will be in touch within 2 business days. In the meantime, explore our recent work at [link to /projects]." Green confirmation text. Form hidden after successful submission.</p></div>
+    <div class="card"><h4>Form Error State</h4><p>Error text displayed adjacent to the relevant field, not just at the top of the form. Example: "Please enter a valid email address." Red (#A31E22) error text. Focus returned to the first field with an error on submit attempt.</p></div>
+  </div>
+</div>
+
+<!-- ════ 23 LOCALISATION ════ -->
+<div class="sec">
+  <div class="sec-num">23</div>
+  <h2 class="sec-title">Localisation Strategy</h2>
+  <p class="sec-intro">CIDE Group works across Africa with partners in French-speaking West and Central Africa, as well as English-speaking East Africa. The website launches in English — the global standard for development sector communications and CIDE's primary working language. A phased multilingual approach is recommended based on post-launch traffic data.</p>
+
+  <div class="callout">
+    <strong>Launch decision — English only:</strong> Consistent with the approach of Genesis Analytics, Laterite, Dalberg, and OPM, the site launches exclusively in English. This is appropriate for CIDE's primary tender, partnership, and development partner audiences. Kiswahili and French should be evaluated at the 3-month post-launch review if Google Analytics shows material traffic from Swahili-speaking audiences or Francophone African countries.
+  </div>
+
+  <table class="t">
+    <thead><tr><th>Language</th><th>Launch Status</th><th>Rationale</th><th>Path to Addition</th><th>Decision Point</th></tr></thead>
+    <tbody>
+      <tr><td>English</td><td class="hi">Confirmed — Week 14</td><td class="plain">Primary language for all CIDE client segments. Development sector global standard. All team communications and reports are in English.</td><td class="plain">Default — no additional configuration needed</td><td class="plain">Confirmed</td></tr>
+      <tr><td>Kiswahili</td><td class="plain">Phase 2 — Month 4</td><td class="plain">Relevant for government ministry audiences, civil society partners in Kenya, Tanzania, Uganda. Would extend reach for domestic capacity development and advocacy work.</td><td class="plain">Add /sw/ URL prefix. Hugo supports multilingual natively. Translate homepage, About, Contact pages first. Priority: pages that Kiswahili-speaking audiences are most likely to read.</td><td class="plain">3-month GA4 review</td></tr>
+      <tr><td>French</td><td class="plain">Phase 3 — TBD</td><td class="plain">Relevant if CIDE expands its work in Francophone West and Central Africa, or if French-language development partners become a significant client segment.</td><td class="plain">Add /fr/ URL prefix via Hugo i18n. External translator required. Priority: Services hub and Contact page.</td><td class="plain">6-month review</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════ 24 RISK REGISTER ════ -->
+<div class="sec">
+  <div class="sec-num">24</div>
+  <h2 class="sec-title">Risk Register</h2>
+  <p class="sec-intro">The risks below represent the most common failure modes for development sector website projects — drawn from pattern analysis of similar organisations. Each risk is assessed on likelihood and impact, with a specific mitigation that can be actioned immediately. The Communications Officer is responsible for reviewing this register at Weeks 5 and 11 review sessions.</p>
+
+  <table class="t">
+    <thead><tr><th>Risk</th><th>Category</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td>Team bios and headshots not delivered on time. The most common cause of delay on advisory firm websites — staff are busy and deprioritise their own profiles.</td><td class="plain">Content</td><td class="warn">High</td><td class="warn">High</td><td class="plain">Hard deadline: all bios and headshots by end of Week 3. The Communications Officer personally follows up with each team member. If photos are not available, use a professional placeholder and add photos in Week 1 post-launch — but the bio copy must be ready.</td><td class="plain">Communications Officer</td></tr>
+      <tr><td>No project case studies available at launch. Without case studies the website is a brochure — it cannot convert consortium leads or tender evaluators.</td><td class="plain">Content</td><td class="warn">High</td><td class="warn">High</td><td class="plain">Begin case study interviews with programme leads in Week 1. CIDE does not need client permission to publish anonymised case study summaries ("A major INGO in East Africa"). Publish with generalised client descriptions at launch, update with named clients once permissions are secured.</td><td class="plain">Communications Officer + Programme Leads</td></tr>
+      <tr><td>Copy that sounds like the company profile, not a website. Profile-style copy with passive voice, jargon, and capability listing will not convert development sector visitors.</td><td class="plain">Content Quality</td><td class="plain">Medium</td><td class="warn">High</td><td class="plain">Brief copywriter with explicit voice guidance (Section 02). All copy reviewed against the voice examples in Section 02 before approval. The Communications Officer should ask: "Would a new client understand this page without knowing what CIDE does?" If not, rewrite.</td><td class="plain">Copywriter + Comms Officer</td></tr>
+      <tr><td>Photography not available at launch. Generic stock images will undermine the credibility argument that CIDE builds through copy and case studies.</td><td class="plain">Assets</td><td class="warn">High</td><td class="plain">Medium</td><td class="plain">Commission photographer by Week 2. Use existing field photography from CIDE's archive as temporary content while the professional shoot is arranged. One thing that cannot be stock: team headshots. These must be real photographs. Launch with 5 real team headshots minimum even if the full team is not yet photographed.</td><td class="plain">Communications Officer</td></tr>
+      <tr><td>Professional email not migrated before launch. Sending contact confirmations from a @gmail.com address after a professionally built website goes live will confuse and concern first-time clients.</td><td class="plain">Operational</td><td class="plain">Medium</td><td class="plain">Medium</td><td class="plain">Set up @cidegroup.org email addresses (Zoho Mail or Google Workspace) by Week 8 — before the build phase completes. The contact form should route to a @cidegroup.org address from day one. Redirect the Gmail account to the new address during the transition period.</td><td class="plain">CIDE Lead + Developer</td></tr>
+      <tr><td>Partner logo permissions not obtained. Displaying partner logos without written permission creates legal and relationship risk.</td><td class="plain">Legal</td><td class="plain">Medium</td><td class="plain">Medium</td><td class="plain">Begin permission outreach in Week 2 with a short, professional email requesting permission to display logos on the new website. If permission is not received by launch, do not display that logo. A partners page with 5 confirmed logos is better than 10 logos without permission.</td><td class="plain">Business Development</td></tr>
+      <tr><td>Scope creep beyond 22 P1 pages extends the project timeline past Week 14.</td><td class="plain">Project Management</td><td class="plain">Medium</td><td class="plain">Medium</td><td class="plain">All new page or feature requests received after Week 4 go to the post-launch backlog. CIDE Project Lead has final authority on scope decisions. No new P1 pages accepted after Week 6. A clear and simple site at Week 14 is vastly preferable to a delayed and complex site at Week 20.</td><td class="plain">CIDE Project Lead</td></tr>
+      <tr><td>Developer or designer unavailable mid-project. External contractors may have competing commitments.</td><td class="plain">Resourcing</td><td class="plain">Low</td><td class="warn">High</td><td class="plain">Brief and contract designer by Week 2, developer by Week 4. Include project dates in the contract with milestone delivery expectations. Ensure all work is committed to GitHub so a replacement developer can pick up the project without starting from scratch.</td><td class="plain">Communications Officer</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout"><strong>Overall risk assessment:</strong> The CIDE Group website project's primary risk is content — not technology. The static site approach eliminates most technical risk. The design brief is clear. The architecture is defined. The variable that will determine whether this project launches on time and with impact is whether CIDE's own team can deliver team bios, project case studies, and service copy inputs by Week 4. This is achievable with clear ownership, hard deadlines, and a Communications Officer empowered to escalate when deadlines are missed.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span class="logo-text">CIDE GROUP</span>
+  <span>Website Content Strategy &amp; Work Plan — March 2026 · Version 1.0</span>
+  <span>communications.cidegroup@gmail.com · +254-745-704-580 · www.cidegroup.org</span>
+</div>
+
+</body>
+</html>

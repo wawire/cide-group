@@ -1,0 +1,108 @@
+
+# Node / Package Managers
+
+node_modules/
+pnpm-lock.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+
+# Next.js
+
+.next/
+out/
+.next-env.d.ts
+
+# Next.js cache directories
+.vercel/
+.vercel_build_output/
+.cache/
+
+
+# TypeScript
+
+*.tsbuildinfo
+
+
+# Environment files
+
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+
+# Logs
+
+logs/
+*.log
+*.log.*
+debug.log
+error.log
+
+
+# Build Artifacts
+
+dist/
+build/
+coverage/
+
+
+# OS Files
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+# IDE / Editor Settings
+
+.vscode/
+.vscode-test/
+.idea/
+*.swp
+*.swo
+
+
+# Optional Caches
+
+# ESLint
+.eslintcache
+
+# Stylelint
+.stylelintcache
+
+# PostCSS / Tailwind
+.postcssrc
+tailwind.config.js.save
+
+
+# Local Dev Tools
+
+*.local
+.tmp/
+temp/
+source-assets/
+ops/keys/
+
+
+# Misc
+
+*.pid
+*.seed
+*.pid.lock
+
+
+# Ignore generated types
+
+types/generated/
