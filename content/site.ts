@@ -1,4 +1,4 @@
-﻿export type NavLink = {
+export type NavLink = {
   label: string
   href: string
   description?: string
@@ -24,7 +24,13 @@ export const siteConfig = {
   partnershipsEmail: "partnerships@cidegroup.org",
   phone: "+254 745 704 580",
   phoneHref: "+254745704580",
-  address: "Nairobi, Kenya",
+  address: "P.O. Box 15040-00509, Nairobi, Kenya",
+  postalAddress: {
+    postOfficeBoxNumber: "15040",
+    postalCode: "00509",
+    addressLocality: "Nairobi",
+    addressCountry: "KE",
+  },
   companyNumber: "PVT-BB1OWQW3",
   heroEyebrow: "Pan-African Development Advisory | Nairobi, Kenya",
   heroSubheading:
@@ -36,7 +42,7 @@ export const siteConfig = {
     alt: "CIDE Group",
   },
   social: {
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/company/cide-group/",
     twitter: "#",
     facebook: "#",
   },
@@ -60,6 +66,11 @@ export const aboutNavLinks: NavLink[] = [
     href: "/partners",
     description: "How we structure collaboration across sectors and programmes.",
   },
+  {
+    label: "Careers",
+    href: "/careers",
+    description: "Join our team of development practitioners across Africa.",
+  },
 ]
 
 export const primaryNavLinks: NavLink[] = [
@@ -74,6 +85,7 @@ export const exploreLinks: NavLink[] = [
   { label: "Projects", href: "/projects" },
   { label: "Research", href: "/research" },
   { label: "Partnerships", href: "/partners" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ]
 
@@ -188,4 +200,5 @@ export const contactCountries = [
   "Tunisia",
   "Other",
 ] as const
+
 

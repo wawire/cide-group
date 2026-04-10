@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   publisher: siteConfig.name,
   icons: {
-    icon: [{ url: "/brand/cide-icon.png", type: "image/png" }],
-    apple: "/brand/cide-icon.png",
-    shortcut: "/brand/cide-icon.png",
+    icon: [{ url: "/brand/cide-icon-256.png", sizes: "175x256", type: "image/png" }],
+    apple: "/brand/cide-icon-256.png",
+    shortcut: "/brand/cide-icon-256.png",
   },
   robots: {
     index: true,

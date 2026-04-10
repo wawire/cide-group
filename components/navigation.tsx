@@ -1,15 +1,25 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { siteConfig } from "@/content/site"
-import { ServicesMegaMenu } from "./mega-menu-services"
-import { ProjectsMegaMenu } from "./mega-menu-projects"
-import { AboutMenu } from "./about-menu"
 import { cn } from "@/lib/utils"
+
+const AboutMenu = dynamic(() => import("./about-menu").then((mod) => mod.AboutMenu), {
+  loading: () => null,
+})
+
+const ServicesMegaMenu = dynamic(() => import("./mega-menu-services").then((mod) => mod.ServicesMegaMenu), {
+  loading: () => null,
+})
+
+const ProjectsMegaMenu = dynamic(() => import("./mega-menu-projects").then((mod) => mod.ProjectsMegaMenu), {
+  loading: () => null,
+})
 
 const mobileNavLinks = [
   { href: "/about", label: "About" },
@@ -254,28 +264,34 @@ export default function Navigation() {
         They share the same openMenu/scheduleClose handlers so hovering from
         a trigger button into the panel cancels the close timer.
       */}
-      <AboutMenu
-        open={openDesktopMenu === "about"}
-        onMouseEnter={() => openMenu("about")}
-        onMouseLeave={scheduleClose}
-        onClose={closeNow}
-        menuId="about-menu"
-        isActive={isActive}
-      />
-      <ServicesMegaMenu
-        open={openDesktopMenu === "what-we-do"}
-        onMouseEnter={() => openMenu("what-we-do")}
-        onMouseLeave={scheduleClose}
-        onClose={closeNow}
-        menuId="what-we-do-mega-menu"
-      />
-      <ProjectsMegaMenu
-        open={openDesktopMenu === "impact"}
-        onMouseEnter={() => openMenu("impact")}
-        onMouseLeave={scheduleClose}
-        onClose={closeNow}
-        menuId="impact-mega-menu"
-      />
+      {openDesktopMenu === "about" ? (
+        <AboutMenu
+          open
+          onMouseEnter={() => openMenu("about")}
+          onMouseLeave={scheduleClose}
+          onClose={closeNow}
+          menuId="about-menu"
+          isActive={isActive}
+        />
+      ) : null}
+      {openDesktopMenu === "what-we-do" ? (
+        <ServicesMegaMenu
+          open
+          onMouseEnter={() => openMenu("what-we-do")}
+          onMouseLeave={scheduleClose}
+          onClose={closeNow}
+          menuId="what-we-do-mega-menu"
+        />
+      ) : null}
+      {openDesktopMenu === "impact" ? (
+        <ProjectsMegaMenu
+          open
+          onMouseEnter={() => openMenu("impact")}
+          onMouseLeave={scheduleClose}
+          onClose={closeNow}
+          menuId="impact-mega-menu"
+        />
+      ) : null}
 
       {/* Mobile menu */}
       {isOpen && (

@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { CheckCircle2 } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, CheckCircle2 } from "lucide-react"
 
 const priorities = [
   "Community leadership, participation and ownership",
@@ -22,7 +23,7 @@ export default function WhoWeAreSection() {
                 fill
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/40 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/40 to-transparent" />
             </div>
 
             <div className="absolute -right-6 -top-6 hidden h-36 w-36 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block">
@@ -59,7 +60,7 @@ export default function WhoWeAreSection() {
               We specialise in delivering evidence-based, community-led, and data-driven development solutions that support governments, donors, investors, NGOs, and private sector organisations in addressing complex development, humanitarian, and market system challenges.
             </p>
 
-            <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
+            <div className="grid gap-x-8 gap-y-4 md:grid-cols-2 mb-8">
               {priorities.map((priority) => (
                 <div key={priority} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#bf2a2c]" />
@@ -67,6 +68,14 @@ export default function WhoWeAreSection() {
                 </div>
               ))}
             </div>
+
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
+            >
+              Learn More
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </div>

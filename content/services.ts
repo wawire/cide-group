@@ -35,7 +35,7 @@ export const services: Service[] = [
     description:
       "We harness Artificial Intelligence (AI) to design and deploy digital tools and platforms that improve service delivery, enhance transparency, and accelerate innovation.",
     icon: "smartphone",
-    image: "/images/AI IT.png",
+    image: "/projects/health-workers-with-tablets.jpg",
     capabilities: [
       "AI-enabled digital tools and service platforms",
       "Digital systems that improve transparency and service delivery",
@@ -55,7 +55,7 @@ export const services: Service[] = [
     description:
       "We support ethical storytelling, communication products, and knowledge management approaches that improve visibility, accountability, and public engagement across programmes.",
     icon: "megaphone",
-    image: "/images/AI Field Filming.png",
+    image: "/hero/communications-mel-filming.png",
     capabilities: [
       "Ethical storytelling and knowledge products",
       "Campaign content and public engagement support",
@@ -98,7 +98,7 @@ export const services: Service[] = [
     description:
       "We provide applied research, evaluations, policy advisory, and analytics to strengthen decision-making and improve programme effectiveness.",
     icon: "chart",
-    image: "/images/AI Research.png",
+    image: "/hero/research-evidence-community.png",
     capabilities: [
       "Applied research and assessments",
       "Evaluations and impact assessments",
@@ -140,7 +140,7 @@ export const services: Service[] = [
     description:
       "We support the growth of inclusive markets, social enterprises, and sustainable systems that drive long-term economic and social impact.",
     icon: "users",
-    image: "/images/AI Livelihoods.png",
+    image: "/focus-areas/livelihoods-vsla-cash-transfer.jpg",
     capabilities: [
       "Inclusive market systems support",
       "Social enterprise development",
@@ -161,7 +161,7 @@ export const services: Service[] = [
     description:
       "We design and deliver practical capacity development support that equips institutions, educators, partners, and communities with the tools needed for stronger delivery.",
     icon: "line-chart",
-    image: "/images/AI GEDSI Capacity Building.png",
+    image: "/hero/gedsi-systems-development.png",
     capabilities: [
       "Teacher training and professional development",
       "Career guidance and life skills training",

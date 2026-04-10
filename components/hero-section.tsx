@@ -1,12 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { siteConfig } from "@/content/site"
 
 const AUTO_ADVANCE_MS = 6500
+const SLIDE_FADE_MS = 700
 
 const slides = [
   {
@@ -77,13 +78,39 @@ const slides = [
 
 export default function HeroSection() {
   const [active, setActive] = useState(0)
+  const [exiting, setExiting] = useState<number | null>(null)
   const [progressReady, setProgressReady] = useState(false)
+  const activeRef = useRef(0)
 
   const currentSlide = slides[active]
+  const visibleSlides = Array.from(new Set([exiting, active].filter((index): index is number => index !== null)))
+
+  useEffect(() => {
+    activeRef.current = active
+  }, [active])
+
+  useEffect(() => {
+    if (exiting === null) return
+
+    const timer = window.setTimeout(() => {
+      setExiting(null)
+    }, SLIDE_FADE_MS)
+
+    return () => window.clearTimeout(timer)
+  }, [exiting])
+
+  function activateSlide(index: number) {
+    const nextIndex = (index + slides.length) % slides.length
+
+    if (nextIndex === activeRef.current) return
+
+    setExiting(activeRef.current)
+    setActive(nextIndex)
+  }
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setActive((current) => (current + 1) % slides.length)
+      activateSlide(activeRef.current + 1)
     }, AUTO_ADVANCE_MS)
 
     return () => window.clearInterval(timer)
@@ -99,18 +126,6 @@ export default function HeroSection() {
     return () => window.cancelAnimationFrame(frame)
   }, [active])
 
-  function goToSlide(index: number) {
-    setActive((index + slides.length) % slides.length)
-  }
-
-  function goToNextSlide() {
-    setActive((current) => (current + 1) % slides.length)
-  }
-
-  function goToPreviousSlide() {
-    setActive((current) => (current - 1 + slides.length) % slides.length)
-  }
-
   return (
     <section
       aria-label="CIDE Group featured focus areas"
@@ -118,28 +133,34 @@ export default function HeroSection() {
       className="group/hero relative isolate min-h-[94vh] overflow-hidden bg-[#110909]"
     >
       <div className="absolute inset-0">
-        {slides.map((slide, index) => (
-          <div
-            key={`${slide.titleLead}-${slide.titleAccent}`}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`Slide ${index + 1} of ${slides.length}`}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === active ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`object-cover object-center transition-transform duration-[7000ms] ease-out ${
-                index === active ? "scale-100" : "scale-110"
+        {visibleSlides.map((index) => {
+          const slide = slides[index]
+          const isActiveSlide = index === active
+
+          return (
+            <div
+              key={`${slide.titleLead}-${slide.titleAccent}`}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`Slide ${index + 1} of ${slides.length}`}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                isActiveSlide ? "opacity-100" : "opacity-0"
               }`}
-            />
-          </div>
-        ))}
+            >
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                quality={68}
+                sizes="100vw"
+                className={`object-cover object-center transition-transform duration-[7000ms] ease-out ${
+                  isActiveSlide ? "scale-100" : "scale-105"
+                }`}
+              />
+            </div>
+          )
+        })}
       </div>
 
       <div className="absolute inset-0 bg-[linear-gradient(104deg,rgba(9,8,8,0.96)_0%,rgba(12,10,10,0.86)_34%,rgba(16,12,12,0.54)_58%,rgba(16,12,12,0.18)_100%)]" />
@@ -147,7 +168,7 @@ export default function HeroSection() {
 
       <button
         type="button"
-        onClick={goToPreviousSlide}
+        onClick={() => activateSlide(activeRef.current - 1)}
         aria-label="Show previous slide"
         className="absolute left-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
       >
@@ -156,7 +177,7 @@ export default function HeroSection() {
 
       <button
         type="button"
-        onClick={goToNextSlide}
+        onClick={() => activateSlide(activeRef.current + 1)}
         aria-label="Show next slide"
         className="absolute right-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
       >
@@ -171,7 +192,10 @@ export default function HeroSection() {
               <span>{siteConfig.heroEyebrow}</span>
             </div>
 
-            <div key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div
+              key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`}
+              className="animate-in fade-in slide-in-from-bottom-4 duration-700"
+            >
               <h1 className="font-serif text-[clamp(3rem,5.6vw,5.8rem)] font-semibold leading-[0.95] tracking-tight text-white">
                 <span className="block text-white">{currentSlide.titleLead}</span>
                 <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
@@ -207,7 +231,7 @@ export default function HeroSection() {
           <button
             key={`${slide.titleLead}-${slide.titleAccent}`}
             type="button"
-            onClick={() => goToSlide(index)}
+            onClick={() => activateSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
             className={`h-2 rounded-full transition-all duration-300 ${
               index === active ? "w-10 bg-white" : "w-2 bg-white/35 hover:bg-white/55"

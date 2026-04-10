@@ -1,4 +1,4 @@
-﻿import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
@@ -26,6 +26,11 @@ const stakeholderGroups = [
   "Private sector actors and impact investors",
 ]
 
+const globalPartners = [
+  "USAID", "BMZ", "KOICA", "SIDA", "European Union (EU)",
+  "African Union (AU)", "IGAD", "UN Agencies",
+]
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
@@ -37,7 +42,7 @@ export default function AboutPage() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/90 via-[#1a0808]/60 to-[#bf2a2c]/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/90 via-[#1a0808]/60 to-[#bf2a2c]/20" />
         <div className="relative z-10 section-shell pb-16 pt-36">
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">About Us</p>
           <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-5 leading-tight max-w-4xl">
@@ -47,6 +52,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Who We Are */}
       <section className="py-20 bg-background">
         <div className="section-shell grid lg:grid-cols-2 gap-10 items-start">
           <div>
@@ -58,14 +64,14 @@ export default function AboutPage() {
               across Anglophone, Francophone, and Lusophone Africa.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed mb-5">
-              We deliver evidence-based, community-led, and data-driven development solutions that support governments,
-              donors, investors, NGOs, and private sector organisations in addressing complex development,
-              humanitarian, and market system challenges.
+              We specialise in delivering evidence-based, community-led, and data-driven development solutions that
+              support governments, donors, investors, NGOs, and private sector organisations in addressing complex
+              development, humanitarian, and market system challenges.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed mb-8">
               We operate at the intersection of policy advisory, sustainable development, social innovation, and
-              community systems strengthening so every intervention is grounded in local realities and designed for
-              long-term impact.
+              community systems strengthening — ensuring that every intervention is grounded in local realities and
+              designed for long-term impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg">
@@ -79,7 +85,7 @@ export default function AboutPage() {
 
           <Card className="p-8 border-[#e2d9d9] bg-white">
             <p className="section-kicker mb-4">Stakeholders We Support</p>
-            <div className="space-y-3 text-sm text-text-secondary">
+            <div className="space-y-3 text-sm text-text-secondary mb-8">
               {stakeholderGroups.map((group) => (
                 <div key={group} className="flex gap-3">
                   <CheckCircle size={16} className="text-primary mt-0.5 shrink-0" />
@@ -87,12 +93,29 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+            <div className="border-t border-[#e2d9d9] pt-6">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-text-muted mb-4">
+                Global Partners We Have Supported
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {globalPartners.map((partner) => (
+                  <span
+                    key={partner}
+                    className="px-3 py-1 rounded-full bg-[#f4efec] border border-[#e2d9d9] text-xs font-semibold text-text-secondary"
+                  >
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
           </Card>
         </div>
       </section>
 
+      {/* Vision, Mission, Values */}
       <CompanyProfileSection />
 
+      {/* Our Approach */}
       <section className="py-20 bg-background">
         <div className="section-shell grid lg:grid-cols-2 gap-10 items-start">
           <div>
@@ -103,6 +126,11 @@ export default function AboutPage() {
               By placing communities at the centre of decision-making, we shift development from traditional delivery
               models towards partnership, accountability, and long-term resilience.
             </p>
+            <p className="text-lg text-text-secondary leading-relaxed mb-5">
+              We design and implement programmes that prioritise community leadership and participation,
+              evidence-based decision-making, sustainability and systems strengthening, inclusion, dignity,
+              and accountability, and scalable and measurable impact.
+            </p>
             <p className="text-lg text-text-secondary leading-relaxed">
               Our work supports sustainable development outcomes aligned with the Sustainable Development Goals and
               contributes to Africa's Agenda 2063 vision of "The Africa We Want."
@@ -111,20 +139,20 @@ export default function AboutPage() {
 
           <Card className="p-8 border-border">
             <p className="section-kicker mb-4">Our 360-Degree Approach</p>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 gap-3 mb-6">
               {companyProfile.approach.map((step, index) => (
                 <div key={step} className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary shrink-0">
                     {index + 1}
                   </span>
                   <span className="font-semibold text-foreground">{step}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-6 space-y-2">
+            <div className="space-y-2">
               {companyProfile.pillars.slice(0, 4).map((item) => (
                 <div key={item} className="flex gap-2">
-                  <CheckCircle size={16} className="text-primary mt-0.5 flex-shrink-0" />
+                  <CheckCircle size={16} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-sm text-text-secondary">{item}</p>
                 </div>
               ))}
@@ -133,7 +161,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-primary to-primary-dark text-white">
+      {/* CTA */}
+      <section className="py-20 bg-linear-to-r from-primary to-primary-dark text-white">
         <div className="section-shell text-center">
           <h2 className="text-4xl md:text-5xl font-semibold mb-5">Let's Connect</h2>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">

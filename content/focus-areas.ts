@@ -1,3 +1,10 @@
+export type FocusAreaCampaign = {
+  name: string
+  partner?: string
+  description: string
+  url?: string
+}
+
 export type FocusArea = {
   slug: string
   title: string
@@ -8,6 +15,7 @@ export type FocusArea = {
   outcomes: string[]
   relatedServiceSlugs: string[]
   featuredProjectIds: string[]
+  campaigns?: FocusAreaCampaign[]
 }
 
 export const focusAreas: FocusArea[] = [
@@ -40,7 +48,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "education-lifelong-learning",
-    image: "/images/AI GEDSI Capacity Building.png",
+    image: "/focus-areas/livelihoods-women-farming.png",
     title: "Education and Lifelong Learning",
     summary:
       "Improving learning outcomes through stronger systems, cross-sector collaboration, and inclusive, evidence-based approaches.",
@@ -117,6 +125,14 @@ export const focusAreas: FocusArea[] = [
     ],
     relatedServiceSlugs: ["advocacy", "communications", "capacity-development", "research"],
     featuredProjectIds: [],
+    campaigns: [
+      {
+        name: "#OverExposed Campaign",
+        partner: "Chance for Childhood",
+        description:
+          "CIDE Group partners with Chance for Childhood and other organisations supporting the #OverExposed Campaign, which challenges traditional thinking in the development sector on the ethical use of imagery and storytelling, and urges fellow organisations to rethink how we use the stories of the people we support.",
+      },
+    ],
   },
   {
     slug: "economic-empowerment",

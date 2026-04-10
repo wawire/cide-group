@@ -1,4 +1,4 @@
-﻿import { siteConfig } from "@/content/site"
+import { siteConfig } from "@/content/site"
 
 interface SEOMetadata {
   title: string
@@ -55,9 +55,11 @@ export function generateOrganizationSchema() {
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
-      addressCountry: "KE",
-      addressLocality: siteConfig.address.replace(", Kenya", ""),
-      addressRegion: "Nairobi",
+      postOfficeBoxNumber: siteConfig.postalAddress.postOfficeBoxNumber,
+      postalCode: siteConfig.postalAddress.postalCode,
+      addressLocality: siteConfig.postalAddress.addressLocality,
+      addressRegion: siteConfig.postalAddress.addressLocality,
+      addressCountry: siteConfig.postalAddress.addressCountry,
     },
     contactPoint: [
       {
@@ -91,4 +93,5 @@ export function generateWebSiteSchema() {
     },
   }
 }
+
 

@@ -1,4 +1,4 @@
-﻿export type TeamGroup =
+export type TeamGroup =
   | "Leadership"
   | "Technical Advisory"
   | "Communications and Knowledge Management"
@@ -104,4 +104,6 @@ export const publishedTeamMembers = teamMembers.filter((member) => member.publis
 export function getTeamMembersByGroup(group: TeamGroup) {
   return teamMembers.filter((member) => member.group === group)
 }
+
+
 

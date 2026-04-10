@@ -1,7 +1,10 @@
-﻿import { siteConfig } from "@/content/site"
+import { siteConfig } from "@/content/site"
 import HeroSection from "@/components/hero-section"
 import WhoWeAreSection from "@/components/who-we-are-section"
+import ApproachSection from "@/components/approach-section"
 import ServicesSection from "@/components/services-section"
+import ImpactMetricsSection from "@/components/impact-metrics-section"
+import FeaturedProjectsSection from "@/components/featured-projects-section"
 import PartnersSection from "@/components/partners-section"
 import CTASection from "@/components/cta-section"
 import ScrollReveal from "@/components/scroll-reveal"
@@ -34,7 +37,16 @@ export default function HomePage() {
         <WhoWeAreSection />
       </ScrollReveal>
       <ScrollReveal>
+        <ApproachSection />
+      </ScrollReveal>
+      <ScrollReveal>
         <ServicesSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <ImpactMetricsSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FeaturedProjectsSection />
       </ScrollReveal>
       <ScrollReveal>
         <PartnersSection />
@@ -45,4 +57,3 @@ export default function HomePage() {
     </main>
   )
 }
-

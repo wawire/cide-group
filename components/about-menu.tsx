@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Users, Building2, Globe, Target } from "lucide-react"
+import { ArrowRight, Users, Building2, Globe, Target, Briefcase } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 type AboutMenuProps = {
@@ -38,6 +38,12 @@ const aboutLinks = [
     description: "How we structure collaboration across programmes, sectors, and institutions.",
     icon: Globe,
   },
+  {
+    href: "/careers",
+    label: "Careers",
+    description: "Join our team of development practitioners working across Africa.",
+    icon: Briefcase,
+  },
 ]
 
 export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, isActive }: AboutMenuProps) {
@@ -63,7 +69,7 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-5 gap-6 mb-10">
               {aboutLinks.map((link) => {
                 const Icon = link.icon
                 const active = isActive(link.href)

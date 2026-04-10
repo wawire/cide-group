@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { focusAreas, getFocusAreaBySlug, projects, services } from "@/content"
+import { Megaphone } from "lucide-react"
 import { siteConfig } from "@/content/site"
 
 type Params = Promise<{ slug: string }>
@@ -109,6 +110,46 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
                     Explore Service
                     <ArrowRight size={16} />
                   </Link>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {focusArea.campaigns && focusArea.campaigns.length > 0 && (
+        <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+          <div className="section-shell">
+            <div className="mb-8 max-w-3xl">
+              <p className="section-kicker mb-4">Ongoing Campaigns</p>
+              <h2 className="section-heading mb-4">Advocacy in action</h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {focusArea.campaigns.map((campaign) => (
+                <Card key={campaign.name} className="border-border bg-white p-8">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#bf2a2c]/10 text-[#bf2a2c] shrink-0">
+                      <Megaphone size={20} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">{campaign.name}</h3>
+                      {campaign.partner && (
+                        <p className="text-sm text-text-muted mt-1">In partnership with {campaign.partner}</p>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-text-secondary leading-relaxed">{campaign.description}</p>
+                  {campaign.url && (
+                    <a
+                      href={campaign.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-[#bf2a2c] hover:text-[#9a1f21] transition-colors"
+                    >
+                      Learn more about the campaign
+                      <ArrowRight size={14} />
+                    </a>
+                  )}
                 </Card>
               ))}
             </div>
