@@ -33,7 +33,7 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service) => (
             <Link key={service.id} href={`/services/${service.slug}`} className="group block">
-              <div className="h-full bg-white border border-[#e2d9d9] rounded-xl p-6 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/10 transition-all duration-300">
+              <div className="h-full rounded-lg border border-[#e2d9d9] bg-white p-6 transition-all duration-300 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/10">
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xs font-bold text-[#bf2a2c]/40 uppercase tracking-widest">
                     {String(service.order).padStart(2, "0")}

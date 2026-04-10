@@ -1,130 +1,229 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { siteConfig } from "@/content/site"
+
+const AUTO_ADVANCE_MS = 6500
 
 const slides = [
   {
     image: "/hero/field-programme-implementation.png",
     alt: "CIDE team working with communities on programme planning",
-    label: "Programme Design & Implementation",
+    titleLead: "Programme Design &",
+    titleAccent: "Implementation",
+    description:
+      "We design and implement scalable development and humanitarian programmes that deliver measurable impact in complex environments.",
+    primaryCta: {
+      href: "/services/project-management",
+      label: "View Programme Delivery",
+    },
+    secondaryCta: {
+      href: "/contact",
+      label: "Discuss Implementation Needs",
+    },
   },
   {
     image: "/hero/research-evidence-community.png",
     alt: "CIDE research team conducting community evidence gathering",
-    label: "Research, Evidence & Policy Advisory",
+    titleLead: "Research, Evidence &",
+    titleAccent: "Policy Advisory",
+    description:
+      "We provide applied research, evaluations, and policy advisory services to strengthen decision-making and improve programme effectiveness.",
+    primaryCta: {
+      href: "/services/research",
+      label: "Explore Research Advisory",
+    },
+    secondaryCta: {
+      href: "/contact",
+      label: "Request Advisory Support",
+    },
   },
   {
     image: "/hero/gedsi-systems-development.png",
     alt: "Gender equity and social inclusion capacity building session",
-    label: "Social Enterprise & Systems Development",
+    titleLead: "Social Enterprise &",
+    titleAccent: "Systems Development",
+    description:
+      "We support the growth of inclusive markets, social enterprises, and sustainable systems that drive long-term economic and social impact.",
+    primaryCta: {
+      href: "/services/enterprise",
+      label: "See Enterprise Support",
+    },
+    secondaryCta: {
+      href: "/contact",
+      label: "Talk About Systems Growth",
+    },
   },
   {
     image: "/hero/communications-mel-filming.png",
     alt: "CIDE communications team capturing community stories in the field",
-    label: "Monitoring, Evaluation & Learning",
+    titleLead: "Monitoring, Evaluation &",
+    titleAccent: "Learning",
+    description:
+      "We deliver robust MEL frameworks, impact assessments, and learning systems to ensure accountability and continuous improvement.",
+    primaryCta: {
+      href: "/services/mel",
+      label: "View MEL Services",
+    },
+    secondaryCta: {
+      href: "/contact",
+      label: "Plan an Evaluation",
+    },
   },
 ] as const
 
 export default function HeroSection() {
   const [active, setActive] = useState(0)
+  const [progressReady, setProgressReady] = useState(false)
+
+  const currentSlide = slides[active]
 
   useEffect(() => {
-    const t = setInterval(() => setActive((c) => (c + 1) % slides.length), 5000)
-    return () => clearInterval(t)
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % slides.length)
+    }, AUTO_ADVANCE_MS)
+
+    return () => window.clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    setProgressReady(false)
+
+    const frame = window.requestAnimationFrame(() => {
+      setProgressReady(true)
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [active])
+
+  function goToSlide(index: number) {
+    setActive((index + slides.length) % slides.length)
+  }
+
+  function goToNextSlide() {
+    setActive((current) => (current + 1) % slides.length)
+  }
+
+  function goToPreviousSlide() {
+    setActive((current) => (current - 1 + slides.length) % slides.length)
+  }
+
   return (
-    <section className="relative w-full min-h-[94vh] overflow-hidden bg-[#140909]">
+    <section
+      aria-label="CIDE Group featured focus areas"
+      aria-roledescription="carousel"
+      className="group/hero relative isolate min-h-[94vh] overflow-hidden bg-[#110909]"
+    >
+      <div className="absolute inset-0">
+        {slides.map((slide, index) => (
+          <div
+            key={`${slide.titleLead}-${slide.titleAccent}`}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`Slide ${index + 1} of ${slides.length}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === active ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className={`object-cover object-center transition-transform duration-[7000ms] ease-out ${
+                index === active ? "scale-100" : "scale-110"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
 
-      {/* Background slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={slide.label}
-          className={`absolute inset-0 transition-opacity duration-1000 ${i === active ? "opacity-100" : "opacity-0"}`}
-        >
-          <Image src={slide.image} alt={slide.alt} fill priority={i === 0} sizes="100vw" className="object-cover object-center" />
-        </div>
-      ))}
+      <div className="absolute inset-0 bg-[linear-gradient(104deg,rgba(9,8,8,0.96)_0%,rgba(12,10,10,0.86)_34%,rgba(16,12,12,0.54)_58%,rgba(16,12,12,0.18)_100%)]" />
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(20,9,9,0.92)_0%,rgba(20,9,9,0.78)_55%,rgba(191,42,44,0.3)_100%)]" />
-      <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
+      <button
+        type="button"
+        onClick={goToPreviousSlide}
+        aria-label="Show previous slide"
+        className="absolute left-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
+      >
+        <ChevronLeft size={20} />
+      </button>
 
-      {/* Content */}
-      <div className="relative z-10 flex min-h-[94vh] items-center px-4">
+      <button
+        type="button"
+        onClick={goToNextSlide}
+        aria-label="Show next slide"
+        className="absolute right-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      <div className="relative z-10 flex min-h-[94vh] items-center px-4 py-20">
         <div className="section-shell w-full">
-          <div className="max-w-3xl">
-
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-sm mb-8">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-white/90">
-                {siteConfig.heroEyebrow}
-              </span>
+          <div className="max-w-[660px]">
+            <div className="mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/58">
+              <span className="h-px w-9 bg-[#bf2a2c]" />
+              <span>{siteConfig.heroEyebrow}</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl font-semibold text-white leading-[0.95] mb-6 drop-shadow-xl">
-              Thriving
-              <br />
-              Together.
-            </h1>
+            <div key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <h1 className="font-serif text-[clamp(3rem,5.6vw,5.8rem)] font-semibold leading-[0.95] tracking-tight text-white">
+                <span className="block text-white">{currentSlide.titleLead}</span>
+                <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
+              </h1>
 
-            {/* Tagline — punchy, no paragraph */}
-            <p className="text-xl md:text-2xl text-white/65 mb-10 font-light tracking-wide">
-              {siteConfig.tagline}
-            </p>
+              <p className="mt-6 max-w-[56ch] text-lg leading-8 text-white/72 md:text-[1.15rem] md:leading-9">
+                {currentSlide.description}
+              </p>
 
-            {/* Rotating service pill */}
-            <div className="mb-10 h-9 flex items-center">
-              <div
-                key={slides[active].label}
-                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#bf2a2c]/20 border border-[#bf2a2c]/50 backdrop-blur-sm animate-in fade-in duration-500"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#bf2a2c] shrink-0" />
-                <span className="text-sm font-semibold text-white/90 tracking-wide">
-                  {slides[active].label}
-                </span>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href={currentSlide.primaryCta.href}
+                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#bf2a2c] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-white shadow-lg shadow-[#bf2a2c]/25 transition hover:-translate-y-0.5 hover:bg-[#9a1f21]"
+                >
+                  {currentSlide.primaryCta.label}
+                  <ArrowRight size={16} />
+                </Link>
+
+                <Link
+                  href={currentSlide.secondaryCta.href}
+                  className="inline-flex items-center justify-center rounded-sm border border-white/35 px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:border-white hover:bg-white/8"
+                >
+                  {currentSlide.secondaryCta.label}
+                </Link>
               </div>
             </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-all shadow-lg shadow-[#bf2a2c]/30 px-8 py-4 rounded-lg font-bold tracking-wide text-sm uppercase"
-              >
-                Get Involved
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white transition-all px-8 py-4 rounded-lg font-bold tracking-wide text-sm uppercase"
-              >
-                See Our Work
-              </Link>
-            </div>
-          </div>
-
-          {/* Slide indicators */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? "w-8 bg-[#c9a84c]" : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-              />
-            ))}
           </div>
         </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
+        {slides.map((slide, index) => (
+          <button
+            key={`${slide.titleLead}-${slide.titleAccent}`}
+            type="button"
+            onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === active ? "w-10 bg-white" : "w-2 bg-white/35 hover:bg-white/55"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 z-20 h-[3px] bg-white/10">
+        <div
+          className="h-full bg-[#bf2a2c]"
+          style={{
+            width: progressReady ? "100%" : "0%",
+            transition: `width ${AUTO_ADVANCE_MS}ms linear`,
+          }}
+        />
       </div>
     </section>
   )

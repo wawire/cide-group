@@ -20,8 +20,8 @@ export default function ProjectsPage() {
     <main className="min-h-screen">
       <section className="relative min-h-[55vh] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1920&q=85"
-          alt="CIDE Group projects across Africa - community-led development"
+          src="/projects/health-workers-with-tablets.jpg"
+          alt="CIDE Group projects delivered with community and field teams"
           fill
           priority
           className="object-cover object-center"

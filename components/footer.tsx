@@ -50,9 +50,14 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-white/70">
               <div className="flex items-start gap-3">
                 <Mail size={15} className="mt-0.5 flex-shrink-0 text-[#bf2a2c]" />
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-[#c9a84c] transition-colors break-all">
-                  {siteConfig.email}
-                </a>
+                <div className="space-y-1">
+                  <a href={`mailto:${siteConfig.partnershipsEmail}`} className="block break-all transition-colors hover:text-[#c9a84c]">
+                    {siteConfig.partnershipsEmail}
+                  </a>
+                  <a href={`mailto:${siteConfig.email}`} className="block break-all transition-colors hover:text-[#c9a84c]">
+                    {siteConfig.email}
+                  </a>
+                </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={15} className="mt-0.5 flex-shrink-0 text-[#bf2a2c]" />

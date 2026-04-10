@@ -56,6 +56,10 @@ function getContactRecipients() {
   return Array.from(new Set([...(configured || []), ...defaults]))
 }
 
+function getPublicContactEmails() {
+  return Array.from(new Set([siteConfig.partnershipsEmail, siteConfig.email]))
+}
+
 function getMailRuntimeConfig(): MailRuntimeConfig | null {
   const host = getRequiredEnv("SMTP_HOST")
   const user = getRequiredEnv("SMTP_USER")
@@ -123,7 +127,14 @@ export async function sendContactEmails({
   const safePhone = escapeHtml(phone?.trim() || "Not provided")
   const safeCountry = escapeHtml(country)
   const safeMessage = escapeHtml(message).replace(/\n/g, "<br>")
-  const safeReplyTo = escapeHtml(config.contactReplyTo)
+  const publicContactEmails = getPublicContactEmails()
+  const urgentContactText = publicContactEmails.join(" or ")
+  const urgentContactHtml = publicContactEmails
+    .map((address) => {
+      const safeAddress = escapeHtml(address)
+      return `<a href="mailto:${safeAddress}">${safeAddress}</a>`
+    })
+    .join(" or ")
 
   const notificationSubject = `New Website Enquiry from ${name} - ${organization}`
   const notificationText = [
@@ -164,28 +175,30 @@ export async function sendContactEmails({
 
   if (config.autoResponseEnabled) {
     try {
-      const acknowledgementSubject = "We received your message | CIDE Group"
+      const acknowledgementSubject = "Thank you for contacting CIDE Group"
       const acknowledgementText = [
         `Hello ${name},`,
         "",
         "Thank you for contacting CIDE Group.",
-        `We have received your message and will respond within ${siteConfig.contactResponseSla}.`,
+        "This is to confirm that we have received your message.",
+        "A member of our team will review it and respond as soon as possible.",
         "",
-        `If your enquiry is urgent, reply to this email or contact us at ${config.contactReplyTo}.`,
+        `If your enquiry is urgent, please reply to this email or contact us at ${urgentContactText}.`,
         "",
-        "Regards,",
+        "Kind regards,",
         "CIDE Group",
       ].join("\n")
 
       const acknowledgementHtml = `
         <p>Hello ${safeName},</p>
         <p>Thank you for contacting CIDE Group.</p>
-        <p>We have received your message and will respond within ${siteConfig.contactResponseSla}.</p>
+        <p>This is to confirm that we have received your message.</p>
+        <p>A member of our team will review it and respond as soon as possible.</p>
         <p>
-          If your enquiry is urgent, reply to this email or contact us at
-          <a href="mailto:${safeReplyTo}">${safeReplyTo}</a>.
+          If your enquiry is urgent, please reply to this email or contact us at
+          ${urgentContactHtml}.
         </p>
-        <p>Regards,<br>CIDE Group</p>
+        <p>Kind regards,<br>CIDE Group</p>
       `
 
       await transporter.sendMail({

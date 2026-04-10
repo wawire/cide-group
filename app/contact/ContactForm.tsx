@@ -50,7 +50,7 @@ export default function ContactForm() {
       ...prev,
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }))
-    // Clear the field error as the user corrects it
+
     if (name in fieldErrors) {
       setFieldErrors((prev) => ({ ...prev, [name]: undefined }))
     }
@@ -60,7 +60,6 @@ export default function ContactForm() {
     e.preventDefault()
     setServerError(null)
 
-    // Client-side validation before hitting the API
     const errors = validateContactForm(formData)
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors)
@@ -93,28 +92,36 @@ export default function ContactForm() {
   return (
     <section className="py-20 bg-background">
       <div className="section-shell">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <Card className="bg-surface border border-border p-8 md:p-10">
               {submitted && (
-                <div className="mb-6 p-4 bg-primary/10 border border-primary text-primary rounded-lg" role="status">
-                  Thank you for reaching out. We will respond within {siteConfig.contactResponseSla}.
+                <div className="mb-6 rounded-lg border border-primary bg-primary/10 p-4 text-primary" role="status">
+                  Thank you for reaching out. Your message has been received.
                 </div>
               )}
 
               {serverError && (
-                <div className="mb-6 p-4 bg-destructive/10 border border-destructive text-destructive rounded-lg" role="alert">
+                <div className="mb-6 rounded-lg border border-destructive bg-destructive/10 p-4 text-destructive" role="alert">
                   {serverError}
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                {/* Honeypot */}
-                <input type="text" name="website" value={formData.website} onChange={handleChange} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <input type="hidden" name="formStartedAt" value={formData.formStartedAt} />
 
                 <div>
-                  <label htmlFor={`${formId}-name`} className="block text-sm font-semibold text-foreground mb-2">
+                  <label htmlFor={`${formId}-name`} className="mb-2 block text-sm font-semibold text-foreground">
                     Your Name <span className="text-primary" aria-hidden="true">*</span>
                   </label>
                   <input
@@ -127,7 +134,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.name ? `${formId}-name-error` : undefined}
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border aria-invalid:border-destructive"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                     placeholder="Your full name"
                   />
                   {fieldErrors.name && (
@@ -138,7 +145,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor={`${formId}-org`} className="block text-sm font-semibold text-foreground mb-2">
+                  <label htmlFor={`${formId}-org`} className="mb-2 block text-sm font-semibold text-foreground">
                     Organization <span className="text-primary" aria-hidden="true">*</span>
                   </label>
                   <input
@@ -151,7 +158,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.organization ? `${formId}-org-error` : undefined}
                     value={formData.organization}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border aria-invalid:border-destructive"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                     placeholder="Your organization name"
                   />
                   {fieldErrors.organization && (
@@ -162,7 +169,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor={`${formId}-email`} className="block text-sm font-semibold text-foreground mb-2">
+                  <label htmlFor={`${formId}-email`} className="mb-2 block text-sm font-semibold text-foreground">
                     Email Address <span className="text-primary" aria-hidden="true">*</span>
                   </label>
                   <input
@@ -175,7 +182,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.email ? `${formId}-email-error` : undefined}
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border aria-invalid:border-destructive"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                     placeholder="your.email@organization.org"
                   />
                   {fieldErrors.email && (
@@ -186,8 +193,8 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor={`${formId}-phone`} className="block text-sm font-semibold text-foreground mb-2">
-                    Phone Number <span className="text-text-muted text-xs font-normal">(Optional)</span>
+                  <label htmlFor={`${formId}-phone`} className="mb-2 block text-sm font-semibold text-foreground">
+                    Phone Number <span className="text-xs font-normal text-text-muted">(Optional)</span>
                   </label>
                   <input
                     id={`${formId}-phone`}
@@ -198,7 +205,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.phone ? `${formId}-phone-error` : undefined}
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border aria-invalid:border-destructive"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                     placeholder="+254 XXX XXX XXX"
                   />
                   {fieldErrors.phone && (
@@ -209,7 +216,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor={`${formId}-country`} className="block text-sm font-semibold text-foreground mb-2">
+                  <label htmlFor={`${formId}-country`} className="mb-2 block text-sm font-semibold text-foreground">
                     Country <span className="text-primary" aria-hidden="true">*</span>
                   </label>
                   <select
@@ -221,7 +228,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.country ? `${formId}-country-error` : undefined}
                     value={formData.country}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border aria-invalid:border-destructive"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                   >
                     <option value="">Select a country</option>
                     {contactCountries.map((country) => (
@@ -238,7 +245,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor={`${formId}-message`} className="block text-sm font-semibold text-foreground mb-2">
+                  <label htmlFor={`${formId}-message`} className="mb-2 block text-sm font-semibold text-foreground">
                     How can we support you? <span className="text-primary" aria-hidden="true">*</span>
                   </label>
                   <textarea
@@ -250,7 +257,7 @@ export default function ContactForm() {
                     aria-describedby={fieldErrors.message ? `${formId}-message-error` : undefined}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border resize-none aria-invalid:border-destructive"
+                    className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 aria-invalid:border-destructive"
                     placeholder="Tell us about your project, challenge, or partnership opportunity"
                   />
                   {fieldErrors.message && (
@@ -267,7 +274,7 @@ export default function ContactForm() {
                     name="subscribe"
                     checked={formData.subscribe}
                     onChange={handleChange}
-                    className="w-4 h-4 rounded accent-primary"
+                    className="h-4 w-4 rounded accent-primary"
                   />
                   <label htmlFor={`${formId}-subscribe`} className="text-sm text-text-secondary">
                     Subscribe to our newsletter for updates and insights
@@ -275,11 +282,11 @@ export default function ContactForm() {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending…" : "Send Message"}
+                  {isLoading ? "Sending..." : "Send Message"}
                 </Button>
 
-                <p className="text-xs text-text-muted text-center">
-                  We respond within {siteConfig.contactResponseSla}. For urgent inquiries, call us directly.
+                <p className="text-center text-xs text-text-muted">
+                  For urgent enquiries, call us directly or email our team.
                 </p>
               </form>
             </Card>
@@ -287,28 +294,33 @@ export default function ContactForm() {
 
           <div className="space-y-8">
             <div>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="mb-3 flex items-center gap-3">
                 <Mail size={24} className="text-primary" />
                 <h3 className="font-semibold text-foreground">Email</h3>
               </div>
-              <a href={`mailto:${siteConfig.email}`} className="text-text-secondary hover:text-primary transition-colors">
-                {siteConfig.email}
-              </a>
+              <div className="space-y-2 text-text-secondary">
+                <a href={`mailto:${siteConfig.partnershipsEmail}`} className="block transition-colors hover:text-primary">
+                  {siteConfig.partnershipsEmail}
+                </a>
+                <a href={`mailto:${siteConfig.email}`} className="block transition-colors hover:text-primary">
+                  {siteConfig.email}
+                </a>
+              </div>
             </div>
 
             <div>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="mb-3 flex items-center gap-3">
                 <Phone size={24} className="text-primary" />
                 <h3 className="font-semibold text-foreground">Phone</h3>
               </div>
-              <a href={`tel:${siteConfig.phoneHref}`} className="text-text-secondary hover:text-primary transition-colors mb-1 block">
+              <a href={`tel:${siteConfig.phoneHref}`} className="mb-1 block text-text-secondary transition-colors hover:text-primary">
                 {siteConfig.phone}
               </a>
-              <p className="text-xs text-text-muted">Mon–Fri, 8am–5pm EAT</p>
+              <p className="text-xs text-text-muted">Mon-Fri, 8am-5pm EAT</p>
             </div>
 
             <div>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="mb-3 flex items-center gap-3">
                 <MapPin size={24} className="text-primary" />
                 <h3 className="font-semibold text-foreground">Address</h3>
               </div>

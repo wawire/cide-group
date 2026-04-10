@@ -1,21 +1,20 @@
-import { Card } from "@/components/ui/card"
+﻿import { Card } from "@/components/ui/card"
 import { ServiceIcon } from "@/components/service-icon"
 import { services } from "@/content/services"
+import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
-import { siteConfig } from "@/content/site"
-
 export const metadata = {
-  title: "Our Services - Research, Policy, MEL & Capacity Building | CIDE Group",
+  title: "Our Services - Strategic Support Across the Programme Cycle | CIDE Group",
   description:
-    "Explore CIDE Group's eight core services: research & evaluation, policy advisory, capacity strengthening, MEL, digital transformation, and more across Africa.",
+    "Explore CIDE Group's integrated services across digital solutions, research, programme implementation, enterprise systems, capacity development, and MEL.",
   alternates: { canonical: `${siteConfig.url}/services` },
   openGraph: {
-    title: "Our Services - Research, Policy, MEL & Capacity Building | CIDE Group",
+    title: "Our Services - Strategic Support Across the Programme Cycle | CIDE Group",
     description:
-      "Eight integrated development services delivered across Africa — from research and policy advisory to digital transformation and institutional strengthening.",
+      "Integrated services spanning digital solutions, research, programme implementation, enterprise systems, capacity development, and MEL.",
     url: `${siteConfig.url}/services`,
   },
 }
@@ -25,8 +24,8 @@ export default function ServicesPage() {
     <main className="min-h-screen">
       <section className="relative min-h-[55vh] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=1920&q=85"
-          alt="CIDE Group team delivering development services across Africa"
+          src="/projects/data-analysis-workshop.jpg"
+          alt="CIDE Group service delivery and technical support"
           fill
           priority
           className="object-cover object-top"
@@ -34,12 +33,12 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/90 via-[#1a0808]/55 to-[#bf2a2c]/15" />
         <div className="relative z-10 section-shell pb-16 pt-40">
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Our Services</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-3xl leading-tight">
-            End-to-End Solutions for Sustainable Development
+          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-4xl leading-tight">
+            Strategic support across the programme cycle
           </h1>
-          <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
-            We collaborate with partners across the full programme cycle, from research and design to implementation,
-            management, and sustainability.
+          <p className="text-xl text-white/80 max-w-3xl leading-relaxed">
+            We provide strategic support across programme design and implementation, research, evidence and policy
+            advisory, social enterprise and systems development, and monitoring, evaluation, learning and reporting.
           </p>
         </div>
       </section>
@@ -73,15 +72,15 @@ export default function ServicesPage() {
       <section className="py-24 bg-surface">
         <div className="section-shell">
           <div className="text-center mb-16">
-            <h2 className="section-heading mb-6">One Partner. Complete Journey.</h2>
+            <h2 className="section-heading mb-6">Our 360-Degree Approach</h2>
             <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-              Unlike fragmented consultancies, CIDE supports partners through the full programme lifecycle and builds
-              local capacity for long-term ownership.
+              Through our integrated 360-degree approach, we use a simple and effective model to deliver end-to-end
+              support.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-5 gap-4 items-center">
-            {["Research", "Design", "Implementation", "Learning", "Sustainability"].map((stage, index) => (
+          <div className="grid md:grid-cols-4 gap-4 items-center">
+            {companyProfile.approach.map((stage, index) => (
               <div key={stage} className="text-center">
                 <div className="bg-primary/10 border-2 border-primary p-6 rounded-lg mb-4">
                   <div className="text-2xl font-bold text-primary">{index + 1}</div>

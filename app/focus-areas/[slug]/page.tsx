@@ -89,68 +89,72 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
         </div>
       </section>
 
-      <section className="py-20 bg-surface">
-        <div className="section-shell">
-          <div className="mb-10 max-w-3xl">
-            <p className="section-kicker mb-4">Related Services</p>
-            <h2 className="section-heading mb-4">Capabilities we combine around this theme</h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              Our focus areas are delivered through integrated services, combining evidence, programme support,
-              communications, and institutional strengthening as needed.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {relatedServices.map((service) => (
-              <Card key={service.slug} className="border-border bg-background p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-5">{service.summary}</p>
-                <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                  Explore Service
-                  <ArrowRight size={16} />
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background">
-        <div className="section-shell">
-          <div className="mb-10 max-w-3xl">
-            <p className="section-kicker mb-4">Selected Work</p>
-            <h2 className="section-heading mb-4">Projects connected to this focus area</h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              These project examples show how thematic expertise translates into measurable delivery.
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-6">
-            {featuredProjects.map((project) => (
-              <Card key={project.id} className="overflow-hidden border-border bg-white p-0 gap-0">
-                <div className="relative h-64">
-                  <Image src={project.image} alt={project.title} fill className="object-cover" />
-                </div>
-                <div className="p-6 space-y-4">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-2">{project.location}</p>
-                    <h3 className="text-2xl font-semibold text-foreground">{project.title}</h3>
-                  </div>
-                  <p className="text-sm text-text-secondary leading-relaxed">{project.description}</p>
-                  <Link href={`/projects/${project.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                    Read Project Story
+      {relatedServices.length > 0 && (
+        <section className="py-20 bg-surface">
+          <div className="section-shell">
+            <div className="mb-10 max-w-3xl">
+              <p className="section-kicker mb-4">Related Services</p>
+              <h2 className="section-heading mb-4">Capabilities we combine around this theme</h2>
+              <p className="text-lg text-text-secondary leading-relaxed">
+                Our focus areas are delivered through integrated services, combining evidence, programme support,
+                communications, and institutional strengthening as needed.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {relatedServices.map((service) => (
+                <Card key={service.slug} className="border-border bg-background p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed mb-5">{service.summary}</p>
+                  <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    Explore Service
                     <ArrowRight size={16} />
                   </Link>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {featuredProjects.length > 0 && (
+        <section className="py-20 bg-background">
+          <div className="section-shell">
+            <div className="mb-10 max-w-3xl">
+              <p className="section-kicker mb-4">Selected Work</p>
+              <h2 className="section-heading mb-4">Projects connected to this focus area</h2>
+              <p className="text-lg text-text-secondary leading-relaxed">
+                These project examples show how thematic expertise translates into measurable delivery.
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-6">
+              {featuredProjects.map((project) => (
+                <Card key={project.id} className="overflow-hidden border-border bg-white p-0 gap-0">
+                  <div className="relative h-64">
+                    <Image src={project.image} alt={project.title} fill className="object-cover" />
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-2">{project.location}</p>
+                      <h3 className="text-2xl font-semibold text-foreground">{project.title}</h3>
+                    </div>
+                    <p className="text-sm text-text-secondary leading-relaxed">{project.description}</p>
+                    <Link href={`/projects/${project.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                      Read Project Story
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-20 bg-linear-to-r from-primary to-primary-dark text-white">
         <div className="w-full max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-semibold mb-6">Need support in this area?</h2>
           <p className="text-xl mb-10 text-white/90">
-            Let&apos;s design an engagement that fits your context, mandate, and implementation reality.
+            Let's design an engagement that fits your context, mandate, and implementation reality.
           </p>
           <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
             <Link href="/contact">Talk to CIDE</Link>
@@ -160,4 +164,3 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
     </main>
   )
 }
-

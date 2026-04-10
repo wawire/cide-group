@@ -37,7 +37,7 @@ const groupMeta: Record<
   },
   "Technical Advisory": {
     title: "Technical Advisory",
-    description: "Senior specialists leading thematic work across policy, climate, GEDSI, resilience, and programme design.",
+    description: "Senior specialists leading thematic work across climate, education, safeguarding, inclusion, resilience, and programme design.",
     badgeClass: "bg-[#140909]/6 text-[#140909]",
     dividerClass: "bg-[#140909]",
   },
@@ -66,8 +66,8 @@ export default function TeamPage() {
     <main className="min-h-screen bg-background">
       <section className="relative overflow-hidden bg-[#140909]">
         <Image
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=85"
-          alt="CIDE Group team collaboration"
+          src="/about/cide-boardroom-strategy.png"
+          alt="CIDE Group advisory team in a strategy session"
           fill
           priority
           className="object-cover object-center opacity-30"
@@ -137,7 +137,7 @@ export default function TeamPage() {
                     <div className="space-y-10">
                       {members.map((member, index) => (
                         <article key={member.slug} className="grid gap-5 md:grid-cols-[190px_minmax(0,1fr)] md:gap-8">
-                          <div className="relative aspect-4/5 overflow-hidden rounded-3xl bg-[#efe6e1]">
+                          <div className="relative aspect-4/5 overflow-hidden rounded-xl bg-[#efe6e1]">
                             <Image
                               src={member.image}
                               alt={member.name}
@@ -189,7 +189,7 @@ export default function TeamPage() {
 
       <section className="pb-24 pt-2">
         <div className="section-shell">
-          <div className="rounded-[30px] border border-border bg-[#f6f0ec] px-8 py-10 md:px-10 md:py-12">
+          <div className="rounded-xl border border-border bg-[#f6f0ec] px-8 py-10 md:px-10 md:py-12">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Associate Network</p>
@@ -216,3 +216,4 @@ export default function TeamPage() {
     </main>
   )
 }
+

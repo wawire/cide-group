@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+﻿import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
@@ -7,34 +7,41 @@ import { CheckCircle } from "lucide-react"
 import CompanyProfileSection from "@/components/company-profile-section"
 
 export const metadata = {
-  title: "About CIDE Group - Pan-African Development Consulting",
+  title: "About CIDE Group - Pan-African Development Advisory and Implementation",
   description:
-    "CIDE Group is a pan-African consulting firm headquartered in Nairobi, Kenya, delivering advisory and implementation support across development, humanitarian, and enterprise contexts.",
+    "CIDE Group is a pan-African development advisory, research, programme design, and implementation organisation working across Africa.",
   alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
-    title: "About CIDE Group - Pan-African Development Consulting",
+    title: "About CIDE Group - Pan-African Development Advisory and Implementation",
     description:
-      "A collective of changemakers working across Africa to co-create solutions that empower communities, strengthen systems, and protect our future.",
+      "CIDE Group works across Anglophone, Francophone, and Lusophone Africa with community-led, evidence-based solutions.",
     url: `${siteConfig.url}/about`,
   },
 }
+
+const stakeholderGroups = [
+  "Governments and public institutions",
+  "International NGOs and civil society organisations",
+  "Bilateral and multilateral development partners",
+  "Private sector actors and impact investors",
+]
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
       <section className="relative min-h-[56vh] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=1920&q=85"
-          alt="Pan-African development collaboration landscape"
+          src="/research/community-members-advocacy-training-workshop.jpg"
+          alt="Pan-African collaboration and community-centred development"
           fill
           priority
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/90 via-[#1a0808]/60 to-[#bf2a2c]/20" />
         <div className="relative z-10 section-shell pb-16 pt-36">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Company Profile</p>
+          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">About Us</p>
           <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-5 leading-tight max-w-4xl">
-            Pan-African Development Consulting Built for Africa&apos;s Realities
+            Pan-African Development Advisory, Research and Programme Implementation
           </h1>
           <p className="text-xl text-white/80 max-w-3xl leading-relaxed">{siteConfig.narrativeLine}</p>
         </div>
@@ -44,19 +51,21 @@ export default function AboutPage() {
         <div className="section-shell grid lg:grid-cols-2 gap-10 items-start">
           <div>
             <p className="section-kicker mb-4">Who We Are</p>
-            <h2 className="section-heading mb-5">{siteConfig.legalName}</h2>
+            <h2 className="section-heading mb-5">About CIDE Group</h2>
             <p className="text-lg text-text-secondary leading-relaxed mb-5">
-              CIDE Group is a pan-African consulting firm headquartered in Nairobi, Kenya. We deliver integrated
-              advisory and implementation support across development, humanitarian, and enterprise contexts.
+              CIDE Group, registered as <strong className="text-foreground">{siteConfig.legalName}</strong>, is a
+              pan-African development advisory, research, programme design, and implementation organisation working
+              across Anglophone, Francophone, and Lusophone Africa.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed mb-5">
-              With over a decade of combined experience, our multidisciplinary network supports ICT and digital
-              transformation, strategic communications, policy and research, GEDSI, institutional strengthening, and
-              business development.
+              We deliver evidence-based, community-led, and data-driven development solutions that support governments,
+              donors, investors, NGOs, and private sector organisations in addressing complex development,
+              humanitarian, and market system challenges.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed mb-8">
-              We work with governments, donors, development partners, civil society, and enterprises to design
-              solutions that are context-driven, scalable, and built to last.
+              We operate at the intersection of policy advisory, sustainable development, social innovation, and
+              community systems strengthening so every intervention is grounded in local realities and designed for
+              long-term impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg">
@@ -69,23 +78,14 @@ export default function AboutPage() {
           </div>
 
           <Card className="p-8 border-[#e2d9d9] bg-white">
-            <p className="section-kicker mb-4">Profile Snapshot</p>
+            <p className="section-kicker mb-4">Stakeholders We Support</p>
             <div className="space-y-3 text-sm text-text-secondary">
-              <p>
-                <span className="font-semibold text-foreground">Legal Name:</span> {siteConfig.legalName}
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Location:</span> {siteConfig.address}
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Email:</span> {siteConfig.email}
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Phone:</span> {siteConfig.phone}
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Registration:</span> {siteConfig.companyNumber}
-              </p>
+              {stakeholderGroups.map((group) => (
+                <div key={group} className="flex gap-3">
+                  <CheckCircle size={16} className="text-primary mt-0.5 shrink-0" />
+                  <p>{group}</p>
+                </div>
+              ))}
             </div>
           </Card>
         </div>
@@ -96,15 +96,16 @@ export default function AboutPage() {
       <section className="py-20 bg-background">
         <div className="section-shell grid lg:grid-cols-2 gap-10 items-start">
           <div>
-            <p className="section-kicker mb-4">Why CIDE Group</p>
-            <h2 className="section-heading mb-5">Local Insight. Systems Thinking. Practical Results.</h2>
+            <p className="section-kicker mb-4">Our Approach</p>
+            <h2 className="section-heading mb-5">Community-led, evidence-based, and built for long-term resilience</h2>
             <p className="text-lg text-text-secondary leading-relaxed mb-5">
-              We believe sustainable transformation begins with locally led solutions. Our proximity to communities
-              provides deep understanding of social realities, institutional dynamics, and implementation risk.
+              We believe the most effective development solutions are shaped by the people closest to the challenges.
+              By placing communities at the centre of decision-making, we shift development from traditional delivery
+              models towards partnership, accountability, and long-term resilience.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed">
-              Our signature 360-degree approach keeps work coherent from strategy to delivery, ensuring measurable and
-              durable outcomes.
+              Our work supports sustainable development outcomes aligned with the Sustainable Development Goals and
+              contributes to Africa's Agenda 2063 vision of "The Africa We Want."
             </p>
           </div>
 
@@ -121,11 +122,7 @@ export default function AboutPage() {
               ))}
             </div>
             <div className="mt-6 space-y-2">
-              {[
-                "Locally led and participatory implementation",
-                "Evidence-guided decisions and adaptive management",
-                "Institutional strengthening for long-term sustainability",
-              ].map((item) => (
+              {companyProfile.pillars.slice(0, 4).map((item) => (
                 <div key={item} className="flex gap-2">
                   <CheckCircle size={16} className="text-primary mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-text-secondary">{item}</p>
@@ -138,9 +135,9 @@ export default function AboutPage() {
 
       <section className="py-20 bg-gradient-to-r from-primary to-primary-dark text-white">
         <div className="section-shell text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-5">Let&apos;s Connect</h2>
+          <h2 className="text-4xl md:text-5xl font-semibold mb-5">Let's Connect</h2>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
-            Reach out to discuss partnerships, programme support, or technical advisory needs.
+            Reach out to discuss programme design, implementation support, research, or strategic collaboration.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8 text-sm">
             <a href={`mailto:${siteConfig.email}`} className="font-semibold text-white/95 hover:text-white">
@@ -161,4 +158,3 @@ export default function AboutPage() {
     </main>
   )
 }
-

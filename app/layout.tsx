@@ -1,4 +1,4 @@
-import type React from "react"
+﻿import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Manrope, Source_Serif_4 } from "next/font/google"
 import "./globals.css"
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
   title: `${siteConfig.name} - ${siteConfig.tagline}`,
   description: siteConfig.description,
   keywords: [
-    "development consultancy",
-    "Africa",
-    "GEDSI",
-    "MEL",
-    "research",
-    "policy advocacy",
-    "locally led solutions",
-    "evidence-driven",
+    "pan-African development advisory",
+    "programme implementation Africa",
+    "research and policy advisory",
+    "education and lifelong learning",
+    "climate energy and environment",
+    "WASH Africa",
+    "community-led solutions",
+    "evidence-based development",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -125,3 +125,4 @@ export default function RootLayout({
     </html>
   )
 }
+

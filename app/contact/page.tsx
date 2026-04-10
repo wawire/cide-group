@@ -22,8 +22,8 @@ export default function ContactPage() {
     <main className="min-h-screen">
       <section className="relative min-h-[55vh] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=1920&q=85"
-          alt="Nairobi city skyline, home of CIDE Group headquarters"
+          src="/research/community-health-workers-mobile-tablets-rural.jpg"
+          alt="CIDE Group engaging with field teams and community partners"
           fill
           priority
           className="object-cover object-center"
@@ -35,7 +35,7 @@ export default function ContactPage() {
             Let&apos;s Co-Create Lasting Change Together
           </h1>
           <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
-            Whether you are a government agency, donor organization, NGO, or civil society partner — we are ready to
+            Whether you are a government agency, donor organization, NGO, or civil society partner - we are ready to
             listen and co-design practical solutions.
           </p>
         </div>

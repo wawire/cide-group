@@ -1,4 +1,4 @@
-export type NavLink = {
+﻿export type NavLink = {
   label: string
   href: string
   description?: string
@@ -14,11 +14,11 @@ export type ImpactMetric = {
 export const siteConfig = {
   name: "CIDE Group",
   legalName: "COMMUNE IDEE (CIDE) GROUPE LTD",
-  tagline: "Locally Led. Evidence-Driven. Built to Last.",
+  tagline: "Pan-African Development Advisory, Research & Programme Implementation Firm",
   narrativeLine:
-    "Thriving together through locally grounded, evidence-driven, and impact-oriented solutions across Africa.",
+    "CIDE Group delivers locally grounded, evidence-driven, and impact-oriented solutions to Africa's most complex development, humanitarian, and business challenges.",
   description:
-    "A collective of changemakers working across Africa to co-create solutions that empower communities, strengthen systems, and protect our future.",
+    "CIDE Group is a pan-African development advisory, research, programme design, and implementation organisation working across Anglophone, Francophone, and Lusophone Africa.",
   url: "https://cidegroup.org",
   email: "communications@cidegroup.org",
   partnershipsEmail: "partnerships@cidegroup.org",
@@ -26,9 +26,9 @@ export const siteConfig = {
   phoneHref: "+254745704580",
   address: "Nairobi, Kenya",
   companyNumber: "PVT-BB1OWQW3",
-  heroEyebrow: "Pan-African Consulting | Nairobi, Kenya",
+  heroEyebrow: "Pan-African Development Advisory | Nairobi, Kenya",
   heroSubheading:
-    "Built for Africa's realities with locally grounded, evidence-driven, and impact-oriented solutions.",
+    "Locally grounded, evidence-driven, and impact-oriented support across development, humanitarian, and market system challenges.",
   logo: {
     primary: "/brand/cide-group-logo-color.svg",
     png: "/brand/cide-group-logo-color.png",
@@ -97,7 +97,7 @@ export const companyProfile = {
   mission:
     "To empower organisations and enterprises with innovative, sustainable solutions that inspire change and deliver lasting impact.",
   vision:
-    "To be a trusted leader in delivering practical, evidence-based solutions that strengthen systems and enable communities to thrive.",
+    "To be a trusted leader in delivering practical, evidence-based solutions that strengthen systems to enable communities to thrive.",
   coreValues: [
     {
       title: "COMPASSION",
@@ -125,14 +125,14 @@ export const companyProfile = {
     },
   ],
   approach: ["Research", "Design", "Implement", "Evaluate"],
-  serviceJourney: ["Research", "Design", "Implementation", "Learning", "Sustainability"],
+  serviceJourney: ["Research", "Design", "Implement", "Evaluate"],
   pillars: [
-    "Locally Led Solutions",
-    "Evidence-Driven Decisions",
-    "Institutional Strengthening",
-    "Long-Term Partnerships",
-    "360 Degree Programme Support",
-    "Pan-African Expertise",
+    "Community leadership, participation and ownership",
+    "Evidence-based decision-making",
+    "Sustainability and systems strengthening",
+    "Inclusion, dignity, and accountability",
+    "Scalable and measurable impact",
+    "Locally grounded implementation",
   ],
 } as const
 
@@ -188,3 +188,4 @@ export const contactCountries = [
   "Tunisia",
   "Other",
 ] as const
+

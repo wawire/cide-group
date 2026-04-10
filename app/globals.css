@@ -198,7 +198,7 @@
   }
 
   .surface-panel {
-    @apply rounded-2xl border border-border shadow-sm;
+    @apply rounded-xl border border-border shadow-sm;
     background-color: var(--surface);
   }
 

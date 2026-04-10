@@ -30,8 +30,8 @@ export default function ResearchPage() {
     <main className="min-h-screen">
       <section className="relative min-h-[55vh] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1920&q=85"
-          alt="Research and data analysis for African development programmes"
+          src="/images/AI Research.png"
+          alt="Research and evidence gathering for African development programmes"
           fill
           priority
           className="object-cover object-center"
