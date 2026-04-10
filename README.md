@@ -147,7 +147,16 @@ Create `.env.local` for any API keys or configuration:
 
 \`\`\`
 NEXT_PUBLIC_SITE_URL=https://cidegroup.org
-# Add other variables as needed
+SMTP_HOST=mail.privateemail.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=communications@cidegroup.org
+SMTP_PASSWORD=your_private_email_password
+SMTP_FROM_NAME=CIDE Group
+SMTP_FROM_EMAIL=communications@cidegroup.org
+CONTACT_NOTIFICATION_TO=communications@cidegroup.org,partnerships@cidegroup.org
+CONTACT_REPLY_TO_EMAIL=communications@cidegroup.org
+CONTACT_AUTO_RESPONSE_ENABLED=true
 \`\`\`
 
 ### Customization
@@ -216,6 +225,16 @@ The site can be deployed to any platform supporting Next.js:
 - AWS Amplify
 - DigitalOcean
 - Your own server with Node.js
+
+### Vultr
+See [docs/deploy-vultr.md](/C:/Projects/cide-group/docs/deploy-vultr.md) for the VM-based Vultr deployment runbook that matches this repository's current Nginx and PM2 setup.
+
+### Docker
+```bash
+docker compose up --build
+```
+
+The project now includes a production `Dockerfile` and `compose.yaml`. The container reads runtime variables from `.env.production.local` and serves the app on port `3000`.
 
 ## Support & Contributions
 

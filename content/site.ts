@@ -56,9 +56,9 @@ export const aboutNavLinks: NavLink[] = [
     description: "Leadership, technical advisory, and communications specialists.",
   },
   {
-    label: "Partners",
+    label: "Partnership Approach",
     href: "/partners",
-    description: "Institutional and programme collaborations across Africa.",
+    description: "How we structure collaboration across sectors and programmes.",
   },
 ]
 
@@ -73,7 +73,7 @@ export const exploreLinks: NavLink[] = [
   { label: "Focus Areas", href: "/focus-areas" },
   { label: "Projects", href: "/projects" },
   { label: "Research", href: "/research" },
-  { label: "Partners", href: "/partners" },
+  { label: "Partnerships", href: "/partners" },
   { label: "Contact", href: "/contact" },
 ]
 

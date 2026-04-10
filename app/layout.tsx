@@ -1,4 +1,4 @@
-﻿import type React from "react"
+import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Manrope, Source_Serif_4 } from "next/font/google"
 import "./globals.css"
@@ -37,12 +37,9 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   publisher: siteConfig.name,
   icons: {
-    icon: [
-      { url: "/brand/icon.svg", type: "image/svg+xml" },
-      { url: "/brand/icon-dark-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/brand/apple-icon.png",
-    shortcut: "/brand/icon.svg",
+    icon: [{ url: "/brand/cide-icon.png", type: "image/png" }],
+    apple: "/brand/cide-icon.png",
+    shortcut: "/brand/cide-icon.png",
   },
   robots: {
     index: true,

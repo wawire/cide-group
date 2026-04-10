@@ -1,10 +1,9 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { partners } from "@/content/partners"
 
 const partnerGroups = [
   {
@@ -45,7 +44,6 @@ const sectorTags = [
 
 export default function PartnersSection() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
-  const partnerCount = partners.length
 
   return (
     <section ref={ref} className="py-20 bg-[#fafaf9]">
@@ -56,10 +54,6 @@ export default function PartnersSection() {
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             We collaborate with governments, donors, development partners, civil society, businesses, and startups
             to co-create evidence-driven solutions.
-          </p>
-          <p className="text-sm text-text-muted mt-4">
-            {partnerCount} organisations are currently structured in the shared content model. Logos remain source-only
-            until written permission to publish is confirmed.
           </p>
         </div>
 
@@ -108,7 +102,7 @@ export default function PartnersSection() {
           <div className="flex justify-center">
             <Button asChild size="lg" variant="outline">
               <Link href="/partners">
-                View Partners Page
+                View Partnership Approach
                 <ArrowRight className="ml-2" size={16} />
               </Link>
             </Button>

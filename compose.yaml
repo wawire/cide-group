@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cidegroup-web:latest
+    env_file:
+      - .env.production.local
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "${HOST_PORT:-3001}:3000"
+    restart: unless-stopped

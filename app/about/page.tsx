@@ -1,4 +1,4 @@
-﻿import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 <Link href="/about/team">Meet the Team</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href="/partners">View Partners</Link>
+                <Link href="/partners">Partnership Approach</Link>
               </Button>
             </div>
           </div>

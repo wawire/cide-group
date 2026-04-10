@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
-import { siteConfig } from "@/content/site"
+import { sendContactEmails } from "@/lib/mail"
 import { z } from "zod"
+
+export const runtime = "nodejs"
 
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_REQUESTS = 5
@@ -19,15 +21,6 @@ const payloadSchema = z.object({
   formStartedAt: z.number().optional(),
   turnstileToken: z.string().optional(),
 })
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;")
-}
 
 function getClientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for")
@@ -93,53 +86,12 @@ export async function POST(request: Request) {
     }
   }
 
-  const apiKey = process.env.RESEND_API_KEY
-  if (!apiKey) {
-    return NextResponse.json({ error: "Email service not configured" }, { status: 500 })
-  }
-
-  const safeMessage = escapeHtml(message).replace(/\n/g, "<br>")
-  const safeName = escapeHtml(name)
-  const safeOrg = escapeHtml(organization)
-  const safeEmail = escapeHtml(email)
-  const safePhone = escapeHtml(phone || "Not provided")
-  const safeCountry = escapeHtml(country)
-
-  const html = `
-    <h2>New Partnership Enquiry</h2>
-    <p><strong>Name:</strong> ${safeName}</p>
-    <p><strong>Organization:</strong> ${safeOrg}</p>
-    <p><strong>Email:</strong> ${safeEmail}</p>
-    <p><strong>Phone:</strong> ${safePhone}</p>
-    <p><strong>Country:</strong> ${safeCountry}</p>
-    <p><strong>Message:</strong></p>
-    <p>${safeMessage}</p>
-    ${subscribe ? "<p><em>This contact opted in to updates.</em></p>" : ""}
-  `
-
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: "CIDE Contact Form <noreply@cidegroup.org>",
-        to: siteConfig.partnershipsEmail,
-        reply_to: email,
-        subject: `New Partnership Enquiry from ${name} - ${organization}`,
-        html,
-      }),
-      cache: "no-store",
-    })
-
-    if (!res.ok) {
-      return NextResponse.json({ error: "Failed to send message" }, { status: 500 })
-    }
+    await sendContactEmails({ name, organization, email, phone, country, message, subscribe })
 
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (error) {
+    console.error("Contact email delivery failed", error)
     return NextResponse.json({ error: "Failed to send message" }, { status: 500 })
   }
 }

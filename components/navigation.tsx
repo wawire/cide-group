@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 const mobileNavLinks = [
   { href: "/about", label: "About" },
   { href: "/about/team", label: "Team" },
-  { href: "/partners", label: "Partners" },
+  { href: "/partners", label: "Partnerships" },
   { href: "/services", label: "What We Do" },
   { href: "/focus-areas", label: "Focus Areas" },
   { href: "/projects", label: "Impact" },
@@ -29,7 +29,7 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const mobileToggleRef = useRef<HTMLButtonElement>(null)
-  // Timeout ref used to delay closing so mouse can travel from trigger → panel
+  // Timeout ref used to delay closing so mouse can travel from trigger Ã¢â€ â€™ panel
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
@@ -60,7 +60,7 @@ export default function Navigation() {
     setOpenDesktopMenu(menu)
   }, [])
 
-  // Schedule close — cancelled if mouse re-enters a menu area within 200 ms
+  // Schedule close Ã¢â‚¬â€ cancelled if mouse re-enters a menu area within 200 ms
   const scheduleClose = useCallback(() => {
     closeTimer.current = setTimeout(() => {
       setOpenDesktopMenu(null)
@@ -115,7 +115,7 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Shared trigger button class — animated underline indicator, no chevron
+  // Shared trigger button class Ã¢â‚¬â€ animated underline indicator, no chevron
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
       "relative px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
@@ -157,7 +157,7 @@ export default function Navigation() {
 
             <div className="flex items-center gap-4">
 
-              {/* Desktop nav — triggers only; panels rendered BELOW outside these wrappers */}
+              {/* Desktop nav Ã¢â‚¬â€ triggers only; panels rendered BELOW outside these wrappers */}
               <div className="hidden md:flex items-center">
 
                 {/* About trigger */}
@@ -208,7 +208,7 @@ export default function Navigation() {
                   Impact
                 </button>
 
-                {/* Research — flat link */}
+                {/* Research Ã¢â‚¬â€ flat link */}
                 <Link
                   href="/research"
                   aria-current={isActive("/research") ? "page" : undefined}
@@ -250,7 +250,7 @@ export default function Navigation() {
       </div>
 
       {/*
-        Mega menus rendered HERE at the nav level — NOT inside trigger wrapper divs.
+        Mega menus rendered HERE at the nav level Ã¢â‚¬â€ NOT inside trigger wrapper divs.
         They share the same openMenu/scheduleClose handlers so hovering from
         a trigger button into the panel cancels the close timer.
       */}

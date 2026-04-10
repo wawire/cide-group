@@ -34,8 +34,8 @@ const aboutLinks = [
   },
   {
     href: "/partners",
-    label: "Partners & Clients",
-    description: "Institutional and programme collaborations we work alongside.",
+    label: "Partnership Approach",
+    description: "How we structure collaboration across programmes, sectors, and institutions.",
     icon: Globe,
   },
 ]
@@ -59,7 +59,7 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
             <div className="mb-10">
               <h2 className="text-2xl font-bold text-foreground mb-2">About CIDE Group</h2>
               <p className="text-text-secondary">
-                Company profile, leadership team, partnerships, and thematic focus areas.
+                Company profile, leadership team, partnership approach, and thematic focus areas.
               </p>
             </div>
 
