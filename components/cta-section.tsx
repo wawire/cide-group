@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { siteConfig } from "@/content/site"
 
 export default function CTASection() {
@@ -17,13 +17,14 @@ export default function CTASection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-white/5 blur-[80px] rounded-full" />
 
       <div className="relative z-10 w-full max-w-3xl mx-auto px-4 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Let's Co-Create</p>
+        <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Let's Work Together</p>
         <h2 className="text-4xl md:text-6xl font-semibold text-white mb-6 leading-tight">
-          Ready to Create<br />Lasting Change?
+          Ready to build
+          <br />
+          lasting impact?
         </h2>
-        <p className="text-lg md:text-xl mb-12 text-white/75 leading-relaxed max-w-2xl mx-auto">
-          Whether you are a government agency, donor organization, NGO, or civil society partner - we are ready to
-          collaborate on measurable and sustainable outcomes.
+        <p className="text-lg md:text-xl mb-12 text-white/75 leading-relaxed max-w-xl mx-auto">
+          Partner with us to design and deliver locally grounded, evidence-driven solutions across Africa.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
@@ -34,10 +35,10 @@ export default function CTASection() {
             Get in Touch
           </Link>
           <Link
-            href="/projects"
+            href="/focus-areas"
             className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
           >
-            View Our Portfolio
+            Explore Solutions
           </Link>
         </div>
 

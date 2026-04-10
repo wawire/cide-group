@@ -1,4 +1,4 @@
-import { services } from "@/content/services"
+﻿import { services } from "@/content/services"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { ServiceIcon } from "./service-icon"
@@ -11,21 +11,21 @@ export default function ServicesSection() {
           <div>
             <p className="section-kicker mb-4">What We Do</p>
             <h2 className="section-heading">
-              8 Core Services.
+              End-to-End Support
               <br />
-              One Integrated Partner.
+              Across Africa.
             </h2>
           </div>
           <div>
             <p className="text-lg text-text-secondary leading-relaxed">
-              We collaborate with partners across the full programme cycle - from research and design to implementation
-              and sustainability - delivering practical solutions built for long-term impact.
+              From research and design through to implementation and evaluation — we deliver integrated solutions
+              that translate strategy into measurable, lasting impact.
             </p>
             <Link
               href="/services"
               className="inline-flex items-center gap-2 text-[#bf2a2c] hover:text-[#9a1f21] font-semibold mt-4 transition-colors"
             >
-              View All Services <ArrowRight size={18} />
+              All Services <ArrowRight size={18} />
             </Link>
           </div>
         </div>

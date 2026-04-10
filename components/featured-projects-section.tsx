@@ -11,17 +11,16 @@ export default function FeaturedProjectsSection() {
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
           <div>
-            <p className="section-kicker mb-4">Our Work in Action</p>
+            <p className="section-kicker mb-4">Impact in Action</p>
             <h2 className="section-heading">
-              Transforming Communities
+              Real Work.
               <br />
-              Through Partnership
+              Lasting Change.
             </h2>
           </div>
           <div>
             <p className="text-lg text-text-secondary leading-relaxed">
-              Each project combines local leadership, rigorous evidence, and implementation discipline to create change
-              that lasts beyond our engagement.
+              Local leadership, rigorous evidence, and implementation discipline — creating change that outlasts our engagement.
             </p>
           </div>
         </div>

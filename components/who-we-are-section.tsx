@@ -1,7 +1,7 @@
-import { ArrowRight, CheckCircle } from "lucide-react"
+﻿import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { companyProfile, siteConfig } from "@/content/site"
+import { companyProfile } from "@/content/site"
 
 export default function WhoWeAreSection() {
   return (
@@ -11,21 +11,18 @@ export default function WhoWeAreSection() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
-                alt="CIDE team collaborating with local partners in East Africa"
+                src="/research/community-members-advocacy-training-workshop.jpg"
+                alt="Community-led engagement and development collaboration"
                 fill
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-white font-semibold text-sm drop-shadow">{siteConfig.tagline}</span>
-              </div>
             </div>
 
             <div className="absolute -top-6 -right-6 w-36 h-36 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
               <Image
-                src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=300&q=80"
-                alt="Community engagement in Kenya"
+                src="/projects/data-analysis-workshop.jpg"
+                alt="Research and analysis session"
                 fill
                 className="object-cover"
               />
@@ -33,8 +30,8 @@ export default function WhoWeAreSection() {
 
             <div className="absolute -bottom-6 -left-6 w-44 h-32 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
               <Image
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80"
-                alt="African professional leading development programme"
+                src="/projects/advocacy-training-workshop.jpg"
+                alt="Stakeholder participation workshop"
                 fill
                 className="object-cover"
               />
@@ -45,23 +42,22 @@ export default function WhoWeAreSection() {
 
           <div className="lg:pl-4">
             <p className="section-kicker mb-4">Who We Are</p>
-            <h2 className="section-heading mb-5">A Pan-African Consulting Firm Built for Africa's Realities</h2>
-            <p className="text-text-secondary leading-relaxed mb-5">
-              CIDE Group, formally registered as <strong className="text-foreground">{siteConfig.legalName}</strong>, is a
-              leading pan-African consulting firm headquartered in Nairobi, Kenya. With over a decade of experience,
-              we convene a continent-wide, multidisciplinary network of technical experts.
-            </p>
+            <h2 className="section-heading mb-5">Pan-African Development Advisory & Implementation</h2>
             <p className="text-text-secondary leading-relaxed mb-6">
-              We partner with governments, donors, NGOs, and enterprises to co-create solutions guided by rigorous
-              evidence and deep local insight because sustainable transformation begins where communities are.
+              CIDE Group partners with governments, donors, NGOs, and the private sector across Anglophone,
+              Francophone, and Lusophone Africa — delivering community-led, evidence-based solutions to complex
+              development, humanitarian, and market system challenges.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6">
+            <div className="flex flex-wrap gap-2 mb-8">
               {companyProfile.pillars.map((pillar) => (
-                <div key={pillar} className="flex items-center gap-2.5">
-                  <CheckCircle size={16} className="text-[#bf2a2c] flex-shrink-0" />
-                  <span className="text-sm text-text-secondary font-medium">{pillar}</span>
-                </div>
+                <span
+                  key={pillar}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#bf2a2c]/8 border border-[#bf2a2c]/20 text-xs font-semibold text-[#bf2a2c]"
+                >
+                  <span className="w-1 h-1 rounded-full bg-[#bf2a2c] shrink-0" />
+                  {pillar}
+                </span>
               ))}
             </div>
 
@@ -69,7 +65,7 @@ export default function WhoWeAreSection() {
               href="/about"
               className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
             >
-              Our Full Story
+              Our Story
               <ArrowRight size={16} />
             </Link>
           </div>
