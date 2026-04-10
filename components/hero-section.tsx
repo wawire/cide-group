@@ -8,23 +8,23 @@ import { siteConfig } from "@/content/site"
 
 const slides = [
   {
-    image: "/projects/health-workers-with-tablets.jpg",
-    alt: "Programme teams using digital tools in the field",
+    image: "/hero/field-programme-implementation.png",
+    alt: "CIDE team working with communities on programme planning",
     label: "Programme Design & Implementation",
   },
   {
-    image: "/projects/data-analysis-workshop.jpg",
-    alt: "Research and data analysis workshop",
+    image: "/hero/research-evidence-community.png",
+    alt: "CIDE research team conducting community evidence gathering",
     label: "Research, Evidence & Policy Advisory",
   },
   {
-    image: "/research/community-members-advocacy-training-workshop.jpg",
-    alt: "Community workshop and stakeholder engagement",
+    image: "/hero/gedsi-systems-development.png",
+    alt: "Gender equity and social inclusion capacity building session",
     label: "Social Enterprise & Systems Development",
   },
   {
-    image: "/research/digital-dashboard-real-time-programme-data.jpg",
-    alt: "Monitoring dashboard and programme learning systems",
+    image: "/hero/communications-mel-filming.png",
+    alt: "CIDE communications team capturing community stories in the field",
     label: "Monitoring, Evaluation & Learning",
   },
 ] as const

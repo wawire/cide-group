@@ -9,31 +9,31 @@ export default function WhoWeAreSection() {
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden aspect-4/3 shadow-2xl">
               <Image
-                src="/research/community-members-advocacy-training-workshop.jpg"
-                alt="Community-led engagement and development collaboration"
+                src="/about/cide-boardroom-strategy.png"
+                alt="CIDE Group strategy and advisory session"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/40 to-transparent" />
             </div>
 
             <div className="absolute -top-6 -right-6 w-36 h-36 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
               <Image
-                src="/projects/data-analysis-workshop.jpg"
-                alt="Research and analysis session"
+                src="/hero/research-evidence-community.png"
+                alt="CIDE research team with community members"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
 
             <div className="absolute -bottom-6 -left-6 w-44 h-32 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
               <Image
-                src="/projects/advocacy-training-workshop.jpg"
-                alt="Stakeholder participation workshop"
+                src="/hero/gedsi-systems-development.png"
+                alt="GEDSI capacity building and community training"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
 
