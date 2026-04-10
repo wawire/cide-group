@@ -1,6 +1,7 @@
 ﻿import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Manrope, Source_Serif_4 } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
@@ -18,6 +19,8 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
   display: "swap",
 })
+
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -111,6 +114,22 @@ export default function RootLayout({
             __html: JSON.stringify(generateWebSiteSchema()),
           }}
         />
+        {googleAnalyticsId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${googleAnalyticsId}');
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body className={`${manrope.variable} ${sourceSerif.variable} antialiased`}>
         <a href="#main-content" className="skip-link">
