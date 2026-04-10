@@ -79,7 +79,6 @@ const slides = [
 export default function HeroSection() {
   const [active, setActive] = useState(0)
   const [exiting, setExiting] = useState<number | null>(null)
-  const [progressReady, setProgressReady] = useState(false)
   const activeRef = useRef(0)
 
   const currentSlide = slides[active]
@@ -115,16 +114,6 @@ export default function HeroSection() {
 
     return () => window.clearInterval(timer)
   }, [])
-
-  useEffect(() => {
-    setProgressReady(false)
-
-    const frame = window.requestAnimationFrame(() => {
-      setProgressReady(true)
-    })
-
-    return () => window.cancelAnimationFrame(frame)
-  }, [active])
 
   return (
     <section
@@ -242,10 +231,10 @@ export default function HeroSection() {
 
       <div className="absolute inset-x-0 bottom-0 z-20 h-[3px] bg-white/10">
         <div
+          key={active}
           className="h-full bg-[#bf2a2c]"
           style={{
-            width: progressReady ? "100%" : "0%",
-            transition: `width ${AUTO_ADVANCE_MS}ms linear`,
+            animation: `hero-progress-fill ${AUTO_ADVANCE_MS}ms linear forwards`,
           }}
         />
       </div>

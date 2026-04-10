@@ -161,6 +161,16 @@
   }
 }
 
+@keyframes hero-progress-fill {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
 /* section-shell outside @layer so it wins over all Tailwind utilities */
 .section-shell {
   width: min(92%, 1280px) !important;
