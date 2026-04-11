@@ -30,6 +30,9 @@ jobs:
         run: npm ci --prefer-offline
 
       # ── Build ─────────────────────────────────────────────────
+      - name: Clean previous build
+        run: rm -rf .next
+
       - name: Build
         run: npm run build
 
