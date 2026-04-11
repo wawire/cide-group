@@ -47,6 +47,12 @@ jobs:
 
             cd "$APP_DIR"
 
+            echo "── Git HEAD ─────────────────────────────"
+            git log --oneline -1
+
+            echo "── next.config.mjs script-src lines ─────"
+            grep "script-src" next.config.mjs || echo "NOT FOUND"
+
             echo "── Sync env secrets ─────────────────────"
             if [ -f /var/www/cide-group/.env.production.local ]; then
               cp /var/www/cide-group/.env.production.local "$APP_DIR/.env.production.local"
