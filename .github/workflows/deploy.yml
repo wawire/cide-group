@@ -78,13 +78,14 @@ jobs:
               echo "✓ nginx CSP: no hardcoded script-src-elem found (Next.js headers are in control)"
             fi
 
-            echo "── Port 3000 before restart ─────────────"
+            echo "── Stop root PM2 + kill anything on port 3000 ──────────────────"
             ss -tlnp | grep ':3000' || echo "nothing on 3000"
-
-            echo "── Kill anything on port 3000 ───────────"
-            fuser -k 3000/tcp 2>/dev/null || true
+            # Stop root-owned PM2 daemon (if running) using sudo
+            echo "$SUDO_PASS" | sudo -S -u root bash -c 'pm2 stop all 2>/dev/null; pm2 delete all 2>/dev/null; pm2 kill 2>/dev/null' || true
+            # Kill any remaining process on port 3000 with root privileges
+            echo "$SUDO_PASS" | sudo -S fuser -k 3000/tcp 2>/dev/null || true
             sleep 2
-            ss -tlnp | grep ':3000' || echo "port 3000 is free"
+            ss -tlnp | grep ':3000' || echo "✓ port 3000 is free"
 
             echo "── Restarting PM2 ───────────────────────"
             pm2 stop cidegroup-web 2>/dev/null || true
