@@ -107,7 +107,6 @@ export default function RootLayout({
           rel="preload"
           as="image"
           href="/hero/field-programme-implementation.png"
-          // @ts-expect-error fetchPriority is valid HTML but not yet in React types
           fetchPriority="high"
         />
         <script
@@ -152,4 +151,3 @@ export default function RootLayout({
     </html>
   )
 }
-
