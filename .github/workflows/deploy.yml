@@ -70,19 +70,25 @@ jobs:
             rm -rf .next
             npm run build
 
-            echo "── Fix nginx CSP (script-src-elem needs unsafe-inline) ──────────"
-            NGINX_CONF=$(echo "$SUDO_PASS" | sudo -S grep -rl "script-src-elem" /etc/nginx/ 2>/dev/null | head -1)
-            if [ -n "$NGINX_CONF" ]; then
-              echo "Found CSP in: $NGINX_CONF"
-              echo "$SUDO_PASS" | sudo -S sed -i \
-                "s|script-src-elem 'self' https://www\.googletagmanager\.com|script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com|g" \
-                "$NGINX_CONF"
-              echo "$SUDO_PASS" | sudo -S nginx -t && \
-                echo "$SUDO_PASS" | sudo -S nginx -s reload && \
-                echo "✓ nginx CSP patched and reloaded" || echo "✗ nginx reload failed"
-            else
-              echo "✓ nginx CSP: no hardcoded script-src-elem found (Next.js headers are in control)"
-            fi
+            echo "── Patch nginx to force correct CSP ─────────────────────────────"
+            CSP_VALUE="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+            for CONF in /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-available/cidegroup.conf; do
+              if ! echo "$SUDO_PASS" | sudo -S test -f "$CONF" 2>/dev/null; then
+                echo "skip $CONF (not found)"
+                continue
+              fi
+              if echo "$SUDO_PASS" | sudo -S grep -q "script-src-elem.*unsafe-inline" "$CONF" 2>/dev/null; then
+                echo "✓ $CONF already patched"
+                continue
+              fi
+              echo "$SUDO_PASS" | sudo -S sed -i '/add_header Content-Security-Policy/d' "$CONF"
+              echo "$SUDO_PASS" | sudo -S sed -i '/proxy_hide_header Content-Security-Policy/d' "$CONF"
+              echo "$SUDO_PASS" | sudo -S sed -i "s|proxy_pass http://127\.0\.0\.1:3000;|proxy_pass http://127.0.0.1:3000;\n        proxy_hide_header Content-Security-Policy;\n        add_header Content-Security-Policy \"$CSP_VALUE\" always;|" "$CONF"
+              echo "✓ Patched $CONF"
+            done
+            echo "$SUDO_PASS" | sudo -S nginx -t && \
+              echo "$SUDO_PASS" | sudo -S nginx -s reload && \
+              echo "✓ nginx reloaded" || echo "✗ nginx config error — check manually"
 
             echo "── Kill everything on port 3000 ─────────────────────────────────"
             echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ':3000' || echo "nothing on 3000"
@@ -116,20 +122,6 @@ jobs:
 
             echo "── CSP from Next.js (port 3000 direct) ──"
             curl -sI http://127.0.0.1:3000 | grep -i "content-security-policy" || echo "no CSP header on port 3000"
-
-            echo "── Dump full nginx config for cidegroup ─"
-            echo "$SUDO_PASS" | sudo -S bash -c '
-              echo "--- sites-enabled:"
-              ls /etc/nginx/sites-enabled/
-              echo "--- conf.d:"
-              ls /etc/nginx/conf.d/ 2>/dev/null || echo "empty"
-              echo "--- proxy_pass to 3000 (all configs):"
-              grep -r "proxy_pass.*:3000" /etc/nginx/ 2>/dev/null | grep -v ".bak"
-              echo "--- add_header across all configs:"
-              grep -rn "add_header" /etc/nginx/ 2>/dev/null | grep -v ".bak\|#"
-              echo "--- cidegroup in all configs:"
-              grep -rl "cidegroup\|3000" /etc/nginx/ 2>/dev/null | grep -v ".bak"
-            ' 2>/dev/null || echo "sudo dump failed"
 
             echo "── Health check ─────────────────────────"
             for i in 1 2 3 4 5; do
