@@ -2,6 +2,7 @@
 const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com",
   "font-src 'self' data:",

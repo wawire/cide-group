@@ -44,12 +44,30 @@ jobs:
 
             cd "$APP_DIR"
 
+            echo "── Sync env secrets ─────────────────────"
+            if [ -f /var/www/cide-group/.env.production.local ]; then
+              cp /var/www/cide-group/.env.production.local "$APP_DIR/.env.production.local"
+              echo "✓ Synced .env.production.local"
+            elif [ ! -f "$APP_DIR/.env.production.local" ]; then
+              echo "⚠ .env.production.local missing — SMTP will not work"
+            else
+              echo "✓ .env.production.local already present"
+            fi
+
             echo "── Installing dependencies ──────────────"
             npm ci --prefer-offline
 
             echo "── Clean build ──────────────────────────"
             rm -rf .next
             npm run build
+
+            echo "── Fix nginx CSP (script-src-elem needs unsafe-inline) ──────────"
+            sudo find /etc/nginx -name "*.conf" -print0 2>/dev/null | \
+              xargs -0 grep -lZ "script-src-elem" 2>/dev/null | \
+              xargs -0 sudo sed -i \
+                "s|script-src-elem 'self' https://www\.googletagmanager\.com|script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com|g" \
+              2>/dev/null && echo "✓ nginx CSP patched" || echo "✓ nginx CSP: no matching entries or no sudo"
+            sudo nginx -t 2>/dev/null && sudo nginx -s reload 2>/dev/null && echo "✓ nginx reloaded" || echo "✓ nginx reload: manual step may be needed"
 
             echo "── Port 3000 before restart ─────────────"
             ss -tlnp | grep ':3000' || echo "nothing on 3000"
