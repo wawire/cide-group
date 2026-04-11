@@ -155,7 +155,7 @@ export default function PartnersPage() {
         <div className="grid lg:grid-cols-2">
 
           {/* Image */}
-          <div className="relative h-72 lg:h-auto lg:min-h-[480px] overflow-hidden">
+          <div className="relative h-72 lg:h-auto lg:min-h-120 overflow-hidden">
             <Image
               src="/hero/gedsi-systems-development.png"
               alt="Ethical storytelling and community representation"
