@@ -21,6 +21,8 @@ export default function WhoWeAreSection() {
                 src="/about/cide-boardroom-strategy.png"
                 alt="CIDE Group strategy and advisory session"
                 fill
+                quality={60}
+                sizes="(min-width: 1024px) 46vw, 92vw"
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/40 to-transparent" />
@@ -31,6 +33,8 @@ export default function WhoWeAreSection() {
                 src="/hero/research-evidence-community.png"
                 alt="CIDE research team with community members"
                 fill
+                quality={52}
+                sizes="144px"
                 className="object-cover object-center"
               />
             </div>
@@ -40,6 +44,8 @@ export default function WhoWeAreSection() {
                 src="/hero/gedsi-systems-development.png"
                 alt="GEDSI capacity building and community training"
                 fill
+                quality={50}
+                sizes="176px"
                 className="object-cover object-center"
               />
             </div>
@@ -73,7 +79,7 @@ export default function WhoWeAreSection() {
               href="/about"
               className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
             >
-              Learn More
+              Read Our Story
               <ArrowRight size={16} />
             </Link>
           </div>

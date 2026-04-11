@@ -141,9 +141,11 @@ export default function HeroSection() {
                 alt={slide.alt}
                 fill
                 priority={index === 0}
-                quality={68}
+                fetchPriority={index === 0 ? "high" : undefined}
+                loading={index === 0 ? "eager" : "lazy"}
+                quality={56}
                 sizes="100vw"
-                className={`object-cover object-center transition-transform duration-[7000ms] ease-out ${
+                className={`object-cover object-center will-change-transform transition-transform duration-[7000ms] ease-out ${
                   isActiveSlide ? "scale-100" : "scale-105"
                 }`}
               />
@@ -215,17 +217,21 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
         {slides.map((slide, index) => (
           <button
             key={`${slide.titleLead}-${slide.titleAccent}`}
             type="button"
             onClick={() => activateSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === active ? "w-10 bg-white" : "w-2 bg-white/35 hover:bg-white/55"
-            }`}
-          />
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full focus-visible:bg-white/10"
+          >
+            <span
+              className={`block rounded-full transition-all duration-300 ${
+                index === active ? "h-2 w-10 bg-white" : "h-2.5 w-2.5 bg-white/55 hover:bg-white/75"
+              }`}
+            />
+          </button>
         ))}
       </div>
 

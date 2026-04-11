@@ -101,7 +101,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <div className="space-y-4">
                 {project.outcomes.map((outcome, i) => (
                   <div key={outcome} className="flex items-start gap-4">
-                    <span className="text-xs font-bold text-[#bf2a2c]/50 tabular-nums mt-0.5 shrink-0 w-5">
+                    <span className="text-xs font-bold text-[#bf2a2c] tabular-nums mt-0.5 shrink-0 w-5">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="text-text-secondary leading-relaxed">{outcome}</p>

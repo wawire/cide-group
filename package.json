@@ -6,7 +6,11 @@
     "node": ">=20.9.0"
   },
   "browserslist": [
-    "defaults"
+    "chrome >= 90",
+    "firefox >= 90",
+    "safari >= 14",
+    "edge >= 90",
+    "not dead"
   ],
   "scripts": {
     "build": "next build --webpack && tsc --noEmit",

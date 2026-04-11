@@ -102,6 +102,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preload LCP hero image — discoverable before JS hydrates */}
+        <link
+          rel="preload"
+          as="image"
+          href="/hero/field-programme-implementation.png"
+          // @ts-expect-error fetchPriority is valid HTML but not yet in React types
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

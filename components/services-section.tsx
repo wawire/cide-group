@@ -35,7 +35,7 @@ export default function ServicesSection() {
             <Link key={service.id} href={`/services/${service.slug}`} className="group block">
               <div className="h-full rounded-lg border border-[#e2d9d9] bg-white p-6 transition-all duration-300 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/10">
                 <div className="flex items-center justify-between mb-5">
-                  <span className="text-xs font-bold text-[#bf2a2c]/40 uppercase tracking-widest">
+                  <span className="text-xs font-bold text-[#8f1e20] uppercase tracking-widest">
                     {String(service.order).padStart(2, "0")}
                   </span>
                   <div className="w-10 h-10 rounded-lg bg-[#bf2a2c]/8 flex items-center justify-center group-hover:bg-[#bf2a2c] transition-colors duration-300">
@@ -53,7 +53,7 @@ export default function ServicesSection() {
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">{service.summary}</p>
 
                 <span className="text-xs font-semibold text-[#bf2a2c] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <ArrowRight size={13} />
+                  Explore Service <ArrowRight size={13} />
                 </span>
               </div>
             </Link>
