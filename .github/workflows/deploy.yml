@@ -51,11 +51,26 @@ jobs:
             rm -rf .next
             npm run build
 
+            echo "── Port 3000 before restart ─────────────"
+            ss -tlnp | grep ':3000' || echo "nothing on 3000"
+
+            echo "── Kill anything on port 3000 ───────────"
+            fuser -k 3000/tcp 2>/dev/null || true
+            sleep 2
+            ss -tlnp | grep ':3000' || echo "port 3000 is free"
+
             echo "── Restarting PM2 ───────────────────────"
             pm2 stop cidegroup-web 2>/dev/null || true
             pm2 delete cidegroup-web 2>/dev/null || true
             pm2 start ecosystem.config.cjs
             pm2 save
+
+            sleep 3
+            echo "── PM2 status ───────────────────────────"
+            pm2 list
+
+            echo "── CSS hash check ───────────────────────"
+            curl -s http://127.0.0.1:3000 | grep -o 'static/css/[^"]*' | head -1
 
             echo "── Health check ─────────────────────────"
             for i in 1 2 3 4 5; do
