@@ -79,19 +79,21 @@ jobs:
             fi
 
             echo "── Kill everything on port 3000 ─────────────────────────────────"
-            ss -tlnp | grep ':3000' || echo "nothing on 3000"
-            # Kill our own PM2 daemon first (from previous deploys)
+            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ':3000' || echo "nothing on 3000"
+            # Kill our own PM2 daemon (previous deploys)
             pm2 kill 2>/dev/null || true
-            # Kill by PID — get all PIDs listening on 3000 and kill them with root
-            PORT_PIDS=$(ss -tlnp | grep ':3000' | grep -oP 'pid=\K[0-9]+' || true)
-            if [ -n "$PORT_PIDS" ]; then
-              echo "PIDs on port 3000: $PORT_PIDS"
-              for pid in $PORT_PIDS; do
-                echo "$SUDO_PASS" | sudo -S kill -9 "$pid" 2>/dev/null && echo "killed $pid" || true
-              done
-            fi
+            # sudo ss to see root-owned PIDs, then kill them all
+            echo "$SUDO_PASS" | sudo -S bash -c '
+              PIDS=$(ss -tlnp | grep ":3000" | grep -oP "pid=\K[0-9]+" | sort -u)
+              if [ -n "$PIDS" ]; then
+                echo "Killing PIDs: $PIDS"
+                echo "$PIDS" | xargs kill -9
+              else
+                echo "port 3000 already free"
+              fi
+            ' 2>/dev/null || true
             sleep 2
-            ss -tlnp | grep ':3000' || echo "✓ port 3000 is free"
+            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ':3000' || echo "✓ port 3000 is free"
 
             echo "── Restarting PM2 ───────────────────────"
             pm2 stop cidegroup-web 2>/dev/null || true
