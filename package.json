@@ -9,7 +9,7 @@
     "defaults"
   ],
   "scripts": {
-    "build": "next build && tsc --noEmit",
+    "build": "next build --webpack && tsc --noEmit",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start"
