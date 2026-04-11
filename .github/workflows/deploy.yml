@@ -30,16 +30,32 @@ jobs:
         run: npm ci --prefer-offline
 
       # ── Build ─────────────────────────────────────────────────
-      - name: Clean previous build
+      - name: Clean previous build cache
         run: rm -rf .next
 
       - name: Build
         run: npm run build
 
+      # ── Sync to app directory ─────────────────────────────────
+      # PM2 always serves from APP_DIR so we sync the fresh build there.
+      - name: Sync build to /var/www/cide-group
+        run: |
+          mkdir -p "$APP_DIR"
+          rsync -a --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            ./ "$APP_DIR/"
+          cd "$APP_DIR"
+          npm ci --omit=dev --prefer-offline
+
       # ── Zero-downtime reload ──────────────────────────────────
       - name: Reload with PM2
         run: |
-          pm2 startOrReload ecosystem.config.cjs --update-env
+          cd "$APP_DIR"
+          pm2 stop cidegroup-web 2>/dev/null || true
+          pm2 delete cidegroup-web 2>/dev/null || true
+          pm2 start ecosystem.config.cjs
           pm2 save
 
       # ── Health check ──────────────────────────────────────────
