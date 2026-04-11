@@ -1,6 +1,5 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -8,18 +7,9 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { siteConfig } from "@/content/site"
 import { cn } from "@/lib/utils"
-
-const AboutMenu = dynamic(() => import("./about-menu").then((mod) => mod.AboutMenu), {
-  loading: () => null,
-})
-
-const ServicesMegaMenu = dynamic(() => import("./mega-menu-services").then((mod) => mod.ServicesMegaMenu), {
-  loading: () => null,
-})
-
-const ProjectsMegaMenu = dynamic(() => import("./mega-menu-projects").then((mod) => mod.ProjectsMegaMenu), {
-  loading: () => null,
-})
+import { AboutMenu } from "./about-menu"
+import { ServicesMegaMenu } from "./mega-menu-services"
+import { ProjectsMegaMenu } from "./mega-menu-projects"
 
 const mobileNavLinks = [
   { href: "/about", label: "About" },
@@ -39,7 +29,6 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const mobileToggleRef = useRef<HTMLButtonElement>(null)
-  // Timeout ref used to delay closing so mouse can travel from trigger Ã¢â€ â€™ panel
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
@@ -56,22 +45,23 @@ export default function Navigation() {
     pathname === "/focus-areas" ||
     pathname.startsWith("/focus-areas/")
 
-  const isWhatWeDoActive =
-    pathname.startsWith("/services") || pathname.startsWith("/focus-areas")
-
+  const isWhatWeDoActive = pathname.startsWith("/services") || pathname.startsWith("/focus-areas")
   const isImpactActive = pathname.startsWith("/projects")
 
-  // Open immediately; cancel any pending close
   const openMenu = useCallback((menu: DesktopMenu) => {
     if (closeTimer.current) {
       clearTimeout(closeTimer.current)
       closeTimer.current = null
     }
+
     setOpenDesktopMenu(menu)
   }, [])
 
-  // Schedule close Ã¢â‚¬â€ cancelled if mouse re-enters a menu area within 200 ms
   const scheduleClose = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+    }
+
     closeTimer.current = setTimeout(() => {
       setOpenDesktopMenu(null)
     }, 200)
@@ -82,36 +72,43 @@ export default function Navigation() {
       clearTimeout(closeTimer.current)
       closeTimer.current = null
     }
+
     setOpenDesktopMenu(null)
   }, [])
 
   useEffect(() => {
     return () => {
-      if (closeTimer.current) clearTimeout(closeTimer.current)
+      if (closeTimer.current) {
+        clearTimeout(closeTimer.current)
+      }
     }
   }, [])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node
-      // Close desktop mega menu on outside click
+
       if (openDesktopMenu && navRef.current && !navRef.current.contains(target)) {
         closeNow()
       }
-      // Close mobile menu on outside click
+
       if (!isOpen) return
       if (mobileMenuRef.current?.contains(target)) return
       if (mobileToggleRef.current?.contains(target)) return
+
       setIsOpen(false)
     }
+
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false)
         closeNow()
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside)
     document.addEventListener("keydown", handleEscape)
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
       document.removeEventListener("keydown", handleEscape)
@@ -122,10 +119,10 @@ export default function Navigation() {
     const onScroll = () => setIsScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
+
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Shared trigger button class Ã¢â‚¬â€ animated underline indicator, no chevron
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
       "relative px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
@@ -147,9 +144,7 @@ export default function Navigation() {
     >
       <div className="w-full overflow-visible">
         <div className="section-shell">
-          <div className="flex justify-between items-center h-20 gap-6">
-
-            {/* Logo */}
+          <div className="flex h-20 items-center justify-between gap-6">
             <Link
               href="/"
               onClick={closeNow}
@@ -160,17 +155,13 @@ export default function Navigation() {
                 alt={siteConfig.logo.alt}
                 width={168}
                 height={48}
-                className="h-10 md:h-11 w-auto"
+                className="h-10 w-auto md:h-11"
                 priority
               />
             </Link>
 
             <div className="flex items-center gap-4">
-
-              {/* Desktop nav Ã¢â‚¬â€ triggers only; panels rendered BELOW outside these wrappers */}
-              <div className="hidden md:flex items-center">
-
-                {/* About trigger */}
+              <div className="hidden items-center md:flex">
                 <button
                   type="button"
                   aria-haspopup="menu"
@@ -178,15 +169,13 @@ export default function Navigation() {
                   aria-controls="about-menu"
                   onMouseEnter={() => openMenu("about")}
                   onMouseLeave={scheduleClose}
-                  onClick={() =>
-                    setOpenDesktopMenu((c) => (c === "about" ? null : "about"))
-                  }
+                  onFocus={() => openMenu("about")}
+                  onClick={() => setOpenDesktopMenu((current) => (current === "about" ? null : "about"))}
                   className={triggerClass(isAboutActive, openDesktopMenu === "about")}
                 >
                   About
                 </button>
 
-                {/* What We Do trigger */}
                 <button
                   type="button"
                   aria-haspopup="menu"
@@ -194,15 +183,15 @@ export default function Navigation() {
                   aria-controls="what-we-do-mega-menu"
                   onMouseEnter={() => openMenu("what-we-do")}
                   onMouseLeave={scheduleClose}
+                  onFocus={() => openMenu("what-we-do")}
                   onClick={() =>
-                    setOpenDesktopMenu((c) => (c === "what-we-do" ? null : "what-we-do"))
+                    setOpenDesktopMenu((current) => (current === "what-we-do" ? null : "what-we-do"))
                   }
                   className={triggerClass(isWhatWeDoActive, openDesktopMenu === "what-we-do")}
                 >
                   What We Do
                 </button>
 
-                {/* Impact trigger */}
                 <button
                   type="button"
                   aria-haspopup="menu"
@@ -210,19 +199,18 @@ export default function Navigation() {
                   aria-controls="impact-mega-menu"
                   onMouseEnter={() => openMenu("impact")}
                   onMouseLeave={scheduleClose}
-                  onClick={() =>
-                    setOpenDesktopMenu((c) => (c === "impact" ? null : "impact"))
-                  }
+                  onFocus={() => openMenu("impact")}
+                  onClick={() => setOpenDesktopMenu((current) => (current === "impact" ? null : "impact"))}
                   className={triggerClass(isImpactActive, openDesktopMenu === "impact")}
                 >
                   Impact
                 </button>
 
-                {/* Research Ã¢â‚¬â€ flat link */}
                 <Link
                   href="/research"
                   aria-current={isActive("/research") ? "page" : undefined}
                   onMouseEnter={scheduleClose}
+                  onFocus={closeNow}
                   onClick={closeNow}
                   className={triggerClass(isActive("/research"))}
                 >
@@ -230,7 +218,6 @@ export default function Navigation() {
                 </Link>
               </div>
 
-              {/* CTA */}
               <Link
                 href="/contact"
                 onClick={closeNow}
@@ -239,15 +226,14 @@ export default function Navigation() {
                 Get Involved
               </Link>
 
-              {/* Mobile toggle */}
               <button
                 type="button"
                 ref={mobileToggleRef}
                 onClick={() => {
                   closeNow()
-                  setIsOpen((c) => !c)
+                  setIsOpen((current) => !current)
                 }}
-                className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary transition-colors duration-200"
+                className="inline-flex items-center justify-center rounded-md p-2 text-foreground transition-colors duration-200 hover:text-primary md:hidden"
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
@@ -259,11 +245,6 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/*
-        Mega menus rendered HERE at the nav level Ã¢â‚¬â€ NOT inside trigger wrapper divs.
-        They share the same openMenu/scheduleClose handlers so hovering from
-        a trigger button into the panel cancels the close timer.
-      */}
       {openDesktopMenu === "about" ? (
         <AboutMenu
           open
@@ -274,6 +255,7 @@ export default function Navigation() {
           isActive={isActive}
         />
       ) : null}
+
       {openDesktopMenu === "what-we-do" ? (
         <ServicesMegaMenu
           open
@@ -283,6 +265,7 @@ export default function Navigation() {
           menuId="what-we-do-mega-menu"
         />
       ) : null}
+
       {openDesktopMenu === "impact" ? (
         <ProjectsMegaMenu
           open
@@ -293,12 +276,11 @@ export default function Navigation() {
         />
       ) : null}
 
-      {/* Mobile menu */}
-      {isOpen && (
+      {isOpen ? (
         <div
           id="mobile-navigation"
           ref={mobileMenuRef}
-          className="md:hidden border-t border-border bg-background/98 backdrop-blur px-4 pt-3 pb-5 space-y-1 animate-in fade-in slide-in-from-top-2 duration-200"
+          className="space-y-1 border-t border-border bg-background/98 px-4 pt-3 pb-5 backdrop-blur animate-in fade-in slide-in-from-top-2 duration-200 md:hidden"
         >
           {mobileNavLinks.map((link) => (
             <Link
@@ -308,15 +290,16 @@ export default function Navigation() {
               className={cn(
                 "flex items-center rounded-md px-3 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200",
                 isActive(link.href)
-                  ? "text-primary bg-primary/5"
-                  : "text-foreground hover:text-primary hover:bg-surface",
+                  ? "bg-primary/5 text-primary"
+                  : "text-foreground hover:bg-surface hover:text-primary",
               )}
               onClick={() => setIsOpen(false)}
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 border-t border-border mt-2">
+
+          <div className="mt-2 border-t border-border pt-3">
             <Link href="/contact" onClick={() => setIsOpen(false)}>
               <span className="block w-full rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-primary-dark">
                 Get Involved
@@ -324,7 +307,7 @@ export default function Navigation() {
             </Link>
           </div>
         </div>
-      )}
+      ) : null}
     </nav>
   )
 }
