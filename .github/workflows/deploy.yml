@@ -117,18 +117,19 @@ jobs:
             echo "── CSP from Next.js (port 3000 direct) ──"
             curl -sI http://127.0.0.1:3000 | grep -i "content-security-policy" || echo "no CSP header on port 3000"
 
-            echo "── Built headers in routes-manifest ─────"
-            node -e "
-              const m = require('./.next/routes-manifest.json');
-              const r = m.headers || [];
-              r.forEach(h => h.headers.forEach(hh => {
-                if (hh.key === 'Content-Security-Policy') console.log(hh.value.substring(0,200));
-              }));
-            " 2>/dev/null || echo "could not read routes-manifest"
-
-            echo "── nginx sites-enabled ──────────────────"
-            echo "$SUDO_PASS" | sudo -S ls /etc/nginx/sites-enabled/ 2>/dev/null
-            echo "$SUDO_PASS" | sudo -S grep -r "proxy_pass\|add_header\|Content-Security" /etc/nginx/sites-enabled/ 2>/dev/null | grep -v "^Binary" | head -20 || echo "no relevant nginx directives"
+            echo "── Dump full nginx config for cidegroup ─"
+            echo "$SUDO_PASS" | sudo -S bash -c '
+              echo "--- sites-enabled:"
+              ls /etc/nginx/sites-enabled/
+              echo "--- conf.d:"
+              ls /etc/nginx/conf.d/ 2>/dev/null || echo "empty"
+              echo "--- proxy_pass to 3000 (all configs):"
+              grep -r "proxy_pass.*:3000" /etc/nginx/ 2>/dev/null | grep -v ".bak"
+              echo "--- add_header across all configs:"
+              grep -rn "add_header" /etc/nginx/ 2>/dev/null | grep -v ".bak\|#"
+              echo "--- cidegroup in all configs:"
+              grep -rl "cidegroup\|3000" /etc/nginx/ 2>/dev/null | grep -v ".bak"
+            ' 2>/dev/null || echo "sudo dump failed"
 
             echo "── Health check ─────────────────────────"
             for i in 1 2 3 4 5; do
