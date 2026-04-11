@@ -12,71 +12,48 @@ concurrency:
 jobs:
   deploy:
     name: Build & Deploy
-    runs-on: [self-hosted, linux, x64, cidegroup]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      APP_DIR: /var/www/cide-group
-      NODE_ENV: production
-      PORT: 3000
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Deploy to Vultr via SSH
+        uses: appleboy/ssh-action@v1.2.0
         with:
-          fetch-depth: 1
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USER }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          port: 22
+          command_timeout: 25m
+          script: |
+            set -e
+            APP_DIR=/var/www/cide-group
 
-      # ── Dependencies ──────────────────────────────────────────
-      - name: Install dependencies
-        run: npm ci --prefer-offline
+            echo "── Pulling latest code ──────────────────"
+            cd "$APP_DIR"
+            git pull origin main
 
-      # ── Build ─────────────────────────────────────────────────
-      - name: Clean previous build cache
-        run: rm -rf .next
+            echo "── Installing dependencies ──────────────"
+            npm ci --prefer-offline
 
-      - name: Build
-        run: npm run build
+            echo "── Clean build ──────────────────────────"
+            rm -rf .next
+            npm run build
 
-      # ── Sync to app directory ─────────────────────────────────
-      # PM2 always serves from APP_DIR so we sync the fresh build there.
-      - name: Sync build to /var/www/cide-group
-        run: |
-          mkdir -p "$APP_DIR"
-          rsync -a --delete \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='node_modules' \
-            ./ "$APP_DIR/"
-          cd "$APP_DIR"
-          npm ci --omit=dev --prefer-offline
+            echo "── Restarting PM2 ───────────────────────"
+            pm2 stop cidegroup-web 2>/dev/null || true
+            pm2 delete cidegroup-web 2>/dev/null || true
+            pm2 start ecosystem.config.cjs
+            pm2 save
 
-      # ── Zero-downtime reload ──────────────────────────────────
-      - name: Reload with PM2
-        run: |
-          cd "$APP_DIR"
-          pm2 stop cidegroup-web 2>/dev/null || true
-          pm2 delete cidegroup-web 2>/dev/null || true
-          pm2 start ecosystem.config.cjs
-          pm2 save
-
-      # ── Health check ──────────────────────────────────────────
-      - name: Health check
-        run: |
-          for i in 1 2 3 4 5; do
-            if curl -fsS http://127.0.0.1:$PORT/api/health; then
-              echo "✓ App is healthy"
-              exit 0
-            fi
-            echo "Attempt $i failed, retrying in 3s..."
-            sleep 3
-          done
-          echo "✗ Health check failed after 5 attempts"
-          pm2 logs cidegroup-web --lines 50 --nostream
-          exit 1
-
-      # ── Rollback on failure ───────────────────────────────────
-      - name: Rollback on failure
-        if: failure()
-        run: |
-          echo "Deployment failed — rolling back to previous release"
-          pm2 reload cidegroup-web || true
-          pm2 logs cidegroup-web --lines 30 --nostream || true
+            echo "── Health check ─────────────────────────"
+            for i in 1 2 3 4 5; do
+              if curl -fsS http://127.0.0.1:3000/api/health; then
+                echo "✓ App is healthy"
+                exit 0
+              fi
+              echo "Attempt $i failed, retrying in 3s..."
+              sleep 3
+            done
+            echo "✗ Health check failed"
+            pm2 logs cidegroup-web --lines 50 --nostream
+            exit 1
