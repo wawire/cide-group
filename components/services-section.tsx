@@ -1,7 +1,15 @@
-﻿import { services } from "@/content/services"
+﻿"use client"
+
+import { motion } from "framer-motion"
+import { services } from "@/content/services"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { ServiceIcon } from "./service-icon"
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+}
 
 export default function ServicesSection() {
   return (
@@ -30,9 +38,16 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-64px" }}
+        >
           {services.map((service) => (
-            <Link key={service.id} href={`/services/${service.slug}`} className="group block">
+            <motion.div key={service.id} variants={cardVariants}>
+            <Link href={`/services/${service.slug}`} className="group block h-full">
               <div className="h-full rounded-lg border border-[#e2d9d9] bg-white p-6 transition-all duration-300 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/10">
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xs font-bold text-[#8f1e20] uppercase tracking-widest">
@@ -57,8 +72,9 @@ export default function ServicesSection() {
                 </span>
               </div>
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

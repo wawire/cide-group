@@ -20,6 +20,8 @@ export function validateContactForm(data: Record<string, unknown>): FormErrors {
   // Organization validation
   if (!data.organization || typeof data.organization !== "string" || !data.organization.trim()) {
     errors.organization = "Organization is required"
+  } else if (data.organization.trim().length < 2) {
+    errors.organization = "Organization must be at least 2 characters"
   }
 
   // Email validation
@@ -44,10 +46,10 @@ export function validateContactForm(data: Record<string, unknown>): FormErrors {
   // Message validation
   if (!data.message || typeof data.message !== "string" || !data.message.trim()) {
     errors.message = "Message is required"
-  } else if (data.message.length < 10) {
-    errors.message = "Message must be at least 10 characters"
-  } else if (data.message.length > 5000) {
-    errors.message = "Message must not exceed 5000 characters"
+  } else if (data.message.trim().length < 20) {
+    errors.message = "Message must be at least 20 characters"
+  } else if (data.message.length > 3000) {
+    errors.message = "Message must not exceed 3000 characters"
   }
 
   return errors

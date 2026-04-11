@@ -64,9 +64,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 })
   }
 
-  const parsed = payloadSchema.safeParse(await request.json())
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Malformed request body." }, { status: 400 })
+  }
+
+  const parsed = payloadSchema.safeParse(body)
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid request payload." }, { status: 400 })
+    const firstIssue = parsed.error.issues[0]
+    const field = firstIssue?.path[0] ? String(firstIssue.path[0]) : null
+    const msg = field
+      ? `Invalid value for field "${field}": ${firstIssue.message}`
+      : "Invalid request payload."
+    console.error("Contact form validation failed", parsed.error.issues)
+    return NextResponse.json({ error: msg }, { status: 400 })
   }
 
   const { name, organization, email, phone, country, message, subscribe, website, formStartedAt, turnstileToken } = parsed.data

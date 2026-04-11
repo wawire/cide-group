@@ -1,6 +1,14 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { companyProfile } from "@/content/site"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+}
 
 const stepDetails = [
   {
@@ -46,10 +54,17 @@ export default function ApproachSection() {
           </div>
 
           {/* Right — step cards */}
-          <div className="grid grid-cols-2 gap-4">
+          <motion.div
+            className="grid grid-cols-2 gap-4"
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-64px" }}
+          >
             {companyProfile.approach.map((step, index) => (
-              <div
+              <motion.div
                 key={step}
+                variants={cardVariants}
                 className="rounded-xl bg-white border border-[#e2d9d9] p-6 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/8 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
@@ -61,9 +76,9 @@ export default function ApproachSection() {
                 <p className="text-sm text-text-secondary leading-relaxed">
                   {stepDetails[index].description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

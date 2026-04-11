@@ -1,6 +1,14 @@
+"use client"
+
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+}
 
 const partnerReasons = [
   {
@@ -45,17 +53,24 @@ export default function PartnersSection() {
           </p>
         </div>
 
-        <div className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
+        <motion.div
+          className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-64px" }}
+        >
           {partnerReasons.map((reason) => (
-            <div
+            <motion.div
               key={reason.title}
+              variants={cardVariants}
               className="rounded-xl border border-[#e2d9d9] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#bf2a2c]/8"
             >
               <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-[#bf2a2c]">{reason.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{reason.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="border-t border-[#e2d9d9] pt-10">
           <div className="grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr]">
@@ -70,16 +85,22 @@ export default function PartnersSection() {
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <motion.div
+              className="grid gap-4 sm:grid-cols-2"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } } }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-64px" }}
+            >
               {ethicalCommitments.map((item) => (
-                <div key={item} className="rounded-xl border border-[#e2d9d9] bg-white p-5">
+                <motion.div key={item} variants={cardVariants} className="rounded-xl border border-[#e2d9d9] bg-white p-5">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#bf2a2c]" />
                     <p className="text-sm leading-relaxed text-text-secondary">{item}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           <div className="mt-10 flex justify-center">

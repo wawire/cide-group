@@ -5,6 +5,7 @@ import Script from "next/script"
 import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
+import PageTransition from "@/components/page-transition"
 import { siteConfig } from "@/content/site"
 import { generateOrganizationSchema, generateWebSiteSchema } from "@/lib/seo-utils"
 
@@ -144,7 +145,7 @@ export default function RootLayout({
         </a>
         <Navigation />
         <div id="main-content" role="main" tabIndex={-1}>
-          {children}
+          <PageTransition>{children}</PageTransition>
         </div>
         <Footer />
       </body>

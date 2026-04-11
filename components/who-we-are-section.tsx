@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
+import WhoWeAreImageCluster from "@/components/who-we-are-image-cluster"
 
 const priorities = [
   "Community leadership, participation and ownership",
@@ -15,43 +15,7 @@ export default function WhoWeAreSection() {
     <section className="overflow-hidden bg-white py-20">
       <div className="section-shell">
         <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div className="relative">
-            <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-2xl">
-              <Image
-                src="/about/cide-boardroom-strategy.png"
-                alt="CIDE Group strategy and advisory session"
-                fill
-                quality={60}
-                sizes="(min-width: 1024px) 46vw, 92vw"
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/40 to-transparent" />
-            </div>
-
-            <div className="absolute -right-6 -top-6 hidden h-36 w-36 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block">
-              <Image
-                src="/hero/research-evidence-community.png"
-                alt="CIDE research team with community members"
-                fill
-                quality={52}
-                sizes="144px"
-                className="object-cover object-center"
-              />
-            </div>
-
-            <div className="absolute -bottom-6 -left-6 hidden h-32 w-44 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block">
-              <Image
-                src="/hero/gedsi-systems-development.png"
-                alt="GEDSI capacity building and community training"
-                fill
-                quality={50}
-                sizes="176px"
-                className="object-cover object-center"
-              />
-            </div>
-
-            <div className="absolute -left-3 top-12 hidden h-28 w-1.5 rounded-full bg-[#bf2a2c] sm:block" />
-          </div>
+          <WhoWeAreImageCluster />
 
           <div className="lg:pl-4">
             <p className="section-kicker mb-4">Who We Are</p>
