@@ -33,25 +33,23 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
-      <ScrollReveal>
+      <ScrollReveal direction="up">
         <WhoWeAreSection />
       </ScrollReveal>
-      <ScrollReveal>
+      <ScrollReveal direction="up" delay={0.05}>
         <ApproachSection />
       </ScrollReveal>
-      <ScrollReveal>
+      <ScrollReveal direction="up" delay={0.05}>
         <ServicesSection />
       </ScrollReveal>
-      <ScrollReveal>
-        <ImpactMetricsSection />
-      </ScrollReveal>
-      <ScrollReveal>
+      <ImpactMetricsSection />
+      <ScrollReveal direction="up" delay={0.05}>
         <FeaturedProjectsSection />
       </ScrollReveal>
-      <ScrollReveal>
+      <ScrollReveal direction="up" delay={0.05}>
         <PartnersSection />
       </ScrollReveal>
-      <ScrollReveal>
+      <ScrollReveal direction="up" delay={0.05}>
         <CTASection />
       </ScrollReveal>
     </main>

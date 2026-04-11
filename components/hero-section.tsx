@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import { siteConfig } from "@/content/site"
 
 const AUTO_ADVANCE_MS = 6500
@@ -76,10 +77,37 @@ const slides = [
   },
 ] as const
 
+const textContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.09,
+      delayChildren: 0.05,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: { duration: 0.25, ease: "easeIn" as const },
+  },
+}
+
+const textLine: Variants = {
+  hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+}
+
 export default function HeroSection() {
   const [active, setActive] = useState(0)
   const [exiting, setExiting] = useState<number | null>(null)
   const activeRef = useRef(0)
+  const isPausedRef = useRef(false)
+  const touchStartX = useRef<number | null>(null)
 
   const currentSlide = slides[active]
   const visibleSlides = Array.from(new Set([exiting, active].filter((index): index is number => index !== null)))
@@ -90,36 +118,48 @@ export default function HeroSection() {
 
   useEffect(() => {
     if (exiting === null) return
-
-    const timer = window.setTimeout(() => {
-      setExiting(null)
-    }, SLIDE_FADE_MS)
-
+    const timer = window.setTimeout(() => setExiting(null), SLIDE_FADE_MS)
     return () => window.clearTimeout(timer)
   }, [exiting])
 
-  function activateSlide(index: number) {
+  const activateSlide = useCallback((index: number) => {
     const nextIndex = (index + slides.length) % slides.length
-
     if (nextIndex === activeRef.current) return
-
     setExiting(activeRef.current)
     setActive(nextIndex)
-  }
+  }, [])
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      activateSlide(activeRef.current + 1)
+      if (!isPausedRef.current) {
+        activateSlide(activeRef.current + 1)
+      }
     }, AUTO_ADVANCE_MS)
-
     return () => window.clearInterval(timer)
+  }, [activateSlide])
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
   }, [])
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(delta) > 50) {
+      activateSlide(delta < 0 ? activeRef.current + 1 : activeRef.current - 1)
+    }
+    touchStartX.current = null
+  }, [activateSlide])
 
   return (
     <section
       aria-label="CIDE Group featured focus areas"
       aria-roledescription="carousel"
       className="group/hero relative isolate min-h-[94vh] overflow-hidden bg-[#110909]"
+      onMouseEnter={() => { isPausedRef.current = true }}
+      onMouseLeave={() => { isPausedRef.current = false }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="absolute inset-0">
         {visibleSlides.map((index) => {
@@ -183,36 +223,47 @@ export default function HeroSection() {
               <span>{siteConfig.heroEyebrow}</span>
             </div>
 
-            <div
-              key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`}
-              className="animate-in fade-in slide-in-from-bottom-4 duration-700"
-            >
-              <h1 className="font-serif text-[clamp(3rem,5.6vw,5.8rem)] font-semibold leading-[0.95] tracking-tight text-white">
-                <span className="block text-white">{currentSlide.titleLead}</span>
-                <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
-              </h1>
-
-              <p className="mt-6 max-w-[56ch] text-lg leading-8 text-white/72 md:text-[1.15rem] md:leading-9">
-                {currentSlide.description}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Link
-                  href={currentSlide.primaryCta.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#bf2a2c] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-white shadow-lg shadow-[#bf2a2c]/25 transition hover:-translate-y-0.5 hover:bg-[#9a1f21]"
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`}
+                variants={textContainer}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <motion.h1
+                  variants={textLine}
+                  className="font-serif text-[clamp(3rem,5.6vw,5.8rem)] font-semibold leading-[0.95] tracking-tight text-white"
                 >
-                  {currentSlide.primaryCta.label}
-                  <ArrowRight size={16} />
-                </Link>
+                  <span className="block text-white">{currentSlide.titleLead}</span>
+                  <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
+                </motion.h1>
 
-                <Link
-                  href={currentSlide.secondaryCta.href}
-                  className="inline-flex items-center justify-center rounded-sm border border-white/35 px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:border-white hover:bg-white/8"
+                <motion.p
+                  variants={textLine}
+                  className="mt-6 max-w-[56ch] text-lg leading-8 text-white/72 md:text-[1.15rem] md:leading-9"
                 >
-                  {currentSlide.secondaryCta.label}
-                </Link>
-              </div>
-            </div>
+                  {currentSlide.description}
+                </motion.p>
+
+                <motion.div variants={textLine} className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    href={currentSlide.primaryCta.href}
+                    className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#bf2a2c] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-white shadow-lg shadow-[#bf2a2c]/25 transition hover:-translate-y-0.5 hover:bg-[#9a1f21]"
+                  >
+                    {currentSlide.primaryCta.label}
+                    <ArrowRight size={16} />
+                  </Link>
+
+                  <Link
+                    href={currentSlide.secondaryCta.href}
+                    className="inline-flex items-center justify-center rounded-sm border border-white/35 px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:border-white hover:bg-white/8"
+                  >
+                    {currentSlide.secondaryCta.label}
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
