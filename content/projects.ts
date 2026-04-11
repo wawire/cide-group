@@ -1,4 +1,4 @@
-﻿export type Project = {
+export type Project = {
   id: string
   title: string
   description: string
@@ -88,4 +88,3 @@ export const featuredProjects = projects.filter((project) => project.featured)
 export function getProjectById(id: string) {
   return projects.find((project) => project.id === id)
 }
-
