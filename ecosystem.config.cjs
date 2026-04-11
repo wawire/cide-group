@@ -2,6 +2,7 @@ module.exports = {
   apps: [
     {
       name: "cidegroup-web",
+      cwd: process.env.HOME + "/cide-group",
       script: "npm",
       args: "run start",
       env: {

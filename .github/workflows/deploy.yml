@@ -117,8 +117,18 @@ jobs:
             echo "── CSP from Next.js (port 3000 direct) ──"
             curl -sI http://127.0.0.1:3000 | grep -i "content-security-policy" || echo "no CSP header on port 3000"
 
-            echo "── nginx config dump (CSP-related lines) ─"
-            echo "$SUDO_PASS" | sudo -S grep -r "Content-Security-Policy\|script-src\|add_header" /etc/nginx/ 2>/dev/null | grep -v "^Binary" || echo "no CSP in nginx configs"
+            echo "── Built headers in routes-manifest ─────"
+            node -e "
+              const m = require('./.next/routes-manifest.json');
+              const r = m.headers || [];
+              r.forEach(h => h.headers.forEach(hh => {
+                if (hh.key === 'Content-Security-Policy') console.log(hh.value.substring(0,200));
+              }));
+            " 2>/dev/null || echo "could not read routes-manifest"
+
+            echo "── nginx sites-enabled ──────────────────"
+            echo "$SUDO_PASS" | sudo -S ls /etc/nginx/sites-enabled/ 2>/dev/null
+            echo "$SUDO_PASS" | sudo -S grep -r "proxy_pass\|add_header\|Content-Security" /etc/nginx/sites-enabled/ 2>/dev/null | grep -v "^Binary" | head -20 || echo "no relevant nginx directives"
 
             echo "── Health check ─────────────────────────"
             for i in 1 2 3 4 5; do
