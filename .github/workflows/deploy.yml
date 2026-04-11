@@ -18,12 +18,15 @@ jobs:
     steps:
       - name: Deploy to Vultr via SSH
         uses: appleboy/ssh-action@v1.2.0
+        env:
+          SUDO_PASS: ${{ secrets.VULTR_SUDO_PASS }}
         with:
           host: ${{ secrets.VULTR_HOST }}
           username: ${{ secrets.VULTR_USER }}
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           port: 22
           command_timeout: 25m
+          envs: SUDO_PASS
           script: |
             set -e
             APP_DIR="$HOME/cide-group"
@@ -62,12 +65,18 @@ jobs:
             npm run build
 
             echo "── Fix nginx CSP (script-src-elem needs unsafe-inline) ──────────"
-            sudo find /etc/nginx -name "*.conf" -print0 2>/dev/null | \
-              xargs -0 grep -lZ "script-src-elem" 2>/dev/null | \
-              xargs -0 sudo sed -i \
+            NGINX_CONF=$(echo "$SUDO_PASS" | sudo -S grep -rl "script-src-elem" /etc/nginx/ 2>/dev/null | head -1)
+            if [ -n "$NGINX_CONF" ]; then
+              echo "Found CSP in: $NGINX_CONF"
+              echo "$SUDO_PASS" | sudo -S sed -i \
                 "s|script-src-elem 'self' https://www\.googletagmanager\.com|script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com|g" \
-              2>/dev/null && echo "✓ nginx CSP patched" || echo "✓ nginx CSP: no matching entries or no sudo"
-            sudo nginx -t 2>/dev/null && sudo nginx -s reload 2>/dev/null && echo "✓ nginx reloaded" || echo "✓ nginx reload: manual step may be needed"
+                "$NGINX_CONF"
+              echo "$SUDO_PASS" | sudo -S nginx -t && \
+                echo "$SUDO_PASS" | sudo -S nginx -s reload && \
+                echo "✓ nginx CSP patched and reloaded" || echo "✗ nginx reload failed"
+            else
+              echo "✓ nginx CSP: no hardcoded script-src-elem found (Next.js headers are in control)"
+            fi
 
             echo "── Port 3000 before restart ─────────────"
             ss -tlnp | grep ':3000' || echo "nothing on 3000"
