@@ -108,6 +108,12 @@ jobs:
             echo "── CSS hash check ───────────────────────"
             curl -s http://127.0.0.1:3000 | grep -o 'static/css/[^"]*' | head -1
 
+            echo "── CSP from Next.js (port 3000 direct) ──"
+            curl -sI http://127.0.0.1:3000 | grep -i "content-security-policy" || echo "no CSP header on port 3000"
+
+            echo "── nginx config dump (CSP-related lines) ─"
+            echo "$SUDO_PASS" | sudo -S grep -r "Content-Security-Policy\|script-src\|add_header" /etc/nginx/ 2>/dev/null | grep -v "^Binary" || echo "no CSP in nginx configs"
+
             echo "── Health check ─────────────────────────"
             for i in 1 2 3 4 5; do
               if curl -fsS http://127.0.0.1:3000/api/health; then
