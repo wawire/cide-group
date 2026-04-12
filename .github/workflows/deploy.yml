@@ -70,6 +70,48 @@ jobs:
             rm -rf .next
             npm run build
 
+            echo "── Fix nginx conflicts (disable old site configs) ───────────────"
+            # Find all enabled configs that claim cidegroup.org but do NOT proxy to port 3000
+            for ENABLED in /etc/nginx/sites-enabled/*; do
+              if ! echo "$SUDO_PASS" | sudo -S test -f "$ENABLED" 2>/dev/null; then continue; fi
+              HAS_DOMAIN=$(echo "$SUDO_PASS" | sudo -S grep -l "server_name.*cidegroup\.org" "$ENABLED" 2>/dev/null || true)
+              if [ -z "$HAS_DOMAIN" ]; then continue; fi
+              HAS_PROXY=$(echo "$SUDO_PASS" | sudo -S grep -c "proxy_pass.*127\.0\.0\.1:3000" "$ENABLED" 2>/dev/null || echo "0")
+              if [ "$HAS_PROXY" = "0" ]; then
+                echo "  ✗ Disabling old config: $ENABLED"
+                echo "$SUDO_PASS" | sudo -S rm -f "$ENABLED"
+              else
+                echo "  ✓ Keeping (proxies to 3000): $ENABLED"
+              fi
+            done
+
+            echo "── Ensure Next.js app nginx config is enabled ───────────────────"
+            # Determine the right sites-available config
+            for CONF in /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-available/cidegroup.conf; do
+              if echo "$SUDO_PASS" | sudo -S test -f "$CONF" 2>/dev/null; then
+                AVAIL_CONF="$CONF"
+                CONF_NAME=$(basename "$CONF")
+                break
+              fi
+            done
+            if [ -z "$AVAIL_CONF" ]; then
+              # Write minimal reverse proxy config via temp file (avoids heredoc YAML issues)
+              TMPCONF=$(mktemp)
+              printf 'server {\n    listen 80;\n    server_name cidegroup.org www.cidegroup.org;\n    return 301 https://$host$request_uri;\n}\nserver {\n    listen 443 ssl;\n    server_name cidegroup.org www.cidegroup.org;\n    ssl_certificate /etc/letsencrypt/live/cidegroup.org/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/cidegroup.org/privkey.pem;\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection upgrade;\n        proxy_set_header Host $host;\n        proxy_cache_bypass $http_upgrade;\n    }\n}\n' > "$TMPCONF"
+              echo "$SUDO_PASS" | sudo -S cp "$TMPCONF" /etc/nginx/sites-available/cidegroup.org
+              rm -f "$TMPCONF"
+              AVAIL_CONF="/etc/nginx/sites-available/cidegroup.org"
+              CONF_NAME="cidegroup.org"
+              echo "  ✓ Created minimal proxy config at $AVAIL_CONF"
+            fi
+            # Symlink if not already enabled
+            if ! echo "$SUDO_PASS" | sudo -S test -L "/etc/nginx/sites-enabled/$CONF_NAME" 2>/dev/null; then
+              echo "$SUDO_PASS" | sudo -S ln -sf "$AVAIL_CONF" "/etc/nginx/sites-enabled/$CONF_NAME"
+              echo "  ✓ Symlinked $CONF_NAME into sites-enabled"
+            else
+              echo "  ✓ $CONF_NAME already in sites-enabled"
+            fi
+
             echo "── Patch nginx to force correct CSP ─────────────────────────────"
             CSP_VALUE="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
             for CONF in /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-available/cidegroup.conf; do
