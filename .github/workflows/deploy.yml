@@ -30,11 +30,11 @@ jobs:
           script: |
             set -e
             APP_DIR="$HOME/cide-group"
+            APP_PORT=3001
 
             echo "── Clone or update repo ─────────────────"
             if [ ! -d "$APP_DIR/.git" ]; then
               git clone https://github.com/wawire/cide-group.git "$APP_DIR"
-              # Copy env secrets from original location if present
               if [ -f /var/www/cide-group/.env.production.local ]; then
                 cp /var/www/cide-group/.env.production.local "$APP_DIR/.env.production.local"
                 echo "✓ Copied .env.production.local"
@@ -49,9 +49,6 @@ jobs:
 
             echo "── Git HEAD ─────────────────────────────"
             git log --oneline -1
-
-            echo "── next.config.mjs script-src lines ─────"
-            grep "script-src" next.config.mjs || echo "NOT FOUND"
 
             echo "── Sync env secrets ─────────────────────"
             if [ -f /var/www/cide-group/.env.production.local ]; then
@@ -70,110 +67,115 @@ jobs:
             rm -rf .next
             npm run build
 
-            echo "── Fix nginx conflicts (disable old site configs) ───────────────"
-            # Find all enabled configs that claim cidegroup.org but do NOT proxy to port 3000
-            for ENABLED in /etc/nginx/sites-enabled/*; do
-              if ! echo "$SUDO_PASS" | sudo -S test -f "$ENABLED" 2>/dev/null; then continue; fi
-              HAS_DOMAIN=$(echo "$SUDO_PASS" | sudo -S grep -l "server_name.*cidegroup\.org" "$ENABLED" 2>/dev/null || true)
-              if [ -z "$HAS_DOMAIN" ]; then continue; fi
-              HAS_PROXY=$(echo "$SUDO_PASS" | sudo -S grep -c "proxy_pass.*127\.0\.0\.1:3000" "$ENABLED" 2>/dev/null || echo "0")
-              if [ "$HAS_PROXY" = "0" ]; then
-                echo "  ✗ Disabling old config: $ENABLED"
-                echo "$SUDO_PASS" | sudo -S rm -f "$ENABLED"
-              else
-                echo "  ✓ Keeping (proxies to 3000): $ENABLED"
-              fi
-            done
-
-            echo "── Ensure Next.js app nginx config is enabled ───────────────────"
-            # Determine the right sites-available config
-            for CONF in /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-available/cidegroup.conf; do
-              if echo "$SUDO_PASS" | sudo -S test -f "$CONF" 2>/dev/null; then
-                AVAIL_CONF="$CONF"
-                CONF_NAME=$(basename "$CONF")
-                break
-              fi
-            done
-            if [ -z "$AVAIL_CONF" ]; then
-              # Write minimal reverse proxy config via temp file (avoids heredoc YAML issues)
-              TMPCONF=$(mktemp)
-              printf 'server {\n    listen 80;\n    server_name cidegroup.org www.cidegroup.org;\n    return 301 https://$host$request_uri;\n}\nserver {\n    listen 443 ssl;\n    server_name cidegroup.org www.cidegroup.org;\n    ssl_certificate /etc/letsencrypt/live/cidegroup.org/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/cidegroup.org/privkey.pem;\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection upgrade;\n        proxy_set_header Host $host;\n        proxy_cache_bypass $http_upgrade;\n    }\n}\n' > "$TMPCONF"
-              echo "$SUDO_PASS" | sudo -S cp "$TMPCONF" /etc/nginx/sites-available/cidegroup.org
-              rm -f "$TMPCONF"
-              AVAIL_CONF="/etc/nginx/sites-available/cidegroup.org"
-              CONF_NAME="cidegroup.org"
-              echo "  ✓ Created minimal proxy config at $AVAIL_CONF"
-            fi
-            # Symlink if not already enabled
-            if ! echo "$SUDO_PASS" | sudo -S test -L "/etc/nginx/sites-enabled/$CONF_NAME" 2>/dev/null; then
-              echo "$SUDO_PASS" | sudo -S ln -sf "$AVAIL_CONF" "/etc/nginx/sites-enabled/$CONF_NAME"
-              echo "  ✓ Symlinked $CONF_NAME into sites-enabled"
-            else
-              echo "  ✓ $CONF_NAME already in sites-enabled"
-            fi
-
-            echo "── Patch nginx to force correct CSP ─────────────────────────────"
-            CSP_VALUE="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
-            for CONF in /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-available/cidegroup.conf; do
-              if ! echo "$SUDO_PASS" | sudo -S test -f "$CONF" 2>/dev/null; then
-                echo "skip $CONF (not found)"
-                continue
-              fi
-              if echo "$SUDO_PASS" | sudo -S grep -q "script-src-elem.*unsafe-inline" "$CONF" 2>/dev/null; then
-                echo "✓ $CONF already patched"
-                continue
-              fi
-              echo "$SUDO_PASS" | sudo -S sed -i '/add_header Content-Security-Policy/d' "$CONF"
-              echo "$SUDO_PASS" | sudo -S sed -i '/proxy_hide_header Content-Security-Policy/d' "$CONF"
-              echo "$SUDO_PASS" | sudo -S sed -i "s|proxy_pass http://127\.0\.0\.1:3000;|proxy_pass http://127.0.0.1:3000;\n        proxy_hide_header Content-Security-Policy;\n        add_header Content-Security-Policy \"$CSP_VALUE\" always;|" "$CONF"
-              echo "✓ Patched $CONF"
-            done
-            echo "$SUDO_PASS" | sudo -S nginx -t && \
-              echo "$SUDO_PASS" | sudo -S nginx -s reload && \
-              echo "✓ nginx reloaded" || echo "✗ nginx config error — check manually"
-
-            echo "── Kill everything on port 3000 ─────────────────────────────────"
-            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ':3000' || echo "nothing on 3000"
-            # Kill our own PM2 daemon (previous deploys)
+            echo "── Free port $APP_PORT before starting app ──────────────────────"
             pm2 kill 2>/dev/null || true
-            # sudo ss to see root-owned PIDs, then kill them all
-            echo "$SUDO_PASS" | sudo -S bash -c '
-              PIDS=$(ss -tlnp | grep ":3000" | grep -oP "pid=\K[0-9]+" | sort -u)
-              if [ -n "$PIDS" ]; then
-                echo "Killing PIDs: $PIDS"
-                echo "$PIDS" | xargs kill -9
+            echo "$SUDO_PASS" | sudo -S bash -c "
+              PIDS=\$(ss -tlnp | grep ':${APP_PORT}' | grep -oP 'pid=\K[0-9]+' | sort -u)
+              if [ -n \"\$PIDS\" ]; then
+                echo \"Killing PIDs on port ${APP_PORT}: \$PIDS\"
+                echo \"\$PIDS\" | xargs kill -9
               else
-                echo "port 3000 already free"
+                echo 'port ${APP_PORT} already free'
               fi
-            ' 2>/dev/null || true
+            " 2>/dev/null || true
             sleep 2
-            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ':3000' || echo "✓ port 3000 is free"
+            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ":${APP_PORT}" || echo "✓ port $APP_PORT is free"
 
-            echo "── Restarting PM2 ───────────────────────"
+            echo "── Start PM2 with new build ─────────────"
             pm2 stop cidegroup-web 2>/dev/null || true
             pm2 delete cidegroup-web 2>/dev/null || true
             pm2 start ecosystem.config.cjs
             pm2 save
 
-            sleep 3
+            sleep 5
             echo "── PM2 status ───────────────────────────"
             pm2 list
 
-            echo "── CSS hash check ───────────────────────"
-            curl -s http://127.0.0.1:3000 | grep -o 'static/css/[^"]*' | head -1
-
-            echo "── CSP from Next.js (port 3000 direct) ──"
-            curl -sI http://127.0.0.1:3000 | grep -i "content-security-policy" || echo "no CSP header on port 3000"
-
-            echo "── Health check ─────────────────────────"
+            echo "── Health check on port $APP_PORT ───────"
             for i in 1 2 3 4 5; do
-              if curl -fsS http://127.0.0.1:3000/api/health; then
-                echo "✓ App is healthy"
-                exit 0
+              if curl -fsS "http://127.0.0.1:${APP_PORT}/api/health"; then
+                echo "✓ App is healthy on port $APP_PORT"
+                break
               fi
               echo "Attempt $i failed, retrying in 3s..."
               sleep 3
+              if [ "$i" = "5" ]; then
+                echo "✗ Health check failed"
+                pm2 logs cidegroup-web --lines 50 --nostream
+                exit 1
+              fi
             done
-            echo "✗ Health check failed"
-            pm2 logs cidegroup-web --lines 50 --nostream
-            exit 1
+
+            echo "── Rewrite nginx config to proxy cidegroup.org → port $APP_PORT ──"
+            CSP_VALUE="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+
+            # Write the authoritative config to a temp file, then sudo-copy it in
+            TMPCONF=$(mktemp)
+            cat > "$TMPCONF" << CONFEOF
+            server {
+                listen 80;
+                listen [::]:80;
+                server_name cidegroup.org www.cidegroup.org;
+                return 301 https://\$host\$request_uri;
+            }
+            server {
+                listen 443 ssl;
+                listen [::]:443 ssl;
+                server_name cidegroup.org www.cidegroup.org;
+                ssl_certificate /etc/letsencrypt/live/cidegroup.org/fullchain.pem;
+                ssl_certificate_key /etc/letsencrypt/live/cidegroup.org/privkey.pem;
+                include /etc/letsencrypt/options-ssl-nginx.conf;
+                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+                location / {
+                    proxy_pass http://127.0.0.1:${APP_PORT};
+                    proxy_http_version 1.1;
+                    proxy_set_header Upgrade \$http_upgrade;
+                    proxy_set_header Connection 'upgrade';
+                    proxy_set_header Host \$host;
+                    proxy_set_header X-Real-IP \$remote_addr;
+                    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto \$scheme;
+                    proxy_cache_bypass \$http_upgrade;
+                    proxy_hide_header Content-Security-Policy;
+                    add_header Content-Security-Policy "${CSP_VALUE}" always;
+                }
+            }
+            CONFEOF
+
+            echo "$SUDO_PASS" | sudo -S cp "$TMPCONF" /etc/nginx/sites-available/cidegroup.org
+            rm -f "$TMPCONF"
+            echo "✓ Wrote /etc/nginx/sites-available/cidegroup.org (port $APP_PORT)"
+
+            # Disable ALL other cidegroup.org configs in sites-enabled
+            for ENABLED in /etc/nginx/sites-enabled/*; do
+              if ! echo "$SUDO_PASS" | sudo -S test -f "$ENABLED" 2>/dev/null; then continue; fi
+              BASENAME=$(basename "$ENABLED")
+              if [ "$BASENAME" = "cidegroup.org" ]; then continue; fi
+              HAS_DOMAIN=$(echo "$SUDO_PASS" | sudo -S grep -l "server_name.*cidegroup\.org" "$ENABLED" 2>/dev/null || true)
+              if [ -n "$HAS_DOMAIN" ]; then
+                echo "  ✗ Removing duplicate: $ENABLED"
+                echo "$SUDO_PASS" | sudo -S rm -f "$ENABLED"
+              fi
+            done
+
+            # Ensure our config is symlinked
+            if ! echo "$SUDO_PASS" | sudo -S test -L "/etc/nginx/sites-enabled/cidegroup.org" 2>/dev/null; then
+              echo "$SUDO_PASS" | sudo -S ln -sf /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-enabled/cidegroup.org
+              echo "  ✓ Symlinked cidegroup.org into sites-enabled"
+            else
+              echo "  ✓ cidegroup.org already in sites-enabled"
+            fi
+
+            echo "── nginx test & reload ───────────────────"
+            echo "$SUDO_PASS" | sudo -S nginx -t && \
+              echo "$SUDO_PASS" | sudo -S nginx -s reload && \
+              echo "✓ nginx reloaded" || \
+              echo "✗ nginx config error — check manually"
+
+            echo "── Verify /where-we-work via nginx ──────"
+            sleep 2
+            STATUS=$(curl -so /dev/null -w "%{http_code}" "http://127.0.0.1:${APP_PORT}/where-we-work" 2>/dev/null)
+            echo "/where-we-work → HTTP $STATUS"
+            [ "$STATUS" = "200" ] && echo "✓ Route confirmed" || echo "⚠ Unexpected status (may still be warming up)"
+
+            echo "✅ Deploy complete"
