@@ -37,8 +37,19 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
   const relatedServices = services.filter((s) => focusArea.relatedServiceSlugs.includes(s.slug))
   const featuredProjects = projects.filter((p) => focusArea.featuredProjectIds.includes(p.id))
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Focus Areas", item: `${siteConfig.url}/focus-areas` },
+      { "@type": "ListItem", position: 3, name: focusArea.title, item: `${siteConfig.url}/focus-areas/${focusArea.slug}` },
+    ],
+  }
+
   return (
     <main className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[62vh] flex items-end overflow-hidden">

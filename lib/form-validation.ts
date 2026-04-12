@@ -4,6 +4,7 @@ export interface FormErrors {
   email?: string
   phone?: string
   country?: string
+  enquiryType?: string
   message?: string
   privacyConsent?: string
 }
@@ -42,6 +43,11 @@ export function validateContactForm(data: Record<string, unknown>): FormErrors {
   // Country validation
   if (!data.country || typeof data.country !== "string" || !data.country.trim()) {
     errors.country = "Country is required"
+  }
+
+  // Enquiry type validation
+  if (!data.enquiryType || typeof data.enquiryType !== "string" || !data.enquiryType.trim()) {
+    errors.enquiryType = "Please select the nature of your enquiry"
   }
 
   // Message validation

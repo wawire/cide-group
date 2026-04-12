@@ -7,6 +7,7 @@ type ContactSubmission = {
   email: string
   phone?: string
   country: string
+  enquiryType?: string
   message: string
   subscribe?: boolean
 }
@@ -111,6 +112,7 @@ export async function sendContactEmails({
   email,
   phone,
   country,
+  enquiryType,
   message,
   subscribe,
 }: ContactSubmission) {
@@ -136,7 +138,8 @@ export async function sendContactEmails({
     })
     .join(" or ")
 
-  const notificationSubject = `New Website Enquiry from ${name} - ${organization}`
+  const safeEnquiryType = enquiryType ? escapeHtml(enquiryType) : "Not specified"
+  const notificationSubject = `[${enquiryType ?? "General"}] New enquiry from ${name} — ${organization}`
   const notificationText = [
     "New website enquiry",
     "",
@@ -145,6 +148,7 @@ export async function sendContactEmails({
     `Email: ${email}`,
     `Phone: ${phone?.trim() || "Not provided"}`,
     `Country: ${country}`,
+    `Enquiry type: ${enquiryType ?? "Not specified"}`,
     "",
     "Message:",
     message,
@@ -159,6 +163,7 @@ export async function sendContactEmails({
     <p><strong>Email:</strong> ${safeEmail}</p>
     <p><strong>Phone:</strong> ${safePhone}</p>
     <p><strong>Country:</strong> ${safeCountry}</p>
+    <p><strong>Enquiry type:</strong> ${safeEnquiryType}</p>
     <p><strong>Message:</strong></p>
     <p>${safeMessage}</p>
     ${subscribe ? "<p><em>This contact opted in to updates.</em></p>" : ""}

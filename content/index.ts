@@ -1,4 +1,5 @@
 export * from "./focus-areas"
+export * from "./knowledge"
 export * from "./partners"
 export * from "./projects"
 export * from "./research"

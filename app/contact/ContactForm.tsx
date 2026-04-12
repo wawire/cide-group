@@ -4,9 +4,21 @@ import type React from "react"
 import { useId, useMemo, useState } from "react"
 import { contactCountries, siteConfig } from "@/content/site"
 import { validateContactForm, type FormErrors } from "@/lib/form-validation"
+import { trackContactFormSubmit, trackEmailClick, trackPhoneClick } from "@/lib/analytics"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+
+const enquiryTypes = [
+  "Programme / Project Support",
+  "Research & Evidence",
+  "Monitoring, Evaluation & Learning",
+  "Strategic Communications",
+  "ICT & Digital Solutions",
+  "Capacity Development",
+  "Partnership / Consortium",
+  "General Enquiry",
+] as const
 
 type FormDataState = {
   name: string
@@ -14,6 +26,7 @@ type FormDataState = {
   email: string
   phone: string
   country: string
+  enquiryType: string
   message: string
   subscribe: boolean
   privacyConsent: boolean
@@ -57,6 +70,7 @@ export default function ContactForm() {
       email: "",
       phone: "",
       country: "",
+      enquiryType: "",
       message: "",
       subscribe: false,
       privacyConsent: false,
@@ -101,6 +115,7 @@ export default function ContactForm() {
       setSubmitted(true)
       setFormData({ ...initialState, formStartedAt: Date.now() })
       setFieldErrors({})
+      trackContactFormSubmit(formData.enquiryType)
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
     } finally {
@@ -158,7 +173,11 @@ export default function ContactForm() {
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-0.5">{label}</p>
                     {href ? (
-                      <a href={href} className="text-sm text-white/70 hover:text-white transition-colors break-all">
+                      <a
+                        href={href}
+                        className="text-sm text-white/70 hover:text-white transition-colors break-all"
+                        onClick={href.startsWith("mailto:") ? trackEmailClick : href.startsWith("tel:") ? trackPhoneClick : undefined}
+                      >
                         {value}
                       </a>
                     ) : (
@@ -257,6 +276,20 @@ export default function ContactForm() {
                       ))}
                     </select>
                     {fieldErrors.country && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.country}</p>}
+                  </div>
+
+                  {/* Nature of Enquiry */}
+                  <div>
+                    <label htmlFor={`${formId}-enquiry`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
+                      Nature of Enquiry <span className="text-[#bf2a2c]">*</span>
+                    </label>
+                    <select id={`${formId}-enquiry`} name="enquiryType" required aria-invalid={!!fieldErrors.enquiryType} value={formData.enquiryType} onChange={handleChange} className={inputClass(fieldErrors.enquiryType)}>
+                      <option value="">Select the nature of your enquiry</option>
+                      {enquiryTypes.map((type) => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                    {fieldErrors.enquiryType && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.enquiryType}</p>}
                   </div>
 
                   {/* Message */}

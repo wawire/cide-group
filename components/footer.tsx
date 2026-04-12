@@ -54,6 +54,7 @@ const companyLinks = [
   { label: "Services", href: "/services" },
   { label: "Focus Areas", href: "/focus-areas" },
   { label: "Projects", href: "/projects" },
+  { label: "Knowledge Hub", href: "/knowledge" },
   { label: "Research", href: "/research" },
   { label: "Partnerships", href: "/partners" },
   { label: "Careers", href: "/careers" },

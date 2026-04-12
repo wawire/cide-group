@@ -15,6 +15,7 @@ const payloadSchema = z.object({
   email: z.string().trim().email().max(254),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   country: z.string().trim().min(2).max(100),
+  enquiryType: z.string().trim().min(2).max(100),
   message: z.string().trim().min(20).max(3000),
   subscribe: z.boolean().optional().default(false),
   privacyConsent: z.literal(true, { errorMap: () => ({ message: "Privacy Policy consent is required" }) }),
@@ -83,7 +84,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: msg }, { status: 400 })
   }
 
-  const { name, organization, email, phone, country, message, subscribe, website, formStartedAt, turnstileToken } = parsed.data
+  const { name, organization, email, phone, country, enquiryType, message, subscribe, website, formStartedAt, turnstileToken } = parsed.data
 
   if (website) {
     return NextResponse.json({ success: true })
@@ -101,7 +102,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendContactEmails({ name, organization, email, phone, country, message, subscribe })
+    await sendContactEmails({ name, organization, email, phone, country, enquiryType, message, subscribe })
 
     return NextResponse.json({ success: true })
   } catch (error) {
