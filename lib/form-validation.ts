@@ -5,6 +5,7 @@ export interface FormErrors {
   phone?: string
   country?: string
   message?: string
+  privacyConsent?: string
 }
 
 export function validateContactForm(data: Record<string, unknown>): FormErrors {
@@ -50,6 +51,11 @@ export function validateContactForm(data: Record<string, unknown>): FormErrors {
     errors.message = "Message must be at least 20 characters"
   } else if (data.message.length > 3000) {
     errors.message = "Message must not exceed 3000 characters"
+  }
+
+  // Privacy consent — required
+  if (!data.privacyConsent) {
+    errors.privacyConsent = "You must agree to the Privacy Policy to submit this form"
   }
 
   return errors

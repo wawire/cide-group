@@ -6,6 +6,7 @@ import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import PageTransition from "@/components/page-transition"
+import CookieConsent from "@/components/cookie-consent"
 import { siteConfig } from "@/content/site"
 import { generateOrganizationSchema, generateWebSiteSchema } from "@/lib/seo-utils"
 
@@ -124,6 +125,18 @@ export default function RootLayout({
         />
         {googleAnalyticsId ? (
           <>
+            {/* Consent Mode v2 — default all denied until user accepts */}
+            <Script id="consent-mode-defaults" strategy="beforeInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('consent', 'default', {
+                  analytics_storage: 'denied',
+                  ad_storage: 'denied',
+                  wait_for_update: 500
+                });
+              `}
+            </Script>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
               strategy="afterInteractive"
@@ -133,7 +146,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${googleAnalyticsId}');
+                gtag('config', '${googleAnalyticsId}', { send_page_view: true });
               `}
             </Script>
           </>
@@ -148,6 +161,7 @@ export default function RootLayout({
           <PageTransition>{children}</PageTransition>
         </div>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   )

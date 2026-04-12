@@ -243,26 +243,24 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/6">
-        <div className="section-shell flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
-            <p className="text-[11px] text-white/52">
-              &copy; {currentYear} {siteConfig.legalName}
-            </p>
-            <span className="hidden text-[10px] text-white/12 sm:block">·</span>
-            <p className="text-[11px] text-white/46">
-              Reg. {siteConfig.companyNumber} &middot; Registered in Kenya
-            </p>
-          </div>
-          <div className="flex items-center gap-5">
-            {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[11px] text-white/52 transition-colors hover:text-white/80"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="section-shell py-4 space-y-3">
+          <p className="text-[10px] text-white/28 leading-relaxed max-w-3xl">
+            The information on this website is for general informational purposes only. CIDE Group makes no
+            representations about the accuracy or completeness of any information on this site.
+            &copy; {currentYear} {siteConfig.legalName} &middot; Reg. {siteConfig.companyNumber} &middot; Registered in Kenya.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-5">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[11px] text-white/44 transition-colors hover:text-white/80"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

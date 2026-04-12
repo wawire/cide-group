@@ -17,6 +17,7 @@ const payloadSchema = z.object({
   country: z.string().trim().min(2).max(100),
   message: z.string().trim().min(20).max(3000),
   subscribe: z.boolean().optional().default(false),
+  privacyConsent: z.literal(true, { errorMap: () => ({ message: "Privacy Policy consent is required" }) }),
   website: z.string().max(0).optional(), // honeypot field
   formStartedAt: z.number().optional(),
   turnstileToken: z.string().optional(),

@@ -4,7 +4,8 @@ import type React from "react"
 import { useId, useMemo, useState } from "react"
 import { contactCountries, siteConfig } from "@/content/site"
 import { validateContactForm, type FormErrors } from "@/lib/form-validation"
-import { Mail, Phone, MapPin, ArrowRight, CheckCircle } from "lucide-react"
+import { Mail, Phone, MapPin, ArrowRight, CheckCircle, ShieldCheck } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 
 type FormDataState = {
@@ -15,6 +16,7 @@ type FormDataState = {
   country: string
   message: string
   subscribe: boolean
+  privacyConsent: boolean
   website: string
   formStartedAt: number
 }
@@ -57,6 +59,7 @@ export default function ContactForm() {
       country: "",
       message: "",
       subscribe: false,
+      privacyConsent: false,
       website: "",
       formStartedAt: Date.now(),
     }),
@@ -272,6 +275,46 @@ export default function ContactForm() {
                       Subscribe to receive updates, insights, and programme news from CIDE Group
                     </label>
                   </div>
+
+                  {/* Privacy consent — required */}
+                  <div className={`rounded-lg border p-4 ${fieldErrors.privacyConsent ? "border-red-300 bg-red-50" : "border-[#e2d9d9] bg-[#f4efec]/60"}`}>
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id={`${formId}-privacy`}
+                        name="privacyConsent"
+                        required
+                        checked={formData.privacyConsent}
+                        onChange={handleChange}
+                        aria-invalid={!!fieldErrors.privacyConsent}
+                        className="mt-0.5 h-4 w-4 rounded accent-[#bf2a2c] shrink-0"
+                      />
+                      <label htmlFor={`${formId}-privacy`} className="text-sm text-text-secondary leading-snug">
+                        I have read and agree to the{" "}
+                        <Link href="/privacy" target="_blank" className="text-[#bf2a2c] underline underline-offset-2 hover:text-[#9a1f21] font-medium">
+                          Privacy Policy
+                        </Link>
+                        . I understand CIDE Group will process my data to respond to this enquiry.{" "}
+                        <span className="text-[#bf2a2c]">*</span>
+                      </label>
+                    </div>
+                    {fieldErrors.privacyConsent && (
+                      <p role="alert" className="mt-2 text-xs text-red-600 flex items-center gap-1.5">
+                        <ShieldCheck size={12} className="shrink-0" />
+                        {fieldErrors.privacyConsent}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Data notice */}
+                  <p className="text-[11px] text-text-muted leading-relaxed">
+                    <ShieldCheck size={11} className="inline mr-1 text-text-muted" aria-hidden="true" />
+                    CIDE Group processes your data to respond to your enquiry, in line with our{" "}
+                    <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground transition-colors">
+                      Privacy Policy
+                    </Link>
+                    . We do not share your data with third parties for marketing purposes.
+                  </p>
 
                   {/* Submit */}
                   <button
