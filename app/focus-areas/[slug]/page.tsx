@@ -207,7 +207,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
                     <div>
                       <h3 className="text-lg font-bold text-white">{campaign.name}</h3>
                       {campaign.partner && (
-                        <p className="text-xs text-white/40 mt-1">In partnership with {campaign.partner}</p>
+                        <p className="text-xs text-white/62 mt-1">In partnership with {campaign.partner}</p>
                       )}
                     </div>
                   </div>

@@ -236,8 +236,8 @@ export default function Footer() {
             </span>
             {regions.map((region, index) => (
               <span key={region} className="flex items-center">
-                <span className="text-[11px] tracking-wide text-white/48">{region}</span>
-                {index < regions.length - 1 ? <span className="mx-3 text-[10px] text-white/24">·</span> : null}
+                <span className="text-[11px] tracking-wide text-white/65">{region}</span>
+                {index < regions.length - 1 ? <span className="mx-3 text-[10px] text-white/30" aria-hidden="true">·</span> : null}
               </span>
             ))}
           </div>
@@ -246,7 +246,7 @@ export default function Footer() {
 
       <div className="border-t border-white/6">
         <div className="section-shell py-4 space-y-3">
-          <p className="text-[10px] text-white/28 leading-relaxed max-w-3xl">
+          <p className="text-[10px] text-white/50 leading-relaxed max-w-3xl">
             The information on this website is for general informational purposes only. CIDE Group makes no
             representations about the accuracy or completeness of any information on this site.
             &copy; {currentYear} {siteConfig.legalName} &middot; Reg. {siteConfig.companyNumber} &middot; Registered in Kenya.
@@ -257,7 +257,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[11px] text-white/44 transition-colors hover:text-white/80"
+                  className="text-[11px] text-white/60 transition-colors hover:text-white/90"
                 >
                   {link.label}
                 </Link>

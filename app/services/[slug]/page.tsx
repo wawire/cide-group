@@ -76,8 +76,8 @@ export default async function ServicePage({ params }: { params: Params }) {
           </Link>
           <div className="flex items-center gap-3 mb-4">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c]">Our Services</p>
-            <span className="text-white/20">—</span>
-            <span className="text-xs font-bold text-white/35 tabular-nums">{String(service.order).padStart(2, "0")}</span>
+            <span className="text-white/20" aria-hidden="true">—</span>
+            <span className="text-xs font-bold text-white/55 tabular-nums" aria-label={`Service ${service.order}`}>{String(service.order).padStart(2, "0")}</span>
           </div>
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-semibold text-white mb-5 max-w-4xl leading-[0.95]">
             {service.title}

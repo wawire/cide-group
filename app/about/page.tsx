@@ -293,7 +293,7 @@ export default function AboutPage() {
             <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors font-medium">
               {siteConfig.email}
             </a>
-            <span className="hidden sm:block text-white/25">|</span>
+            <span className="hidden sm:block text-white/25" aria-hidden="true">|</span>
             <a href={`tel:${siteConfig.phoneHref}`} className="hover:text-white transition-colors font-medium">
               {siteConfig.phone}
             </a>

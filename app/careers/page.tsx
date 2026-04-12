@@ -195,7 +195,7 @@ export default function CareersPage() {
               Are you a development practitioner, researcher, or communications specialist? We are always interested
               in hearing from talented people who share our commitment to locally grounded, evidence-driven impact.
             </p>
-            <p className="text-sm text-white/45 mb-6">
+            <p className="text-sm text-white/65 mb-6">
               Share your CV and a brief note on your thematic focus and availability.
             </p>
             <a

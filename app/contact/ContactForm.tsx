@@ -171,7 +171,7 @@ export default function ContactForm() {
                     <Icon size={14} className="text-[#c9a84c]" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-0.5">{label}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/55 mb-0.5">{label}</p>
                     {href ? (
                       <a
                         href={href}
@@ -183,7 +183,7 @@ export default function ContactForm() {
                     ) : (
                       <p className="text-sm text-white/70 leading-relaxed">{value}</p>
                     )}
-                    {sub && <p className="text-[11px] text-white/30 mt-0.5">{sub}</p>}
+                    {sub && <p className="text-[11px] text-white/55 mt-0.5">{sub}</p>}
                   </div>
                 </div>
               ))}
@@ -191,8 +191,8 @@ export default function ContactForm() {
 
             {/* Bottom rule */}
             <div className="mt-10 pt-8 border-t border-white/10">
-              <p className="text-[11px] text-white/30 leading-relaxed">{siteConfig.legalName}</p>
-              <p className="text-[11px] text-white/20">Reg. {siteConfig.companyNumber}</p>
+              <p className="text-[11px] text-white/55 leading-relaxed">{siteConfig.legalName}</p>
+              <p className="text-[11px] text-white/50" aria-label={`Registration number: ${siteConfig.companyNumber}`}>Reg. {siteConfig.companyNumber}</p>
             </div>
           </div>
         </div>
@@ -324,7 +324,7 @@ export default function ContactForm() {
                       />
                       <label htmlFor={`${formId}-privacy`} className="text-sm text-text-secondary leading-snug">
                         I have read and agree to the{" "}
-                        <Link href="/privacy" target="_blank" className="text-[#bf2a2c] underline underline-offset-2 hover:text-[#9a1f21] font-medium">
+                        <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#bf2a2c] underline underline-offset-2 hover:text-[#9a1f21] font-medium">
                           Privacy Policy
                         </Link>
                         . I understand CIDE Group will process my data to respond to this enquiry.{" "}

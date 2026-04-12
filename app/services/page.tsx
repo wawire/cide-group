@@ -52,7 +52,7 @@ export default function ServicesPage() {
               <span className="text-[#bf2a2c] font-bold tabular-nums text-xs">0{i + 1}</span>
               <span className="font-semibold text-white/75">{step}</span>
               {i < companyProfile.approach.length - 1 && (
-                <span className="text-white/20">→</span>
+                <span className="text-white/20" aria-hidden="true">→</span>
               )}
             </span>
           ))}

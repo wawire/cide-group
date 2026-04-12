@@ -133,16 +133,16 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">About this piece</p>
               <div className="space-y-4 text-sm">
                 <div>
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest mb-0.5">Author</p>
+                  <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Author</p>
                   <p className="text-white/80 font-semibold">{article.author}</p>
-                  <p className="text-white/45 text-xs">{article.authorRole}</p>
+                  <p className="text-white/65 text-xs">{article.authorRole}</p>
                 </div>
                 <div>
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest mb-0.5">Published</p>
+                  <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Published</p>
                   <p className="text-white/80"><time dateTime={article.date}>{formatDate(article.date)}</time></p>
                 </div>
                 <div>
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest mb-0.5">Reading time</p>
+                  <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Reading time</p>
                   <p className="text-white/80">{article.readTime}</p>
                 </div>
               </div>
