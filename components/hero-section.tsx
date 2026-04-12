@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import { motion, AnimatePresence, type Variants } from "motion/react"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import { siteConfig } from "@/content/site"
 
 const AUTO_ADVANCE_MS = 6500
