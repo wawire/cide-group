@@ -1,3 +1,4 @@
+export * from "./countries"
 export * from "./focus-areas"
 export * from "./knowledge"
 export * from "./partners"

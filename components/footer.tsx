@@ -51,6 +51,7 @@ const focusLinks = [
 const companyLinks = [
   { label: "About CIDE Group", href: "/about" },
   { label: "Our Team", href: "/about/team" },
+  { label: "Where We Work", href: "/where-we-work" },
   { label: "Services", href: "/services" },
   { label: "Focus Areas", href: "/focus-areas" },
   { label: "Projects", href: "/projects" },
