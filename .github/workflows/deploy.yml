@@ -138,6 +138,10 @@ jobs:
                     proxy_cache_bypass \$http_upgrade;
                     proxy_hide_header Content-Security-Policy;
                     add_header Content-Security-Policy "${CSP_VALUE}" always;
+                    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+                    add_header X-Content-Type-Options "nosniff" always;
+                    add_header X-Frame-Options "DENY" always;
+                    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
                 }
             }
             CONFEOF

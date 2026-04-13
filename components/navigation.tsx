@@ -125,7 +125,7 @@ export default function Navigation() {
 
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
-      "relative px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
+      "relative px-4 py-2.5 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
       "after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2px] after:rounded-full",
       "after:transition-transform after:duration-200 after:origin-left",
       active || menuOpen
@@ -233,7 +233,7 @@ export default function Navigation() {
                   closeNow()
                   setIsOpen((current) => !current)
                 }}
-                className="inline-flex items-center justify-center rounded-md p-2 text-foreground transition-colors duration-200 hover:text-primary md:hidden"
+                className="inline-flex items-center justify-center rounded-md p-2.5 min-h-11 min-w-11 text-foreground transition-colors duration-200 hover:text-primary md:hidden"
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"

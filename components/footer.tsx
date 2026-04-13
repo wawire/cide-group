@@ -124,12 +124,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-6">
           <div>
             <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Services</p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-0">
               {servicesLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -140,12 +140,12 @@ export default function Footer() {
 
           <div>
             <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Focus Areas</p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-0">
               {focusLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -156,12 +156,12 @@ export default function Footer() {
 
           <div>
             <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Company</p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-0">
               {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block text-[13px] text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-[13px] text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -217,7 +217,7 @@ export default function Footer() {
                     aria-label={label}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="flex h-7 w-7 items-center justify-center rounded-sm border border-white/20 text-white/62 transition-all hover:border-[#bf2a2c]/70 hover:bg-[#bf2a2c]/15 hover:text-white"
+                    className="flex h-11 w-11 items-center justify-center rounded-sm border border-white/20 text-white/62 transition-all hover:border-[#bf2a2c]/70 hover:bg-[#bf2a2c]/15 hover:text-white"
                   >
                     <Icon />
                   </a>
