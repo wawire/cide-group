@@ -40,10 +40,10 @@ export default function TeamPage() {
               Back to About
             </Link>
             <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Our Team</p>
-            <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-5xl leading-[0.98]">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold text-white mb-6 max-w-5xl leading-[1.05] md:leading-[0.98]">
               The people behind CIDE Group&apos;s advisory work.
             </h1>
-            <p className="text-xl text-white/78 max-w-3xl leading-relaxed mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-white/78 max-w-3xl leading-relaxed mb-8">
               An international advisory board, executive secretariat, and senior technical specialists — combining
               global expertise with deep local knowledge across Africa.
             </p>

@@ -160,7 +160,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
   const cfg = groupConfig[member.group]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-10">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/55 backdrop-blur-[3px]" onClick={onClose} aria-hidden="true" />
 
@@ -169,45 +169,45 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
         role="dialog"
         aria-modal="true"
         aria-label={`Profile: ${member.name}`}
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-270 max-h-[92vh] overflow-y-auto"
+        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-270 max-h-[96vh] overflow-y-auto"
       >
         {/* Close */}
         <button
           type="button"
           onClick={onClose}
           aria-label="Close profile"
-          className="absolute top-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-[#f0eae6] hover:bg-[#e2d9d4] transition-colors"
+          className="absolute top-3 right-3 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#f0eae6] hover:bg-[#e2d9d4] transition-colors"
         >
-          <X size={17} strokeWidth={2.5} className="text-[#5a4a4a]" />
+          <X size={16} strokeWidth={2.5} className="text-[#5a4a4a]" />
         </button>
 
         <div className="grid md:grid-cols-[380px_1fr]">
-          {/* Photo — no strip, clean match to card style */}
-          <div className="relative aspect-4/5 md:aspect-auto md:min-h-115 bg-[#ede5e0] shrink-0">
+          {/* Photo — landscape crop on mobile, portrait on desktop */}
+          <div className="relative aspect-[4/3] sm:aspect-[3/2] md:aspect-auto md:min-h-115 bg-[#ede5e0] shrink-0">
             <ModalPhoto member={member} />
           </div>
 
           {/* Content */}
-          <div className="p-8 md:p-10 flex flex-col gap-5">
+          <div className="p-4 sm:p-6 md:p-10 flex flex-col gap-3 md:gap-5">
             <span className={cn("w-fit rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em]", cfg.badgeBg, cfg.badgeText)}>
               {cfg.label}
             </span>
 
             <div>
-              <h2 className="text-xl font-bold text-[#140909] leading-tight">{member.name}</h2>
-              <p className="mt-1 text-sm text-[#6b5c5c] leading-snug font-medium">{member.title}</p>
+              <h2 className="text-lg sm:text-xl font-bold text-[#140909] leading-tight">{member.name}</h2>
+              <p className="mt-1 text-xs sm:text-sm text-[#6b5c5c] leading-snug font-medium">{member.title}</p>
             </div>
 
             <hr className="border-[#ede5e0]" />
 
-            <p className="text-[14px] leading-[1.7] text-[#4a3a3a] flex-1">{member.bio}</p>
+            <p className="text-[13px] sm:text-[14px] leading-[1.7] text-[#4a3a3a] flex-1">{member.bio}</p>
 
             {member.expertise.length > 0 && (
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#9a8888] mb-2">Focus areas</p>
                 <div className="flex flex-wrap gap-1.5">
                   {member.expertise.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 rounded-full bg-[#f5f0ec] text-[12px] font-medium text-[#6b5c5c]">
+                    <span key={tag} className="px-2 sm:px-2.5 py-1 rounded-full bg-[#f5f0ec] text-[11px] sm:text-[12px] font-medium text-[#6b5c5c]">
                       {tag}
                     </span>
                   ))}
@@ -237,9 +237,9 @@ export default function TeamGrid() {
           return (
             <section key={group} id={group.toLowerCase().replace(/\s+/g, "-")}>
               {/* Section heading — single line with left accent */}
-              <div className={cn("mb-8 pl-4 border-l-4", cfg.borderClass)}>
-                <h2 className={cn("text-xl font-bold leading-tight", cfg.kickerClass)}>{cfg.label}</h2>
-                <p className="mt-1.5 text-sm text-[#7a6666] max-w-xl leading-relaxed">{cfg.description}</p>
+              <div className={cn("mb-6 md:mb-8 pl-3 md:pl-4 border-l-4", cfg.borderClass)}>
+                <h2 className={cn("text-base sm:text-lg md:text-xl font-bold leading-tight", cfg.kickerClass)}>{cfg.label}</h2>
+                <p className="mt-1.5 text-xs sm:text-sm text-[#7a6666] max-w-xl leading-relaxed">{cfg.description}</p>
               </div>
 
               {/* Card grid — flex-wrap so partial rows centre automatically */}
