@@ -96,6 +96,7 @@ tailwind.config.js.save
 temp/
 source-assets/
 ops/keys/
+.claude/
 .claude/settings.local.json
 .codex-lighthouse*.json
 .chrome-debug*/
