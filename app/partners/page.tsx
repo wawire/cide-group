@@ -1,7 +1,9 @@
+import PageHero from "@/components/page-hero"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { siteConfig } from "@/content/site"
+import PartnerLogos from "@/components/partner-logos"
 
 export const metadata = {
   title: "Why Partner With CIDE Group",
@@ -61,29 +63,16 @@ export default function PartnersPage() {
     <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        <Image
-          src="/projects/advocacy-training-workshop.jpg"
-          alt="Partnership and stakeholder engagement"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/50 to-[#bf2a2c]/15" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Why Partner With Us</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-4xl leading-[0.95]">
-            Built for accountable delivery and long-term partnership
-          </h1>
-          <p className="text-xl text-white/75 max-w-2xl leading-relaxed">
-            Implementation strength, lean delivery, and ethical practice — in a single team.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Why Partner With Us"
+        title="Built for accountable delivery and long-term partnership"
+        description="Implementation strength, lean delivery, and ethical practice — in a single team."
+      />
+
+      <PartnerLogos />
 
       {/* ── Reasons — editorial numbered list with image ───────────────────── */}
-      <section className="py-20 bg-background">
+      <section className="section-space bg-background">
         <div className="section-shell">
           <div className="grid lg:grid-cols-[1fr_420px] gap-12 items-start">
 

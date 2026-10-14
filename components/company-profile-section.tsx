@@ -3,7 +3,7 @@ import { companyProfile, siteConfig } from "@/content/site"
 
 export default function CompanyProfileSection() {
   return (
-    <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+    <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
       <div className="section-shell">
         <div className="text-center mb-10">
           <p className="section-kicker mb-3">Vision, Mission and Values</p>

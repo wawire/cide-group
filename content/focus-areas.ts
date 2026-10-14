@@ -48,7 +48,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "education-lifelong-learning",
-    image: "/focus-areas/livelihoods-women-farming.png",
+    image: "/research/community-members-advocacy-training-workshop.jpg",
     title: "Education and Lifelong Learning",
     summary:
       "Improving learning outcomes through stronger systems, cross-sector collaboration, and inclusive, evidence-based approaches.",

@@ -125,8 +125,8 @@ export default function Navigation() {
 
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
-      "relative px-4 py-2.5 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
-      "after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2px] after:rounded-full",
+      "relative px-3 py-2 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
+      "after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full",
       "after:transition-transform after:duration-200 after:origin-left",
       active || menuOpen
         ? "text-primary after:bg-primary after:scale-x-100"
@@ -144,7 +144,7 @@ export default function Navigation() {
     >
       <div className="w-full overflow-visible">
         <div className="section-shell">
-          <div className="flex h-20 items-center justify-between gap-6">
+          <div className="flex h-16 items-center justify-between gap-4">
             <Link
               href="/"
               onClick={closeNow}
@@ -155,7 +155,7 @@ export default function Navigation() {
                 alt={siteConfig.logo.alt}
                 width={168}
                 height={48}
-                className="h-10 w-auto md:h-11"
+                className="h-9 w-auto md:h-10"
                 priority
               />
             </Link>

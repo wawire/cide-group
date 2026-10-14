@@ -1,13 +1,13 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { featuredProjects } from "@/content/projects"
-import Image from "next/image"
+import ContentImage from "@/components/content-image"
 import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
 
 export default function FeaturedProjectsSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="section-space bg-white">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
           <div>
@@ -29,22 +29,7 @@ export default function FeaturedProjectsSection() {
           {featuredProjects.map((project) => (
             <Link key={project.id} href={`/projects/${project.id}`} className="group block h-full">
               <Card className="overflow-hidden bg-white border border-[#e2d9d9] hover:border-[#bf2a2c] hover:shadow-2xl hover:shadow-[#bf2a2c]/10 transition-all duration-300 h-full flex flex-col">
-                <div className="relative h-52 overflow-hidden flex-shrink-0">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808]/70 to-transparent" />
-                  <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="text-xs font-semibold bg-white/90 text-[#bf2a2c] px-2 py-0.5 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <ContentImage src={project.image} alt={project.title} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px" />
 
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-1.5 text-xs text-text-muted mb-3">
@@ -52,6 +37,9 @@ export default function FeaturedProjectsSection() {
                     <span>{project.location}</span>
                   </div>
 
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => <span key={tag} className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">{tag}</span>)}
+                  </div>
                   <h3 className="text-base font-bold text-foreground mb-3 leading-snug group-hover:text-[#bf2a2c] transition-colors flex-shrink-0">
                     {project.title}
                   </h3>

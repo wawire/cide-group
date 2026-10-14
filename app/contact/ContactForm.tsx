@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useId, useMemo, useState } from "react"
+import { useId, useState } from "react"
 import { contactCountries, siteConfig } from "@/content/site"
 import { validateContactForm, type FormErrors } from "@/lib/form-validation"
 import { trackContactFormSubmit, trackEmailClick, trackPhoneClick } from "@/lib/analytics"
@@ -63,7 +63,7 @@ const contactPoints = [
 ]
 
 export default function ContactForm() {
-  const initialState = useMemo<FormDataState>(
+  const [initialState] = useState<FormDataState>(
     () => ({
       name: "",
       organization: "",
@@ -77,7 +77,6 @@ export default function ContactForm() {
       website: "",
       formStartedAt: Date.now(),
     }),
-    [],
   )
 
   const [formData, setFormData] = useState<FormDataState>(initialState)

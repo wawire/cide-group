@@ -6,6 +6,7 @@ import ServicesSection from "@/components/services-section"
 import ImpactMetricsSection from "@/components/impact-metrics-section"
 import FeaturedProjectsSection from "@/components/featured-projects-section"
 import PartnersSection from "@/components/partners-section"
+import PartnerLogos from "@/components/partner-logos"
 import CTASection from "@/components/cta-section"
 import ScrollReveal from "@/components/scroll-reveal"
 
@@ -33,6 +34,7 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      <PartnerLogos />
       <ScrollReveal direction="up">
         <WhoWeAreSection />
       </ScrollReveal>

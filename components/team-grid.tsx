@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
+import TeamPortrait from "@/components/team-portrait"
 import { X } from "lucide-react"
 import { type TeamMember, type TeamGroup, teamGroupOrder, publishedTeamMembers } from "@/content/team"
 import { cn } from "@/lib/utils"
@@ -55,52 +55,6 @@ const groupConfig: Record<
   },
 }
 
-/* ── Initials fallback ──────────────────────────────────────────────────── */
-function Initials({ name }: { name: string }) {
-  const letters = name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-  return (
-    <div className="absolute inset-0 flex items-center justify-center bg-[#ede5e0]">
-      <span className="text-4xl font-bold text-[#bf2a2c]/25 select-none tracking-tight">{letters}</span>
-    </div>
-  )
-}
-
-/* ── Card photo — grayscale → colour on hover ───────────────────────────── */
-function CardPhoto({ member }: { member: TeamMember }) {
-  const [err, setErr] = useState(false)
-  if (!member.image || err) return <Initials name={member.name} />
-  return (
-    <Image
-      src={member.image}
-      alt={member.name}
-      fill
-      className="object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-[1.04] transition-[filter,transform] duration-500 ease-out"
-      onError={() => setErr(true)}
-      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw"
-    />
-  )
-}
-
-/* ── Modal photo — always full colour ───────────────────────────────────── */
-function ModalPhoto({ member }: { member: TeamMember }) {
-  const [err, setErr] = useState(false)
-  if (!member.image || err) return <Initials name={member.name} />
-  return (
-    <Image
-      src={member.image}
-      alt={member.name}
-      fill
-      className="object-cover object-top"
-      sizes="300px"
-    />
-  )
-}
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
 function MemberCard({
@@ -126,7 +80,12 @@ function MemberCard({
             borderClass,
           )}
         >
-          <CardPhoto member={member} />
+          <TeamPortrait
+            name={member.name}
+            src={member.image}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw"
+            className="grayscale group-hover:grayscale-0 group-hover:scale-[1.04] transition-[filter,transform] duration-500 ease-out"
+          />
         </div>
       </div>
       {/* Text always at the top of its area, wraps naturally */}
@@ -184,7 +143,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
         <div className="grid md:grid-cols-[380px_1fr]">
           {/* Photo — landscape crop on mobile, portrait on desktop */}
           <div className="relative aspect-[4/3] sm:aspect-[3/2] md:aspect-auto md:min-h-115 bg-[#ede5e0] shrink-0">
-            <ModalPhoto member={member} />
+            <TeamPortrait name={member.name} src={member.image} sizes="300px" />
           </div>
 
           {/* Content */}

@@ -119,3 +119,31 @@ export const partners: Partner[] = [
 export const approvedPartners = partners.filter(
   (partner): partner is ApprovedPartner => partner.permissionStatus === "approved",
 )
+
+export const featuredPartners = [
+  {
+    name: "Mara Basin Conservation Forum",
+    logo: "/partners/mara-basin.png",
+    href: "https://marabasinconservation.org/",
+  },
+  {
+    name: "Miss Koch Kenya",
+    logo: "/partners/miss-koch-kenya.jpeg",
+    href: "https://misskoch.org/",
+  },
+  {
+    name: "Restoration of Elgeyo Marakwet Escarpment Initiative (REMEI)",
+    logo: "/partners/remei.png",
+    href: "https://www.restoreelgeyomarakwet.org/",
+  },
+  {
+    name: "ASEITY 222",
+    logo: "/partners/aseity.png",
+    href: "https://aseity.global/",
+  },
+  {
+    name: "Jitolee Good Friends Foundation",
+    logo: "/partners/jitolee.jpeg",
+    href: "https://jitoleegoodfriendsfoundation.org/",
+  },
+] as const

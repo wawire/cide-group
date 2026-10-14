@@ -52,7 +52,7 @@ export default function ImpactMetricsSection() {
   return (
     <section
       ref={ref}
-      className="py-20 relative overflow-hidden"
+      className="section-space relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, #1a0808 0%, #2d0e0e 40%, #3d1414 70%, #1a0808 100%)" }}
     >
       {/* Decorative dot grid */}

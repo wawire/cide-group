@@ -1,4 +1,4 @@
-import Image from "next/image"
+import PageHero from "@/components/page-hero"
 import ResearchContent from "./ResearchContent"
 
 import { siteConfig } from "@/content/site"
@@ -28,25 +28,11 @@ export const metadata = {
 export default function ResearchPage() {
   return (
     <main className="min-h-screen">
-      <section className="relative min-h-[55vh] flex items-end overflow-hidden">
-        <Image
-          src="/projects/data-analysis-workshop.jpg"
-          alt="Research and evidence gathering for African development programmes"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/90 via-[#1a0808]/55 to-[#bf2a2c]/15" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Knowledge Hub</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-3xl leading-tight">
-            Research, Insights & Thought Leadership
-          </h1>
-          <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
-            Explore research reports, briefs, and practical insights showing how evidence informs better decisions.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Knowledge Hub"
+        title={<>Research, Insights & Thought Leadership</>}
+        description="Research and evidence to inform better decisions. Contact our team about reports, policy briefs and learning resources."
+      />
 
       <ResearchContent />
     </main>

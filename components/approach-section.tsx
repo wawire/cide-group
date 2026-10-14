@@ -31,7 +31,7 @@ const stepDetails = [
 
 export default function ApproachSection() {
   return (
-    <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+    <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left — text */}

@@ -1,7 +1,10 @@
+import PageHero from "@/components/page-hero"
+import HeroBackLink from "@/components/hero-back-link"
+import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react"
+import { ArrowRight, Tag } from "lucide-react"
 import { knowledgeArticles, getArticleBySlug } from "@/content/knowledge"
 import { siteConfig } from "@/content/site"
 
@@ -29,9 +32,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
 }
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
-}
+
 
 export default async function KnowledgeArticlePage({ params }: { params: Params }) {
   const { slug } = await params
@@ -47,7 +48,6 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
     headline: article.title,
     description: article.excerpt,
     image: `${siteConfig.url}${article.image}`,
-    datePublished: article.date,
     author: { "@type": "Organization", name: article.author },
     publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
     url: `${siteConfig.url}/knowledge/${article.slug}`,
@@ -69,33 +69,20 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* ── Hero image ────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[52vh] flex items-end overflow-hidden">
-        <Image src={article.image} alt={article.title} fill priority className="object-cover object-center" />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/55 to-[#1a0808]/15" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-14 pt-36">
-          <Link
-            href="/knowledge"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft size={15} />
-            Knowledge Hub
-          </Link>
-          <span className="inline-block px-3 py-1 rounded-full bg-[#bf2a2c]/80 text-white text-[10px] font-bold uppercase tracking-widest mb-4">
+      <PageHero
+        breadcrumb={<HeroBackLink href="/knowledge">Knowledge Hub</HeroBackLink>}
+        eyebrow={
+          <span className="inline-block px-3 py-1 rounded-full bg-[#bf2a2c]/80 text-white text-[10px] font-bold uppercase tracking-widest">
             {article.category}
           </span>
-          <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white mb-5 max-w-3xl leading-tight">
-            {article.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-white/55">
-            <span>{article.author}</span>
-            <span>·</span>
-            <span className="flex items-center gap-1.5"><Clock size={13} />{article.readTime}</span>
-            <span>·</span>
-            <time dateTime={article.date}>{formatDate(article.date)}</time>
-          </div>
+        }
+        title={article.title}
+      >
+        <div className="flex flex-wrap items-center gap-4 text-sm text-white/55">
+          <span>{article.author}</span>
+
         </div>
-      </section>
+      </PageHero>
 
       {/* ── Article body ──────────────────────────────────────────────────── */}
       <section className="py-16 bg-background">
@@ -137,14 +124,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                   <p className="text-white/80 font-semibold">{article.author}</p>
                   <p className="text-white/65 text-xs">{article.authorRole}</p>
                 </div>
-                <div>
-                  <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Published</p>
-                  <p className="text-white/80"><time dateTime={article.date}>{formatDate(article.date)}</time></p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Reading time</p>
-                  <p className="text-white/80">{article.readTime}</p>
-                </div>
+
+
               </div>
               <div className="mt-6 pt-5 border-t border-white/10">
                 <Link
@@ -166,15 +147,13 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                     <Link key={rel.slug} href={`/knowledge/${rel.slug}`} className="group block">
                       <div className="flex gap-3 items-start">
                         <div className="relative h-14 w-20 rounded-lg overflow-hidden shrink-0">
-                          <Image src={rel.image} alt={rel.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <Image src={rel.image} alt={rel.title} fill sizes="(max-width: 768px) 100vw, 400px" className="object-contain" />
                         </div>
                         <div>
                           <p className="text-xs font-bold text-foreground leading-snug group-hover:text-[#bf2a2c] transition-colors line-clamp-2">
                             {rel.title}
                           </p>
-                          <p className="text-[10px] text-text-muted mt-1 flex items-center gap-1">
-                            <Clock size={9} />{rel.readTime}
-                          </p>
+
                         </div>
                       </div>
                     </Link>
@@ -187,35 +166,26 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section
-        className="relative py-24 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #bf2a2c 0%, #9a1f21 50%, #1a0808 100%)" }}
+      <PageCallout
+        eyebrow="Work With Us"
+        title="Want to put this thinking into practice?"
+        description="Talk to our team about how we can apply this approach to your programme or context."
       >
-        <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)", backgroundSize: "28px 28px" }} />
-        <div className="relative z-10 w-full max-w-2xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Work With Us</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">
-            Want to put this thinking into practice?
-          </h2>
-          <p className="text-lg text-white/70 leading-relaxed mb-10">
-            Talk to our team about how we can apply this approach to your programme or context.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-            >
-              Start a Conversation
-            </Link>
-            <Link
-              href="/knowledge"
-              className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-            >
-              Read More Insights
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/contact"
+            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
+          >
+            Start a Conversation
+          </Link>
+          <Link
+            href="/knowledge"
+            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
+          >
+            Read More Insights
+          </Link>
         </div>
-      </section>
+      </PageCallout>
 
       <style>{`
         .knowledge-body { color: #4a3535; line-height: 1.8; font-size: 1rem; }

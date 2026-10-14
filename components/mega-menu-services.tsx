@@ -26,24 +26,24 @@ export function ServicesMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
       }`}
     >
         <div className="w-full bg-background border-b border-border shadow-lg">
-          <div className="section-shell py-12">
-            <div className="mb-10">
+          <div className="navigation-panel section-shell">
+            <div className="mb-5">
               <h2 className="text-2xl font-bold text-foreground mb-2">What We Do</h2>
               <p className="text-text-secondary">
                 Comprehensive solutions addressing Africa&apos;s most pressing development challenges
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-8 mb-10">
+            <div className="grid grid-cols-4 gap-4 mb-5">
               {services.map((service) => (
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
                   onClick={onClose}
-                  className="group/item flex flex-col p-5 rounded-lg border border-transparent hover:border-primary hover:bg-primary/5 transition-all duration-200"
+                  className="group/item flex flex-col p-3 rounded-lg border border-transparent hover:border-primary hover:bg-primary/5 transition-all duration-200"
                 >
-                  <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-surface group-hover/item:bg-primary group-hover/item:text-white transition-all duration-200 mb-4 text-primary shrink-0">
-                    <ServiceIcon icon={service.icon} className="w-6 h-6" />
+                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-surface group-hover/item:bg-primary group-hover/item:text-white transition-all duration-200 mb-3 text-primary shrink-0">
+                    <ServiceIcon icon={service.icon} className="w-5 h-5" />
                   </div>
 
                   <h3 className="font-semibold text-base text-foreground group-hover/item:text-primary transition-colors mb-2 leading-snug">
@@ -68,7 +68,7 @@ export function ServicesMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
               ))}
             </div>
 
-            <div className="border-t border-border pt-8 flex justify-between items-center">
+            <div className="border-t border-border pt-4 flex justify-between items-center">
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-foreground">Need specialized support?</p>
                 <p className="text-xs text-text-secondary">

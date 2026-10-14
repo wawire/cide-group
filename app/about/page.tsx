@@ -1,3 +1,5 @@
+import PageCallout from "@/components/page-callout"
+import PageHero from "@/components/page-hero"
 import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
 import Image from "next/image"
@@ -33,38 +35,26 @@ export default function AboutPage() {
     <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[62vh] flex items-end overflow-hidden">
-        <Image
-          src="/research/community-members-advocacy-training-workshop.jpg"
-          alt="Pan-African collaboration and community-centred development"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/55 to-[#bf2a2c]/20" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">About Us</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-5 leading-[0.95] max-w-4xl">
-            Pan-African Development Advisory, Research and Programme Implementation
-          </h1>
-          <p className="text-xl text-white/75 max-w-3xl leading-relaxed mb-9">{siteConfig.narrativeLine}</p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/about/team"
-              className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-            >
-              Meet the Team <ArrowRight size={15} />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-            >
-              Get in Touch
-            </Link>
-          </div>
+      <PageHero
+        eyebrow="About Us"
+        title="Pan-African Development Advisory, Research and Programme Implementation"
+        description={siteConfig.narrativeLine}
+      >
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link
+            href="/about/team"
+            className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+          >
+            Meet the Team <ArrowRight size={15} />
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+          >
+            Get in Touch
+          </Link>
         </div>
-      </section>
+      </PageHero>
 
       {/* ── Who We Are — image + content split ───────────────────────────── */}
       <section className="py-0">
@@ -129,7 +119,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Vision, Mission, Values — dark strip ─────────────────────────── */}
-      <section className="py-20 bg-[#1a0808]">
+      <section className="section-space bg-[#1a0808]">
         <div className="section-shell">
           <div className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">What Drives Us</p>
@@ -176,7 +166,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Our 360° Approach ────────────────────────────────────────────── */}
-      <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
         <div className="section-shell grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
           <div>
             <p className="section-kicker mb-4">Our 360° Approach</p>
@@ -212,7 +202,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Team CTA — image + dark content ──────────────────────────────── */}
-      <section className="py-20 bg-background">
+      <section className="section-space bg-background">
         <div className="section-shell">
           <div className="rounded-2xl overflow-hidden grid lg:grid-cols-[1fr_400px]">
             <div className="bg-[#1a0808] p-10 lg:p-14 flex flex-col justify-center">
@@ -254,52 +244,35 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA — rich dark ───────────────────────────────────────────────── */}
-      <section
-        className="relative py-28 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #bf2a2c 0%, #9a1f21 50%, #1a0808 100%)" }}
+      <PageCallout
+        eyebrow="Let's Connect"
+        title="Ready to build lasting impact?"
+        description="Reach out to discuss programme design, implementation support, research, or strategic collaboration across Africa."
       >
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-white/5 blur-[80px] rounded-full" />
-        <div className="relative z-10 w-full max-w-3xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Let's Connect</p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-5 leading-tight">
-            Ready to build lasting impact?
-          </h2>
-          <p className="text-lg text-white/72 leading-relaxed max-w-xl mx-auto mb-10">
-            Reach out to discuss programme design, implementation support, research, or strategic collaboration
-            across Africa.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-            <Link
-              href="/contact"
-              className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-            >
-              Contact CIDE
-            </Link>
-            <Link
-              href="/focus-areas"
-              className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-            >
-              Explore Focus Areas
-            </Link>
-          </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-white/55 text-sm">
-            <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors font-medium">
-              {siteConfig.email}
-            </a>
-            <span className="hidden sm:block text-white/25" aria-hidden="true">|</span>
-            <a href={`tel:${siteConfig.phoneHref}`} className="hover:text-white transition-colors font-medium">
-              {siteConfig.phone}
-            </a>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <Link
+            href="/contact"
+            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
+          >
+            Contact CIDE
+          </Link>
+          <Link
+            href="/focus-areas"
+            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
+          >
+            Explore Focus Areas
+          </Link>
         </div>
-      </section>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-white/55 text-sm">
+          <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors font-medium">
+            {siteConfig.email}
+          </a>
+          <span className="hidden sm:block text-white/25" aria-hidden="true">|</span>
+          <a href={`tel:${siteConfig.phoneHref}`} className="hover:text-white transition-colors font-medium">
+            {siteConfig.phone}
+          </a>
+        </div>
+      </PageCallout>
     </main>
   )
 }

@@ -1,6 +1,7 @@
-import Image from "next/image"
+import PageHero from "@/components/page-hero"
+import HeroBackLink from "@/components/hero-back-link"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/content/site"
 import TeamGrid from "@/components/team-grid"
@@ -23,57 +24,37 @@ export default function TeamPage() {
     <main className="min-h-screen bg-background">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#140909]">
-        <Image
-          src="/about/cide-boardroom-strategy.png"
-          alt="CIDE Group advisory team in a strategy session"
-          fill
-          priority
-          className="object-cover object-center opacity-30"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(20,9,9,0.94)_0%,rgba(20,9,9,0.86)_45%,rgba(191,42,44,0.28)_100%)]" />
-
-        <div className="relative z-10 section-shell py-24 md:py-32">
-          <div className="max-w-5xl">
-            <Link href="/about" className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 mb-7 hover:text-white transition-colors">
-              <ArrowLeft size={16} />
-              Back to About
+      <PageHero
+        breadcrumb={<HeroBackLink href="/about">Back to About</HeroBackLink>}
+        eyebrow="Our Team"
+        title="The people behind CIDE Group's advisory work."
+        description="An international advisory board, executive secretariat, and senior technical specialists — combining global expertise with deep local knowledge across Africa."
+      >
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Button asChild size="lg" className="bg-white text-primary hover:bg-white/92">
+            <Link href="/contact">
+              Talk to Our Team
+              <ArrowRight className="ml-2" size={18} />
             </Link>
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Our Team</p>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold text-white mb-6 max-w-5xl leading-[1.05] md:leading-[0.98]">
-              The people behind CIDE Group&apos;s advisory work.
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/78 max-w-3xl leading-relaxed mb-8">
-              An international advisory board, executive secretariat, and senior technical specialists — combining
-              global expertise with deep local knowledge across Africa.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/92">
-                <Link href="/contact">
-                  Talk to Our Team
-                  <ArrowRight className="ml-2" size={18} />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/25 bg-white/6 text-white hover:bg-white/12 hover:text-white"
-              >
-                <Link href="/focus-areas">Explore Focus Areas</Link>
-              </Button>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-white/68">
-              <span>Advisory Board</span>
-              <span>Secretariat</span>
-              <span>Technical Advisory</span>
-            </div>
-          </div>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/25 bg-white/6 text-white hover:bg-white/12 hover:text-white"
+          >
+            <Link href="/focus-areas">Explore Focus Areas</Link>
+          </Button>
         </div>
-      </section>
+        <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-white/68">
+          <span>Advisory Board</span>
+          <span>Secretariat</span>
+          <span>Technical Advisory</span>
+        </div>
+      </PageHero>
 
       {/* ── Team grid ────────────────────────────────────────────────────── */}
-      <section className="py-18 md:py-24">
+      <section className="section-space">
         <div className="section-shell">
           <TeamGrid />
         </div>

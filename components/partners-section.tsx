@@ -42,7 +42,7 @@ const ethicalCommitments = [
 
 export default function PartnersSection() {
   return (
-    <section className="bg-[#fafaf9] py-20">
+    <section className="section-space bg-[#fafaf9]">
       <div className="section-shell">
         <div className="mb-10 text-center">
           <p className="section-kicker mb-4">Why Partner With Us</p>

@@ -20,14 +20,14 @@ export default function WhoWeAreImageCluster() {
   const yAccent = useTransform(scrollYProgress, [0, 1], [10, -24])
 
   return (
-    <div ref={ref} className="relative">
-      <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-2xl">
+    <div ref={ref} className="relative lg:h-full">
+      <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-2xl lg:aspect-auto lg:h-full lg:min-h-[32rem]">
         <Image
           src="/about/cide-boardroom-strategy.png"
           alt="CIDE Group strategy and advisory session"
           fill
           quality={60}
-          sizes="(min-width: 1024px) 46vw, 92vw"
+          sizes="(min-width: 1280px) 605px, (min-width: 1024px) 51vw, 92vw"
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/40 to-transparent" />
