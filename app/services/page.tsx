@@ -1,7 +1,8 @@
+import PageHero from "@/components/page-hero"
 import { services } from "@/content/services"
 import { companyProfile, siteConfig } from "@/content/site"
 import Link from "next/link"
-import Image from "next/image"
+import ContentImage from "@/components/content-image"
 import { ArrowRight } from "lucide-react"
 
 export const metadata = {
@@ -22,27 +23,11 @@ export default function ServicesPage() {
     <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        <Image
-          src="/projects/data-analysis-workshop.jpg"
-          alt="CIDE Group service delivery and technical support"
-          fill
-          priority
-          className="object-cover object-top"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/55 to-[#bf2a2c]/15" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Our Services</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-6 max-w-4xl leading-[0.95]">
-            Strategic support across the programme cycle
-          </h1>
-          <p className="text-xl text-white/75 max-w-2xl leading-relaxed">
-            From research and design through to implementation and evaluation — end-to-end support that translates
-            strategy into measurable, lasting impact.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Our Services"
+        title="Strategic support across the programme cycle"
+        description="From research and design through to implementation and evaluation — end-to-end support that translates strategy into measurable, lasting impact."
+      />
 
       {/* ── Intro strip ──────────────────────────────────────────────────── */}
       <div className="bg-[#1a0808]">
@@ -77,23 +62,12 @@ export default function ServicesPage() {
                   }`}
                 >
                   {/* Image panel */}
-                  <div className="relative h-64 lg:h-auto lg:min-h-[360px] overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/60 to-transparent" />
-                    {/* Service number */}
-                    <span className="absolute top-5 left-5 text-[11px] font-bold uppercase tracking-[0.2em] text-white/50 bg-black/30 px-3 py-1 rounded-full backdrop-blur-sm">
-                      {String(service.order).padStart(2, "0")}
-                    </span>
+                  <div className="self-center py-6">
+                    <ContentImage src={service.image} alt={service.title} sizes="(max-width: 1024px) 100vw, 600px" />
                   </div>
 
                   {/* Content panel */}
-                  <div className="flex flex-col justify-center px-0 lg:px-12 py-12">
+                  <div className="flex flex-col justify-center px-0 lg:px-8 py-6">
                     <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 leading-snug">
                       {service.title}
                     </h2>
@@ -101,7 +75,7 @@ export default function ServicesPage() {
 
                     {/* Capability pills */}
                     <div className="flex flex-wrap gap-2 mb-8">
-                      {service.capabilities.slice(0, 3).map((cap) => (
+                      {service.capabilities.map((cap) => (
                         <span
                           key={cap}
                           className="text-xs px-3 py-1.5 rounded-full bg-[#bf2a2c]/8 border border-[#bf2a2c]/18 text-[#bf2a2c] font-medium leading-tight"
@@ -127,7 +101,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#1a0808]">
+      <section className="section-space bg-[#1a0808]">
         <div className="section-shell">
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-center">
             <div>

@@ -85,7 +85,7 @@ export default function Footer() {
             <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#c9a84c]">
               Pan-African Development Advisory &middot; Est. Nairobi, Kenya
             </p>
-            <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] font-semibold leading-[0.95] tracking-tight text-white">
+            <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-white">
               CIDE
               <br />
               <span className="text-[#bf2a2c]">Group.</span>
@@ -229,13 +229,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/6">
-        <div className="section-shell overflow-x-auto py-4">
-          <div className="flex items-center gap-0 whitespace-nowrap">
+        <div className="section-shell py-4">
+          <div className="flex flex-wrap items-center justify-center gap-y-2 text-center">
             <span className="mr-5 shrink-0 text-[10px] font-bold uppercase tracking-[0.22em] text-[#bf2a2c]">
               Coverage
             </span>
             {regions.map((region, index) => (
-              <span key={region} className="flex items-center">
+              <span key={region} className="flex items-center whitespace-nowrap">
                 <span className="text-[11px] tracking-wide text-white/65">{region}</span>
                 {index < regions.length - 1 ? <span className="mx-3 text-[10px] text-white/30" aria-hidden="true">·</span> : null}
               </span>
@@ -245,14 +245,14 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/6">
-        <div className="section-shell py-4 space-y-3">
-          <p className="text-[10px] text-white/50 leading-relaxed max-w-3xl">
+        <div className="section-shell py-4 space-y-3 text-center">
+          <p className="mx-auto text-[10px] text-white/50 leading-relaxed max-w-3xl">
             The information on this website is for general informational purposes only. CIDE Group makes no
             representations about the accuracy or completeness of any information on this site.
             &copy; {currentYear} {siteConfig.legalName} &middot; Reg. {siteConfig.companyNumber} &middot; Registered in Kenya.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-5">
+          <div className="flex justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-5">
               {legalLinks.map((link) => (
                 <Link
                   key={link.href}

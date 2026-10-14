@@ -146,7 +146,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     authorRole: "Research & Evidence",
     date: "2026-01-28",
     readTime: "11 min read",
-    image: "/focus-areas/climate-energy-hero.jpg",
+    image: "/focus-areas/climate-arid-landscape.jpg",
     featured: false,
     tags: ["Climate Adaptation", "East Africa", "Policy Brief", "Kenya", "Uganda", "Tanzania"],
   },

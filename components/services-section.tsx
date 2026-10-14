@@ -13,7 +13,7 @@ const cardVariants = {
 
 export default function ServicesSection() {
   return (
-    <section className="py-20 bg-[#fafaf9]">
+    <section className="section-space bg-[#fafaf9]">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
           <div>

@@ -1,3 +1,4 @@
+import PageHero from "@/components/page-hero"
 import { siteConfig } from "@/content/site"
 import Link from "next/link"
 
@@ -14,17 +15,9 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen bg-[#faf7f5]">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <section className="bg-[#1a0808] pt-32 pb-14">
-        <div className="section-shell">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Legal</p>
-          <h1 className="font-serif text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
-            Terms of Use
-          </h1>
-          <p className="text-white/55 text-sm">
-            Last updated: {lastUpdated} &nbsp;&middot;&nbsp; {siteConfig.legalName}
-          </p>
-        </div>
-      </section>
+      <PageHero eyebrow="Legal" title="Terms of Use">
+        <p className="text-sm text-white/55">Last updated: {lastUpdated} &nbsp;&middot;&nbsp; {siteConfig.legalName}</p>
+      </PageHero>
 
       {/* ── Content ────────────────────────────────────────────────────────── */}
       <section className="py-16">

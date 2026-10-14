@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import { projects } from "@/content/projects"
 import Link from "next/link"
-import Image from "next/image"
+import ContentImage from "@/components/content-image"
 import { ArrowRight, MapPin } from "lucide-react"
 
 export default function ProjectsClientPage() {
@@ -29,26 +29,26 @@ export default function ProjectsClientPage() {
   return (
     <>
       {/* ── Filter bar ───────────────────────────────────────────────────── */}
-      <section className="bg-[#faf7f5] border-b border-[#e2d9d9] sticky top-16 z-20">
+      <section id="project-filters" className="scroll-mt-16 bg-[#faf7f5] border-b border-[#e2d9d9] sticky top-16 z-20">
         <div className="section-shell py-4 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mr-1">Theme</span>
-            <button type="button" onClick={() => setSelectedService(null)} className={filterBtn(selectedService === null)}>
+            <button type="button" aria-pressed={selectedService === null} onClick={() => setSelectedService(null)} className={filterBtn(selectedService === null)}>
               All
             </button>
             {allServices.map((s) => (
-              <button key={s} type="button" onClick={() => setSelectedService(s)} className={filterBtn(selectedService === s)}>
+              <button key={s} type="button" aria-pressed={selectedService === s} onClick={() => setSelectedService(s)} className={filterBtn(selectedService === s)}>
                 {s}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mr-1">Country</span>
-            <button type="button" onClick={() => setSelectedCountry(null)} className={filterBtn(selectedCountry === null)}>
+            <button type="button" aria-pressed={selectedCountry === null} onClick={() => setSelectedCountry(null)} className={filterBtn(selectedCountry === null)}>
               All
             </button>
             {allCountries.map((c) => (
-              <button key={c} type="button" onClick={() => setSelectedCountry(c)} className={filterBtn(selectedCountry === c)}>
+              <button key={c} type="button" aria-pressed={selectedCountry === c} onClick={() => setSelectedCountry(c)} className={filterBtn(selectedCountry === c)}>
                 {c}
               </button>
             ))}
@@ -60,80 +60,20 @@ export default function ProjectsClientPage() {
       <section className="py-16 bg-background">
         <div className="section-shell">
           {filtered.length === 0 ? (
-            <div className="py-24 text-center">
+            <div className="py-12 text-center" role="status">
               <p className="text-lg text-text-secondary">No projects match your filters.</p>
+              <button type="button" onClick={() => { setSelectedService(null); setSelectedCountry(null) }} className="mt-4 rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary">Clear filters</button>
             </div>
           ) : (
             <div className="space-y-6">
 
-              {/* First project — full-width feature */}
-              {filtered[0] && (
-                <Link href={`/projects/${filtered[0].id}`} className="group block">
-                  <div className="relative h-105 md:h-130 rounded-xl overflow-hidden">
-                    <Image
-                      src={filtered[0].image}
-                      alt={filtered[0].title}
-                      fill
-                      className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                      sizes="100vw"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/90 via-[#1a0808]/30 to-transparent" />
-
-                    {/* Tags */}
-                    <div className="absolute top-5 left-5 flex flex-wrap gap-2">
-                      {filtered[0].tags.map((tag) => (
-                        <span key={tag} className="text-xs font-semibold bg-white/90 text-[#bf2a2c] px-2.5 py-1 rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                      <div className="flex items-center gap-2 text-white/60 text-xs mb-3">
-                        <MapPin size={11} />
-                        <span>{filtered[0].location}</span>
-                      </div>
-                      <h2 className="font-serif text-2xl md:text-4xl font-semibold text-white mb-3 max-w-2xl leading-tight">
-                        {filtered[0].title}
-                      </h2>
-                      <p className="text-white/70 text-sm md:text-base max-w-xl leading-relaxed mb-5">
-                        {filtered[0].description}
-                      </p>
-                      <span className="inline-flex items-center gap-2 text-sm font-bold text-[#c9a84c] group-hover:gap-3 transition-all">
-                        Read Case Study <ArrowRight size={14} />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              )}
-
-              {/* Remaining — alternating 2-col and 3-col rows */}
-              {filtered.length > 1 && (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filtered.slice(1).map((project) => (
+                  {filtered.map((project) => (
                     <Link key={project.id} href={`/projects/${project.id}`} className="group block">
                       <article className="relative rounded-xl overflow-hidden h-full flex flex-col bg-white border border-[#e2d9d9] hover:border-[#bf2a2c] hover:shadow-xl hover:shadow-[#bf2a2c]/8 transition-all duration-300">
 
                         {/* Image */}
-                        <div className="relative h-48 overflow-hidden shrink-0">
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/60 to-transparent" />
-                          <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
-                            {project.tags.slice(0, 2).map((tag) => (
-                              <span key={tag} className="text-[10px] font-bold bg-white/90 text-[#bf2a2c] px-2 py-0.5 rounded-full uppercase tracking-wide">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
+                        <ContentImage src={project.image} alt={project.title} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px" />
 
                         {/* Content */}
                         <div className="p-6 flex flex-col flex-1">
@@ -148,9 +88,12 @@ export default function ProjectsClientPage() {
                             {project.description}
                           </p>
 
+                          <div className="mb-4 flex flex-wrap gap-2">
+                            {project.tags.map((tag) => <span key={tag} className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">{tag}</span>)}
+                          </div>
                           {/* Outcomes */}
                           <div className="space-y-1 border-t border-[#e2d9d9] pt-4 mb-4">
-                            {project.outcomes.slice(0, 2).map((o) => (
+                            {project.outcomes.map((o) => (
                               <div key={o} className="flex items-start gap-2">
                                 <span className="w-1 h-1 rounded-full bg-[#bf2a2c] shrink-0 mt-1.5" />
                                 <span className="text-[11px] text-text-muted leading-snug">{o}</span>
@@ -166,7 +109,6 @@ export default function ProjectsClientPage() {
                     </Link>
                   ))}
                 </div>
-              )}
             </div>
           )}
         </div>

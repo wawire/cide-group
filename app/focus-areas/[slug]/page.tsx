@@ -1,7 +1,10 @@
+import PageHero from "@/components/page-hero"
+import HeroBackLink from "@/components/hero-back-link"
+import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Megaphone, MapPin } from "lucide-react"
+import { ArrowRight, Megaphone, MapPin } from "lucide-react"
 import { focusAreas, getFocusAreaBySlug, projects, services } from "@/content"
 import { siteConfig } from "@/content/site"
 
@@ -52,35 +55,23 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[62vh] flex items-end overflow-hidden">
-        <Image src={focusArea.image} alt={focusArea.title} fill priority className="object-cover object-center" />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/55 to-[#bf2a2c]/15" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <Link
-            href="/focus-areas"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white/75 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft size={15} />
-            All Focus Areas
-          </Link>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Focus Area</p>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-semibold text-white mb-5 max-w-4xl leading-[0.95]">
-            {focusArea.title}
-          </h1>
-          <p className="text-xl text-white/75 max-w-2xl leading-relaxed mb-9">{focusArea.summary}</p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-          >
-            Work With Us Here
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-      </section>
+      <PageHero
+        breadcrumb={<HeroBackLink href="/focus-areas">All Focus Areas</HeroBackLink>}
+        eyebrow="Focus Area"
+        title={focusArea.title}
+        description={focusArea.summary}
+      >
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+        >
+          Work With Us Here
+          <ArrowRight size={15} />
+        </Link>
+      </PageHero>
 
       {/* ── Overview — two column ─────────────────────────────────────────── */}
-      <section className="py-20 bg-background">
+      <section className="section-space bg-background">
         <div className="section-shell grid lg:grid-cols-[1fr_340px] gap-12 items-start">
           <div>
             <p className="section-kicker mb-4">Overview</p>
@@ -117,7 +108,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
       </section>
 
       {/* ── Practice Areas — editorial numbered list ──────────────────────── */}
-      <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
         <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           <div className="lg:sticky lg:top-24">
             <p className="section-kicker mb-4">Practice Areas</p>
@@ -142,7 +133,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
 
       {/* ── Featured Projects ─────────────────────────────────────────────── */}
       {featuredProjects.length > 0 && (
-        <section className="py-20 bg-background">
+        <section className="section-space bg-background">
           <div className="section-shell">
             <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
               <div>
@@ -162,7 +153,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain"
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/70 to-transparent" />
                       <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-xs text-white/70">
@@ -189,7 +180,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
 
       {/* ── Campaigns ────────────────────────────────────────────────────── */}
       {focusArea.campaigns && focusArea.campaigns.length > 0 && (
-        <section className="py-20 bg-[#1a0808]">
+        <section className="section-space bg-[#1a0808]">
           <div className="section-shell">
             <div className="mb-10">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Ongoing Campaigns</p>
@@ -231,7 +222,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
 
       {/* ── Related Services ─────────────────────────────────────────────── */}
       {relatedServices.length > 0 && (
-        <section className="py-20 bg-[#fafaf9]">
+        <section className="section-space bg-[#fafaf9]">
           <div className="section-shell">
             <div className="flex items-end justify-between mb-10">
               <div>
@@ -253,7 +244,7 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="object-cover object-center group-hover:scale-[1.04] transition-transform duration-500"
+                      className="object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/80 to-transparent" />
@@ -273,42 +264,26 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
       )}
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section
-        className="relative py-28 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #bf2a2c 0%, #9a1f21 50%, #1a0808 100%)" }}
+      <PageCallout
+        eyebrow="Work With Us"
+        title="Need support in this area?"
+        description="Let's design an engagement that fits your context, mandate, and implementation reality."
       >
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-white/5 blur-[80px] rounded-full" />
-        <div className="relative z-10 w-full max-w-3xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Work With Us</p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-5 leading-tight">
-            Need support in this area?
-          </h2>
-          <p className="text-lg text-white/72 leading-relaxed max-w-xl mx-auto mb-10">
-            Let&apos;s design an engagement that fits your context, mandate, and implementation reality.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-            >
-              Start a Conversation
-            </Link>
-            <Link
-              href="/services"
-              className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-            >
-              Explore Our Services
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/contact"
+            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
+          >
+            Start a Conversation
+          </Link>
+          <Link
+            href="/services"
+            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
+          >
+            Explore Our Services
+          </Link>
         </div>
-      </section>
+      </PageCallout>
     </main>
   )
 }

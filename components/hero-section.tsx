@@ -155,7 +155,7 @@ export default function HeroSection() {
     <section
       aria-label="CIDE Group featured focus areas"
       aria-roledescription="carousel"
-      className="group/hero relative isolate min-h-[94vh] overflow-hidden bg-[#110909]"
+      className="home-hero group/hero relative isolate overflow-hidden bg-[#110909]"
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
       onTouchStart={handleTouchStart}
@@ -182,12 +182,10 @@ export default function HeroSection() {
                 fill
                 priority={index === 0}
                 fetchPriority={index === 0 ? "high" : undefined}
-                loading={index === 0 ? "eager" : "lazy"}
+                loading="eager"
                 quality={56}
                 sizes="100vw"
-                className={`object-cover object-center will-change-transform transition-transform duration-[7000ms] ease-out ${
-                  isActiveSlide ? "scale-100" : "scale-105"
-                }`}
+                className="object-cover object-center"
               />
             </div>
           )
@@ -215,9 +213,9 @@ export default function HeroSection() {
         <ChevronRight size={20} />
       </button>
 
-      <div className="relative z-10 flex min-h-[94vh] items-center px-4 py-20">
+      <div className="home-hero relative z-10 flex items-center py-14 md:py-16">
         <div className="section-shell w-full">
-          <div className="max-w-[660px]">
+          <div className="max-w-[620px]">
             <div className="mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/58">
               <span className="h-px w-9 bg-[#bf2a2c]" />
               <span>{siteConfig.heroEyebrow}</span>
@@ -233,7 +231,7 @@ export default function HeroSection() {
               >
                 <motion.h1
                   variants={textLine}
-                  className="font-serif text-[clamp(3rem,5.6vw,5.8rem)] font-semibold leading-[0.95] tracking-tight text-white"
+                  className="display-title font-serif font-semibold tracking-tight text-white"
                 >
                   <span className="block text-white">{currentSlide.titleLead}</span>
                   <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
@@ -241,7 +239,7 @@ export default function HeroSection() {
 
                 <motion.p
                   variants={textLine}
-                  className="mt-6 max-w-[56ch] text-lg leading-8 text-white/72 md:text-[1.15rem] md:leading-9"
+                  className="mt-5 max-w-[54ch] text-base leading-7 text-white/72 md:text-lg md:leading-8"
                 >
                   {currentSlide.description}
                 </motion.p>

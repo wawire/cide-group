@@ -1,3 +1,5 @@
+import PageCallout from "@/components/page-callout"
+import PageHero from "@/components/page-hero"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
@@ -61,37 +63,22 @@ export default function CareersPage() {
     <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[62vh] flex items-end overflow-hidden">
-        <Image
-          src="/hero/communications-mel-filming.png"
-          alt="CIDE team working on development and communications programmes"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/92 via-[#1a0808]/55 to-[#bf2a2c]/15" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-        <div className="relative z-10 section-shell pb-16 pt-40">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Careers</p>
-          <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white mb-5 leading-[0.95] max-w-4xl">
-            Help build Africa's development future
-          </h1>
-          <p className="text-xl text-white/75 max-w-2xl leading-relaxed mb-9">
-            CIDE Group brings together practitioners, researchers, and communicators serious about locally grounded,
-            evidence-driven impact across Africa.
-          </p>
-          <a
-            href={`mailto:${siteConfig.email}?subject=Expression of Interest – CIDE Group`}
-            className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-          >
-            Send an Expression of Interest
-            <ArrowRight size={15} />
-          </a>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Careers"
+        title="Help build Africa's development future"
+        description="CIDE Group brings together practitioners, researchers, and communicators serious about locally grounded, evidence-driven impact across Africa."
+      >
+        <a
+          href={`mailto:${siteConfig.email}?subject=Expression of Interest – CIDE Group`}
+          className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+        >
+          Send an Expression of Interest
+          <ArrowRight size={15} />
+        </a>
+      </PageHero>
 
       {/* ── Why CIDE — editorial numbered list ────────────────────────────── */}
-      <section className="py-20 bg-background">
+      <section className="section-space bg-background">
         <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           <div className="lg:sticky lg:top-24">
             <p className="section-kicker mb-4">Why CIDE Group</p>
@@ -122,7 +109,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Areas of work + Values — two-col on light bg ──────────────────── */}
-      <section className="py-20 bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
         <div className="section-shell grid lg:grid-cols-2 gap-12 items-start">
 
           {/* Areas of work */}
@@ -200,53 +187,36 @@ export default function CareersPage() {
             </p>
             <a
               href={`mailto:${siteConfig.email}?subject=Expression of Interest – CIDE Group`}
-              className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide self-start"
+              className="inline-flex max-w-full items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-semibold px-5 py-3 rounded-lg text-sm self-start"
             >
-              {siteConfig.email}
-              <ArrowRight size={15} />
+              <span className="min-w-0 break-all">{siteConfig.email}</span>
+              <ArrowRight size={15} className="shrink-0" />
             </a>
           </div>
         </div>
       </section>
 
       {/* ── CTA — rich dark ───────────────────────────────────────────────── */}
-      <section
-        className="relative py-28 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #bf2a2c 0%, #9a1f21 50%, #1a0808 100%)" }}
+      <PageCallout
+        eyebrow="Looking to Partner?"
+        title="Want to collaborate, not join?"
+        description="If you are an organisation or institution looking to work with us on development programmes, visit our partnerships page."
       >
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-white/5 blur-[80px] rounded-full" />
-        <div className="relative z-10 w-full max-w-3xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">Looking to Partner?</p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-5 leading-tight">
-            Want to collaborate, not join?
-          </h2>
-          <p className="text-lg text-white/72 leading-relaxed max-w-xl mx-auto mb-10">
-            If you are an organisation or institution looking to work with us on development programmes, visit our
-            partnerships page.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/partners"
-              className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-            >
-              Partnership Approach
-            </Link>
-            <Link
-              href="/contact"
-              className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-            >
-              Get in Touch
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/partners"
+            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
+          >
+            Partnership Approach
+          </Link>
+          <Link
+            href="/contact"
+            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
+          >
+            Get in Touch
+          </Link>
         </div>
-      </section>
+      </PageCallout>
     </main>
   )
 }

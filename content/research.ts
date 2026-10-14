@@ -7,6 +7,7 @@
   date: string
   readTime: string
   featured: boolean
+  published: boolean
   image: string
   downloadUrl?: string
   externalUrl?: string
@@ -23,6 +24,7 @@ export const researchResources: ResearchResource[] = [
     date: "December 2024",
     readTime: "15 min",
     featured: true,
+    published: false,
     image: "/research/digital-dashboard-real-time-programme-data.jpg",
   },
   {
@@ -35,6 +37,7 @@ export const researchResources: ResearchResource[] = [
     date: "November 2024",
     readTime: "8 min",
     featured: false,
+    published: false,
     image: "/research/community-members-advocacy-training-workshop.jpg",
   },
   {
@@ -46,6 +49,7 @@ export const researchResources: ResearchResource[] = [
     date: "October 2024",
     readTime: "3 min",
     featured: false,
+    published: false,
     image: "/projects/digital-campaign-dashboard.jpg",
   },
   {
@@ -57,6 +61,7 @@ export const researchResources: ResearchResource[] = [
     date: "September 2024",
     readTime: "20 min",
     featured: false,
+    published: false,
     image: "/projects/data-analysis-workshop.jpg",
   },
   {
@@ -68,6 +73,7 @@ export const researchResources: ResearchResource[] = [
     date: "August 2024",
     readTime: "12 min",
     featured: false,
+    published: false,
     image: "/research/community-health-workers-mobile-tablets-rural.jpg",
   },
   {
@@ -79,10 +85,12 @@ export const researchResources: ResearchResource[] = [
     date: "July 2024",
     readTime: "10 min",
     featured: false,
+    published: false,
     image: "/projects/health-workers-with-tablets.jpg",
   },
 ]
 
-export const featuredResearchResource =
-  researchResources.find((resource) => resource.featured) ?? researchResources[0]
+export const publishedResearchResources = researchResources.filter(
+  (resource) => resource.published && Boolean(resource.downloadUrl || resource.externalUrl),
+)
 

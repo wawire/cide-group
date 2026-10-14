@@ -1,3 +1,5 @@
+import PageHero from "@/components/page-hero"
+import HeroBackLink from "@/components/hero-back-link"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -38,28 +40,10 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <main className="min-h-screen">
-      <section className="relative flex min-h-[70vh] items-end overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808] via-[#1a0808]/50 to-transparent" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-linear-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
-
-        <div className="section-shell relative z-10 w-full pb-16 pt-40">
-          <Link
-            href="/projects"
-            className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-white/60 transition-colors hover:text-white"
-          >
-            <ArrowLeft size={14} />
-            All Projects
-          </Link>
-
-          <div className="mb-5 flex flex-wrap gap-2">
+      <PageHero
+        breadcrumb={<HeroBackLink href="/projects">All Projects</HeroBackLink>}
+        eyebrow={
+          <div className="flex flex-wrap gap-2 normal-case tracking-normal">
             {project.tags.map((tag) => (
               <span
                 key={tag}
@@ -69,20 +53,17 @@ export default async function ProjectDetailPage({ params }: Props) {
               </span>
             ))}
           </div>
-
-          <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-            <h1 className="max-w-4xl font-serif text-4xl font-semibold leading-[0.95] text-white md:text-6xl">
-              {project.title}
-            </h1>
-            <div className="flex shrink-0 items-center gap-2 text-sm text-white/55">
-              <MapPin size={13} className="text-[#c9a84c]" />
-              <span>{project.location}</span>
-            </div>
+        }
+        title={project.title}
+        titleAside={
+          <div className="flex shrink-0 items-center gap-2 text-sm text-white/55">
+            <MapPin size={13} className="text-[#c9a84c]" />
+            <span>{project.location}</span>
           </div>
-        </div>
-      </section>
+        }
+      />
 
-      <section className="bg-background py-20">
+      <section className="section-space bg-background">
         <div className="section-shell grid items-start gap-14 lg:grid-cols-[1fr_320px]">
           <div>
             <p className="mb-12 max-w-2xl border-l-2 border-[#bf2a2c] pl-6 text-lg leading-relaxed text-text-secondary md:text-xl">
@@ -173,7 +154,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       src={relatedProject.image}
                       alt={relatedProject.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain"
                       sizes="33vw"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/70 to-transparent" />

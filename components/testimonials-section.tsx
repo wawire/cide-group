@@ -79,7 +79,7 @@ export default function TestimonialsSection() {
   const t = testimonials[current]
 
   return (
-    <section className="py-20 bg-surface">
+    <section className="section-space bg-surface">
       <div className="section-shell">
         <div className="text-center mb-10">
           <p className="section-kicker mb-4">Partner Voices</p>

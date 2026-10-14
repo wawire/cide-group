@@ -1,7 +1,8 @@
-/** @type {import('next').NextConfig} */
+const isDevelopment = process.env.NODE_ENV === "development"
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com`,
   "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com",
@@ -14,11 +15,14 @@ const csp = [
   "upgrade-insecure-requests",
 ].join("; ")
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
+  agentRules: false,
   poweredByHeader: false,
   compress: true,
   output: "standalone",
   images: {
+    qualities: [50, 52, 56, 60, 75],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {

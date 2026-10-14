@@ -36,8 +36,8 @@ export function ProjectsMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
       }`}
     >
         <div className="w-full bg-background border-b border-border shadow-lg">
-          <div className="section-shell py-12">
-            <div className="flex items-start justify-between mb-10">
+          <div className="navigation-panel section-shell">
+            <div className="flex items-start justify-between mb-5">
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-2">Our Impact</h2>
                 <p className="text-text-secondary max-w-xl">
@@ -46,7 +46,7 @@ export function ProjectsMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
               </div>
               <div className="flex gap-2">
                 <Link
-                  href="/projects"
+                  href="/projects#project-filters"
                   onClick={onClose}
                   className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-foreground hover:text-primary border border-border rounded-lg hover:border-primary transition-all hover:bg-surface"
                 >
@@ -64,13 +64,13 @@ export function ProjectsMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-3 gap-4 mb-5">
               {featuredProjects.map((project) => (
                 <Link
                   key={project.id}
                   href={`/projects/${project.id}`}
                   onClick={onClose}
-                  className="group/card p-5 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all duration-200 flex flex-col"
+                  className="group/card p-3 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all duration-200 flex flex-col"
                 >
                   <div className="inline-flex items-center gap-1 mb-4 px-3 py-1 bg-surface rounded-full text-xs font-semibold text-primary w-fit">
                     <Globe className="w-3 h-3" />
@@ -97,20 +97,22 @@ export function ProjectsMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
               ))}
             </div>
 
-            <div className="grid grid-cols-3 gap-8 py-8 bg-surface/50 rounded-lg px-8 mb-8 border border-border/50">
+            <div className="grid grid-cols-3 gap-4 rounded-lg border border-border/50 bg-surface/50 px-4 py-4 mb-5">
               {menuStats.map((stat) => {
                 const Icon = stat.icon
                 return (
-                  <div key={stat.label} className="flex flex-col items-center text-center">
-                    <Icon className="w-5 h-5 text-primary/80 mb-2" />
-                    <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                    <p className="text-sm text-text-secondary font-medium">{stat.label}</p>
+                  <div key={stat.label} className="flex items-center justify-center gap-3">
+                    <Icon className="h-5 w-5 shrink-0 text-primary/80" />
+                    <div>
+                      <div className="text-2xl font-bold leading-tight text-primary">{stat.number}</div>
+                      <p className="text-xs text-text-secondary font-medium">{stat.label}</p>
+                    </div>
                   </div>
                 )
               })}
             </div>
 
-            <div className="border-t border-border pt-8 flex justify-between items-center">
+            <div className="border-t border-border pt-4 flex justify-between items-center">
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-foreground">Real impact across multiple sectors</p>
                 <p className="text-xs text-text-secondary">

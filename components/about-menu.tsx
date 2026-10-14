@@ -61,15 +61,15 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
       }`}
     >
         <div className="w-full bg-background border-b border-border shadow-lg">
-          <div className="section-shell py-12">
-            <div className="mb-10">
+          <div className="navigation-panel section-shell">
+            <div className="mb-5">
               <h2 className="text-2xl font-bold text-foreground mb-2">About CIDE Group</h2>
               <p className="text-text-secondary">
                 Company profile, leadership team, partnership approach, and thematic focus areas.
               </p>
             </div>
 
-            <div className="grid grid-cols-5 gap-6 mb-10">
+            <div className="grid grid-cols-5 gap-4 mb-5">
               {aboutLinks.map((link) => {
                 const Icon = link.icon
                 const active = isActive(link.href)
@@ -80,7 +80,7 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
                     role="menuitem"
                     onClick={onClose}
                     className={cn(
-                      "group/item flex flex-col p-5 rounded-lg border transition-all duration-200",
+                      "group/item flex flex-col p-3 rounded-lg border transition-all duration-200",
                       active
                         ? "border-primary bg-primary/5"
                         : "border-transparent hover:border-primary hover:bg-primary/5",
@@ -88,13 +88,13 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
                   >
                     <div
                       className={cn(
-                        "flex items-center justify-center w-14 h-14 rounded-lg transition-all duration-200 mb-4",
+                        "flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 mb-3",
                         active
                           ? "bg-primary text-white"
                           : "bg-surface text-primary group-hover/item:bg-primary group-hover/item:text-white",
                       )}
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-5 h-5" />
                     </div>
 
                     <h3
@@ -126,7 +126,7 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
               })}
             </div>
 
-            <div className="border-t border-border pt-8 flex justify-between items-center">
+            <div className="border-t border-border pt-4 flex justify-between items-center">
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-foreground">Ready to work together?</p>
                 <p className="text-xs text-text-secondary">

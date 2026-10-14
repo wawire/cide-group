@@ -14,6 +14,7 @@
   --accent-brown: #7c4a1d;
   --accent-gold: #c9a84c;
   --accent-warm: #f5f0eb;
+  --hero-background: #1a0808;
 
   --background: #fafaf9;
   --foreground: #1a1010;
@@ -45,6 +46,10 @@
   --chart-5: oklch(0.769 0.188 70.08);
 
   --radius: 0.75rem;
+  --section-space: clamp(3rem, 5.5vw, 4.5rem);
+  --callout-space: clamp(3.5rem, 6vw, 5rem);
+  --page-title-size: clamp(1.625rem, 2.5vw, 2.25rem);
+  --display-title-size: clamp(2.5rem, 4.8vw, 4.5rem);
 
   --sidebar: #ffffff;
   --sidebar-foreground: #1a1010;
@@ -89,6 +94,14 @@
 }
 
 @theme inline {
+  --text-lg: 1.0625rem;
+  --text-xl: 1.1875rem;
+  --text-2xl: 1.375rem;
+  --text-3xl: 1.75rem;
+  --text-4xl: 2.125rem;
+  --text-5xl: 2.625rem;
+  --text-6xl: 3.25rem;
+  --text-7xl: 4rem;
   --font-sans: var(--font-manrope);
   --font-serif: var(--font-source-serif);
   --font-mono: "Consolas", "Courier New", monospace;
@@ -99,6 +112,8 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-accent-gold: var(--accent-gold);
+  --color-hero-background: var(--hero-background);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -154,6 +169,7 @@
   h3,
   h4 {
     @apply tracking-tight;
+    text-wrap: balance;
   }
 
   p {
@@ -171,14 +187,142 @@
   }
 }
 
+@keyframes partner-logo-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.experience-map.leaflet-container {
+  background: #0d3530;
+  font-family: inherit;
+}
+
+.experience-map-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+}
+
+.partner-logo-viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.partner-logo-track {
+  display: flex;
+  width: 200%;
+  min-width: 1920px;
+  animation: partner-logo-scroll 45s linear infinite;
+}
+
+.partner-logo-group {
+  display: flex;
+  flex: 0 0 50%;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.partner-logo-link {
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
+}
+
+.partner-logo-link:hover,
+.partner-logo-link:focus-visible {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: translateY(-4px) scale(1.04);
+}
+
+.partner-marquee:hover .partner-logo-track,
+.partner-marquee:focus-within .partner-logo-track {
+  animation-play-state: paused;
+}
+
+.partner-logo-viewport:focus-within .partner-logo-track {
+  animation: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-logo-viewport {
+    overflow-x: auto;
+    mask-image: none;
+  }
+
+  .partner-logo-track {
+    width: max-content;
+    min-width: 0;
+    animation: none;
+  }
+
+  .partner-logo-group {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 0.75rem 0;
+  }
+
+  .partner-logo-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .partner-logo-link {
+    transition: none;
+  }
+
+  .partner-logo-link:hover,
+  .partner-logo-link:focus-visible {
+    transform: none;
+  }
+}
+
 /* section-shell outside @layer so it wins over all Tailwind utilities */
 .section-shell {
-  width: min(92%, 1280px) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  width: min(calc(100% - 2.5rem), 1200px);
+  margin-inline: auto;
 }
 
 @layer components {
+  .navigation-panel {
+    max-height: calc(100vh - 4rem);
+    max-height: calc(100svh - 4rem);
+    overflow-y: auto;
+    padding-block: 1.5rem;
+  }
+
+  .section-space {
+    padding-block: var(--section-space);
+  }
+
+  .callout-space {
+    padding-block: var(--callout-space);
+  }
+
+  .home-hero {
+    min-height: clamp(31rem, 65vh, 40rem);
+    min-height: clamp(31rem, 65svh, 40rem);
+  }
+
+  .page-title {
+    font-size: var(--page-title-size);
+    line-height: 1.15;
+  }
+
+  .display-title {
+    font-size: var(--display-title-size);
+    line-height: 1.08;
+  }
+
+  .page-callout {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark) 50%, var(--hero-background));
+  }
+
   .skip-link {
     position: fixed;
     left: 1rem;
@@ -200,7 +344,9 @@
   }
 
   .section-heading {
-    @apply text-3xl md:text-4xl font-semibold text-foreground leading-tight;
+    @apply font-semibold text-foreground;
+    font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+    line-height: 1.2;
   }
 
   .section-kicker {
