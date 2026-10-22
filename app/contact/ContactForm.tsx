@@ -126,8 +126,8 @@ export default function ContactForm() {
     `w-full rounded-lg border ${error ? "border-red-400" : "border-[#e2d9d9]"} bg-white px-4 py-3 text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-[#bf2a2c] focus:ring-2 focus:ring-[#bf2a2c]/15 transition-colors`
 
   return (
-    <section className="bg-background">
-      <div className="grid lg:grid-cols-[420px_1fr] min-h-[70vh]">
+    <section className="section-space bg-background">
+      <div className="section-shell grid overflow-hidden rounded-xl border border-border lg:grid-cols-[minmax(0,1fr)_minmax(0,1.65fr)]">
 
         {/* ── Left — dark info panel ──────────────────────────────────────── */}
         <div className="relative bg-[#1a0808] flex flex-col overflow-hidden">
@@ -145,18 +145,18 @@ export default function ContactForm() {
             <div className="absolute inset-0 bg-linear-to-b from-[#1a0808]/60 via-[#1a0808]/80 to-[#1a0808]" />
           </div>
 
-          <div className="relative z-10 flex flex-col h-full p-10 lg:p-12">
+          <div className="relative z-10 flex h-full flex-col p-6 sm:p-8 lg:p-10">
             {/* Kicker */}
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c] mb-8">
               Contact CIDE Group
             </p>
 
             {/* Heading */}
-            <div className="mb-auto">
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight mb-5">
+            <div>
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-white leading-tight mb-5">
                 Let's build something lasting together.
               </h2>
-              <p className="text-white/55 leading-relaxed text-sm">
+              <p className="text-white/80 leading-relaxed text-sm">
                 Whether you are a government agency, donor, NGO, or private sector partner — we are ready to
                 listen and co-design practical solutions for your context.
               </p>
@@ -197,7 +197,7 @@ export default function ContactForm() {
         </div>
 
         {/* ── Right — form ──────────────────────────────────────────────── */}
-        <div className="flex flex-col justify-center px-6 py-14 lg:px-16 lg:py-20 bg-[#faf7f5]">
+        <div className="flex flex-col bg-card p-6 sm:p-8 lg:p-10">
           <div className="max-w-xl w-full mx-auto">
 
             {submitted ? (
