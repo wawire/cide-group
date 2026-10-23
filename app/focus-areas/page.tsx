@@ -71,7 +71,7 @@ export default function FocusAreasPage() {
               src="/focus-areas/livelihoods-women-farming.png"
               alt="CIDE community development work"
               fill
-              sizes="(min-width: 1280px) 1200px, 100vw"
+              sizes="(min-width: 1640px) 1600px, calc(100vw - 2.5rem)"
               className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-[#1a0808]/80" />

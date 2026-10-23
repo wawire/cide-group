@@ -22,7 +22,7 @@ export default function ContactPage() {
     <main className="min-h-screen">
       <PageHero
         eyebrow="Get in Touch"
-        title="Let's Co-Create Lasting Change Together"
+        title="Contact us"
         description="Whether you are a government agency, donor organization, NGO, or civil society partner - we are ready to listen and co-design practical solutions."
       />
 
