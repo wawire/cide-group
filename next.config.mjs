@@ -18,6 +18,9 @@ const csp = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   agentRules: false,
+  experimental: {
+    agentUpgrade: "security",
+  },
   poweredByHeader: false,
   compress: true,
   output: "standalone",
