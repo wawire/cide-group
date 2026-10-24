@@ -157,7 +157,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navigation />
-        <div id="main-content" role="main" tabIndex={-1}>
+        <div id="main-content" tabIndex={-1}>
           <PageTransition>{children}</PageTransition>
         </div>
         <Footer />

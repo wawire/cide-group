@@ -50,11 +50,10 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
   return (
     <div
       id={menuId}
-      role="menu"
       aria-hidden={!open}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`absolute left-0 right-0 top-full z-40 transition-all duration-200 ${
+      className={`hidden lg:block absolute left-0 right-0 top-full z-40 transition-all duration-200 ${
         open
           ? "opacity-100 visible translate-y-0 pointer-events-auto"
           : "opacity-0 invisible -translate-y-1 pointer-events-none"
@@ -69,7 +68,7 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
               </p>
             </div>
 
-            <div className="grid grid-cols-5 gap-4 mb-5">
+            <div className="grid grid-cols-2 xl:grid-cols-5 gap-4 mb-5">
               {aboutLinks.map((link) => {
                 const Icon = link.icon
                 const active = isActive(link.href)
@@ -77,7 +76,6 @@ export function AboutMenu({ open, onClose, onMouseEnter, onMouseLeave, menuId, i
                   <Link
                     key={link.href}
                     href={link.href}
-                    role="menuitem"
                     onClick={onClose}
                     className={cn(
                       "group/item flex flex-col p-3 rounded-lg border transition-all duration-200",

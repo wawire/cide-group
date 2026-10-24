@@ -24,34 +24,34 @@ const groupConfig: Record<
     label: "Advisory Board",
     description:
       "Distinguished international specialists providing strategic guidance on CIDE Group's global advisory and programme work.",
-    lineClass: "bg-[#c9a84c]",
-    kickerClass: "text-[#c9a84c]",
-    stripClass: "bg-[#c9a84c]",
-    badgeBg: "bg-[#c9a84c]/15",
-    badgeText: "text-[#7a5c0e]",
-    borderClass: "border-[#c9a84c]",
+    lineClass: "bg-accent-gold",
+    kickerClass: "text-accent-gold",
+    stripClass: "bg-accent-gold",
+    badgeBg: "bg-accent-gold/15",
+    badgeText: "text-accent-brown",
+    borderClass: "border-accent-gold",
   },
   Secretariat: {
     label: "Secretariat",
     description:
       "Executive leadership and core operations team directing strategy, partnerships, and organisational management.",
-    lineClass: "bg-[#bf2a2c]",
-    kickerClass: "text-[#bf2a2c]",
-    stripClass: "bg-[#bf2a2c]",
-    badgeBg: "bg-[#bf2a2c]/10",
-    badgeText: "text-[#bf2a2c]",
-    borderClass: "border-[#bf2a2c]",
+    lineClass: "bg-primary",
+    kickerClass: "text-primary",
+    stripClass: "bg-primary",
+    badgeBg: "bg-primary/10",
+    badgeText: "text-primary",
+    borderClass: "border-primary",
   },
   "Technical Advisory": {
     label: "Technical Advisory",
     description:
       "Senior thematic specialists leading CIDE Group's work across climate, education, safeguarding, inclusion, and communications.",
-    lineClass: "bg-[#140909]",
-    kickerClass: "text-[#140909]",
-    stripClass: "bg-[#140909]",
-    badgeBg: "bg-[#140909]/8",
-    badgeText: "text-[#4a3030]",
-    borderClass: "border-[#140909]/40",
+    lineClass: "bg-hero-background",
+    kickerClass: "text-hero-background",
+    stripClass: "bg-hero-background",
+    badgeBg: "bg-hero-background/8",
+    badgeText: "text-text-secondary",
+    borderClass: "border-hero-background/40",
   },
 }
 
@@ -70,13 +70,13 @@ function MemberCard({
     <button
       type="button"
       onClick={() => onClick(member)}
-      className="group w-full h-full text-left flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bf2a2c] focus-visible:ring-offset-2 rounded-2xl"
+      className="group w-full h-full text-left flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"
     >
       {/* Photo at 50% card width — centred, thin accent border on bottom + right */}
       <div className="w-1/2 mx-auto">
         <div
           className={cn(
-            "relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-[#ede5e0] border-b-2 border-r-2",
+            "relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-surface-secondary border-b-2 border-r-2",
             borderClass,
           )}
         >
@@ -90,10 +90,10 @@ function MemberCard({
       </div>
       {/* Text always at the top of its area, wraps naturally */}
       <div className="mt-3.5 text-center flex-1">
-        <p className="font-bold text-[#140909] text-[15px] leading-snug group-hover:text-[#bf2a2c] transition-colors duration-200">
+        <p className="font-bold text-hero-background text-[15px] leading-snug group-hover:text-primary transition-colors duration-200">
           {member.name}
         </p>
-        <p className="mt-1 text-[13px] text-[#7a6666] leading-snug break-words">
+        <p className="mt-1 text-[13px] text-text-muted leading-snug break-words">
           {member.title}
         </p>
       </div>
@@ -135,14 +135,14 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
           type="button"
           onClick={onClose}
           aria-label="Close profile"
-          className="absolute top-3 right-3 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#f0eae6] hover:bg-[#e2d9d4] transition-colors"
+          className="absolute top-3 right-3 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-surface-secondary hover:bg-border transition-colors"
         >
-          <X size={16} strokeWidth={2.5} className="text-[#5a4a4a]" />
+          <X size={16} strokeWidth={2.5} className="text-text-secondary" />
         </button>
 
         <div className="grid md:grid-cols-[380px_1fr]">
           {/* Photo — landscape crop on mobile, portrait on desktop */}
-          <div className="relative aspect-[4/3] sm:aspect-[3/2] md:aspect-auto md:min-h-115 bg-[#ede5e0] shrink-0">
+          <div className="relative aspect-[4/3] sm:aspect-[3/2] md:aspect-auto md:min-h-115 bg-surface-secondary shrink-0">
             <TeamPortrait name={member.name} src={member.image} sizes="300px" />
           </div>
 
@@ -153,20 +153,20 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
             </span>
 
             <div>
-              <h2 className="text-lg sm:text-xl font-bold text-[#140909] leading-tight">{member.name}</h2>
-              <p className="mt-1 text-xs sm:text-sm text-[#6b5c5c] leading-snug font-medium">{member.title}</p>
+              <h2 className="text-lg sm:text-xl font-bold text-hero-background leading-tight">{member.name}</h2>
+              <p className="mt-1 text-xs sm:text-sm text-text-muted leading-snug font-medium">{member.title}</p>
             </div>
 
-            <hr className="border-[#ede5e0]" />
+            <hr className="border-surface-secondary" />
 
-            <p className="text-[13px] sm:text-[14px] leading-[1.7] text-[#4a3a3a] flex-1">{member.bio}</p>
+            <p className="text-[13px] sm:text-[14px] leading-[1.7] text-text-secondary flex-1">{member.bio}</p>
 
             {member.expertise.length > 0 && (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#9a8888] mb-2">Focus areas</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-text-muted mb-2">Focus areas</p>
                 <div className="flex flex-wrap gap-1.5">
                   {member.expertise.map((tag) => (
-                    <span key={tag} className="px-2 sm:px-2.5 py-1 rounded-full bg-[#f5f0ec] text-[11px] sm:text-[12px] font-medium text-[#6b5c5c]">
+                    <span key={tag} className="px-2 sm:px-2.5 py-1 rounded-full bg-surface-secondary text-[11px] sm:text-[12px] font-medium text-text-muted">
                       {tag}
                     </span>
                   ))}
@@ -198,7 +198,7 @@ export default function TeamGrid() {
               {/* Section heading — single line with left accent */}
               <div className={cn("mb-6 md:mb-8 pl-3 md:pl-4 border-l-4", cfg.borderClass)}>
                 <h2 className={cn("text-base sm:text-lg md:text-xl font-bold leading-tight", cfg.kickerClass)}>{cfg.label}</h2>
-                <p className="mt-1.5 text-xs sm:text-sm text-[#7a6666] max-w-xl leading-relaxed">{cfg.description}</p>
+                <p className="mt-1.5 text-xs sm:text-sm text-text-muted max-w-xl leading-relaxed">{cfg.description}</p>
               </div>
 
               {/* Card grid — flex-wrap so partial rows centre automatically */}

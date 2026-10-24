@@ -1,23 +1,16 @@
-import { Card } from "@/components/ui/card"
+import SectionHeading from "@/components/section-heading"
+import ProjectCard from "@/components/project-card"
 import { Button } from "@/components/ui/button"
 import { featuredProjects } from "@/content/projects"
-import ContentImage from "@/components/content-image"
 import Link from "next/link"
-import { ArrowRight, MapPin } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export default function FeaturedProjectsSection() {
   return (
     <section className="section-space bg-white">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
-          <div>
-            <p className="section-kicker mb-4">Impact in Action</p>
-            <h2 className="section-heading">
-              Real Work.
-              <br />
-              Lasting Change.
-            </h2>
-          </div>
+          <SectionHeading kicker="Impact in Action" title={<>Real Work.<br />Lasting Change.</>} />
           <div>
             <p className="text-lg text-text-secondary leading-relaxed">
               Local leadership, rigorous evidence, and implementation discipline — creating change that outlasts our engagement.
@@ -27,53 +20,19 @@ export default function FeaturedProjectsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {featuredProjects.map((project) => (
-            <Link key={project.id} href={`/projects/${project.id}`} className="group block h-full">
-              <Card className="overflow-hidden bg-white border border-[#e2d9d9] hover:border-[#bf2a2c] hover:shadow-2xl hover:shadow-[#bf2a2c]/10 transition-all duration-300 h-full flex flex-col">
-                <ContentImage src={project.image} alt={project.title} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px" />
-
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-1.5 text-xs text-text-muted mb-3">
-                    <MapPin size={11} />
-                    <span>{project.location}</span>
-                  </div>
-
-                  <div className="mb-3 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => <span key={tag} className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">{tag}</span>)}
-                  </div>
-                  <h3 className="text-base font-bold text-foreground mb-3 leading-snug group-hover:text-[#bf2a2c] transition-colors flex-shrink-0">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-1">{project.description}</p>
-
-                  <div className="space-y-1.5 mb-4 border-t border-[#e2d9d9] pt-4">
-                    {project.outcomes.slice(0, 3).map((metric) => (
-                      <div key={metric} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#bf2a2c] flex-shrink-0" />
-                        <span className="text-xs text-text-secondary">{metric}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#bf2a2c] group-hover:gap-3 transition-all">
-                    Read Case Study <ArrowRight size={14} />
-                  </span>
-                </div>
-              </Card>
-            </Link>
+            <ProjectCard key={project.id} project={project} outcomeLimit={3} />
           ))}
         </div>
 
         <div className="text-center">
-          <Link href="/projects">
-            <Button
+          <Button asChild
               variant="outline"
               size="lg"
-              className="border-2 border-[#bf2a2c] text-[#bf2a2c] hover:bg-[#bf2a2c] hover:text-white bg-transparent font-bold uppercase tracking-wide px-8 transition-all"
+              className="font-bold uppercase tracking-wide px-8"
             >
-              View All Projects
-              <ArrowRight size={18} className="ml-2" />
+              <Link href="/projects">View All Projects
+              <ArrowRight size={18} className="ml-2" aria-hidden="true" /></Link>
             </Button>
-          </Link>
         </div>
       </div>
     </section>

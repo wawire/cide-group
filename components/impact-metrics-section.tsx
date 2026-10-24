@@ -1,5 +1,6 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
 import { useEffect, useState } from "react"
 import { impactMetrics } from "@/content/site"
 import { useInView } from "react-intersection-observer"
@@ -12,10 +13,11 @@ interface AnimatedCounterProps {
 }
 
 function AnimatedCounter({ end, label, suffix, inView }: AnimatedCounterProps) {
+  const reducedMotion = useReducedMotion()
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView || reducedMotion) return
 
     let start = 0
     const increment = end / 40
@@ -30,17 +32,18 @@ function AnimatedCounter({ end, label, suffix, inView }: AnimatedCounterProps) {
     }, 30)
 
     return () => clearInterval(timer)
-  }, [inView, end])
+  }, [inView, end, reducedMotion])
 
   return (
     <div className="relative text-center p-6 group cursor-default">
-      <div className="absolute inset-0 rounded-xl border border-white/10 bg-white/5 group-hover:bg-[#bf2a2c]/20 group-hover:border-[#bf2a2c]/40 transition-all duration-300" />
+      <div className="absolute inset-0 rounded-xl border border-white/10 bg-white/5 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-300" />
       <div className="relative">
         <div className="text-4xl md:text-5xl font-bold text-white mb-1">
-          {count}
-          <span className="text-[#c9a84c]">{suffix}</span>
+          <span className="sr-only">{end}{suffix}</span>
+          <span aria-hidden="true">{reducedMotion || !inView ? end : count}
+          <span className="text-accent-gold">{suffix}</span></span>
         </div>
-        <p className="text-xs text-white/50 font-semibold uppercase tracking-wider">{label}</p>
+        <p className="text-xs text-white/70 font-semibold uppercase tracking-wider">{label}</p>
       </div>
     </div>
   )
@@ -64,13 +67,13 @@ export default function ImpactMetricsSection() {
         }}
       />
       {/* Red glow top-right */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-[#bf2a2c]/20 blur-[100px] rounded-full" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-primary/20 blur-[100px] rounded-full" />
       {/* Gold glow bottom-left */}
-      <div className="absolute bottom-0 left-1/4 w-[300px] h-[200px] bg-[#c9a84c]/10 blur-[80px] rounded-full" />
+      <div className="absolute bottom-0 left-1/4 w-[300px] h-[200px] bg-accent-gold/10 blur-[80px] rounded-full" />
 
       <div className="section-shell relative z-10">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Proven at Scale</p>
+          <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Proven at Scale</p>
           <h2 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
             Our Impact Across Africa
           </h2>

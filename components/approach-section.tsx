@@ -1,5 +1,7 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { motion } from "framer-motion"
 import { companyProfile } from "@/content/site"
 import Link from "next/link"
@@ -30,8 +32,9 @@ const stepDetails = [
 ]
 
 export default function ApproachSection() {
+  const reducedMotion = useReducedMotion()
   return (
-    <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
+    <section className="section-space bg-surface-secondary border-y border-border">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left — text */}
@@ -47,7 +50,7 @@ export default function ApproachSection() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-[#bf2a2c] hover:text-[#9a1f21] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-colors"
             >
               Learn more about CIDE <ArrowRight size={16} />
             </Link>
@@ -57,18 +60,18 @@ export default function ApproachSection() {
           <motion.div
             className="grid grid-cols-2 gap-4"
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } }}
-            initial="hidden"
+            initial={false}
             whileInView="visible"
             viewport={{ once: true, margin: "-64px" }}
           >
             {companyProfile.approach.map((step, index) => (
               <motion.div
                 key={step}
-                variants={cardVariants}
-                className="rounded-xl bg-white border border-[#e2d9d9] p-6 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/8 transition-all duration-300"
+                variants={reducedMotion ? undefined : cardVariants}
+                className="rounded-xl bg-surface border border-border p-6 hover:border-primary hover:shadow-lg hover:shadow-primary/8 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#bf2a2c] text-white text-xs font-bold shrink-0">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-xs font-bold shrink-0">
                     {index + 1}
                   </span>
                   <h3 className="font-bold text-foreground text-base">{step}</h3>

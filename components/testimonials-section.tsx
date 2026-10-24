@@ -1,77 +1,44 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+import SectionHeading from "@/components/section-heading"
+import { testimonials } from "@/content/testimonials"
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
 
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      "CIDE did not just deliver a report. They helped our team build internal capacity to sustain MEL systems and use data for decisions.",
-    author: "Dr. Jane Mwangi",
-    title: "Programme Director",
-    organization: "Community Health Initiative Kenya",
-    since: "Partnership since 2022",
-  },
-  {
-    id: 2,
-    quote:
-      "From day one, CIDE listened to community priorities and co-designed practical interventions. The campaign outcomes were measurable and durable.",
-    author: "Michael Odhiambo",
-    title: "Executive Director",
-    organization: "East Africa Climate Coalition",
-    since: "Partnership since 2020",
-  },
-  {
-    id: 3,
-    quote:
-      "Their GEDSI expertise helped us engage groups we previously struggled to reach. The partnership improved both quality and equity of our programming.",
-    author: "Amina Hassan",
-    title: "Deputy Country Director",
-    organization: "Global Health Initiative Tanzania",
-    since: "Partnership since 2021",
-  },
-]
 
-const variants = {
-  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40 }),
-  center: { opacity: 1, x: 0, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -40 : 40, transition: { duration: 0.28, ease: [0.4, 0, 1, 1] as [number, number, number, number] } }),
-}
 
 function getInitials(name: string) {
   return name.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()
 }
 
 export default function TestimonialsSection() {
+  const reducedMotion = useReducedMotion()
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
   const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState(1)
-  const [autoPlay, setAutoPlay] = useState(true)
+  const [autoPlay, setAutoPlay] = useState(false)
 
   useEffect(() => {
-    if (!autoPlay) return
+    if (!autoPlay || reducedMotion || hovered || focused) return
     const timer = setInterval(() => {
-      setDirection(1)
       setCurrent((prev) => (prev + 1) % testimonials.length)
     }, 7000)
     return () => clearInterval(timer)
-  }, [autoPlay])
+  }, [autoPlay, reducedMotion, hovered, focused])
 
   const next = () => {
-    setDirection(1)
     setCurrent((prev) => (prev + 1) % testimonials.length)
     setAutoPlay(false)
   }
 
   const prev = () => {
-    setDirection(-1)
     setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)
     setAutoPlay(false)
   }
 
   const goTo = (i: number) => {
-    setDirection(i > current ? 1 : -1)
     setCurrent(i)
     setAutoPlay(false)
   }
@@ -79,33 +46,24 @@ export default function TestimonialsSection() {
   const t = testimonials[current]
 
   return (
-    <section className="section-space bg-surface">
+    <section className="section-space bg-surface" aria-label="Partner testimonials" aria-roledescription="carousel" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false) }}>
       <div className="section-shell">
-        <div className="text-center mb-10">
-          <p className="section-kicker mb-4">Partner Voices</p>
-          <h2 className="section-heading mb-4">What Our Partners Say</h2>
-          <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-            Success is measured by outcomes and by the strength of long-term partnerships.
-          </p>
-        </div>
+        <SectionHeading className="mb-10 text-center [&>p:last-child]:mx-auto" kicker="Partner Voices" title="What Our Partners Say" introduction="Success is measured by outcomes and by the strength of long-term partnerships." />
 
-        <div className="relative overflow-hidden">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
+        <div className="relative overflow-hidden" aria-live={autoPlay && !reducedMotion && !hovered && !focused ? "off" : "polite"}>
+            <div
               key={t.id}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="rounded-xl border border-border bg-background p-7 md:p-8"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${current + 1} of ${testimonials.length}`}
+              className="rounded-xl border border-border bg-background p-6 pb-16 md:p-8 md:pb-16"
             >
-              <p className="text-xl text-foreground italic mb-8 leading-relaxed">&quot;{t.quote}&quot;</p>
+              <blockquote className="reading-width text-xl text-foreground italic mb-8 leading-relaxed">&quot;{t.quote}&quot;</blockquote>
 
               <div className="flex items-center gap-4">
                 <div
                   aria-hidden="true"
-                  className="w-16 h-16 rounded-full bg-linear-to-br from-[#bf2a2c] to-[#7a1718] text-white flex items-center justify-center text-lg font-bold tracking-wide shrink-0"
+                  className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold tracking-wide shrink-0"
                 >
                   {getInitials(t.author)}
                 </div>
@@ -116,13 +74,12 @@ export default function TestimonialsSection() {
                   <p className="text-xs text-text-muted mt-1">{t.since}</p>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
 
           <button
             type="button"
             onClick={prev}
-            className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 text-primary hover:text-[#9a1f21] transition-colors"
+            className="absolute bottom-3 left-3 flex size-11 items-center justify-center rounded-md bg-surface text-link"
             aria-label="Previous testimonial"
           >
             <ChevronLeft size={28} />
@@ -130,22 +87,26 @@ export default function TestimonialsSection() {
           <button
             type="button"
             onClick={next}
-            className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 text-primary hover:text-[#9a1f21] transition-colors"
+            className="absolute bottom-3 right-3 flex size-11 items-center justify-center rounded-md bg-surface text-link"
             aria-label="Next testimonial"
           >
             <ChevronRight size={28} />
           </button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="mt-8 flex items-center justify-center gap-2">
+          <Button size="icon" variant="outline" onClick={() => setAutoPlay((value) => !value)} disabled={reducedMotion} aria-label={reducedMotion ? "Testimonials paused for reduced motion" : autoPlay ? "Pause testimonials" : "Resume testimonials"}>{autoPlay && !reducedMotion ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}</Button>
           {testimonials.map((item, i) => (
             <button
               type="button"
               key={item.id}
               onClick={() => goTo(i)}
-              className={`h-2 rounded-full transition-all ${i === current ? "bg-primary w-8" : "bg-border w-2"}`}
+              className="flex size-11 items-center justify-center rounded-md"
+              aria-current={i === current ? "true" : undefined}
               aria-label={`Go to testimonial ${i + 1}`}
-            />
+            >
+              <span className={`h-2 rounded-full ${i === current ? "w-8 bg-primary" : "w-2 bg-control-border"}`} />
+            </button>
           ))}
         </div>
       </div>

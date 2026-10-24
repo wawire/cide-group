@@ -150,7 +150,7 @@ export default function GeographicExperienceMap() {
         <div className="relative isolate overflow-hidden rounded-xl border border-border">
           <div ref={containerRef} role="region" aria-label="Interactive map of team assignment experience" className="experience-map h-96 w-full md:h-[480px]" />
           {status !== "ready" && (
-            <div className="absolute inset-0 z-[1001] flex flex-col items-center justify-center gap-4 bg-[#0d3530] px-6 text-center text-white" role="status">
+            <div className="absolute inset-0 z-[1001] flex flex-col items-center justify-center gap-4 bg-accent-green px-6 text-center text-white" role="status">
               <span>{status === "loading" ? "Loading the map…" : "The map could not load. You can still explore the locations below."}</span>
               {status === "error" && (
                 <button type="button" onClick={() => { setStatus("loading"); setAttempt((value) => value + 1) }} className="rounded-full border border-white/50 px-5 py-2 text-sm">Retry map</button>
@@ -158,7 +158,7 @@ export default function GeographicExperienceMap() {
             </div>
           )}
         </div>
-        <div className="flex flex-col rounded-xl border border-border bg-[#f4efec] p-6" aria-live="polite" aria-atomic="true">
+        <div className="flex flex-col rounded-xl border border-border bg-surface-secondary p-6" aria-live="polite" aria-atomic="true">
           <p className="section-kicker mb-6">Team Experience</p>
           {selected ? (
             <>

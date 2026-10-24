@@ -63,7 +63,7 @@ export default function TeamPage() {
       {/* ── Associate network CTA ────────────────────────────────────────── */}
       <section className="pb-24 pt-4">
         <div className="section-shell">
-          <div className="rounded-xl border border-border bg-[#f6f0ec] px-8 py-10 md:px-10 md:py-12">
+          <div className="rounded-xl border border-border bg-surface-secondary px-8 py-10 md:px-10 md:py-12">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Associate Network</p>

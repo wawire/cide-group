@@ -80,14 +80,14 @@ export default function PartnersPage() {
             <div>
               <p className="section-kicker mb-4">Partnership Value</p>
               <h2 className="section-heading mb-10">Why organisations choose CIDE Group</h2>
-              <div className="space-y-0 divide-y divide-[#e2d9d9]">
+              <div className="space-y-0 divide-y divide-border">
                 {reasons.map((reason, i) => (
                   <div key={reason.title} className="py-7 grid grid-cols-[48px_1fr] gap-5 group">
-                    <span className="text-3xl font-bold text-[#e2d9d9] group-hover:text-[#bf2a2c] transition-colors tabular-nums leading-none pt-1">
+                    <span className="text-3xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-1">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-[#bf2a2c] transition-colors">
+                      <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                         {reason.title}
                       </h3>
                       <p className="text-text-secondary leading-relaxed">{reason.description}</p>
@@ -107,9 +107,9 @@ export default function PartnersPage() {
                   className="object-cover object-center"
                   sizes="420px"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/70 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-hero-background/70 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-1">Supporting partners including</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-1">Supporting partners including</p>
                   <div className="flex flex-wrap gap-1.5">
                     {globalPartners.map((p) => (
                       <span key={p} className="text-[10px] font-semibold bg-white/15 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
@@ -121,14 +121,14 @@ export default function PartnersPage() {
               </div>
 
               {/* CTA card */}
-              <div className="rounded-xl bg-[#1a0808] p-7">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-3">Ready to collaborate?</p>
+              <div className="rounded-xl bg-hero-background p-7">
+                <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-3">Ready to collaborate?</p>
                 <p className="text-white/65 text-sm leading-relaxed mb-5">
                   Reach out to discuss programme design, implementation support, research, or strategic collaboration.
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide"
+                  className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide"
                 >
                   Start a Conversation
                   <ArrowRight size={13} />
@@ -152,7 +152,7 @@ export default function PartnersPage() {
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-[#1a0808]/40" />
+            <div className="absolute inset-0 bg-hero-background/40" />
             <div className="absolute inset-0 flex items-end p-8">
               <p className="font-serif text-2xl md:text-3xl font-semibold text-white leading-snug max-w-xs">
                 "Communities represented with consent, respect, and integrity."
@@ -161,7 +161,7 @@ export default function PartnersPage() {
           </div>
 
           {/* Content */}
-          <div className="bg-[#f4efec] p-10 lg:p-16 flex flex-col justify-center">
+          <div className="bg-surface-secondary p-10 lg:p-16 flex flex-col justify-center">
             <p className="section-kicker mb-4">Ethical Commitment</p>
             <h2 className="section-heading mb-5">Safeguarding, dignity, and consent are part of the work</h2>
             <p className="text-text-secondary leading-relaxed mb-8">
@@ -172,7 +172,7 @@ export default function PartnersPage() {
             <div className="space-y-4">
               {commitments.map((item, i) => (
                 <div key={item} className="flex items-start gap-4">
-                  <span className="text-xs font-bold text-[#bf2a2c] tabular-nums mt-0.5 shrink-0">
+                  <span className="text-xs font-bold text-primary tabular-nums mt-0.5 shrink-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="text-sm text-text-secondary leading-relaxed">{item}</p>

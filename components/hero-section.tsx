@@ -5,9 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence, type Variants } from "framer-motion"
-import { siteConfig } from "@/content/site"
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+import { Button } from "@/components/ui/button"
 
-const AUTO_ADVANCE_MS = 6500
 const SLIDE_FADE_MS = 700
 
 const slides = [
@@ -81,7 +81,7 @@ const textContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.09,
+      staggerChildren: 0.04,
       delayChildren: 0.05,
     },
   },
@@ -93,12 +93,11 @@ const textContainer: Variants = {
 }
 
 const textLine: Variants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   },
 }
 
@@ -106,7 +105,7 @@ export default function HeroSection() {
   const [active, setActive] = useState(0)
   const [exiting, setExiting] = useState<number | null>(null)
   const activeRef = useRef(0)
-  const isPausedRef = useRef(false)
+  const reducedMotion = useReducedMotion()
   const touchStartX = useRef<number | null>(null)
 
   const currentSlide = slides[active]
@@ -126,17 +125,13 @@ export default function HeroSection() {
     const nextIndex = (index + slides.length) % slides.length
     if (nextIndex === activeRef.current) return
     setExiting(activeRef.current)
+    activeRef.current = nextIndex
     setActive(nextIndex)
   }, [])
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      if (!isPausedRef.current) {
-        activateSlide(activeRef.current + 1)
-      }
-    }, AUTO_ADVANCE_MS)
-    return () => window.clearInterval(timer)
-  }, [activateSlide])
+  const selectSlide = (index: number) => {
+    activateSlide(index)
+  }
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
@@ -146,7 +141,7 @@ export default function HeroSection() {
     if (touchStartX.current === null) return
     const delta = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(delta) > 50) {
-      activateSlide(delta < 0 ? activeRef.current + 1 : activeRef.current - 1)
+        activateSlide(delta < 0 ? activeRef.current + 1 : activeRef.current - 1)
     }
     touchStartX.current = null
   }, [activateSlide])
@@ -155,9 +150,7 @@ export default function HeroSection() {
     <section
       aria-label="CIDE Group featured focus areas"
       aria-roledescription="carousel"
-      className="home-hero group/hero relative isolate overflow-hidden bg-[#110909]"
-      onMouseEnter={() => { isPausedRef.current = true }}
-      onMouseLeave={() => { isPausedRef.current = false }}
+      className="inverse-surface home-hero group/hero relative isolate overflow-hidden bg-hero-background"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -169,6 +162,7 @@ export default function HeroSection() {
           return (
             <div
               key={`${slide.titleLead}-${slide.titleAccent}`}
+              aria-hidden={!isActiveSlide}
               role="group"
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${slides.length}`}
@@ -193,22 +187,22 @@ export default function HeroSection() {
       </div>
 
       <div className="absolute inset-0 bg-[linear-gradient(104deg,rgba(9,8,8,0.96)_0%,rgba(12,10,10,0.86)_34%,rgba(16,12,12,0.54)_58%,rgba(16,12,12,0.18)_100%)]" />
-      <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-[#bf2a2c] via-[#c9a84c] to-transparent" />
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-primary via-accent-gold to-transparent" />
 
       <button
         type="button"
-        onClick={() => activateSlide(activeRef.current - 1)}
+        onClick={() => selectSlide(activeRef.current - 1)}
         aria-label="Show previous slide"
-        className="absolute left-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
+        className="absolute left-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-primary hover:bg-primary group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
       >
         <ChevronLeft size={20} />
       </button>
 
       <button
         type="button"
-        onClick={() => activateSlide(activeRef.current + 1)}
+        onClick={() => selectSlide(activeRef.current + 1)}
         aria-label="Show next slide"
-        className="absolute right-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-[#bf2a2c] hover:bg-[#bf2a2c] group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
+        className="absolute right-5 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/8 text-white/90 opacity-0 backdrop-blur-sm transition hover:scale-105 hover:border-primary hover:bg-primary group-hover/hero:opacity-100 group-focus-within/hero:opacity-100 md:flex"
       >
         <ChevronRight size={20} />
       </button>
@@ -216,49 +210,39 @@ export default function HeroSection() {
       <div className="home-hero relative z-10 flex items-center py-14 md:py-16">
         <div className="section-shell w-full">
           <div className="max-w-[620px]">
-            <div className="mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/58">
-              <span className="h-px w-9 bg-[#bf2a2c]" />
-              <span>{siteConfig.heroEyebrow}</span>
-            </div>
-
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
+                aria-live="polite"
                 key={`${currentSlide.titleLead}-${currentSlide.titleAccent}`}
-                variants={textContainer}
-                initial="hidden"
+                variants={reducedMotion ? undefined : textContainer}
+                initial={false}
                 animate="visible"
-                exit="exit"
+                exit={reducedMotion ? undefined : "exit"}
               >
                 <motion.h1
-                  variants={textLine}
+                  variants={reducedMotion ? undefined : textLine}
                   className="display-title font-serif font-semibold tracking-tight text-white"
                 >
                   <span className="block text-white">{currentSlide.titleLead}</span>
-                  <span className="block text-[#c9a84c]">{currentSlide.titleAccent}</span>
+                  <span className="block text-accent-gold">{currentSlide.titleAccent}</span>
                 </motion.h1>
 
                 <motion.p
-                  variants={textLine}
+                  variants={reducedMotion ? undefined : textLine}
                   className="mt-5 max-w-[54ch] text-base leading-7 text-white/72 md:text-lg md:leading-8"
                 >
                   {currentSlide.description}
                 </motion.p>
 
-                <motion.div variants={textLine} className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <Link
-                    href={currentSlide.primaryCta.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#bf2a2c] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-white shadow-lg shadow-[#bf2a2c]/25 transition hover:-translate-y-0.5 hover:bg-[#9a1f21]"
-                  >
+                <motion.div variants={reducedMotion ? undefined : textLine} className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Button asChild size="lg" className="whitespace-normal text-center"><Link href={currentSlide.primaryCta.href}>
                     {currentSlide.primaryCta.label}
-                    <ArrowRight size={16} />
-                  </Link>
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link></Button>
 
-                  <Link
-                    href={currentSlide.secondaryCta.href}
-                    className="inline-flex items-center justify-center rounded-sm border border-white/35 px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:border-white hover:bg-white/8"
-                  >
+                  <Button asChild variant="inverse-outline" size="lg" className="whitespace-normal text-center"><Link href={currentSlide.secondaryCta.href}>
                     {currentSlide.secondaryCta.label}
-                  </Link>
+                  </Link></Button>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
@@ -271,7 +255,8 @@ export default function HeroSection() {
           <button
             key={`${slide.titleLead}-${slide.titleAccent}`}
             type="button"
-            onClick={() => activateSlide(index)}
+            onClick={() => selectSlide(index)}
+            aria-current={index === active ? "true" : undefined}
             aria-label={`Go to slide ${index + 1}`}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full focus-visible:bg-white/10"
           >
@@ -284,15 +269,6 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-20 h-[3px] bg-white/10">
-        <div
-          key={active}
-          className="h-full bg-[#bf2a2c]"
-          style={{
-            animation: `hero-progress-fill ${AUTO_ADVANCE_MS}ms linear forwards`,
-          }}
-        />
-      </div>
     </section>
   )
 }

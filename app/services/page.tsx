@@ -30,11 +30,11 @@ export default function ServicesPage() {
       />
 
       {/* ── Intro strip ──────────────────────────────────────────────────── */}
-      <div className="bg-[#1a0808]">
+      <div className="bg-hero-background">
         <div className="section-shell py-6 flex flex-wrap items-center gap-x-8 gap-y-2">
           {companyProfile.approach.map((step, i) => (
             <span key={step} className="flex items-center gap-3 text-sm text-white/55">
-              <span className="text-[#bf2a2c] font-bold tabular-nums text-xs">0{i + 1}</span>
+              <span className="text-primary font-bold tabular-nums text-xs">0{i + 1}</span>
               <span className="font-semibold text-white/75">{step}</span>
               {i < companyProfile.approach.length - 1 && (
                 <span className="text-white/20" aria-hidden="true">→</span>
@@ -51,8 +51,8 @@ export default function ServicesPage() {
           return (
             <div
               key={service.id}
-              className={`border-b border-[#e2d9d9] last:border-b-0 ${
-                isEven ? "bg-background" : "bg-[#faf7f5]"
+              className={`border-b border-border last:border-b-0 ${
+                isEven ? "bg-background" : "bg-background"
               }`}
             >
               <div className="section-shell">
@@ -78,7 +78,7 @@ export default function ServicesPage() {
                       {service.capabilities.map((cap) => (
                         <span
                           key={cap}
-                          className="text-xs px-3 py-1.5 rounded-full bg-[#bf2a2c]/8 border border-[#bf2a2c]/18 text-[#bf2a2c] font-medium leading-tight"
+                          className="text-xs px-3 py-1.5 rounded-full bg-primary/8 border border-primary/18 text-primary font-medium leading-tight"
                         >
                           {cap}
                         </span>
@@ -87,7 +87,7 @@ export default function ServicesPage() {
 
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-[#bf2a2c] hover:text-[#9a1f21] transition-colors group"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-dark transition-colors group"
                     >
                       Explore this service
                       <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
@@ -101,11 +101,11 @@ export default function ServicesPage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="section-space bg-[#1a0808]">
+      <section className="section-space bg-hero-background">
         <div className="section-shell">
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Work With Us</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
               <h2 className="font-serif text-4xl md:text-5xl font-semibold text-white leading-tight max-w-2xl">
                 Not sure which service fits your challenge?
               </h2>
@@ -117,7 +117,7 @@ export default function ServicesPage() {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+                className="inline-flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
               >
                 Start a Conversation
                 <ArrowRight size={15} />

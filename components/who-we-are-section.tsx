@@ -33,7 +33,7 @@ export default function WhoWeAreSection() {
             <div className="grid gap-x-8 gap-y-4 md:grid-cols-2 mb-8">
               {priorities.map((priority) => (
                 <div key={priority} className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#bf2a2c]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                   <p className="text-sm font-semibold leading-6 text-foreground md:text-base">{priority}</p>
                 </div>
               ))}
@@ -41,7 +41,7 @@ export default function WhoWeAreSection() {
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
+              className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
             >
               Read Our Story
               <ArrowRight size={16} />

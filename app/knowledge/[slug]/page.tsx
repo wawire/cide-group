@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import PageHero from "@/components/page-hero"
 import HeroBackLink from "@/components/hero-back-link"
 import PageCallout from "@/components/page-callout"
@@ -72,7 +73,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
       <PageHero
         breadcrumb={<HeroBackLink href="/knowledge">Knowledge Hub</HeroBackLink>}
         eyebrow={
-          <span className="inline-block px-3 py-1 rounded-full bg-[#bf2a2c]/80 text-white text-[10px] font-bold uppercase tracking-widest">
+          <span className="inline-block px-3 py-1 rounded-full bg-primary/80 text-white text-[10px] font-bold uppercase tracking-widest">
             {article.category}
           </span>
         }
@@ -90,7 +91,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
 
           {/* Main content */}
           <article>
-            <p className="text-xl text-text-secondary leading-relaxed mb-10 pb-10 border-b border-[#e6dcda] font-medium">
+            <p className="text-xl text-text-secondary leading-relaxed mb-10 pb-10 border-b border-border font-medium">
               {article.excerpt}
             </p>
             <div
@@ -98,13 +99,13 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
               dangerouslySetInnerHTML={{ __html: article.body }}
             />
             {/* Tags */}
-            <div className="mt-12 pt-8 border-t border-[#e6dcda]">
+            <div className="mt-12 pt-8 border-t border-border">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-text-muted mb-3">Topics</p>
               <div className="flex flex-wrap gap-2">
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#e2d9d9] bg-[#f4efec] text-xs font-semibold text-text-secondary"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-surface-secondary text-xs font-semibold text-text-secondary"
                   >
                     <Tag size={10} />
                     {tag}
@@ -116,8 +117,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
 
           {/* Sticky sidebar */}
           <aside className="lg:sticky lg:top-24 space-y-6">
-            <div className="rounded-xl bg-[#1a0808] p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">About this piece</p>
+            <div className="rounded-xl bg-hero-background p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">About this piece</p>
               <div className="space-y-4 text-sm">
                 <div>
                   <p className="text-white/60 text-[10px] uppercase tracking-widest mb-0.5">Author</p>
@@ -130,7 +131,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
               <div className="mt-6 pt-5 border-t border-white/10">
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
+                  className="flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
                 >
                   Talk to Our Team
                   <ArrowRight size={13} />
@@ -150,7 +151,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                           <Image src={rel.image} alt={rel.title} fill sizes="(max-width: 768px) 100vw, 400px" className="object-contain" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-foreground leading-snug group-hover:text-[#bf2a2c] transition-colors line-clamp-2">
+                          <p className="text-xs font-bold text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-2">
                             {rel.title}
                           </p>
 
@@ -172,18 +173,12 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
         description="Talk to our team about how we can apply this approach to your programme or context."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-          >
+          <Button asChild variant="inverse" size="lg"><Link href="/contact">
             Start a Conversation
-          </Link>
-          <Link
-            href="/knowledge"
-            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg"><Link href="/knowledge">
             Read More Insights
-          </Link>
+          </Link></Button>
         </div>
       </PageCallout>
 

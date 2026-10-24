@@ -76,19 +76,19 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="overflow-hidden bg-[#0c0606] text-white">
-      <div className="h-0.5 w-full bg-linear-to-r from-[#bf2a2c] via-[#c9a84c] to-[#bf2a2c]/30" />
+    <footer className="overflow-hidden bg-hero-background text-white">
+      <div className="h-0.5 w-full bg-linear-to-r from-primary via-accent-gold to-primary/30" />
 
       <div className="section-shell pt-14 pb-10">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#c9a84c]">
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-accent-gold">
               Pan-African Development Advisory &middot; Est. Nairobi, Kenya
             </p>
             <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-white">
               CIDE
               <br />
-              <span className="text-[#bf2a2c]">Group.</span>
+              <span className="text-primary">Group.</span>
             </h2>
           </div>
 
@@ -100,7 +100,7 @@ export default function Footer() {
             <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#bf2a2c] px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9a1f21]"
+                className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-primary-dark"
               >
                 Get in Touch
                 <ArrowUpRight size={13} />
@@ -123,7 +123,7 @@ export default function Footer() {
       <div className="section-shell py-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-6">
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Services</p>
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Services</p>
             <ul className="space-y-0">
               {servicesLinks.map((link) => (
                 <li key={link.href}>
@@ -139,7 +139,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Focus Areas</p>
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Focus Areas</p>
             <ul className="space-y-0">
               {focusLinks.map((link) => (
                 <li key={link.href}>
@@ -155,7 +155,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Company</p>
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Company</p>
             <ul className="space-y-0">
               {companyLinks.map((link) => (
                 <li key={link.href}>
@@ -171,7 +171,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c]">Contact</p>
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Contact</p>
             <div className="space-y-5">
               <div>
                 <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-white/52">General</p>
@@ -217,7 +217,7 @@ export default function Footer() {
                     aria-label={label}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="flex h-11 w-11 items-center justify-center rounded-sm border border-white/20 text-white/62 transition-all hover:border-[#bf2a2c]/70 hover:bg-[#bf2a2c]/15 hover:text-white"
+                    className="flex h-11 w-11 items-center justify-center rounded-sm border border-white/20 text-white/62 transition-all hover:border-primary/70 hover:bg-primary/15 hover:text-white"
                   >
                     <Icon />
                   </a>
@@ -231,7 +231,7 @@ export default function Footer() {
       <div className="border-t border-white/6">
         <div className="section-shell py-4">
           <div className="flex flex-wrap items-center justify-center gap-y-2 text-center">
-            <span className="mr-5 shrink-0 text-[10px] font-bold uppercase tracking-[0.22em] text-[#bf2a2c]">
+            <span className="mr-5 shrink-0 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
               Coverage
             </span>
             {regions.map((region, index) => (

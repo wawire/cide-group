@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { siteConfig } from "@/content/site"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { AboutMenu } from "./about-menu"
 import { ServicesMegaMenu } from "./mega-menu-services"
@@ -63,6 +64,11 @@ export default function Navigation() {
     }
 
     closeTimer.current = setTimeout(() => {
+      const focusedElement = document.activeElement
+      if (
+        navRef.current?.querySelector('[aria-expanded="true"]') === focusedElement ||
+        navRef.current?.querySelector('.navigation-panel')?.contains(focusedElement)
+      ) return
       setOpenDesktopMenu(null)
     }, 200)
   }, [])
@@ -101,6 +107,9 @@ export default function Navigation() {
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        const trigger = openDesktopMenu ? navRef.current?.querySelector<HTMLButtonElement>(`[aria-controls="${openDesktopMenu === "about" ? "about-menu" : openDesktopMenu === "what-we-do" ? "what-we-do-mega-menu" : "impact-mega-menu"}"]`) : null
+        if (isOpen) mobileToggleRef.current?.focus()
+        else trigger?.focus()
         setIsOpen(false)
         closeNow()
       }
@@ -125,20 +134,49 @@ export default function Navigation() {
 
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
-      "relative px-3 py-2 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
-      "after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full",
-      "after:transition-transform after:duration-200 after:origin-left",
+      "relative inline-flex items-center gap-1.5 px-3 py-2 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
       active || menuOpen
-        ? "text-primary after:bg-primary after:scale-x-100"
-        : "text-foreground hover:text-primary after:bg-primary after:scale-x-0 hover:after:scale-x-100",
+        ? "text-primary"
+        : "text-foreground hover:text-primary",
     )
 
   return (
     <nav
       ref={navRef}
       aria-label="Primary"
+      onKeyDown={(event) => {
+        if (event.key !== "Tab" || !openDesktopMenu) return
+        const navigation = event.currentTarget
+        const trigger = navigation.querySelector<HTMLButtonElement>('button[aria-expanded="true"]')
+        const panelId = trigger?.getAttribute("aria-controls")
+        const panel = panelId ? document.getElementById(panelId) : null
+        if (!trigger || !panel) return
+        const links = Array.from(panel.querySelectorAll<HTMLAnchorElement>('a[href]'))
+        if (!event.shiftKey && event.target === trigger && links[0]) {
+          event.preventDefault()
+          links[0].focus()
+        } else if (event.shiftKey && event.target === links[0]) {
+          event.preventDefault()
+          trigger.focus()
+        } else if (!event.shiftKey && event.target === links.at(-1)) {
+          const controls = Array.from(navigation.querySelectorAll<HTMLElement>('a[href], button'))
+            .filter((control) => !panel.contains(control) && control.getClientRects().length > 0)
+          const nextControl = controls[controls.indexOf(trigger) + 1]
+          if (nextControl) {
+            event.preventDefault()
+            closeNow()
+            nextControl.focus()
+          }
+        }
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          closeNow()
+          setIsOpen(false)
+        }
+      }}
       className={cn(
-        "sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/85 transition-shadow duration-200",
+        "[&_a]:no-underline sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/85 transition-shadow duration-200",
         isScrolled && "shadow-sm",
       )}
     >
@@ -161,15 +199,12 @@ export default function Navigation() {
             </Link>
 
             <div className="flex items-center gap-4">
-              <div className="hidden items-center md:flex">
+              <div className="hidden items-center lg:flex">
                 <button
                   type="button"
-                  aria-haspopup="menu"
                   aria-expanded={openDesktopMenu === "about"}
                   aria-controls="about-menu"
-                  onMouseEnter={() => openMenu("about")}
                   onMouseLeave={scheduleClose}
-                  onFocus={() => openMenu("about")}
                   onClick={() => setOpenDesktopMenu((current) => (current === "about" ? null : "about"))}
                   className={triggerClass(isAboutActive, openDesktopMenu === "about")}
                 >
@@ -178,12 +213,9 @@ export default function Navigation() {
 
                 <button
                   type="button"
-                  aria-haspopup="menu"
                   aria-expanded={openDesktopMenu === "what-we-do"}
                   aria-controls="what-we-do-mega-menu"
-                  onMouseEnter={() => openMenu("what-we-do")}
                   onMouseLeave={scheduleClose}
-                  onFocus={() => openMenu("what-we-do")}
                   onClick={() =>
                     setOpenDesktopMenu((current) => (current === "what-we-do" ? null : "what-we-do"))
                   }
@@ -194,12 +226,9 @@ export default function Navigation() {
 
                 <button
                   type="button"
-                  aria-haspopup="menu"
                   aria-expanded={openDesktopMenu === "impact"}
                   aria-controls="impact-mega-menu"
-                  onMouseEnter={() => openMenu("impact")}
                   onMouseLeave={scheduleClose}
-                  onFocus={() => openMenu("impact")}
                   onClick={() => setOpenDesktopMenu((current) => (current === "impact" ? null : "impact"))}
                   className={triggerClass(isImpactActive, openDesktopMenu === "impact")}
                 >
@@ -218,13 +247,9 @@ export default function Navigation() {
                 </Link>
               </div>
 
-              <Link
-                href="/contact"
-                onClick={closeNow}
-                className="hidden md:inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-white shadow-sm shadow-primary/30 transition-all duration-200 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                Get Involved
-              </Link>
+              <Button asChild className="hidden lg:inline-flex">
+                <Link href="/contact" onClick={closeNow}>Get Involved</Link>
+              </Button>
 
               <button
                 type="button"
@@ -233,7 +258,7 @@ export default function Navigation() {
                   closeNow()
                   setIsOpen((current) => !current)
                 }}
-                className="inline-flex items-center justify-center rounded-md p-2.5 min-h-11 min-w-11 text-foreground transition-colors duration-200 hover:text-primary md:hidden"
+                className="inline-flex items-center justify-center rounded-md p-2.5 min-h-11 min-w-11 text-foreground transition-colors duration-200 hover:text-primary lg:hidden"
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
@@ -280,7 +305,7 @@ export default function Navigation() {
         <div
           id="mobile-navigation"
           ref={mobileMenuRef}
-          className="space-y-1 border-t border-border bg-background/98 px-4 pt-3 pb-5 backdrop-blur animate-in fade-in slide-in-from-top-2 duration-200 md:hidden"
+          className="max-h-[calc(100svh_-_4rem)] overflow-y-auto space-y-1 border-t border-border bg-background/98 px-4 pt-3 pb-5 backdrop-blur animate-in fade-in slide-in-from-top-2 duration-200 lg:hidden"
         >
           {mobileNavLinks.map((link) => (
             <Link

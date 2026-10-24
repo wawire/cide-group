@@ -1,5 +1,7 @@
 ﻿"use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { motion } from "framer-motion"
 import { services } from "@/content/services"
 import Link from "next/link"
@@ -12,8 +14,9 @@ const cardVariants = {
 }
 
 export default function ServicesSection() {
+  const reducedMotion = useReducedMotion()
   return (
-    <section className="section-space bg-[#fafaf9]">
+    <section className="section-space bg-background">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
           <div>
@@ -31,7 +34,7 @@ export default function ServicesSection() {
             </p>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-[#bf2a2c] hover:text-[#9a1f21] font-semibold mt-4 transition-colors"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold mt-4 transition-colors"
             >
               All Services <ArrowRight size={18} />
             </Link>
@@ -41,33 +44,33 @@ export default function ServicesSection() {
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}
-          initial="hidden"
+          initial={false}
           whileInView="visible"
           viewport={{ once: true, margin: "-64px" }}
         >
           {services.map((service) => (
-            <motion.div key={service.id} variants={cardVariants}>
+            <motion.div key={service.id} variants={reducedMotion ? undefined : cardVariants}>
             <Link href={`/services/${service.slug}`} className="group block h-full">
-              <div className="h-full rounded-lg border border-[#e2d9d9] bg-white p-6 transition-all duration-300 hover:border-[#bf2a2c] hover:shadow-lg hover:shadow-[#bf2a2c]/10">
+              <div className="h-full rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/10">
                 <div className="flex items-center justify-between mb-5">
-                  <span className="text-xs font-bold text-[#8f1e20] uppercase tracking-widest">
+                  <span className="text-xs font-bold text-primary-dark uppercase tracking-widest">
                     {String(service.order).padStart(2, "0")}
                   </span>
-                  <div className="w-10 h-10 rounded-lg bg-[#bf2a2c]/8 flex items-center justify-center group-hover:bg-[#bf2a2c] transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                     <ServiceIcon
                       icon={service.icon}
                       size={20}
-                      className="text-[#bf2a2c] group-hover:text-white transition-colors duration-300"
+                      className="text-primary group-hover:text-white transition-colors duration-300"
                     />
                   </div>
                 </div>
 
-                <h3 className="text-base font-bold text-foreground mb-3 leading-snug group-hover:text-[#bf2a2c] transition-colors">
+                <h3 className="text-base font-bold text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
                   {service.shortTitle}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">{service.summary}</p>
 
-                <span className="text-xs font-semibold text-[#bf2a2c] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                <span className="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                   Explore Service <ArrowRight size={13} />
                 </span>
               </div>

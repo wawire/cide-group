@@ -120,7 +120,14 @@ export const approvedPartners = partners.filter(
   (partner): partner is ApprovedPartner => partner.permissionStatus === "approved",
 )
 
-export const featuredPartners = [
+type FeaturedPartner = {
+  name: string
+  logo: string
+  href: string
+  logoSource?: string
+}
+
+export const featuredPartners: readonly FeaturedPartner[] = [
   {
     name: "Mara Basin Conservation Forum",
     logo: "/partners/mara-basin.png",
@@ -145,5 +152,28 @@ export const featuredPartners = [
     name: "Jitolee Good Friends Foundation",
     logo: "/partners/jitolee.jpeg",
     href: "https://jitoleegoodfriendsfoundation.org/",
+  },
+  {
+    name: "Global Compassion Coalition",
+    logo: "/partners/global-compassion-coalition.png",
+    href: "https://www.globalcompassioncoalition.org/",
+    logoSource: "https://www.globalcompassioncoalition.org/wp-content/uploads/2026/07/GCC-Logo-2026-Small.png",
+  },
+  {
+    name: "Chance for Childhood",
+    logo: "/partners/chance-for-childhood.png",
+    href: "https://www.chanceforchildhood.org/",
+  },
+  {
+    name: "Slum Child Foundation",
+    logo: "/partners/slum-child-foundation.png",
+    logoSource: "https://www.wus-austria.org/files/user/docs/Downloads/Draft%20Agenda%20Slums%20Improving%20Life%20Skills%20of%20Teenage%20Mothers%2007122022.pdf",
+    href: "https://slumchildfoundation.org/",
+  },
+  {
+    name: "Turning Point",
+    logo: "/partners/turning-point.png",
+    href: "https://www.turningpointmagazine.africa/",
+    logoSource: "https://www.turningpointmagazine.africa/",
   },
 ] as const

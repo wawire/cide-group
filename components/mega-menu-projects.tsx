@@ -25,11 +25,10 @@ export function ProjectsMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
   return (
     <div
       id={menuId}
-      role="menu"
       aria-hidden={!open}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`absolute left-0 right-0 top-full z-40 transition-all duration-200 ${
+      className={`hidden lg:block absolute left-0 right-0 top-full z-40 transition-all duration-200 ${
         open
           ? "opacity-100 visible translate-y-0 pointer-events-auto"
           : "opacity-0 invisible -translate-y-1 pointer-events-none"

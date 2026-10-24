@@ -46,7 +46,7 @@ export default function FocusAreasPage() {
         </div>
       </section>
 
-      <section className="bg-[#1a0808] py-12">
+      <section className="bg-hero-background py-12">
         <div className="section-shell">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -54,7 +54,7 @@ export default function FocusAreasPage() {
               { title: "Evidence-Based", desc: "Research, analytics, and learning guide strategy and continuous adaptation." },
               { title: "Built for Scale", desc: "Solutions designed for long-term resilience, replication, and measurable impact." },
             ].map((item) => (
-              <div key={item.title} className="border-l-2 border-[#bf2a2c] pl-5">
+              <div key={item.title} className="border-l-2 border-primary pl-5">
                 <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
                 <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
               </div>
@@ -74,9 +74,9 @@ export default function FocusAreasPage() {
               sizes="(min-width: 1640px) 1600px, calc(100vw - 2.5rem)"
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-[#1a0808]/80" />
+            <div className="absolute inset-0 bg-hero-background/80" />
             <div className="relative z-10 py-16 px-8 md:px-16 text-center">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Work With Us</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
               <h2 className="font-serif text-3xl md:text-5xl font-semibold text-white mb-5 leading-tight">
                 Bring your challenge to us
               </h2>
@@ -85,7 +85,7 @@ export default function FocusAreasPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide"
+                className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide"
               >
                 Start a Conversation
                 <ArrowRight size={15} />

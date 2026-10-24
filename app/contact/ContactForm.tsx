@@ -1,13 +1,19 @@
 "use client"
 
 import type React from "react"
-import { useId, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { contactCountries, siteConfig } from "@/content/site"
 import { validateContactForm, type FormErrors } from "@/lib/form-validation"
 import { trackContactFormSubmit, trackEmailClick, trackPhoneClick } from "@/lib/analytics"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { FormField } from "@/components/ui/form-field"
 
 const enquiryTypes = [
   "Programme / Project Support",
@@ -85,6 +91,12 @@ export default function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({})
   const formId = useId()
+  const errorSummaryRef = useRef<HTMLDivElement>(null)
+  const successRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (submitted) successRef.current?.focus()
+  }, [submitted])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
@@ -99,7 +111,11 @@ export default function ContactForm() {
     e.preventDefault()
     setServerError(null)
     const errors = validateContactForm(formData)
-    if (Object.keys(errors).length > 0) { setFieldErrors(errors); return }
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      requestAnimationFrame(() => errorSummaryRef.current?.focus())
+      return
+    }
     setIsLoading(true)
     try {
       const res = await fetch("/api/contact", {
@@ -117,20 +133,19 @@ export default function ContactForm() {
       trackContactFormSubmit(formData.enquiryType)
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      requestAnimationFrame(() => errorSummaryRef.current?.focus())
     } finally {
       setIsLoading(false)
     }
   }
 
-  const inputClass = (error?: string) =>
-    `w-full rounded-lg border ${error ? "border-red-400" : "border-[#e2d9d9]"} bg-white px-4 py-3 text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-[#bf2a2c] focus:ring-2 focus:ring-[#bf2a2c]/15 transition-colors`
 
   return (
     <section className="section-space bg-background">
       <div className="section-shell grid overflow-hidden rounded-xl border border-border lg:grid-cols-[minmax(0,1fr)_minmax(0,1.65fr)]">
 
         {/* ── Left — dark info panel ──────────────────────────────────────── */}
-        <div className="relative bg-[#1a0808] flex flex-col overflow-hidden">
+        <div className="inverse-surface relative bg-hero-background flex flex-col overflow-hidden">
 
           {/* Background image overlay */}
           <div className="absolute inset-0">
@@ -142,12 +157,12 @@ export default function ContactForm() {
               sizes="420px"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-linear-to-b from-[#1a0808]/60 via-[#1a0808]/80 to-[#1a0808]" />
+            <div className="absolute inset-0 bg-linear-to-b from-hero-background/60 via-hero-background/80 to-hero-background" />
           </div>
 
           <div className="relative z-10 flex h-full flex-col p-6 sm:p-8 lg:p-10">
             {/* Kicker */}
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a84c] mb-8">
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold mb-8">
               Contact CIDE Group
             </p>
 
@@ -166,8 +181,8 @@ export default function ContactForm() {
             <div className="mt-12 space-y-6">
               {contactPoints.map(({ icon: Icon, label, value, href, sub }) => (
                 <div key={label} className="flex items-start gap-4">
-                  <div className="shrink-0 mt-0.5 w-8 h-8 rounded-lg bg-[#bf2a2c]/20 flex items-center justify-center">
-                    <Icon size={14} className="text-[#c9a84c]" />
+                  <div className="shrink-0 mt-0.5 w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <Icon size={14} className="text-accent-gold" />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/55 mb-0.5">{label}</p>
@@ -201,9 +216,9 @@ export default function ContactForm() {
           <div className="max-w-xl w-full mx-auto">
 
             {submitted ? (
-              <div className="text-center py-16">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#bf2a2c]/10 mb-6">
-                  <CheckCircle size={32} className="text-[#bf2a2c]" />
+              <div ref={successRef} tabIndex={-1} className="text-center py-16">
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-success/10 mb-6">
+                  <CheckCircle size={32} className="text-success-text" aria-hidden="true" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-3">Message received</h3>
                 <p className="text-text-secondary leading-relaxed">
@@ -214,153 +229,84 @@ export default function ContactForm() {
               <>
                 <div className="mb-8">
                   <h3 className="text-2xl font-bold text-foreground mb-2">Send us a message</h3>
-                  <p className="text-sm text-text-muted">Fields marked <span className="text-[#bf2a2c]">*</span> are required.</p>
+                  <p className="text-sm text-text-muted">Fields marked <span className="text-primary">*</span> are required.</p>
                 </div>
 
-                {serverError && (
-                  <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
-                    {serverError}
-                  </div>
-                )}
+                <div ref={errorSummaryRef} tabIndex={-1} hidden={!serverError && !Object.values(fieldErrors).some(Boolean)} className="mb-6 rounded-md border border-destructive-text p-4" role="alert">
+                  <p className="font-semibold text-destructive-text">{serverError || "Please correct the following fields."}</p>
+                  {Object.entries(fieldErrors).some(([, error]) => error) && (
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                      {Object.entries(fieldErrors).map(([name, error]) => error ? (
+                        <li key={name}><a className="inline-link" href={`#${formId}-${name}`} onClick={(event) => {
+                          event.preventDefault()
+                          document.getElementById(`${formId}-${name}`)?.focus()
+                        }}>{error}</a></li>
+                      ) : null)}
+                    </ul>
+                  )}
+                </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                  {/* Honeypot */}
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate aria-busy={isLoading}>
                   <input type="text" name="website" value={formData.website} onChange={handleChange} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                   <input type="hidden" name="formStartedAt" value={formData.formStartedAt} />
-
-                  {/* Name + Org — side by side */}
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor={`${formId}-name`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                        Name <span className="text-[#bf2a2c]">*</span>
-                      </label>
-                      <input id={`${formId}-name`} type="text" name="name" required autoComplete="name" aria-invalid={!!fieldErrors.name} value={formData.name} onChange={handleChange} className={inputClass(fieldErrors.name)} placeholder="Full name" />
-                      {fieldErrors.name && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.name}</p>}
+                  <fieldset disabled={isLoading} className="min-w-0 space-y-5">
+                    <legend className="sr-only">Your enquiry</legend>
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <FormField id={`${formId}-name`} label="Name" required error={fieldErrors.name}>
+                        <Input name="name" required autoComplete="name" value={formData.name} onChange={handleChange} placeholder="Full name" />
+                      </FormField>
+                      <FormField id={`${formId}-organization`} label="Organisation" required error={fieldErrors.organization}>
+                        <Input name="organization" required autoComplete="organization" value={formData.organization} onChange={handleChange} placeholder="Organisation name" />
+                      </FormField>
                     </div>
-                    <div>
-                      <label htmlFor={`${formId}-org`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                        Organisation <span className="text-[#bf2a2c]">*</span>
-                      </label>
-                      <input id={`${formId}-org`} type="text" name="organization" required autoComplete="organization" aria-invalid={!!fieldErrors.organization} value={formData.organization} onChange={handleChange} className={inputClass(fieldErrors.organization)} placeholder="Organisation name" />
-                      {fieldErrors.organization && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.organization}</p>}
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <FormField id={`${formId}-email`} label="Email" required error={fieldErrors.email}>
+                        <Input type="email" name="email" required autoComplete="email" value={formData.email} onChange={handleChange} placeholder="your@org.com" />
+                      </FormField>
+                      <FormField id={`${formId}-phone`} label="Phone" error={fieldErrors.phone}>
+                        <Input type="tel" name="phone" autoComplete="tel" value={formData.phone} onChange={handleChange} placeholder="+254 XXX XXX XXX" />
+                      </FormField>
                     </div>
-                  </div>
-
-                  {/* Email + Phone */}
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor={`${formId}-email`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                        Email <span className="text-[#bf2a2c]">*</span>
-                      </label>
-                      <input id={`${formId}-email`} type="email" name="email" required autoComplete="email" aria-invalid={!!fieldErrors.email} value={formData.email} onChange={handleChange} className={inputClass(fieldErrors.email)} placeholder="your@org.com" />
-                      {fieldErrors.email && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.email}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor={`${formId}-phone`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                        Phone <span className="text-xs font-normal normal-case text-text-muted">(optional)</span>
-                      </label>
-                      <input id={`${formId}-phone`} type="tel" name="phone" autoComplete="tel" value={formData.phone} onChange={handleChange} className={inputClass()} placeholder="+254 XXX XXX XXX" />
-                    </div>
-                  </div>
-
-                  {/* Country */}
-                  <div>
-                    <label htmlFor={`${formId}-country`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                      Country <span className="text-[#bf2a2c]">*</span>
-                    </label>
-                    <select id={`${formId}-country`} name="country" required autoComplete="country-name" aria-invalid={!!fieldErrors.country} value={formData.country} onChange={handleChange} className={inputClass(fieldErrors.country)}>
-                      <option value="">Select your country</option>
-                      {contactCountries.map((country) => (
-                        <option key={country} value={country}>{country}</option>
-                      ))}
-                    </select>
-                    {fieldErrors.country && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.country}</p>}
-                  </div>
-
-                  {/* Nature of Enquiry */}
-                  <div>
-                    <label htmlFor={`${formId}-enquiry`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                      Nature of Enquiry <span className="text-[#bf2a2c]">*</span>
-                    </label>
-                    <select id={`${formId}-enquiry`} name="enquiryType" required aria-invalid={!!fieldErrors.enquiryType} value={formData.enquiryType} onChange={handleChange} className={inputClass(fieldErrors.enquiryType)}>
-                      <option value="">Select the nature of your enquiry</option>
-                      {enquiryTypes.map((type) => (
-                        <option key={type} value={type}>{type}</option>
-                      ))}
-                    </select>
-                    {fieldErrors.enquiryType && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.enquiryType}</p>}
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor={`${formId}-message`} className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-foreground">
-                      How can we support you? <span className="text-[#bf2a2c]">*</span>
-                    </label>
-                    <textarea id={`${formId}-message`} name="message" required rows={5} aria-invalid={!!fieldErrors.message} value={formData.message} onChange={handleChange} className={inputClass(fieldErrors.message)} placeholder="Tell us about your project, challenge, or partnership opportunity" />
-                    {fieldErrors.message && <p role="alert" className="mt-1 text-xs text-red-600">{fieldErrors.message}</p>}
-                  </div>
-
-                  {/* Subscribe */}
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" id={`${formId}-subscribe`} name="subscribe" checked={formData.subscribe} onChange={handleChange} className="mt-0.5 h-4 w-4 rounded accent-[#bf2a2c]" />
-                    <label htmlFor={`${formId}-subscribe`} className="text-sm text-text-secondary leading-snug">
-                      Subscribe to receive updates, insights, and programme news from CIDE Group
-                    </label>
-                  </div>
-
-                  {/* Privacy consent — required */}
-                  <div className={`rounded-lg border p-4 ${fieldErrors.privacyConsent ? "border-red-300 bg-red-50" : "border-[#e2d9d9] bg-[#f4efec]/60"}`}>
+                    <FormField id={`${formId}-country`} label="Country" required error={fieldErrors.country}>
+                      <Select name="country" required autoComplete="country-name" value={formData.country} onChange={handleChange}>
+                        <option value="">Select your country</option>
+                        {contactCountries.map((country) => <option key={country} value={country}>{country}</option>)}
+                      </Select>
+                    </FormField>
+                    <FormField id={`${formId}-enquiryType`} label="Nature of Enquiry" required error={fieldErrors.enquiryType}>
+                      <Select name="enquiryType" required value={formData.enquiryType} onChange={handleChange}>
+                        <option value="">Select the nature of your enquiry</option>
+                        {enquiryTypes.map((type) => <option key={type} value={type}>{type}</option>)}
+                      </Select>
+                    </FormField>
+                    <FormField id={`${formId}-message`} label="How can we support you?" required description="Use 20 to 3,000 characters." error={fieldErrors.message}>
+                      <Textarea name="message" required rows={5} maxLength={3000} value={formData.message} onChange={handleChange} placeholder="Tell us about your project, challenge, or partnership opportunity" />
+                    </FormField>
                     <div className="flex items-start gap-3">
-                      <input
-                        type="checkbox"
-                        id={`${formId}-privacy`}
-                        name="privacyConsent"
-                        required
-                        checked={formData.privacyConsent}
-                        onChange={handleChange}
-                        aria-invalid={!!fieldErrors.privacyConsent}
-                        className="mt-0.5 h-4 w-4 rounded accent-[#bf2a2c] shrink-0"
-                      />
-                      <label htmlFor={`${formId}-privacy`} className="text-sm text-text-secondary leading-snug">
-                        I have read and agree to the{" "}
-                        <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#bf2a2c] underline underline-offset-2 hover:text-[#9a1f21] font-medium">
-                          Privacy Policy
-                        </Link>
-                        . I understand CIDE Group will process my data to respond to this enquiry.{" "}
-                        <span className="text-[#bf2a2c]">*</span>
-                      </label>
+                      <Checkbox id={`${formId}-subscribe`} name="subscribe" checked={formData.subscribe} onChange={handleChange} />
+                      <label htmlFor={`${formId}-subscribe`} className="supporting-text">Subscribe to receive updates, insights, and programme news from CIDE Group</label>
                     </div>
-                    {fieldErrors.privacyConsent && (
-                      <p role="alert" className="mt-2 text-xs text-red-600 flex items-center gap-1.5">
-                        <ShieldCheck size={12} className="shrink-0" />
-                        {fieldErrors.privacyConsent}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Data notice */}
-                  <p className="text-[11px] text-text-muted leading-relaxed">
-                    <ShieldCheck size={11} className="inline mr-1 text-text-muted" aria-hidden="true" />
-                    CIDE Group processes your data to respond to your enquiry, in line with our{" "}
-                    <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground transition-colors">
-                      Privacy Policy
-                    </Link>
-                    . We do not share your data with third parties for marketing purposes.
+                    <div className="rounded-md border border-control-border bg-muted p-4">
+                      <div className="flex items-start gap-3">
+                        <Checkbox id={`${formId}-privacyConsent`} name="privacyConsent" required checked={formData.privacyConsent} onChange={handleChange} aria-invalid={!!fieldErrors.privacyConsent} aria-describedby={fieldErrors.privacyConsent ? `${formId}-privacyConsent-error` : undefined} />
+                        <label htmlFor={`${formId}-privacyConsent`} className="supporting-text">
+                          I have read and agree to the{" "}
+                          <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="inline-link">Privacy Policy<span className="sr-only"> (opens in a new tab)</span></Link>
+                          . I understand CIDE Group will process my data to respond to this enquiry. <span className="text-destructive-text" aria-hidden="true">*</span>
+                        </label>
+                      </div>
+                      {fieldErrors.privacyConsent && <p id={`${formId}-privacyConsent-error`} className="mt-2 text-sm text-destructive-text">{fieldErrors.privacyConsent}</p>}
+                    </div>
+                  </fieldset>
+                  <p className="caption">
+                    <ShieldCheck size={14} className="mr-1 inline" aria-hidden="true" />
+                    CIDE Group processes your data to respond to your enquiry, in line with our <Link href="/privacy" className="inline-link">Privacy Policy</Link>. We do not share your data with third parties for marketing purposes.
                   </p>
-
-                  {/* Submit */}
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] disabled:opacity-60 disabled:cursor-not-allowed transition-colors font-bold px-6 py-4 rounded-lg text-sm uppercase tracking-wide"
-                  >
+                  <Button type="submit" loading={isLoading} size="lg" className="w-full">
                     {isLoading ? "Sending…" : "Send Message"}
-                    {!isLoading && <ArrowRight size={15} />}
-                  </button>
-
-                  <p className="text-center text-[11px] text-text-muted">
-                    We respond within {siteConfig.contactResponseSla}. For urgent matters, call us directly.
-                  </p>
+                    {!isLoading && <ArrowRight size={16} aria-hidden="true" />}
+                  </Button>
+                  <p className="caption text-center" role="status">{isLoading ? "Your message is being sent." : `We respond within ${siteConfig.contactResponseSla}. For urgent matters, call us directly.`}</p>
                 </form>
               </>
             )}

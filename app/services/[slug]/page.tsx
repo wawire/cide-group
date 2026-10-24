@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import PageHero from "@/components/page-hero"
 import HeroBackLink from "@/components/hero-back-link"
 import PageCallout from "@/components/page-callout"
@@ -79,7 +80,7 @@ export default async function ServicePage({ params }: { params: Params }) {
       >
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
         >
           Discuss This Service
           <ArrowRight size={15} />
@@ -97,19 +98,19 @@ export default async function ServicePage({ params }: { params: Params }) {
 
           {/* Sticky dark sidebar */}
           <div className="lg:sticky lg:top-24">
-            <div className="rounded-xl bg-[#1a0808] p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-5">What's Included</p>
+            <div className="rounded-xl bg-hero-background p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-5">What's Included</p>
               <ul className="space-y-3.5 mb-7">
                 {service.capabilities.map((cap) => (
                   <li key={cap} className="flex items-start gap-3">
-                    <CheckCircle2 size={14} className="text-[#c9a84c] mt-0.5 shrink-0" />
+                    <CheckCircle2 size={14} className="text-accent-gold mt-0.5 shrink-0" />
                     <span className="text-sm text-white/72 leading-snug">{cap}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
+                className="flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
               >
                 Get in Touch
                 <ArrowRight size={13} />
@@ -120,7 +121,7 @@ export default async function ServicePage({ params }: { params: Params }) {
       </section>
 
       {/* ── Capabilities — editorial numbered list ────────────────────────── */}
-      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           <div className="lg:sticky lg:top-24">
             <p className="section-kicker mb-4">Core Capabilities</p>
@@ -128,13 +129,13 @@ export default async function ServicePage({ params }: { params: Params }) {
               How we deliver this service
             </h2>
           </div>
-          <div className="divide-y divide-[#e2d9d9]">
+          <div className="divide-y divide-border">
             {service.capabilities.map((cap, i) => (
               <div key={cap} className="py-6 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-[#ddd0cc] group-hover:text-[#bf2a2c] transition-colors tabular-nums leading-none pt-1 select-none">
+                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-1 select-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-base font-semibold text-foreground group-hover:text-[#bf2a2c] transition-colors leading-snug pt-1">
+                <p className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug pt-1">
                   {cap}
                 </p>
               </div>
@@ -144,10 +145,10 @@ export default async function ServicePage({ params }: { params: Params }) {
       </section>
 
       {/* ── Approach pillars — dark strip ─────────────────────────────────── */}
-      <section className="section-space bg-[#1a0808]">
+      <section className="section-space bg-hero-background">
         <div className="section-shell">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Our Approach</p>
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Our Approach</p>
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto leading-tight">
               Community-led, evidence-based, and built for long-term resilience
             </h2>
@@ -170,8 +171,8 @@ export default async function ServicePage({ params }: { params: Params }) {
                 desc: "We plan for sustainability and local ownership so that impact — and the systems that sustain it — outlast our engagement.",
               },
             ].map(({ num, title, desc }) => (
-              <div key={num} className="border-l-2 border-[#bf2a2c] pl-6">
-                <p className="text-[#c9a84c] text-xs font-bold tabular-nums mb-3">{num}</p>
+              <div key={num} className="border-l-2 border-primary pl-6">
+                <p className="text-accent-gold text-xs font-bold tabular-nums mb-3">{num}</p>
                 <h3 className="text-base font-bold text-white mb-2">{title}</h3>
                 <p className="text-sm text-white/48 leading-relaxed">{desc}</p>
               </div>
@@ -190,7 +191,7 @@ export default async function ServicePage({ params }: { params: Params }) {
             </div>
             <Link
               href="/services"
-              className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-[#bf2a2c] hover:text-[#9a1f21] transition-colors"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
             >
               All Services <ArrowRight size={15} />
             </Link>
@@ -206,12 +207,12 @@ export default async function ServicePage({ params }: { params: Params }) {
                     className="object-contain"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/80 to-transparent" />
-                  <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c9a84c]">
+                  <div className="absolute inset-0 bg-linear-to-t from-hero-background/80 to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-gold">
                     {String(rel.order).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="font-bold text-foreground group-hover:text-[#bf2a2c] transition-colors mb-1.5 leading-snug">
+                <h3 className="font-bold text-foreground group-hover:text-primary transition-colors mb-1.5 leading-snug">
                   {rel.shortTitle}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed">{rel.summary}</p>
@@ -228,18 +229,12 @@ export default async function ServicePage({ params }: { params: Params }) {
         description="Tell us about your context and we'll design the right support — whether standalone or combined with other services."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-          >
+          <Button asChild variant="inverse" size="lg"><Link href="/contact">
             Start a Conversation
-          </Link>
-          <Link
-            href="/focus-areas"
-            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg"><Link href="/focus-areas">
             Explore Focus Areas
-          </Link>
+          </Link></Button>
         </div>
       </PageCallout>
     </main>

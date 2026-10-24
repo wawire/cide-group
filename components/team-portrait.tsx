@@ -17,7 +17,7 @@ export default function TeamPortrait({ name, src, sizes, className }: TeamPortra
   if (!src || failedSource === src) {
     const initials = name.split(" ").filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase()
     return (
-      <div role="img" aria-label={name} className="absolute inset-0 flex items-center justify-center bg-[#ede5e0]">
+      <div role="img" aria-label={name} className="absolute inset-0 flex items-center justify-center bg-surface-secondary">
         <span className="select-none text-4xl font-bold tracking-tight text-primary/25">{initials}</span>
       </div>
     )

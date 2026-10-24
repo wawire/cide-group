@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
 import { companyProfile, siteConfig } from "@/content/site"
@@ -43,7 +44,7 @@ export default function AboutPage() {
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/about/team"
-            className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+            className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
           >
             Meet the Team <ArrowRight size={15} />
           </Link>
@@ -67,7 +68,7 @@ export default function AboutPage() {
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-[#1a0808]/40" />
+            <div className="absolute inset-0 bg-hero-background/40" />
             <div className="absolute inset-0 flex items-end p-10">
               <blockquote className="font-serif text-2xl font-semibold text-white leading-snug max-w-xs">
                 "Evidence-based, community-led, and built for long-term impact."
@@ -75,7 +76,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="bg-[#faf7f5] p-10 lg:p-16 flex flex-col justify-center">
+          <div className="bg-background p-10 lg:p-16 flex flex-col justify-center">
             <p className="section-kicker mb-4">Who We Are</p>
             <h2 className="section-heading mb-6">About CIDE Group</h2>
             <p className="text-text-secondary leading-relaxed mb-5">
@@ -94,7 +95,7 @@ export default function AboutPage() {
               <div className="space-y-2.5">
                 {stakeholderGroups.map((group) => (
                   <div key={group} className="flex items-start gap-3">
-                    <CheckCircle2 size={15} className="text-[#bf2a2c] mt-0.5 shrink-0" />
+                    <CheckCircle2 size={15} className="text-primary mt-0.5 shrink-0" />
                     <p className="text-sm text-text-secondary">{group}</p>
                   </div>
                 ))}
@@ -107,7 +108,7 @@ export default function AboutPage() {
                 {globalPartners.map((partner) => (
                   <span
                     key={partner}
-                    className="px-3 py-1 rounded-full bg-white border border-[#e2d9d9] text-xs font-semibold text-text-secondary"
+                    className="px-3 py-1 rounded-full bg-white border border-border text-xs font-semibold text-text-secondary"
                   >
                     {partner}
                   </span>
@@ -119,25 +120,25 @@ export default function AboutPage() {
       </section>
 
       {/* ── Vision, Mission, Values — dark strip ─────────────────────────── */}
-      <section className="section-space bg-[#1a0808]">
+      <section className="section-space bg-hero-background">
         <div className="section-shell">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">What Drives Us</p>
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">What Drives Us</p>
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto leading-tight">
               Vision, Mission and Values
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="border-l-2 border-[#bf2a2c] pl-6">
-              <p className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Vision</p>
+            <div className="border-l-2 border-primary pl-6">
+              <p className="text-accent-gold text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Vision</p>
               <p className="text-white/80 leading-relaxed">{companyProfile.vision}</p>
             </div>
-            <div className="border-l-2 border-[#c9a84c] pl-6">
-              <p className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Mission</p>
+            <div className="border-l-2 border-accent-gold pl-6">
+              <p className="text-accent-gold text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Mission</p>
               <p className="text-white/80 leading-relaxed">{companyProfile.mission}</p>
             </div>
             <div className="border-l-2 border-white/20 pl-6">
-              <p className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Model</p>
+              <p className="text-accent-gold text-xs font-bold uppercase tracking-[0.15em] mb-3">Our Model</p>
               <p className="text-white/80 leading-relaxed">
                 We combine advisory depth with implementation capacity — translating strategy into measurable, locally
                 grounded results across the full programme cycle.
@@ -147,12 +148,12 @@ export default function AboutPage() {
 
           {/* Core values */}
           <div className="border-t border-white/10 pt-12">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-8 text-center">Core Values</p>
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-8 text-center">Core Values</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {companyProfile.coreValues.map((value, i) => (
                 <div key={value.title} className="rounded-xl border border-white/8 bg-white/4 p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs font-bold tabular-nums text-[#c9a84c]">
+                    <span className="text-xs font-bold tabular-nums text-accent-gold">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="text-sm font-bold text-white uppercase tracking-wide">{value.title}</h3>
@@ -166,7 +167,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Our 360° Approach ────────────────────────────────────────────── */}
-      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
           <div>
             <p className="section-kicker mb-4">Our 360° Approach</p>
@@ -180,19 +181,19 @@ export default function AboutPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-[#bf2a2c] hover:text-[#9a1f21] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-colors"
             >
               Talk to our team <ArrowRight size={15} />
             </Link>
           </div>
 
-          <div className="space-y-0 divide-y divide-[#e2d9d9]">
+          <div className="space-y-0 divide-y divide-border">
             {companyProfile.approach.map((step, i) => (
               <div key={step} className="py-5 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-[#ddd0cc] group-hover:text-[#bf2a2c] transition-colors tabular-nums leading-none pt-0.5 select-none">
+                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-0.5 select-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-base font-bold text-foreground group-hover:text-[#bf2a2c] transition-colors pt-0.5">
+                <p className="text-base font-bold text-foreground group-hover:text-primary transition-colors pt-0.5">
                   {step}
                 </p>
               </div>
@@ -205,8 +206,8 @@ export default function AboutPage() {
       <section className="section-space bg-background">
         <div className="section-shell">
           <div className="rounded-2xl overflow-hidden grid lg:grid-cols-[1fr_400px]">
-            <div className="bg-[#1a0808] p-10 lg:p-14 flex flex-col justify-center">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c] mb-4">Our People</p>
+            <div className="bg-hero-background p-10 lg:p-14 flex flex-col justify-center">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Our People</p>
               <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">
                 The team behind the work
               </h2>
@@ -217,7 +218,7 @@ export default function AboutPage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/about/team"
-                  className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
+                  className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-6 py-3 rounded-lg text-sm uppercase tracking-wide"
                 >
                   Meet the Team <ArrowRight size={14} />
                 </Link>
@@ -237,7 +238,7 @@ export default function AboutPage() {
                 className="object-cover object-center"
                 sizes="400px"
               />
-              <div className="absolute inset-0 bg-[#1a0808]/25" />
+              <div className="absolute inset-0 bg-hero-background/25" />
             </div>
           </div>
         </div>
@@ -250,18 +251,12 @@ export default function AboutPage() {
         description="Reach out to discuss programme design, implementation support, research, or strategic collaboration across Africa."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-          <Link
-            href="/contact"
-            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-          >
+          <Button asChild variant="inverse" size="lg"><Link href="/contact">
             Contact CIDE
-          </Link>
-          <Link
-            href="/focus-areas"
-            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg"><Link href="/focus-areas">
             Explore Focus Areas
-          </Link>
+          </Link></Button>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-white/55 text-sm">
           <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors font-medium">

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
 import Link from "next/link"
@@ -40,7 +41,7 @@ export default function WhereWeWorkPage() {
       >
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
         >
           Work With Us <ArrowRight size={15} />
         </Link>
@@ -56,7 +57,7 @@ export default function WhereWeWorkPage() {
       </section>
 
       {/* ── Our local advantage ───────────────────────────────────────────── */}
-      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
           <div>
             <p className="section-kicker mb-4">Our Local Advantage</p>
@@ -73,13 +74,13 @@ export default function WhereWeWorkPage() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-[#bf2a2c] hover:text-[#9a1f21] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-colors"
             >
               About CIDE Group <ArrowRight size={15} />
             </Link>
           </div>
 
-          <div className="space-y-0 divide-y divide-[#e2d9d9]">
+          <div className="space-y-0 divide-y divide-border">
             {[
               { num: "01", text: "East African headquarters with deep regional networks" },
               { num: "02", text: "Multilingual capacity across English, French, and Swahili" },
@@ -88,10 +89,10 @@ export default function WhereWeWorkPage() {
               { num: "05", text: "Understanding of local procurement, compliance, and operational realities" },
             ].map(({ num, text }) => (
               <div key={num} className="py-5 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-[#ddd0cc] group-hover:text-[#bf2a2c] transition-colors tabular-nums leading-none pt-0.5 select-none">
+                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-0.5 select-none">
                   {num}
                 </span>
-                <p className="text-base font-bold text-foreground group-hover:text-[#bf2a2c] transition-colors pt-0.5">
+                <p className="text-base font-bold text-foreground group-hover:text-primary transition-colors pt-0.5">
                   {text}
                 </p>
               </div>
@@ -107,18 +108,12 @@ export default function WhereWeWorkPage() {
         description="Tell us where you are working and what you need — we will connect you with the right expertise and local knowledge."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-          >
+          <Button asChild variant="inverse" size="lg"><Link href="/contact">
             Start a Conversation
-          </Link>
-          <Link
-            href="/projects"
-            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg"><Link href="/projects">
             See Our Projects
-          </Link>
+          </Link></Button>
         </div>
       </PageCallout>
     </main>

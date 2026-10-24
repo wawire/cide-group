@@ -1,5 +1,7 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { motion, type Variants } from "framer-motion"
 import type { ReactNode } from "react"
 
@@ -38,19 +40,20 @@ export default function StaggerContainer({
   delay = 0,
   stagger = 0.1,
 }: StaggerContainerProps) {
+  const reducedMotion = useReducedMotion()
   const childArray = Array.isArray(children) ? children : [children]
 
   return (
     <motion.div
       className={className}
       variants={container}
-      initial="hidden"
+      initial={false}
       whileInView="visible"
       viewport={{ once: true, margin: "-64px" }}
-      custom={{ delay, stagger }}
+      custom={{ delay: reducedMotion ? 0 : delay, stagger: reducedMotion ? 0 : stagger }}
     >
       {childArray.map((child, i) => (
-        <motion.div key={i} variants={item}>
+        <motion.div key={i} variants={reducedMotion ? undefined : item}>
           {child}
         </motion.div>
       ))}

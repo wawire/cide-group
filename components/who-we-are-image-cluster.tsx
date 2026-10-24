@@ -1,10 +1,13 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 export default function WhoWeAreImageCluster() {
+  const reducedMotion = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
@@ -30,11 +33,11 @@ export default function WhoWeAreImageCluster() {
           sizes="(min-width: 1280px) 605px, (min-width: 1024px) 51vw, 92vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-[#1a0808]/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-hero-background/40 to-transparent" />
       </div>
 
       <motion.div
-        style={{ y: yTopRight }}
+        style={{ y: reducedMotion ? 0 : yTopRight }}
         className="absolute -right-6 -top-6 hidden h-36 w-36 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block"
       >
         <Image
@@ -48,7 +51,7 @@ export default function WhoWeAreImageCluster() {
       </motion.div>
 
       <motion.div
-        style={{ y: yBottomLeft }}
+        style={{ y: reducedMotion ? 0 : yBottomLeft }}
         className="absolute -bottom-6 -left-6 hidden h-32 w-44 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block"
       >
         <Image
@@ -62,8 +65,8 @@ export default function WhoWeAreImageCluster() {
       </motion.div>
 
       <motion.div
-        style={{ y: yAccent }}
-        className="absolute -left-3 top-12 hidden h-28 w-1.5 rounded-full bg-[#bf2a2c] sm:block"
+        style={{ y: reducedMotion ? 0 : yAccent }}
+        className="absolute -left-3 top-12 hidden h-28 w-1.5 rounded-full bg-primary sm:block"
       />
     </div>
   )

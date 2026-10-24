@@ -13,7 +13,7 @@ const lastUpdated = "April 2026"
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#faf7f5]">
+    <main className="min-h-screen bg-background">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <PageHero eyebrow="Legal" title="Terms of Use">
         <p className="text-sm text-white/55">Last updated: {lastUpdated} &nbsp;&middot;&nbsp; {siteConfig.legalName}</p>
@@ -21,16 +21,16 @@ export default function TermsPage() {
 
       {/* ── Content ────────────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="section-shell space-y-10 text-[0.9375rem] leading-[1.75] text-[#4a3535]" style={{ maxWidth: "760px" }}>
+        <div className="section-shell space-y-10 text-[0.9375rem] leading-[1.75] text-text-secondary" style={{ maxWidth: "760px" }}>
 
           {/* 1 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">1. Acceptance of Terms</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">1. Acceptance of Terms</h2>
             <p>
               By accessing or using the website at{" "}
-              <a href={siteConfig.url} className="text-[#bf2a2c] hover:underline">{siteConfig.url}</a>{" "}
+              <a href={siteConfig.url} className="text-primary hover:underline">{siteConfig.url}</a>{" "}
               (the &ldquo;Site&rdquo;), you agree to be bound by these Terms of Use (&ldquo;Terms&rdquo;) and our{" "}
-              <Link href="/privacy" className="text-[#bf2a2c] hover:underline">Privacy Policy</Link>. If you do not agree to
+              <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>. If you do not agree to
               these Terms, please do not use this Site.
             </p>
             <p>
@@ -43,7 +43,7 @@ export default function TermsPage() {
 
           {/* 2 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">2. Permitted Use</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">2. Permitted Use</h2>
             <p className="mb-3">
               You may access and use the Site for lawful, informational, and non-commercial purposes, subject to these
               Terms. You may not:
@@ -60,7 +60,7 @@ export default function TermsPage() {
 
           {/* 3 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">3. Intellectual Property</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">3. Intellectual Property</h2>
             <p className="mb-3">
               All content on this Site — including text, photographs, graphics, logos, icons, and software — is the
               property of {siteConfig.legalName} or its content suppliers, and is protected by applicable intellectual
@@ -75,13 +75,13 @@ export default function TermsPage() {
 
           {/* 4 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">4. Disclaimer of Warranties</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">4. Disclaimer of Warranties</h2>
             <p className="mb-3">
               The information published on this Site is provided for general informational purposes only. CIDE Group
               makes no representations about the accuracy, completeness, reliability, or suitability of the content for
               any particular purpose.
             </p>
-            <div className="rounded-lg border border-[#e6dcda] border-l-[3px] border-l-[#c9a84c] bg-[#f4efec] px-5 py-4">
+            <div className="rounded-lg border border-border border-l-[3px] border-l-accent-gold bg-surface-secondary px-5 py-4">
               <p className="mb-0 text-sm">
                 <strong>Website disclaimer:</strong> The information on this website is for general informational
                 purposes only. CIDE Group makes no representations about the accuracy or completeness of any
@@ -98,7 +98,7 @@ export default function TermsPage() {
 
           {/* 5 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">5. Limitation of Liability</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">5. Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by law, CIDE Group shall not be liable for any direct, indirect,
               incidental, special, or consequential damages arising from your use of, or inability to use, this Site
@@ -110,7 +110,7 @@ export default function TermsPage() {
 
           {/* 6 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">6. Third-Party Links</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">6. Third-Party Links</h2>
             <p>
               This Site may contain links to external websites operated by third parties. These links are provided
               for your convenience only. CIDE Group has no control over, and accepts no responsibility for, the
@@ -121,11 +121,11 @@ export default function TermsPage() {
 
           {/* 7 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">7. Contact Form &amp; Communications</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">7. Contact Form &amp; Communications</h2>
             <p>
               When you submit a message via our contact form, you consent to CIDE Group processing your personal data
               to respond to your enquiry, in accordance with our{" "}
-              <Link href="/privacy" className="text-[#bf2a2c] hover:underline">Privacy Policy</Link>. We will not add you
+              <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>. We will not add you
               to any mailing list without your explicit opt-in. We aim to respond to all enquiries within{" "}
               {siteConfig.contactResponseSla}.
             </p>
@@ -133,7 +133,7 @@ export default function TermsPage() {
 
           {/* 8 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">8. Governing Law</h2>
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">8. Governing Law</h2>
             <p>
               These Terms are governed by the laws of <strong>Kenya</strong>. Any dispute arising in connection with
               these Terms or the use of this Site shall be subject to the exclusive jurisdiction of the courts of
@@ -143,16 +143,16 @@ export default function TermsPage() {
 
           {/* 9 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a0808] pb-2 mb-4 border-b border-[#e6dcda]">9. Contact</h2>
-            <div className="rounded-lg border border-[#e6dcda] border-l-[3px] border-l-[#bf2a2c] bg-[#f4efec] px-5 py-4 leading-[1.9]">
+            <h2 className="text-lg font-bold text-hero-background pb-2 mb-4 border-b border-border">9. Contact</h2>
+            <div className="rounded-lg border border-border border-l-[3px] border-l-primary bg-surface-secondary px-5 py-4 leading-[1.9]">
               <strong>{siteConfig.legalName}</strong><br />
               {siteConfig.address}<br />
-              <a href={`mailto:${siteConfig.email}`} className="text-[#bf2a2c] hover:underline">{siteConfig.email}</a><br />
-              <a href={`tel:${siteConfig.phoneHref}`} className="text-[#bf2a2c] hover:underline">{siteConfig.phone}</a>
+              <a href={`mailto:${siteConfig.email}`} className="text-primary hover:underline">{siteConfig.email}</a><br />
+              <a href={`tel:${siteConfig.phoneHref}`} className="text-primary hover:underline">{siteConfig.phone}</a>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-[#e6dcda] flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="pt-8 border-t border-border flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <p className="text-xs text-text-muted">
               {siteConfig.legalName} &middot; Reg. {siteConfig.companyNumber} &middot; Kenya
             </p>
@@ -160,7 +160,7 @@ export default function TermsPage() {
               <Link href="/privacy" className="text-xs text-text-muted hover:text-foreground transition-colors underline underline-offset-2">
                 Privacy Policy
               </Link>
-              <Link href="/contact" className="text-xs text-[#bf2a2c] hover:text-[#9a1f21] transition-colors font-semibold">
+              <Link href="/contact" className="text-xs text-primary hover:text-primary-dark transition-colors font-semibold">
                 Contact CIDE
               </Link>
             </div>

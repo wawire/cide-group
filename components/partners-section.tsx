@@ -1,5 +1,7 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
@@ -41,8 +43,9 @@ const ethicalCommitments = [
 ]
 
 export default function PartnersSection() {
+  const reducedMotion = useReducedMotion()
   return (
-    <section className="section-space bg-[#fafaf9]">
+    <section className="section-space bg-background">
       <div className="section-shell">
         <div className="mb-10 text-center">
           <p className="section-kicker mb-4">Why Partner With Us</p>
@@ -54,25 +57,25 @@ export default function PartnersSection() {
         </div>
 
         <motion.div
-          className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5"
+          className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5"
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}
-          initial="hidden"
+          initial={false}
           whileInView="visible"
           viewport={{ once: true, margin: "-64px" }}
         >
           {partnerReasons.map((reason) => (
             <motion.div
               key={reason.title}
-              variants={cardVariants}
-              className="rounded-xl border border-[#e2d9d9] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#bf2a2c]/8"
+              variants={reducedMotion ? undefined : cardVariants}
+              className="min-w-0 break-words rounded-xl border border-border bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/8"
             >
-              <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-[#bf2a2c]">{reason.title}</h3>
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary">{reason.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{reason.description}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        <div className="border-t border-[#e2d9d9] pt-10">
+        <div className="border-t border-border pt-10">
           <div className="grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-text-muted">Ethical Commitment</p>
@@ -88,14 +91,14 @@ export default function PartnersSection() {
             <motion.div
               className="grid gap-4 sm:grid-cols-2"
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } } }}
-              initial="hidden"
+              initial={false}
               whileInView="visible"
               viewport={{ once: true, margin: "-64px" }}
             >
               {ethicalCommitments.map((item) => (
-                <motion.div key={item} variants={cardVariants} className="rounded-xl border border-[#e2d9d9] bg-white p-5">
+                <motion.div key={item} variants={reducedMotion ? undefined : cardVariants} className="rounded-xl border border-border bg-surface p-5">
                   <div className="flex gap-3">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#bf2a2c]" />
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
                     <p className="text-sm leading-relaxed text-text-secondary">{item}</p>
                   </div>
                 </motion.div>

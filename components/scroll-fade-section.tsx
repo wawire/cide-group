@@ -1,5 +1,7 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/use-reduced-motion"
+
 import { useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
 
@@ -18,10 +20,12 @@ export default function ScrollFadeSection({
   duration = 0.6,
   delay = 0,
 }: ScrollFadeSectionProps) {
+  const reducedMotion = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    if (reducedMotion) return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -37,7 +41,7 @@ export default function ScrollFadeSection({
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [reducedMotion])
 
   const getTransform = () => {
     const baseValue = "20px"
@@ -60,9 +64,9 @@ export default function ScrollFadeSection({
       ref={ref}
       className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: getTransform(),
-        transition: `all ${duration}s ease-out ${delay}s`,
+        opacity: reducedMotion || isVisible ? 1 : 0,
+        transform: reducedMotion ? "none" : getTransform(),
+        transition: reducedMotion ? "none" : `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s`,
       }}
     >
       {children}

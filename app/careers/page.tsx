@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
 import Link from "next/link"
@@ -70,7 +71,7 @@ export default function CareersPage() {
       >
         <a
           href={`mailto:${siteConfig.email}?subject=Expression of Interest – CIDE Group`}
-          className="inline-flex items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
+          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
         >
           Send an Expression of Interest
           <ArrowRight size={15} />
@@ -90,14 +91,14 @@ export default function CareersPage() {
               Government MDAs, supporting USAID, BMZ, KOICA, SIDA, EU, AU, IGAD, and UN Agencies.
             </p>
           </div>
-          <div className="divide-y divide-[#e2d9d9]">
+          <div className="divide-y divide-border">
             {whyJoin.map(({ num, title, description }) => (
               <div key={num} className="py-7 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-[#ddd0cc] group-hover:text-[#bf2a2c] transition-colors tabular-nums leading-none pt-1 select-none">
+                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-1 select-none">
                   {num}
                 </span>
                 <div>
-                  <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-[#bf2a2c] transition-colors">
+                  <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {title}
                   </h3>
                   <p className="text-text-secondary leading-relaxed">{description}</p>
@@ -109,7 +110,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Areas of work + Values — two-col on light bg ──────────────────── */}
-      <section className="section-space bg-[#f4efec] border-y border-[#e6dcda]">
+      <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-2 gap-12 items-start">
 
           {/* Areas of work */}
@@ -122,8 +123,8 @@ export default function CareersPage() {
             </p>
             <div className="grid sm:grid-cols-2 gap-2.5">
               {areasOfWork.map((area) => (
-                <div key={area} className="flex items-start gap-3 rounded-lg border border-[#e2d9d9] bg-white px-4 py-3">
-                  <CheckCircle2 size={14} className="text-[#bf2a2c] mt-0.5 shrink-0" />
+                <div key={area} className="flex items-start gap-3 rounded-lg border border-border bg-white px-4 py-3">
+                  <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0" />
                   <span className="text-sm font-medium text-foreground leading-snug">{area}</span>
                 </div>
               ))}
@@ -137,7 +138,7 @@ export default function CareersPage() {
             <div className="space-y-4">
               {companyProfile.coreValues.map((value, i) => (
                 <div key={value.title} className="grid grid-cols-[32px_1fr] gap-4 items-start">
-                  <span className="text-xs font-bold tabular-nums text-[#bf2a2c] pt-0.5">
+                  <span className="text-xs font-bold tabular-nums text-primary pt-0.5">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -164,7 +165,7 @@ export default function CareersPage() {
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-[#1a0808]/50" />
+            <div className="absolute inset-0 bg-hero-background/50" />
             <div className="absolute inset-0 flex items-end p-10">
               <blockquote className="font-serif text-2xl font-semibold text-white leading-snug max-w-xs">
                 "Professionals who combine depth with a commitment to people-centred impact."
@@ -173,8 +174,8 @@ export default function CareersPage() {
           </div>
 
           {/* Content side */}
-          <div className="bg-[#1a0808] p-10 lg:p-16 flex flex-col justify-center">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c9a84c] mb-4">Work With Us</p>
+          <div className="bg-hero-background p-10 lg:p-16 flex flex-col justify-center">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">
               We welcome expressions of interest
             </h2>
@@ -187,7 +188,7 @@ export default function CareersPage() {
             </p>
             <a
               href={`mailto:${siteConfig.email}?subject=Expression of Interest – CIDE Group`}
-              className="inline-flex max-w-full items-center gap-2 bg-[#bf2a2c] text-white hover:bg-[#9a1f21] transition-colors font-semibold px-5 py-3 rounded-lg text-sm self-start"
+              className="inline-flex max-w-full items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-semibold px-5 py-3 rounded-lg text-sm self-start"
             >
               <span className="min-w-0 break-all">{siteConfig.email}</span>
               <ArrowRight size={15} className="shrink-0" />
@@ -203,18 +204,12 @@ export default function CareersPage() {
         description="If you are an organisation or institution looking to work with us on development programmes, visit our partnerships page."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/partners"
-            className="bg-white text-[#bf2a2c] hover:bg-white/90 font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all shadow-lg"
-          >
+          <Button asChild variant="inverse" size="lg"><Link href="/partners">
             Partnership Approach
-          </Link>
-          <Link
-            href="/contact"
-            className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold px-8 py-4 rounded-lg text-sm uppercase tracking-wide transition-all"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg"><Link href="/contact">
             Get in Touch
-          </Link>
+          </Link></Button>
         </div>
       </PageCallout>
     </main>
