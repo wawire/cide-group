@@ -204,8 +204,12 @@ export default function Navigation() {
                   type="button"
                   aria-expanded={openDesktopMenu === "about"}
                   aria-controls="about-menu"
+                  onMouseEnter={() => openMenu("about")}
                   onMouseLeave={scheduleClose}
-                  onClick={() => setOpenDesktopMenu((current) => (current === "about" ? null : "about"))}
+                  onClick={(event) => {
+                    if (event.detail === 0) setOpenDesktopMenu((current) => current === "about" ? null : "about")
+                    else openMenu("about")
+                  }}
                   className={triggerClass(isAboutActive, openDesktopMenu === "about")}
                 >
                   About
@@ -215,10 +219,12 @@ export default function Navigation() {
                   type="button"
                   aria-expanded={openDesktopMenu === "what-we-do"}
                   aria-controls="what-we-do-mega-menu"
+                  onMouseEnter={() => openMenu("what-we-do")}
                   onMouseLeave={scheduleClose}
-                  onClick={() =>
-                    setOpenDesktopMenu((current) => (current === "what-we-do" ? null : "what-we-do"))
-                  }
+                  onClick={(event) => {
+                    if (event.detail === 0) setOpenDesktopMenu((current) => current === "what-we-do" ? null : "what-we-do")
+                    else openMenu("what-we-do")
+                  }}
                   className={triggerClass(isWhatWeDoActive, openDesktopMenu === "what-we-do")}
                 >
                   What We Do
@@ -228,8 +234,12 @@ export default function Navigation() {
                   type="button"
                   aria-expanded={openDesktopMenu === "impact"}
                   aria-controls="impact-mega-menu"
+                  onMouseEnter={() => openMenu("impact")}
                   onMouseLeave={scheduleClose}
-                  onClick={() => setOpenDesktopMenu((current) => (current === "impact" ? null : "impact"))}
+                  onClick={(event) => {
+                    if (event.detail === 0) setOpenDesktopMenu((current) => current === "impact" ? null : "impact")
+                    else openMenu("impact")
+                  }}
                   className={triggerClass(isImpactActive, openDesktopMenu === "impact")}
                 >
                   Impact
