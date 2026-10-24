@@ -25,7 +25,7 @@ export default function FocusAreasPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Our Integrated Solutions"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Focus Areas" }}
         title="Thematic solutions grounded in Africa's realities"
         description="Where policy, systems, communities, and implementation realities come together for lasting impact."
       />
@@ -66,7 +66,7 @@ export default function FocusAreasPage() {
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="section-space bg-background">
         <div className="section-shell">
-          <div className="relative rounded-2xl overflow-hidden">
+          <div className="relative rounded-lg overflow-hidden">
             <Image
               src="/focus-areas/livelihoods-women-farming.png"
               alt="CIDE community development work"

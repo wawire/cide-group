@@ -1,6 +1,5 @@
 import ProjectCard from "@/components/project-card"
 import PageHero from "@/components/page-hero"
-import Breadcrumbs from "@/components/breadcrumbs"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react"
@@ -41,25 +40,13 @@ export default async function ProjectDetailPage({ params }: Props) {
   return (
     <main className="min-h-screen">
       <PageHero
-        breadcrumb={<Breadcrumbs ancestors={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }]} current={project.title} />}
-        eyebrow={
-          <div className="flex flex-wrap gap-2 normal-case tracking-normal">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/20 bg-white/12 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        }
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }], current: project.title }}
         title={project.title}
         titleAside={
-          <div className="flex shrink-0 items-center gap-2 text-sm text-white/55">
-            <MapPin size={13} className="text-accent-gold" />
+          <p className="flex items-center gap-2 text-sm text-white/75">
+            <MapPin size={14} aria-hidden="true" />
             <span>{project.location}</span>
-          </div>
+          </p>
         }
       />
 
@@ -95,7 +82,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 {project.countries.map((country) => (
                   <span
                     key={country}
-                    className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/70"
+                    className="rounded-sm border border-white/15 px-3 py-1 text-xs text-white/70"
                   >
                     {country}
                   </span>
@@ -111,7 +98,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary"
+                    className="rounded-sm border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary"
                   >
                     {tag}
                   </span>

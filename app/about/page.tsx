@@ -37,23 +37,17 @@ export default function AboutPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="About Us"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "About" }}
         title="Pan-African Development Advisory, Research and Programme Implementation"
         description={siteConfig.narrativeLine}
       >
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/about/team"
-            className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-          >
+          <Button asChild variant="default" size="lg" className="whitespace-normal text-center"><Link href="/about/team">
             Meet the Team <ArrowRight size={15} />
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-          >
+          </Link></Button>
+          <Button asChild variant="inverse-outline" size="lg" className="whitespace-normal text-center"><Link href="/contact">
             Get in Touch
-          </Link>
+          </Link></Button>
         </div>
       </PageHero>
 
@@ -108,7 +102,7 @@ export default function AboutPage() {
                 {globalPartners.map((partner) => (
                   <span
                     key={partner}
-                    className="px-3 py-1 rounded-full bg-white border border-border text-xs font-semibold text-text-secondary"
+                    className="px-3 py-1 rounded-sm bg-white border border-border text-xs font-semibold text-text-secondary"
                   >
                     {partner}
                   </span>
@@ -205,7 +199,7 @@ export default function AboutPage() {
       {/* ── Team CTA — image + dark content ──────────────────────────────── */}
       <section className="section-space bg-background">
         <div className="section-shell">
-          <div className="rounded-2xl overflow-hidden grid lg:grid-cols-[1fr_400px]">
+          <div className="rounded-lg overflow-hidden grid lg:grid-cols-[1fr_400px]">
             <div className="bg-hero-background p-10 lg:p-14 flex flex-col justify-center">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Our People</p>
               <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">

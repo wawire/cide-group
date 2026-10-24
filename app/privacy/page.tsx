@@ -16,14 +16,16 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <PageHero eyebrow="Legal" title="Privacy Policy">
+      <PageHero
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Privacy Policy" }}
+        title="Privacy Policy">
         <p className="text-sm text-white/55">Last updated: {lastUpdated} &nbsp;&middot;&nbsp; {siteConfig.legalName}</p>
       </PageHero>
 
       {/* ── Content ────────────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="section-shell" style={{ maxWidth: "760px" }}>
-          <div className="space-y-10 text-[0.9375rem] leading-[1.75] text-text-secondary">
+        <div className="section-shell reading-width">
+          <div className="space-y-10 text-base leading-relaxed text-text-secondary">
 
             {/* 1 */}
             <div>

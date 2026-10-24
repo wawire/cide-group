@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import PageHero from "@/components/page-hero"
-import HeroBackLink from "@/components/hero-back-link"
 import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
 import { getServiceBySlug, services } from "@/content/services"
@@ -67,24 +66,14 @@ export default async function ServicePage({ params }: { params: Params }) {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        breadcrumb={<HeroBackLink href="/services">All Services</HeroBackLink>}
-        eyebrow={
-          <div className="flex items-center gap-3">
-            <span>Our Services</span>
-            <span className="text-white/20" aria-hidden="true">—</span>
-            <span className="text-xs font-bold text-white/55 tabular-nums" aria-label={`Service ${service.order}`}>{String(service.order).padStart(2, "0")}</span>
-          </div>
-        }
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Services", href: "/services" }], current: service.title }}
         title={service.title}
         description={service.subtitle}
       >
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-        >
+        <Button asChild variant="default" size="lg" className="whitespace-normal text-center"><Link href="/contact">
           Discuss This Service
           <ArrowRight size={15} />
-        </Link>
+        </Link></Button>
       </PageHero>
 
       {/* ── Overview — two column ─────────────────────────────────────────── */}

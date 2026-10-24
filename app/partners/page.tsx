@@ -64,7 +64,7 @@ export default function PartnersPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Why Partner With Us"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Partners" }}
         title="Built for accountable delivery and long-term partnership"
         description="Implementation strength, lean delivery, and ethical practice — in a single team."
       />
@@ -112,7 +112,7 @@ export default function PartnersPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-1">Supporting partners including</p>
                   <div className="flex flex-wrap gap-1.5">
                     {globalPartners.map((p) => (
-                      <span key={p} className="text-[10px] font-semibold bg-white/15 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
+                      <span key={p} className="text-[10px] font-semibold bg-white/15 text-white px-2 py-0.5 rounded-sm backdrop-blur-sm">
                         {p}
                       </span>
                     ))}

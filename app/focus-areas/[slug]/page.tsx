@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import SectionHeading from "@/components/section-heading"
 import ProjectCard from "@/components/project-card"
 import PageHero from "@/components/page-hero"
-import HeroBackLink from "@/components/hero-back-link"
 import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -59,18 +58,14 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        breadcrumb={<HeroBackLink href="/focus-areas">All Focus Areas</HeroBackLink>}
-        eyebrow="Focus Area"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Focus Areas", href: "/focus-areas" }], current: focusArea.title }}
         title={focusArea.title}
         description={focusArea.summary}
       >
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-        >
+        <Button asChild variant="default" size="lg" className="whitespace-normal text-center"><Link href="/contact">
           Work With Us Here
           <ArrowRight size={15} />
-        </Link>
+        </Link></Button>
       </PageHero>
 
       {/* ── Overview — two column ─────────────────────────────────────────── */}

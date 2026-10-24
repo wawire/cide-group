@@ -35,16 +35,13 @@ export default function WhereWeWorkPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Where We Work"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Where We Work" }}
         title="Experience across Africa and beyond"
         description="Over a decade of multidisciplinary experience supporting non-profit, public and private organisations across borders."
       >
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-7 py-4 rounded-lg text-sm uppercase tracking-wide"
-        >
+        <Button asChild variant="default" size="lg" className="whitespace-normal text-center"><Link href="/contact">
           Work With Us <ArrowRight size={15} />
-        </Link>
+        </Link></Button>
       </PageHero>
 
       <section className="bg-background py-12 md:py-16" aria-labelledby="assignment-experience-heading">

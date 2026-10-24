@@ -33,13 +33,13 @@ export default async function KnowledgeHubPage({ searchParams }: { searchParams:
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Knowledge Hub"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Knowledge Hub" }}
         title="Evidence-based thinking from the field"
         description="Insights, policy briefs, and publications from CIDE Group practitioners — grounded in real programme experience across Africa."
       >
         <nav aria-label="Filter insights by category" className="flex flex-wrap gap-2">
           {["All", ...knowledgeCategories].map((cat) => (
-            <Link key={cat} href={cat === "All" ? "/knowledge" : `/knowledge?category=${encodeURIComponent(cat)}`} aria-current={(!category && cat === "All") || category === cat ? "page" : undefined} className="rounded-full border border-white/30 px-3 py-2 text-xs font-semibold text-white transition-colors hover:border-accent-gold aria-[current=page]:bg-white/20">
+            <Link key={cat} href={cat === "All" ? "/knowledge" : `/knowledge?category=${encodeURIComponent(cat)}`} aria-current={(!category && cat === "All") || category === cat ? "page" : undefined} className="rounded-sm border border-white/30 px-3 py-2 text-xs font-semibold text-white transition-colors hover:border-accent-gold aria-[current=page]:bg-white/20">
               {cat}
             </Link>
           ))}

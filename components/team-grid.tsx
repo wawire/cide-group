@@ -70,13 +70,13 @@ function MemberCard({
     <button
       type="button"
       onClick={() => onClick(member)}
-      className="group w-full h-full text-left flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"
+      className="group w-full h-full text-left flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg"
     >
       {/* Photo at 50% card width — centred, thin accent border on bottom + right */}
       <div className="w-1/2 mx-auto">
         <div
           className={cn(
-            "relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-surface-secondary border-b-2 border-r-2",
+            "relative aspect-4/5 w-full overflow-hidden rounded-lg bg-surface-secondary border-b-2 border-r-2",
             borderClass,
           )}
         >
@@ -128,7 +128,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
         role="dialog"
         aria-modal="true"
         aria-label={`Profile: ${member.name}`}
-        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-270 max-h-[96vh] overflow-y-auto"
+        className="relative bg-white rounded-lg shadow-2xl w-full max-w-270 max-h-[96vh] overflow-y-auto"
       >
         {/* Close */}
         <button

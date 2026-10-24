@@ -19,7 +19,7 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen">
       <PageHero
-        eyebrow="Our Work"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Projects" }}
         title="Evidence in Action Across Africa"
         description="Every project is a story of partnership, evidence, and sustained impact. Filter to explore the portfolio."
       />

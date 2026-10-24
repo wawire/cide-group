@@ -29,7 +29,7 @@ export default function ResearchPage() {
   return (
     <main className="min-h-screen">
       <PageHero
-        eyebrow="Knowledge Hub"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Research" }}
         title={<>Research, Insights & Thought Leadership</>}
         description="Research and evidence to inform better decisions. Contact our team about reports, policy briefs and learning resources."
       />

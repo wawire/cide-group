@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import PageHero from "@/components/page-hero"
-import HeroBackLink from "@/components/hero-back-link"
 import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -71,12 +70,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
 
       {/* ── Hero image ────────────────────────────────────────────────────── */}
       <PageHero
-        breadcrumb={<HeroBackLink href="/knowledge">Knowledge Hub</HeroBackLink>}
-        eyebrow={
-          <span className="inline-block px-3 py-1 rounded-full bg-primary/80 text-white text-[10px] font-bold uppercase tracking-widest">
-            {article.category}
-          </span>
-        }
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Knowledge Hub", href: "/knowledge" }], current: article.title }}
+
         title={article.title}
       >
         <div className="flex flex-wrap items-center gap-4 text-sm text-white/55">
@@ -105,7 +100,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-surface-secondary text-xs font-semibold text-text-secondary"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm border border-border bg-surface-secondary text-xs font-semibold text-text-secondary"
                   >
                     <Tag size={10} />
                     {tag}

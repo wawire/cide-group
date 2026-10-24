@@ -24,7 +24,7 @@ export default function ServicesPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Our Services"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Services" }}
         title="Strategic support across the programme cycle"
         description="From research and design through to implementation and evaluation — end-to-end support that translates strategy into measurable, lasting impact."
       />
@@ -78,7 +78,7 @@ export default function ServicesPage() {
                       {service.capabilities.map((cap) => (
                         <span
                           key={cap}
-                          className="text-xs px-3 py-1.5 rounded-full bg-primary/8 border border-primary/18 text-primary font-medium leading-tight"
+                          className="text-xs px-3 py-1.5 rounded-sm bg-primary/8 border border-primary/18 text-primary font-medium leading-tight"
                         >
                           {cap}
                         </span>

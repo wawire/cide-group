@@ -65,7 +65,7 @@ export default function CareersPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow="Careers"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Careers" }}
         title="Help build Africa's development future"
         description="CIDE Group brings together practitioners, researchers, and communicators serious about locally grounded, evidence-driven impact across Africa."
       >

@@ -1,5 +1,4 @@
 import PageHero from "@/components/page-hero"
-import HeroBackLink from "@/components/hero-back-link"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -25,13 +24,12 @@ export default function TeamPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
-        breadcrumb={<HeroBackLink href="/about">Back to About</HeroBackLink>}
-        eyebrow="Our Team"
+        breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "About", href: "/about" }], current: "Team" }}
         title="The people behind CIDE Group's advisory work."
         description="An international advisory board, executive secretariat, and senior technical specialists — combining global expertise with deep local knowledge across Africa."
       >
         <div className="flex flex-col sm:flex-row gap-3">
-          <Button asChild size="lg" className="bg-white text-primary hover:bg-white/92">
+          <Button asChild size="lg" variant="inverse">
             <Link href="/contact">
               Talk to Our Team
               <ArrowRight className="ml-2" size={18} />
@@ -40,8 +38,7 @@ export default function TeamPage() {
           <Button
             asChild
             size="lg"
-            variant="outline"
-            className="border-white/25 bg-white/6 text-white hover:bg-white/12 hover:text-white"
+            variant="inverse-outline"
           >
             <Link href="/focus-areas">Explore Focus Areas</Link>
           </Button>

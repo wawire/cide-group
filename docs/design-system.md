@@ -66,7 +66,7 @@ H1-H6 now receive tight tracking (-0.025em), balanced wrapping and explicit base
 | `.section-shell` | `width: min(calc(100% - 2.5rem), 1600px)`, centred; outside CSS layers so it wins over layered width utilities |
 | `.section-space` | Block padding `clamp(3rem, 5.5vw, 4.5rem)` |
 | `.callout-space` | Block padding `clamp(3.5rem, 6vw, 5rem)` |
-| PageHero padding | `py-12 md:py-16 lg:py-20` |
+| PageHero padding | `.section-space` / `--section-space` |
 | `.home-hero` | Minimum height `clamp(31rem, 65svh, 40rem)` with a `vh` fallback |
 | Breakpoints | Tailwind defaults: `sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem; no project overrides currently |
 | Radius | Base `--radius: 0.375rem`; `sm` subtracts 4px, `md` subtracts 2px, `lg` uses the base, `xl` adds 2px; `2xl`/`3xl`/`4xl` use 12/16/20px at the default root size |
@@ -78,7 +78,7 @@ Use existing spacing and container utilities before adding arbitrary per-page va
 
 | Pattern | Existing implementation and convention |
 | --- | --- |
-| Page hero | [PageHero](../components/page-hero.tsx): required `title`; optional `eyebrow`, `description`, `breadcrumb`, `titleAside`, `children`, all React nodes. Renders an H1; do not nest headings inside `title`. The breadcrumb slot does not create accessible breadcrumb markup for you. |
+| Page hero | [PageHero](../components/page-hero.tsx): required `title: ReactNode` and `breadcrumb: { ancestors: readonly { label: string; href: string }[]; current: string }`; optional `description`, `titleAside` and `children`. Renders the shared breadcrumb and one H1. Inner heroes have no eyebrow, service number or category badges. Keep location/byline metadata below the heading. Uses section-space and page-title tokens; actions use shared Button variants. |
 | CTA block | [PageCallout](../components/page-callout.tsx): required `eyebrow`, `title`, `description`, `children`. Renders an H2 and accepts action markup. [CTASection](../components/cta-section.tsx) supplies homepage copy and contact actions. |
 | Buttons | [Button](../components/ui/button.tsx): default, destructive, outline, secondary, ghost, link, inverse and inverse-outline; sizes default, sm, lg, icon, icon-sm, icon-lg. Use asChild with a link for navigation. Shared loading/disabled/focus states are implemented; see the state matrix below. |
 | Cards | [Card primitives](../components/ui/card.tsx): compose header, title, description, content, action and footer. CardTitle renders a div by default; use asChild with an h2/h3 for heading semantics. Titles use leading-snug to support wrapping. Domain-specific cards still appear inline in pages and sections. |
@@ -228,7 +228,7 @@ Future page work must reuse this document, app/globals.css and shared variants. 
 | `components/project-card.tsx` | `project` picks the existing Project identity, title, description, location, tags and outcomes; optional image. Optional `outcomeLimit` restricts the displayed outcome list. | Homepage, filtered projects, focus-area projects and related project listings |
 | `components/knowledge-card.tsx` | `article` picks KnowledgeArticle slug, title, category, excerpt, author and tags; optional image and ISO date. No invented publication metadata. | Featured and remaining knowledge articles |
 | `components/resource-card.tsx` | `resource` picks ResearchResource identity, title, description, type, category and real destinations; optional image. Download URL takes priority over external reading URL; absent destinations render unavailable text. | Research results; currently no published downloadable resources |
-| `components/breadcrumbs.tsx` | Required `ancestors: readonly {label, href}[]` and `current: string`. Ordered, labelled navigation wraps; only the final item has aria-current. | Project details inside PageHero's breadcrumb slot |
+| `components/breadcrumbs.tsx` | Required `ancestors: readonly {label, href}[]` and `current: string`. Ordered, labelled navigation wraps; links have no underline; only the final item has aria-current. | Every inner-page hero through PageHero |
 | `components/empty-state.tsx` | Required title and description strings; optional children for links/buttons. Status text announces an empty collection or filtered result. Errors must use separate error feedback. | Project filters, knowledge category and research search |
 
 ```tsx
