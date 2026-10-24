@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
       title: `${project.title} - CIDE Group`,
       description: project.description,
       url: `${siteConfig.url}/projects/${project.id}`,
-      images: [{ url: project.image, width: 1200, height: 630, alt: project.title }],
+      images: [{ url: project.image, width: 1200, height: 800, alt: `Illustrative image for ${project.title}` }],
     },
   }
 }

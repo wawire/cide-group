@@ -1,5 +1,7 @@
 "use client"
 
+import { editorialImages } from "@/content/imagery"
+
 import type React from "react"
 import { useEffect, useId, useRef, useState } from "react"
 import { contactCountries, siteConfig } from "@/content/site"
@@ -150,8 +152,8 @@ export default function ContactForm() {
           {/* Background image overlay */}
           <div className="absolute inset-0">
             <Image
-              src="/research/community-members-advocacy-training-workshop.jpg"
-              alt=""
+              src={editorialImages["contact-conversation"].src}
+              alt={editorialImages["contact-conversation"].alt}
               fill
               className="object-cover object-center opacity-20"
               sizes="420px"

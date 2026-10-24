@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
@@ -56,8 +57,8 @@ export default function AboutPage() {
         <div className="grid lg:grid-cols-2">
           <div className="relative h-72 lg:h-auto lg:min-h-120 overflow-hidden">
             <Image
-              src="/about/cide-boardroom-strategy.png"
-              alt="CIDE Group strategy and advisory session"
+              src={editorialImages["about-strategy"].src}
+              alt={editorialImages["about-strategy"].alt}
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -226,8 +227,8 @@ export default function AboutPage() {
             </div>
             <div className="relative h-64 lg:h-auto overflow-hidden">
               <Image
-                src="/about/community-elder-portrait.png"
-                alt="CIDE Group community partner"
+                src={editorialImages["about-community"].src}
+                alt={editorialImages["about-community"].alt}
                 fill
                 className="object-cover object-center"
                 sizes="400px"

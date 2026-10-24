@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 export type KnowledgeCategory = "Insights" | "Publications" | "Toolkits" | "Policy Briefs" | "News & Events"
 
 export type KnowledgeArticle = {
@@ -61,7 +62,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     authorRole: "Programme Design & Implementation",
     date: "2026-03-20",
     readTime: "7 min read",
-    image: "/research/community-members-advocacy-training-workshop.jpg",
+    image: editorialImages["knowledge-co-design"].src,
     featured: true,
     tags: ["Programme Design", "Community Engagement", "Development Advisory", "East Africa"],
   },
@@ -106,7 +107,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     authorRole: "Monitoring, Evaluation & Learning",
     date: "2026-02-14",
     readTime: "9 min read",
-    image: "/research/digital-dashboard-real-time-programme-data.jpg",
+    image: editorialImages["knowledge-learning"].src,
     featured: true,
     tags: ["MEL", "Monitoring & Evaluation", "Learning Systems", "Development Programmes"],
   },
@@ -146,7 +147,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     authorRole: "Research & Evidence",
     date: "2026-01-28",
     readTime: "11 min read",
-    image: "/focus-areas/climate-arid-landscape.jpg",
+    image: editorialImages["knowledge-adaptation"].src,
     featured: false,
     tags: ["Climate Adaptation", "East Africa", "Policy Brief", "Kenya", "Uganda", "Tanzania"],
   },

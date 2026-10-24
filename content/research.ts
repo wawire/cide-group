@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 ﻿export type ResearchResource = {
   id: number
   type: "report" | "blog" | "infographic" | "case-study"
@@ -25,7 +26,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "15 min",
     featured: true,
     published: false,
-    image: "/research/digital-dashboard-real-time-programme-data.jpg",
+    image: editorialImages["knowledge-adaptation"].src,
   },
   {
     id: 2,
@@ -38,7 +39,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "8 min",
     featured: false,
     published: false,
-    image: "/research/community-members-advocacy-training-workshop.jpg",
+    image: editorialImages["focus-child-rights"].src,
   },
   {
     id: 3,
@@ -50,7 +51,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "3 min",
     featured: false,
     published: false,
-    image: "/projects/digital-campaign-dashboard.jpg",
+    image: editorialImages["project-campaigns"].src,
   },
   {
     id: 4,
@@ -62,7 +63,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "20 min",
     featured: false,
     published: false,
-    image: "/projects/data-analysis-workshop.jpg",
+    image: editorialImages["service-mel"].src,
   },
   {
     id: 5,
@@ -74,7 +75,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "12 min",
     featured: false,
     published: false,
-    image: "/research/community-health-workers-mobile-tablets-rural.jpg",
+    image: editorialImages["knowledge-co-design"].src,
   },
   {
     id: 6,
@@ -86,7 +87,7 @@ export const researchResources: ResearchResource[] = [
     readTime: "10 min",
     featured: false,
     published: false,
-    image: "/projects/health-workers-with-tablets.jpg",
+    image: editorialImages["project-health"].src,
   },
 ]
 

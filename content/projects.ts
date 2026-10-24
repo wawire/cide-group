@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 export type Project = {
   id: string
   title: string
@@ -22,7 +23,7 @@ export const projects: Project[] = [
     tags: ["MEL", "GEDSI", "Digital Solutions"],
     countries: ["Kenya"],
     location: "Western Kenya",
-    image: "/projects/health-workers-with-tablets.jpg",
+    image: editorialImages["project-health"].src,
     outcomes: [
       "120,000+ people reached by improved services",
       "County-level dashboards adopted by health managers",
@@ -39,7 +40,7 @@ export const projects: Project[] = [
     tags: ["Policy Advocacy", "Strategic Communications"],
     countries: ["Kenya", "Tanzania", "Uganda"],
     location: "East Africa",
-    image: "/projects/advocacy-training-workshop.jpg",
+    image: editorialImages["project-climate"].src,
     outcomes: [
       "3 policy reforms influenced through coalition advocacy",
       "Cross-border working group established",
@@ -56,7 +57,7 @@ export const projects: Project[] = [
     tags: ["Research", "Campaign Management"],
     countries: ["Kenya", "Tanzania", "Uganda", "Rwanda", "Ethiopia", "Somalia"],
     location: "Six African countries",
-    image: "/projects/digital-campaign-dashboard.jpg",
+    image: editorialImages["project-campaigns"].src,
     outcomes: [
       "2M people reached through coordinated channels",
       "Audience sentiment improved in post-campaign surveys",
@@ -73,7 +74,7 @@ export const projects: Project[] = [
     tags: ["MEL", "Capacity Building"],
     countries: ["Kenya", "Uganda"],
     location: "Kenya and Uganda",
-    image: "/projects/data-analysis-workshop.jpg",
+    image: editorialImages["project-networks"].src,
     outcomes: [
       "20+ organizations aligned on MEL standards",
       "Reporting quality improved across partner portfolio",

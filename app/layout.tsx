@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 ﻿import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Manrope, Source_Serif_4 } from "next/font/google"
@@ -108,7 +109,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/hero/field-programme-implementation.png"
+          href={editorialImages["hero-programme"].src}
           fetchPriority="high"
         />
         <script

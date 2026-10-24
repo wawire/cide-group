@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Params }) {
       title: article.title,
       description: article.excerpt,
       url: `${siteConfig.url}/knowledge/${article.slug}`,
-      images: [{ url: `${siteConfig.url}${article.image}`, width: 1200, height: 630, alt: article.title }],
+      images: [{ url: `${siteConfig.url}${article.image}`, width: 1200, height: 800, alt: `Illustrative image for ${article.title}` }],
     },
   }
 }

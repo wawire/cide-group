@@ -1,5 +1,7 @@
 "use client"
 
+import { editorialImages } from "@/content/imagery"
+
 import { useEffect, useRef, useState, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -12,8 +14,8 @@ const SLIDE_FADE_MS = 700
 
 const slides = [
   {
-    image: "/hero/field-programme-implementation.png",
-    alt: "CIDE team working with communities on programme planning",
+    image: editorialImages["hero-programme"].src,
+    alt: editorialImages["hero-programme"].alt,
     titleLead: "Programme Design &",
     titleAccent: "Implementation",
     description:
@@ -28,8 +30,8 @@ const slides = [
     },
   },
   {
-    image: "/hero/research-evidence-community.png",
-    alt: "CIDE research team conducting community evidence gathering",
+    image: editorialImages["hero-research"].src,
+    alt: editorialImages["hero-research"].alt,
     titleLead: "Research, Evidence &",
     titleAccent: "Policy Advisory",
     description:
@@ -44,8 +46,8 @@ const slides = [
     },
   },
   {
-    image: "/hero/gedsi-systems-development.png",
-    alt: "Gender equity and social inclusion capacity building session",
+    image: editorialImages["hero-enterprise"].src,
+    alt: editorialImages["hero-enterprise"].alt,
     titleLead: "Social Enterprise &",
     titleAccent: "Systems Development",
     description:
@@ -60,8 +62,8 @@ const slides = [
     },
   },
   {
-    image: "/hero/communications-mel-filming.png",
-    alt: "CIDE communications team capturing community stories in the field",
+    image: editorialImages["hero-mel"].src,
+    alt: editorialImages["hero-mel"].alt,
     titleLead: "Monitoring, Evaluation &",
     titleAccent: "Learning",
     description:

@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 import PageHero from "@/components/page-hero"
 import Link from "next/link"
 import Image from "next/image"
@@ -101,8 +102,8 @@ export default function PartnersPage() {
             <div className="lg:sticky lg:top-24 space-y-5">
               <div className="relative h-72 md:h-80 lg:h-96 rounded-xl overflow-hidden">
                 <Image
-                  src="/research/community-health-workers-mobile-tablets-rural.jpg"
-                  alt="CIDE field team working with partners"
+                  src={editorialImages["partners-field"].src}
+                  alt={editorialImages["partners-field"].alt}
                   fill
                   className="object-cover object-center"
                   sizes="420px"
@@ -146,8 +147,8 @@ export default function PartnersPage() {
           {/* Image */}
           <div className="relative h-72 lg:h-auto lg:min-h-120 overflow-hidden">
             <Image
-              src="/hero/gedsi-systems-development.png"
-              alt="Ethical storytelling and community representation"
+              src={editorialImages["partners-ethics"].src}
+              alt={editorialImages["partners-ethics"].alt}
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"

@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 import PageHero from "@/components/page-hero"
 import { focusAreas } from "@/content/focus-areas"
 import Link from "next/link"
@@ -68,8 +69,8 @@ export default function FocusAreasPage() {
         <div className="section-shell">
           <div className="relative rounded-lg overflow-hidden">
             <Image
-              src="/focus-areas/livelihoods-women-farming.png"
-              alt="CIDE community development work"
+              src={editorialImages["focus-collaboration"].src}
+              alt={editorialImages["focus-collaboration"].alt}
               fill
               sizes="(min-width: 1640px) 1600px, calc(100vw - 2.5rem)"
               className="object-cover object-center"

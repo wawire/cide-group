@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 export type FocusAreaCampaign = {
   name: string
   partner?: string
@@ -21,7 +22,7 @@ export type FocusArea = {
 export const focusAreas: FocusArea[] = [
   {
     slug: "climate-energy-environment",
-    image: "/focus-areas/climate-reforestation-planting.jpg",
+    image: editorialImages["focus-climate"].src,
     title: "Climate, Energy and Environment",
     summary:
       "Powering Africa's transition to a climate-resilient, low-carbon future through scalable, high-impact solutions.",
@@ -48,7 +49,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "education-lifelong-learning",
-    image: "/research/community-members-advocacy-training-workshop.jpg",
+    image: editorialImages["focus-education"].src,
     title: "Education and Lifelong Learning",
     summary:
       "Improving learning outcomes through stronger systems, cross-sector collaboration, and inclusive, evidence-based approaches.",
@@ -75,7 +76,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "agriculture-food-security-livelihoods",
-    image: "/focus-areas/agriculture-vegetable-crop.jpg",
+    image: editorialImages["focus-agriculture"].src,
     title: "Agriculture, Food Security and Sustainable Livelihoods",
     summary:
       "Scalable, locally driven, and climate-smart solutions that strengthen food systems, rural economies, and resilience.",
@@ -102,7 +103,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "child-rights-social-justice",
-    image: "/projects/advocacy-training-workshop.jpg",
+    image: editorialImages["focus-child-rights"].src,
     title: "Child Rights and Social Justice",
     summary:
       "Rights-based and participatory approaches that advance child protection, safeguarding, and social justice.",
@@ -136,7 +137,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "economic-empowerment",
-    image: "/focus-areas/livelihoods-vsla-cash-transfer.jpg",
+    image: editorialImages["focus-economic"].src,
     title: "Economic Empowerment",
     summary:
       "Inclusive economic growth that equips individuals and communities with skills, resources, and sustainable livelihood pathways.",
@@ -159,7 +160,7 @@ export const focusAreas: FocusArea[] = [
   },
   {
     slug: "wash",
-    image: "/focus-areas/wash-children-clean-water.png",
+    image: editorialImages["focus-wash"].src,
     title: "Water, Sanitation and Hygiene (WASH)",
     summary:
       "Climate-resilient, inclusive, and scalable WASH solutions that improve public health and strengthen community resilience.",

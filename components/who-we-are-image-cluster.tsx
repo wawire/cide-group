@@ -1,5 +1,7 @@
 "use client"
 
+import { editorialImages } from "@/content/imagery"
+
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
 import { useRef } from "react"
@@ -26,8 +28,8 @@ export default function WhoWeAreImageCluster() {
     <div ref={ref} className="relative lg:h-full">
       <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-2xl lg:aspect-auto lg:h-full lg:min-h-[32rem]">
         <Image
-          src="/about/cide-boardroom-strategy.png"
-          alt="CIDE Group strategy and advisory session"
+          src={editorialImages["about-strategy"].src}
+          alt={editorialImages["about-strategy"].alt}
           fill
           quality={60}
           sizes="(min-width: 1280px) 605px, (min-width: 1024px) 51vw, 92vw"
@@ -41,8 +43,8 @@ export default function WhoWeAreImageCluster() {
         className="absolute -right-6 -top-6 hidden h-36 w-36 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block"
       >
         <Image
-          src="/hero/research-evidence-community.png"
-          alt="CIDE research team with community members"
+          src={editorialImages["hero-research"].src}
+          alt={editorialImages["hero-research"].alt}
           fill
           quality={52}
           sizes="144px"
@@ -55,8 +57,8 @@ export default function WhoWeAreImageCluster() {
         className="absolute -bottom-6 -left-6 hidden h-32 w-44 overflow-hidden rounded-lg border-4 border-white shadow-xl sm:block"
       >
         <Image
-          src="/hero/gedsi-systems-development.png"
-          alt="GEDSI capacity building and community training"
+          src={editorialImages["hero-enterprise"].src}
+          alt={editorialImages["hero-enterprise"].alt}
           fill
           quality={50}
           sizes="176px"

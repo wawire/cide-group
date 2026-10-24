@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 export type ServiceIconKey =
   | "smartphone"
   | "megaphone"
@@ -35,7 +36,7 @@ export const services: Service[] = [
     description:
       "We harness Artificial Intelligence (AI) to design and deploy digital tools and platforms that improve service delivery, enhance transparency, and accelerate innovation.",
     icon: "smartphone",
-    image: "/projects/health-workers-with-tablets.jpg",
+    image: editorialImages["service-tech"].src,
     capabilities: [
       "AI-enabled digital tools and service platforms",
       "Digital systems that improve transparency and service delivery",
@@ -55,7 +56,7 @@ export const services: Service[] = [
     description:
       "We support ethical storytelling, communication products, and knowledge management approaches that improve visibility, accountability, and public engagement across programmes.",
     icon: "megaphone",
-    image: "/hero/communications-mel-filming.png",
+    image: editorialImages["service-communications"].src,
     capabilities: [
       "Ethical storytelling and knowledge products",
       "Campaign content and public engagement support",
@@ -76,7 +77,7 @@ export const services: Service[] = [
     description:
       "We advance rights-based advocacy and participatory engagement approaches that strengthen accountability, child protection, safeguarding, and social justice outcomes.",
     icon: "building",
-    image: "/projects/advocacy-training-workshop.jpg",
+    image: editorialImages["service-advocacy"].src,
     capabilities: [
       "Child rights mainstreaming",
       "Child and adult safeguarding",
@@ -98,7 +99,7 @@ export const services: Service[] = [
     description:
       "We provide applied research, evaluations, policy advisory, and analytics to strengthen decision-making and improve programme effectiveness.",
     icon: "chart",
-    image: "/hero/research-evidence-community.png",
+    image: editorialImages["service-research"].src,
     capabilities: [
       "Applied research and assessments",
       "Evaluations and impact assessments",
@@ -119,7 +120,7 @@ export const services: Service[] = [
     description:
       "We design and implement scalable development and humanitarian programmes that deliver measurable impact in complex environments.",
     icon: "blocks",
-    image: "/hero/field-programme-implementation.png",
+    image: editorialImages["service-programme"].src,
     capabilities: [
       "Programme design and implementation",
       "Technical assistance and cross-sector coordination",
@@ -140,7 +141,7 @@ export const services: Service[] = [
     description:
       "We support the growth of inclusive markets, social enterprises, and sustainable systems that drive long-term economic and social impact.",
     icon: "users",
-    image: "/focus-areas/livelihoods-vsla-cash-transfer.jpg",
+    image: editorialImages["service-enterprise"].src,
     capabilities: [
       "Inclusive market systems support",
       "Social enterprise development",
@@ -161,7 +162,7 @@ export const services: Service[] = [
     description:
       "We design and deliver practical capacity development support that equips institutions, educators, partners, and communities with the tools needed for stronger delivery.",
     icon: "line-chart",
-    image: "/hero/gedsi-systems-development.png",
+    image: editorialImages["service-capacity"].src,
     capabilities: [
       "Teacher training and professional development",
       "Career guidance and life skills training",
@@ -182,7 +183,7 @@ export const services: Service[] = [
     description:
       "We deliver robust MEL frameworks, impact assessments, reporting, and learning systems to ensure accountability and continuous improvement.",
     icon: "calendar",
-    image: "/research/digital-dashboard-real-time-programme-data.jpg",
+    image: editorialImages["service-mel"].src,
     capabilities: [
       "MEL frameworks and learning systems",
       "Impact assessments and reporting",

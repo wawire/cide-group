@@ -1,3 +1,4 @@
+import { editorialImages } from "@/content/imagery"
 import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
@@ -159,8 +160,8 @@ export default function CareersPage() {
           {/* Image side */}
           <div className="relative h-72 lg:h-auto lg:min-h-120 overflow-hidden">
             <Image
-              src="/research/community-members-advocacy-training-workshop.jpg"
-              alt="CIDE team working with communities across Africa"
+              src={editorialImages["careers-team"].src}
+              alt={editorialImages["careers-team"].alt}
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
