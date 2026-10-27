@@ -1,10 +1,10 @@
+import RelatedServices from "@/components/related-services"
 import { Button } from "@/components/ui/button"
 import SectionHeading from "@/components/section-heading"
 import ProjectCard from "@/components/project-card"
 import PageHero from "@/components/page-hero"
 import PageCallout from "@/components/page-callout"
 import { notFound } from "next/navigation"
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Megaphone } from "lucide-react"
 import { focusAreas, getFocusAreaBySlug, projects, services } from "@/content"
@@ -56,7 +56,6 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
     <main className="min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Focus Areas", href: "/focus-areas" }], current: focusArea.title }}
         title={focusArea.title}
@@ -68,7 +67,6 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
         </Link></Button>
       </PageHero>
 
-      {/* ── Overview — two column ─────────────────────────────────────────── */}
       <section className="section-space bg-background">
         <div className="section-shell grid lg:grid-cols-[1fr_340px] gap-12 items-start">
           <div>
@@ -77,7 +75,6 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
             <p className="text-xl text-text-secondary leading-relaxed">{focusArea.overview}</p>
           </div>
 
-          {/* Sticky dark outcomes sidebar */}
           <div className="lg:sticky lg:top-24">
             <div className="rounded-xl bg-hero-background p-8">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-6">Key Outcomes</p>
@@ -91,36 +88,27 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
                   </li>
                 ))}
               </ol>
-              <div className="mt-7 pt-6 border-t border-white/10">
-                <Link
-                  href="/contact"
-                  className="flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
-                >
-                  Discuss This Area
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Practice Areas — editorial numbered list ──────────────────────── */}
       <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           <div className="lg:sticky lg:top-24">
             <p className="section-kicker mb-4">Practice Areas</p>
-            <h2 className="text-3xl font-semibold text-foreground leading-tight">
+            <h2 className="section-heading text-foreground">
               Where we focus our work
             </h2>
           </div>
           <div className="divide-y divide-border">
             {focusArea.practiceAreas.map((area, i) => (
-              <div key={area} className="py-5 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-0.5 select-none">
+              <div key={area} className="py-5 grid grid-cols-[44px_1fr] gap-5">
+                <span className="text-2xl font-bold text-text-muted tabular-nums leading-none pt-0.5 select-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug pt-0.5">
+                <p className="text-base font-semibold text-foreground leading-snug pt-0.5">
                   {area}
                 </p>
               </div>
@@ -129,7 +117,6 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
         </div>
       </section>
 
-      {/* ── Featured Projects ─────────────────────────────────────────────── */}
       {featuredProjects.length > 0 && (
         <section className="section-space bg-background">
           <div className="section-shell">
@@ -148,13 +135,12 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
         </section>
       )}
 
-      {/* ── Campaigns ────────────────────────────────────────────────────── */}
       {focusArea.campaigns && focusArea.campaigns.length > 0 && (
         <section className="section-space bg-hero-background">
           <div className="section-shell">
             <div className="mb-10">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Ongoing Campaigns</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white max-w-2xl leading-tight">
+              <h2 className="section-heading text-white max-w-2xl">
                 Advocacy in action
               </h2>
             </div>
@@ -190,50 +176,8 @@ export default async function FocusAreaDetailPage({ params }: { params: Params }
         </section>
       )}
 
-      {/* ── Related Services ─────────────────────────────────────────────── */}
-      {relatedServices.length > 0 && (
-        <section className="section-space bg-background">
-          <div className="section-shell">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="section-kicker mb-3">Capabilities We Combine</p>
-                <h2 className="text-3xl font-semibold text-foreground">Services that support this area</h2>
-              </div>
-              <Link
-                href="/services"
-                className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
-              >
-                All Services <ArrowRight size={15} />
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-              {relatedServices.map((service) => (
-                <Link key={service.slug} href={`/services/${service.slug}`} className="group block">
-                  <div className="relative h-40 rounded-xl overflow-hidden mb-4">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-hero-background/80 to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-gold">
-                      {String(service.order).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-foreground group-hover:text-primary transition-colors mb-1.5 leading-snug">
-                    {service.shortTitle}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">{service.summary}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <RelatedServices services={relatedServices} kicker="Capabilities We Combine" title="Services that support this area" />
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <PageCallout
         eyebrow="Work With Us"
         title="Need support in this area?"

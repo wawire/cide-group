@@ -8,12 +8,12 @@ import { ArrowRight } from "lucide-react"
 export const metadata = {
   title: "Our Services - Strategic Support Across the Programme Cycle | CIDE Group",
   description:
-    "Explore CIDE Group's integrated services across digital solutions, research, programme implementation, enterprise systems, capacity development, and MEL.",
+    "Explore CIDE Group's integrated services across communications, advocacy, research, digital solutions, programme delivery, organisational support, capacity development and MEL.",
   alternates: { canonical: `${siteConfig.url}/services` },
   openGraph: {
     title: "Our Services - Strategic Support Across the Programme Cycle | CIDE Group",
     description:
-      "Integrated services spanning digital solutions, research, programme implementation, enterprise systems, capacity development, and MEL.",
+      "Integrated services spanning communications, advocacy, research, digital solutions, programme delivery, organisational support, capacity development and MEL.",
     url: `${siteConfig.url}/services`,
   },
 }
@@ -34,7 +34,7 @@ export default function ServicesPage() {
         <div className="section-shell py-6 flex flex-wrap items-center gap-x-8 gap-y-2">
           {companyProfile.approach.map((step, i) => (
             <span key={step} className="flex items-center gap-3 text-sm text-white/55">
-              <span className="text-primary font-bold tabular-nums text-xs">0{i + 1}</span>
+              <span className="text-accent-gold font-bold tabular-nums text-xs">0{i + 1}</span>
               <span className="font-semibold text-white/75">{step}</span>
               {i < companyProfile.approach.length - 1 && (
                 <span className="text-white/20" aria-hidden="true">→</span>
@@ -68,7 +68,7 @@ export default function ServicesPage() {
 
                   {/* Content panel */}
                   <div className="flex flex-col justify-center px-0 lg:px-8 py-6">
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 leading-snug">
+                    <h2 className="section-heading text-foreground mb-4">
                       {service.title}
                     </h2>
                     <p className="text-text-secondary leading-relaxed mb-6">{service.description}</p>
@@ -106,7 +106,7 @@ export default function ServicesPage() {
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-center">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-white leading-tight max-w-2xl">
+              <h2 className="section-heading font-serif text-white max-w-2xl">
                 Not sure which service fits your challenge?
               </h2>
               <p className="mt-4 text-lg text-white/60 max-w-xl leading-relaxed">

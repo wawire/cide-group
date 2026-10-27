@@ -1,4 +1,4 @@
-import { editorialImages } from "@/content/imagery"
+import { editorialImages, eventImages } from "@/content/imagery"
 import { Button } from "@/components/ui/button"
 import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
@@ -8,14 +8,14 @@ import Image from "next/image"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 
 export const metadata = {
-  title: "About CIDE Group - Pan-African Development Advisory and Implementation",
+  title: "About CIDE Group - Pan-African Advisory, Consulting and Implementation",
   description:
-    "CIDE Group is a pan-African development advisory, research, programme design, and implementation organisation working across Africa.",
+    "CIDE Group combines African technical expertise and international advisory support to design, resource and deliver country-specific programmes.",
   alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
-    title: "About CIDE Group - Pan-African Development Advisory and Implementation",
+    title: "About CIDE Group - Pan-African Advisory, Consulting and Implementation",
     description:
-      "CIDE Group works across Anglophone, Francophone, and Lusophone Africa with community-led, evidence-based solutions.",
+      "CIDE Group combines African technical expertise and international advisory support to design, resource and deliver country-specific programmes.",
     url: `${siteConfig.url}/about`,
   },
 }
@@ -36,10 +36,9 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "About" }}
-        title="Pan-African Development Advisory, Research and Programme Implementation"
+        title="Pan-African Advisory, Consulting & Implementation"
         description={siteConfig.narrativeLine}
       >
         <div className="flex flex-col sm:flex-row gap-4">
@@ -52,7 +51,6 @@ export default function AboutPage() {
         </div>
       </PageHero>
 
-      {/* ── Who We Are — image + content split ───────────────────────────── */}
       <section className="py-0">
         <div className="grid lg:grid-cols-2">
           <div className="relative h-72 lg:h-auto lg:min-h-120 overflow-hidden">
@@ -76,13 +74,10 @@ export default function AboutPage() {
             <h2 className="section-heading mb-6">About CIDE Group</h2>
             <p className="text-text-secondary leading-relaxed mb-5">
               CIDE Group, registered as <strong className="text-foreground">{siteConfig.legalName}</strong>, is a
-              pan-African development advisory, research, programme design, and implementation organisation working
-              across Anglophone, Francophone, and Lusophone Africa.
+              pan-African advisory, consulting and implementation organisation. We help partners design, resource and manage programmes that fit their context.
             </p>
             <p className="text-text-secondary leading-relaxed mb-8">
-              We operate at the intersection of policy advisory, sustainable development, social innovation, and
-              community systems strengthening — ensuring every intervention is grounded in local realities and
-              designed for long-term impact.
+              Our technical experts across Africa and International Advisory Board combine local insight with global perspectives. We co-create evidence and solutions with partners at national and institutional levels.
             </p>
 
             <div className="mb-6">
@@ -103,7 +98,7 @@ export default function AboutPage() {
                 {globalPartners.map((partner) => (
                   <span
                     key={partner}
-                    className="px-3 py-1 rounded-sm bg-white border border-border text-xs font-semibold text-text-secondary"
+                    className="px-3 py-1 rounded-sm bg-surface border border-border text-xs font-semibold text-text-secondary"
                   >
                     {partner}
                   </span>
@@ -114,12 +109,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Vision, Mission, Values — dark strip ─────────────────────────── */}
       <section className="section-space bg-hero-background">
         <div className="section-shell">
           <div className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">What Drives Us</p>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto leading-tight">
+            <h2 className="section-heading text-white max-w-2xl mx-auto">
               Vision, Mission and Values
             </h2>
           </div>
@@ -161,7 +155,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Our 360° Approach ────────────────────────────────────────────── */}
       <section className="section-space bg-surface-secondary border-y border-border">
         <div className="section-shell grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
           <div>
@@ -197,13 +190,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Team CTA — image + dark content ──────────────────────────────── */}
       <section className="section-space bg-background">
         <div className="section-shell">
           <div className="rounded-lg overflow-hidden grid lg:grid-cols-[1fr_400px]">
             <div className="bg-hero-background p-10 lg:p-14 flex flex-col justify-center">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Our People</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">
+              <h2 className="section-heading font-serif text-white mb-5">
                 The team behind the work
               </h2>
               <p className="text-white/60 leading-relaxed mb-8">
@@ -239,28 +231,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── CTA — rich dark ───────────────────────────────────────────────── */}
+      <section className="section-space bg-surface-secondary">
+        <div className="section-shell">
+          <p className="section-kicker mb-4">Our Work in Practice</p>
+          <h2 className="section-heading mb-5">Cancer prevention and care workshop</h2>
+          <p className="mb-8 max-w-2xl leading-relaxed text-text-secondary">
+            Discussion, shared learning and collaboration at a CIDE Group workshop supporting cancer prevention and care.
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {Object.values(eventImages).map((photo) => (
+              <figure key={photo.src}>
+                <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
+                </div>
+                <figcaption className="mt-3 text-sm text-text-secondary">{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <PageCallout
         eyebrow="Let's Connect"
         title="Ready to build lasting impact?"
         description="Reach out to discuss programme design, implementation support, research, or strategic collaboration across Africa."
       >
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild variant="inverse" size="lg"><Link href="/contact">
             Contact CIDE
           </Link></Button>
           <Button asChild variant="inverse-outline" size="lg"><Link href="/focus-areas">
             Explore Focus Areas
           </Link></Button>
-        </div>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-white/55 text-sm">
-          <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors font-medium">
-            {siteConfig.email}
-          </a>
-          <span className="hidden sm:block text-white/25" aria-hidden="true">|</span>
-          <a href={`tel:${siteConfig.phoneHref}`} className="hover:text-white transition-colors font-medium">
-            {siteConfig.phone}
-          </a>
         </div>
       </PageCallout>
     </main>

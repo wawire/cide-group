@@ -10,12 +10,12 @@ import { siteConfig } from "@/content/site"
 export const metadata = {
   title: "Our Integrated Solutions | CIDE Group",
   description:
-    "Explore CIDE Group's integrated solutions across climate, education, agriculture, child rights, economic empowerment, and WASH.",
+    "Explore CIDE Group's integrated solutions across climate, health, food security, education, safeguarding, GEDSI and WASH.",
   alternates: { canonical: `${siteConfig.url}/focus-areas` },
   openGraph: {
     title: "Our Integrated Solutions | CIDE Group",
     description:
-      "Integrated solutions across climate, education, agriculture, child rights, economic empowerment, and WASH.",
+      "Integrated solutions across climate, health, food security, education, safeguarding, GEDSI and WASH.",
     url: `${siteConfig.url}/focus-areas`,
   },
 }
@@ -24,23 +24,21 @@ export default function FocusAreasPage() {
   return (
     <main className="min-h-screen">
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Focus Areas" }}
         title="Thematic solutions grounded in Africa's realities"
         description="Where policy, systems, communities, and implementation realities come together for lasting impact."
       />
 
-      {/* ── Full-bleed image card grid ────────────────────────────────────── */}
       <section className="section-space bg-background">
-        <div className="section-shell grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="section-shell grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {focusAreas.map((area) => (
-            <Link key={area.slug} href={`/focus-areas/${area.slug}`} className="group block overflow-hidden rounded-xl border border-border bg-white transition-colors hover:border-primary">
-              <ContentImage src={area.image} alt={area.title} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px" />
-              <div className="p-5">
-                <h2 className="mb-3 text-xl font-semibold leading-snug group-hover:text-primary">{area.title}</h2>
-                <p className="mb-4 text-sm leading-relaxed text-text-secondary">{area.summary}</p>
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">Explore focus area <ArrowRight size={14} /></span>
+            <Link key={area.slug} href={`/focus-areas/${area.slug}`} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-surface transition-colors hover:border-primary">
+              <ContentImage src={area.image} alt={area.title} sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, (max-width: 1639px) 25vw, 385px" />
+              <div className="flex flex-1 flex-col p-5">
+                <h2 className="card-heading mb-3 group-hover:text-primary">{area.title}</h2>
+                <p className="mb-5 flex-1 text-sm leading-relaxed text-text-secondary">{area.summary}</p>
+                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary">Explore focus area <ArrowRight size={14} /></span>
               </div>
             </Link>
           ))}
@@ -64,7 +62,6 @@ export default function FocusAreasPage() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="section-space bg-background">
         <div className="section-shell">
           <div className="relative rounded-lg overflow-hidden">
@@ -78,7 +75,7 @@ export default function FocusAreasPage() {
             <div className="absolute inset-0 bg-hero-background/80" />
             <div className="relative z-10 py-16 px-8 md:px-16 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
-              <h2 className="font-serif text-3xl md:text-5xl font-semibold text-white mb-5 leading-tight">
+              <h2 className="section-heading font-serif text-white mb-5">
                 Bring your challenge to us
               </h2>
               <p className="text-lg text-white/70 max-w-xl mx-auto mb-8">

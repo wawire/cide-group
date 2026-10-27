@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 export default function FeaturedProjectsSection() {
   return (
-    <section className="section-space bg-white">
+    <section className="section-space bg-surface">
       <div className="section-shell">
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-10">
           <SectionHeading kicker="Impact in Action" title={<>Real Work.<br />Lasting Change.</>} />

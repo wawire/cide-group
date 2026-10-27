@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import TeamPortrait from "@/components/team-portrait"
 import { X } from "lucide-react"
 import { type TeamMember, type TeamGroup, teamGroupOrder, publishedTeamMembers } from "@/content/team"
@@ -25,7 +25,7 @@ const groupConfig: Record<
     description:
       "Distinguished international specialists providing strategic guidance on CIDE Group's global advisory and programme work.",
     lineClass: "bg-accent-gold",
-    kickerClass: "text-accent-gold",
+    kickerClass: "text-accent-brown",
     stripClass: "bg-accent-gold",
     badgeBg: "bg-accent-gold/15",
     badgeText: "text-accent-brown",
@@ -70,7 +70,7 @@ function MemberCard({
     <button
       type="button"
       onClick={() => onClick(member)}
-      className="group w-full h-full text-left flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg"
+      className="group flex h-full w-full min-w-0 flex-col items-center rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
     >
       {/* Photo at 50% card width — centred, thin accent border on bottom + right */}
       <div className="w-1/2 mx-auto">
@@ -89,11 +89,11 @@ function MemberCard({
         </div>
       </div>
       {/* Text always at the top of its area, wraps naturally */}
-      <div className="mt-3.5 text-center flex-1">
-        <p className="font-bold text-hero-background text-[15px] leading-snug group-hover:text-primary transition-colors duration-200">
+      <div className="mt-3.5 w-full max-w-64 flex-1 px-3 text-center">
+        <p className="font-semibold text-hero-background text-base leading-snug group-hover:text-primary transition-colors duration-200">
           {member.name}
         </p>
-        <p className="mt-1 text-[13px] text-text-muted leading-snug break-words">
+        <p className="mt-1 whitespace-normal break-words text-balance text-sm leading-relaxed text-text-muted">
           {member.title}
         </p>
       </div>
@@ -103,15 +103,18 @@ function MemberCard({
 
 /* ── Modal ───────────────────────────────────────────────────────────────── */
 function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
   useEffect(() => {
     if (!member) return
+    const dialog = dialogRef.current
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const prev = document.body.style.overflow
     document.body.style.overflow = "hidden"
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
-    window.addEventListener("keydown", onKey)
+    dialog?.showModal()
     return () => {
       document.body.style.overflow = prev
-      window.removeEventListener("keydown", onKey)
+      dialog?.close()
+      trigger?.focus()
     }
   }, [member, onClose])
 
@@ -119,15 +122,17 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
   const cfg = groupConfig[member.group]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-10">
+    <dialog
+      ref={dialogRef}
+      aria-label={`Profile: ${member.name}`}
+      onCancel={(event) => { event.preventDefault(); onClose() }}
+      className="fixed inset-0 m-auto h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-2 open:flex sm:p-4 md:p-10 backdrop:bg-transparent"
+    >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/55 backdrop-blur-[3px]" onClick={onClose} aria-hidden="true" />
 
       {/* Dialog */}
       <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Profile: ${member.name}`}
         className="relative bg-white rounded-lg shadow-2xl w-full max-w-270 max-h-[96vh] overflow-y-auto"
       >
         {/* Close */}
@@ -135,7 +140,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
           type="button"
           onClick={onClose}
           aria-label="Close profile"
-          className="absolute top-3 right-3 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-surface-secondary hover:bg-border transition-colors"
+          className="absolute top-3 right-3 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-surface-secondary hover:bg-border transition-colors"
         >
           <X size={16} strokeWidth={2.5} className="text-text-secondary" />
         </button>
@@ -148,7 +153,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
 
           {/* Content */}
           <div className="p-4 sm:p-6 md:p-10 flex flex-col gap-3 md:gap-5">
-            <span className={cn("w-fit rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em]", cfg.badgeBg, cfg.badgeText)}>
+            <span className={cn("w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.15em]", cfg.badgeBg, cfg.badgeText)}>
               {cfg.label}
             </span>
 
@@ -159,14 +164,14 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
 
             <hr className="border-surface-secondary" />
 
-            <p className="text-[13px] sm:text-[14px] leading-[1.7] text-text-secondary flex-1">{member.bio}</p>
+            <p className="text-sm  leading-[1.7] text-text-secondary flex-1">{member.bio}</p>
 
             {member.expertise.length > 0 && (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-text-muted mb-2">Focus areas</p>
+                <p className="text-xs font-bold uppercase tracking-[0.15em] text-text-muted mb-2">Focus areas</p>
                 <div className="flex flex-wrap gap-1.5">
                   {member.expertise.map((tag) => (
-                    <span key={tag} className="px-2 sm:px-2.5 py-1 rounded-full bg-surface-secondary text-[11px] sm:text-[12px] font-medium text-text-muted">
+                    <span key={tag} className="px-2 sm:px-2.5 py-1 rounded-full bg-surface-secondary text-xs font-medium text-text-muted">
                       {tag}
                     </span>
                   ))}
@@ -176,7 +181,7 @@ function MemberModal({ member, onClose }: { member: TeamMember | null; onClose: 
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   )
 }
 
@@ -202,7 +207,7 @@ export default function TeamGrid() {
               </div>
 
               {/* Card grid — flex-wrap so partial rows centre automatically */}
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-x-3 gap-y-10 md:gap-y-12">
                 {members.map((member) => (
                   <div
                     key={member.slug}

@@ -19,7 +19,7 @@ const slides = [
     titleLead: "Programme Design &",
     titleAccent: "Implementation",
     description:
-      "We design and implement scalable development and humanitarian programmes that deliver measurable impact in complex environments.",
+      "We help partners design, deliver and sustain programmes, from theory of change to rollout and exit planning.",
     primaryCta: {
       href: "/services/project-management",
       label: "View Programme Delivery",
@@ -32,13 +32,13 @@ const slides = [
   {
     image: editorialImages["hero-research"].src,
     alt: editorialImages["hero-research"].alt,
-    titleLead: "Research, Evidence &",
-    titleAccent: "Policy Advisory",
+    titleLead: "Research &",
+    titleAccent: "Evidence Generation",
     description:
-      "We provide applied research, evaluations, and policy advisory services to strengthen decision-making and improve programme effectiveness.",
+      "We co-create country-specific evidence that helps partners shape policy, design programmes and improve delivery.",
     primaryCta: {
       href: "/services/research",
-      label: "Explore Research Advisory",
+      label: "Explore Research Services",
     },
     secondaryCta: {
       href: "/contact",
@@ -48,17 +48,17 @@ const slides = [
   {
     image: editorialImages["hero-enterprise"].src,
     alt: editorialImages["hero-enterprise"].alt,
-    titleLead: "Social Enterprise &",
-    titleAccent: "Systems Development",
+    titleLead: "Enterprise &",
+    titleAccent: "Organisational Support",
     description:
-      "We support the growth of inclusive markets, social enterprises, and sustainable systems that drive long-term economic and social impact.",
+      "We help institutions and enterprises strengthen strategy, build capacity and improve the systems behind their work.",
     primaryCta: {
       href: "/services/enterprise",
       label: "See Enterprise Support",
     },
     secondaryCta: {
       href: "/contact",
-      label: "Talk About Systems Growth",
+      label: "Discuss Organisational Needs",
     },
   },
   {

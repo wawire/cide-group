@@ -3,7 +3,7 @@ import PageCallout from "@/components/page-callout"
 import PageHero from "@/components/page-hero"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { experienceStatement } from "@/content/geographic-experience"
+import { experienceStatement, technicalExpertCountries, advisoryBoardLocations } from "@/content/geographic-experience"
 import GeographicExperienceMap from "@/components/geographic-experience-map"
 import { siteConfig } from "@/content/site"
 
@@ -50,6 +50,20 @@ export default function WhereWeWorkPage() {
           <h2 id="assignment-experience-heading" className="section-heading mb-5">Where our team has worked</h2>
           <p className="mb-8 max-w-4xl text-lg leading-relaxed text-text-secondary">{experienceStatement}</p>
           <GeographicExperienceMap />
+        </div>
+      </section>
+
+      <section className="section-space bg-background">
+        <div className="section-shell grid gap-8 md:grid-cols-2">
+          <div>
+            <h2 className="text-xl font-semibold mb-3">Where our technical experts are based</h2>
+            <p className="text-text-secondary leading-relaxed">{technicalExpertCountries.join(", ")}</p>
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold mb-3">International Advisory Board</h2>
+            <p className="text-text-secondary leading-relaxed">{advisoryBoardLocations.join(", ")}</p>
+            <p className="mt-3 text-sm text-text-secondary">Expert and board locations are distinct from the assignment experience shown on the map.</p>
+          </div>
         </div>
       </section>
 

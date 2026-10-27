@@ -14,11 +14,11 @@ export type ImpactMetric = {
 export const siteConfig = {
   name: 'CIDE Group',
   legalName: 'COMMUNE IDEE (CIDE) GROUPE LTD',
-  tagline: 'Pan-African Development Advisory, Research & Programme Implementation Firm',
+  tagline: 'Pan-African Advisory, Consulting & Implementation',
   narrativeLine:
-    "CIDE Group delivers locally grounded, evidence-driven, and impact-oriented solutions to Africa's most complex development, humanitarian, and business challenges.",
+    "CIDE Group brings local insight and global expertise to help partners design, resource and deliver programmes across Africa.",
   description:
-    'Thriving Together: Pan-African development advisory, research, and programme implementation across Anglophone, Francophone, and Lusophone Africa.',
+    'Pan-African advisory, consulting and implementation. Country-specific research, programme delivery and institutional support, grounded in local expertise.',
   url: 'https://cidegroup.org',
   email: 'communications@cidegroup.org',
   partnershipsEmail: 'partnerships@cidegroup.org',
@@ -32,9 +32,9 @@ export const siteConfig = {
     addressCountry: 'KE',
   },
   companyNumber: 'PVT-BB1OWQW3',
-  heroEyebrow: 'Pan-African Development Advisory | Nairobi, Kenya',
+  heroEyebrow: 'Pan-African Advisory | Nairobi, Kenya',
   heroSubheading:
-    'Locally grounded, evidence-driven, and impact-oriented support across development, humanitarian, and market system challenges.',
+    'Country-specific research, programme delivery and institutional support, combining local insight with global expertise.',
   logo: {
     primary: '/brand/cide-group-logo-color.svg',
     png: '/brand/cide-group-logo-color.png',

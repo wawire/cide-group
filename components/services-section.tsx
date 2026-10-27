@@ -52,10 +52,7 @@ export default function ServicesSection() {
             <motion.div key={service.id} variants={reducedMotion ? undefined : cardVariants}>
             <Link href={`/services/${service.slug}`} className="group block h-full">
               <div className="h-full rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/10">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="text-xs font-bold text-primary-dark uppercase tracking-widest">
-                    {String(service.order).padStart(2, "0")}
-                  </span>
+                <div className="mb-5">
                   <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                     <ServiceIcon
                       icon={service.icon}
@@ -65,7 +62,7 @@ export default function ServicesSection() {
                   </div>
                 </div>
 
-                <h3 className="text-base font-bold text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
+                <h3 className="card-heading text-foreground mb-3 group-hover:text-primary transition-colors">
                   {service.shortTitle}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">{service.summary}</p>

@@ -26,3 +26,10 @@ export const experienceLocations: ExperienceLocation[] = [
 
 export const experienceStatement =
   "Our multidisciplinary team of experts brings over a decade of experience and has worked with non-profit, public and private organisations, implementing assignments in Kenya, Uganda, Tanzania, Ethiopia, Rwanda, Malawi, Côte d’Ivoire, Central African Republic (CAR), Democratic Republic of Congo (DRC), Zambia, South Sudan, Burundi, the United States, Asia and Spain."
+
+export const technicalExpertCountries = [
+  "Ethiopia", "Rwanda", "Malawi", "Kenya", "Uganda",
+  "Central African Republic", "South Africa", "South Sudan", "C\u00f4te d\u2019Ivoire",
+] as const
+
+export const advisoryBoardLocations = ["Canada", "USA", "Asia", "Spain"] as const

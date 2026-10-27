@@ -23,7 +23,7 @@ export default function ContactPage() {
       <PageHero
         breadcrumb={{ ancestors: [{ label: "Home", href: "/" }], current: "Contact" }}
         title="Contact us"
-        description="Whether you are a government agency, donor organization, NGO, or civil society partner - we are ready to listen and co-design practical solutions."
+        description="Discuss a programme, tender or partnership. We help governments, businesses, civil society and development partners turn priorities into practical plans."
       />
 
       <ContactForm />

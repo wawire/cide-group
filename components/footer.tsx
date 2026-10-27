@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
 import { legalLinks, siteConfig } from "@/content/site"
 
 function LinkedInIcon() {
@@ -29,23 +28,25 @@ function FacebookIcon() {
 }
 
 const servicesLinks = [
-  { label: "Programme Design & Implementation", href: "/services/project-management" },
-  { label: "Research & Policy Advisory", href: "/services/research" },
+  { label: "Programme Delivery & Sustainability", href: "/services/project-management" },
+  { label: "Research & Evidence", href: "/services/research" },
   { label: "MEL & Reporting", href: "/services/mel" },
   { label: "Strategic Communications", href: "/services/communications" },
   { label: "ICT & Digital Solutions", href: "/services/tech" },
   { label: "Capacity Development", href: "/services/capacity-development" },
-  { label: "Social Enterprise & Systems", href: "/services/enterprise" },
+  { label: "Enterprise & Organisations", href: "/services/enterprise" },
   { label: "Policy Advocacy", href: "/services/advocacy" },
 ] as const
 
 const focusLinks = [
   { label: "Climate, Energy & Environment", href: "/focus-areas/climate-energy-environment" },
-  { label: "Education & Lifelong Learning", href: "/focus-areas/education-lifelong-learning" },
-  { label: "Agriculture & Food Security", href: "/focus-areas/agriculture-food-security-livelihoods" },
-  { label: "Child Rights & Social Justice", href: "/focus-areas/child-rights-social-justice" },
+  { label: "Education, Digital Skills & Youth", href: "/focus-areas/education-lifelong-learning" },
+  { label: "Food Security & Economic Development", href: "/focus-areas/agriculture-food-security-livelihoods" },
+  { label: "Child Rights & Safeguarding", href: "/focus-areas/child-rights-social-justice" },
   { label: "Economic Empowerment", href: "/focus-areas/economic-empowerment" },
   { label: "WASH", href: "/focus-areas/wash" },
+  { label: "Health & Nutrition", href: "/focus-areas/health-nutrition" },
+  { label: "GEDSI", href: "/focus-areas/gedsi" },
 ] as const
 
 const companyLinks = [
@@ -82,8 +83,8 @@ export default function Footer() {
       <div className="section-shell pt-14 pb-10">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-accent-gold">
-              Pan-African Development Advisory &middot; Est. Nairobi, Kenya
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">
+              Pan-African Advisory, Consulting &amp; Implementation
             </p>
             <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-white">
               CIDE
@@ -93,25 +94,11 @@ export default function Footer() {
           </div>
 
           <div className="lg:max-w-sm lg:text-right">
-            <p className="mb-7 text-sm leading-relaxed text-white/72">
+            <p className="text-sm leading-relaxed text-white/72">
               Locally grounded, evidence-driven, and impact-oriented solutions to Africa&apos;s most complex
               development, humanitarian, and business challenges.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-primary-dark"
-              >
-                Get in Touch
-                <ArrowUpRight size={13} />
-              </Link>
-              <Link
-                href="/focus-areas"
-                className="inline-flex items-center justify-center gap-2 rounded-sm border border-white/18 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white/78 transition-colors hover:border-white/40 hover:bg-white/5 hover:text-white"
-              >
-                Explore Solutions
-              </Link>
-            </div>
+
           </div>
         </div>
       </div>
@@ -123,13 +110,13 @@ export default function Footer() {
       <div className="section-shell py-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-6">
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Services</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">Services</p>
             <ul className="space-y-0">
               {servicesLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block py-2 text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-sm leading-snug text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -139,13 +126,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Focus Areas</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">Focus Areas</p>
             <ul className="space-y-0">
               {focusLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block py-2 text-[13px] leading-snug text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-sm leading-snug text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -155,13 +142,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Company</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">Company</p>
             <ul className="space-y-0">
               {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block py-2 text-[13px] text-white/72 transition-colors hover:text-white"
+                    className="block py-2 text-sm text-white/72 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -171,38 +158,38 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-gold">Contact</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">Contact</p>
             <div className="space-y-5">
               <div>
-                <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-white/52">General</p>
+                <p className="mb-1 text-xs uppercase tracking-[0.15em] text-white/52">General</p>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="break-all text-[13px] text-white/78 transition-colors hover:text-white"
+                  className="break-all text-sm text-white/78 transition-colors hover:text-white"
                 >
                   {siteConfig.email}
                 </a>
               </div>
               <div>
-                <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-white/52">Partnerships</p>
+                <p className="mb-1 text-xs uppercase tracking-[0.15em] text-white/52">Partnerships</p>
                 <a
                   href={`mailto:${siteConfig.partnershipsEmail}`}
-                  className="break-all text-[13px] text-white/78 transition-colors hover:text-white"
+                  className="break-all text-sm text-white/78 transition-colors hover:text-white"
                 >
                   {siteConfig.partnershipsEmail}
                 </a>
               </div>
               <div>
-                <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-white/52">Phone</p>
+                <p className="mb-1 text-xs uppercase tracking-[0.15em] text-white/52">Phone</p>
                 <a
                   href={`tel:${siteConfig.phoneHref}`}
-                  className="text-[13px] text-white/78 transition-colors hover:text-white"
+                  className="text-sm text-white/78 transition-colors hover:text-white"
                 >
                   {siteConfig.phone}
                 </a>
               </div>
               <div>
-                <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-white/52">Address</p>
-                <p className="text-[13px] leading-relaxed text-white/72">{siteConfig.address}</p>
+                <p className="mb-1 text-xs uppercase tracking-[0.15em] text-white/52">Address</p>
+                <p className="text-sm leading-relaxed text-white/72">{siteConfig.address}</p>
               </div>
 
               <div className="flex items-center gap-3 pt-2">
@@ -210,7 +197,7 @@ export default function Footer() {
                   { href: siteConfig.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
                   { href: siteConfig.social.twitter, label: "X / Twitter", Icon: XIcon },
                   { href: siteConfig.social.facebook, label: "Facebook", Icon: FacebookIcon },
-                ].map(({ href, label, Icon }) => (
+                ].filter(({ href }) => href !== "#").map(({ href, label, Icon }) => (
                   <a
                     key={label}
                     href={href}
@@ -231,13 +218,13 @@ export default function Footer() {
       <div className="border-t border-white/6">
         <div className="section-shell py-4">
           <div className="flex flex-wrap items-center justify-center gap-y-2 text-center">
-            <span className="mr-5 shrink-0 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+            <span className="mr-5 shrink-0 text-xs font-bold uppercase tracking-[0.12em] text-accent-gold">
               Coverage
             </span>
             {regions.map((region, index) => (
               <span key={region} className="flex items-center whitespace-nowrap">
-                <span className="text-[11px] tracking-wide text-white/65">{region}</span>
-                {index < regions.length - 1 ? <span className="mx-3 text-[10px] text-white/30" aria-hidden="true">·</span> : null}
+                <span className="text-xs tracking-wide text-white/65">{region}</span>
+                {index < regions.length - 1 ? <span className="mx-3 text-xs text-white/30" aria-hidden="true">·</span> : null}
               </span>
             ))}
           </div>
@@ -246,7 +233,7 @@ export default function Footer() {
 
       <div className="border-t border-white/6">
         <div className="section-shell py-4 space-y-3 text-center">
-          <p className="mx-auto text-[10px] text-white/50 leading-relaxed max-w-3xl">
+          <p className="mx-auto text-xs text-white/50 leading-relaxed max-w-3xl">
             The information on this website is for general informational purposes only. CIDE Group makes no
             representations about the accuracy or completeness of any information on this site.
             &copy; {currentYear} {siteConfig.legalName} &middot; Reg. {siteConfig.companyNumber} &middot; Registered in Kenya.
@@ -257,7 +244,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[11px] text-white/60 transition-colors hover:text-white/90"
+                  className="text-xs text-white/60 transition-colors hover:text-white/90"
                 >
                   {link.label}
                 </Link>

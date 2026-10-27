@@ -18,6 +18,87 @@ export type KnowledgeArticle = {
 
 export const knowledgeArticles: KnowledgeArticle[] = [
   {
+    slug: "from-antalya-to-impact-on-the-ground-africa-cop31",
+    title: "From Antalya to Impact on the Ground: Advancing Africa’s Priorities at COP31",
+    category: "Insights",
+    excerpt: "As COP31 convenes in Antalya, Türkiye, Africa must push for accessible climate finance, stronger adaptation, resilient food systems, support for loss and damage, child-sensitive climate action and a just energy transition. The priority is to ensure that global commitments translate into tangible benefits for communities across the continent.",
+    body: `
+<p>This article sets out six priorities for Africa at COP31: accessible climate finance, adaptation and resilience, food security, loss and damage, child-sensitive and locally led action, and a just energy transition.</p>
+
+<p>It calls for stronger links between global negotiations and local implementation, with progress measured through improvements in community resilience, essential services, livelihoods and energy access.</p>
+
+<p><a href="https://www.linkedin.com/pulse/from-antalya-impact-ground-advancing-africas-priorities-cop31-ucyqe/">Read full article on LinkedIn</a>.</p>
+    `.trim(),
+    author: "CIDE Group",
+    authorRole: "Thriving Together",
+    date: "2026-10-25",
+    readTime: "1 min read",
+    image: editorialImages["project-climate"].src,
+    featured: true,
+    tags: ["COP31", "Climate Finance", "Climate Adaptation", "Food Security", "Clean Energy", "Africa"],
+  },
+  {
+    slug: "el-nino-2026-27-emergency-preparedness-africa",
+    title: "El Niño 2026-27: Why Emergency Preparedness Matters for Africa",
+    category: "Insights",
+    excerpt: "As climate risks intensify across Eastern and Southern Africa, governments, humanitarian organisations and communities face a critical question: Are we prepared to act before disaster strikes?",
+    body: `
+<p>This article examines the different risks El Ni&ntilde;o can bring to Eastern and Southern Africa, from flooding and landslides to drought and food insecurity. It argues that preparedness should reflect local conditions and the pressures communities already face.</p>
+
+<p>It explores practical anticipatory action, including protecting water supplies, preparing emergency resources, supporting farmers and pastoralists, and turning early warnings into accessible, trusted information that communities can act on.</p>
+
+<p><a href="https://www.linkedin.com/pulse/el-ni%C3%B1o-2026-27-why-emergency-preparedness-matters-africa-lzfrf/">Read full article on LinkedIn</a>.</p>
+    `.trim(),
+    author: "CIDE Group",
+    authorRole: "Thriving Together",
+    date: "2026-09-26",
+    readTime: "1 min read",
+    image: editorialImages["knowledge-adaptation"].src,
+    featured: true,
+    tags: ["El Niño", "Emergency Preparedness", "Anticipatory Action", "Climate Resilience", "Africa"],
+  },
+  {
+    slug: "cide-group-mara-basin-conservation-forum-partnership",
+    title: "CIDE Group and Mara Basin Conservation Forum Partner to Advance Community-Led Sustainable Development in Kenya",
+    category: "News & Events",
+    excerpt:
+      "CIDE Group and the Mara Basin Conservation Forum have entered a five-year partnership to strengthen community resilience, protect natural resources, and improve livelihoods in Kenya.",
+    body: `
+<p>Signed on 28 July 2026, this five-year partnership brings together CIDE Group's technical and strategic expertise and Mara Basin Conservation Forum's community implementation experience.</p>
+
+<p>The article outlines plans to jointly design programmes, mobilise resources and strengthen institutional capacity across climate resilience, conservation, livelihoods and inclusive development in Kenya. Community ownership, accountability and evidence-informed programming underpin the collaboration.</p>
+
+<p><a href="https://www.linkedin.com/pulse/cide-group-mara-basin-conservation-forum-partner-advance-community-led-svikf/">Read full article on LinkedIn</a>.</p>
+    `.trim(),
+    author: "CIDE Group",
+    authorRole: "Thriving Together",
+    date: "2026-08-17",
+    readTime: "1 min read",
+    image: editorialImages["knowledge-co-design"].src,
+    featured: true,
+    tags: ["Partnerships", "Community-Led Development", "Climate Resilience", "Kenya"],
+  },
+  {
+    slug: "malawi-battery-breakthrough-africa-climate-resilient-energy",
+    title: "Malawi\u0027s Battery Breakthrough: A Blueprint for Africa\u0027s Climate-Resilient Energy Future",
+    category: "Insights",
+    excerpt: "When Malawi recently switched on its first utility-scale Battery Energy Storage System (BESS), it did more than commission a new piece of energy infrastructure. It sent a powerful signal that Africa\u0027s clean energy transition is entering a new phase, one defined not simply by generating renewable energy but by building resilient, intelligent energy systems capable of powering sustainable development.",
+    body: `
+<p>This article considers what Malawi's 20 MW Battery Energy Storage System means for Africa's clean energy transition. It explores how storage can support grid stability, renewable energy integration and resilience to climate-related disruptions.</p>
+
+<p>It argues for an integrated approach that connects generation and storage with infrastructure, policy, finance and institutional capacity, keeping reliable electricity and its benefits for communities at the centre of energy planning.</p>
+
+<p><a href="https://www.linkedin.com/pulse/malawis-battery-breakthrough-blueprint-africas-climate-resilient-mzg5f/">Read full article on LinkedIn</a>.</p>
+    `.trim(),
+    author: "CIDE Group",
+    authorRole: "Thriving Together",
+    date: "2026-07-28",
+    readTime: "1 min read",
+    image: editorialImages["project-climate"].src,
+    featured: true,
+    tags: ["Malawi", "Battery Storage", "Clean Energy", "Climate Resilience", "Africa"],
+  },
+  {
     slug: "community-led-development-why-it-matters",
     title: "Community-Led Development: Why Local Ownership Determines Whether Programmes Last",
     category: "Insights",

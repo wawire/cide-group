@@ -42,9 +42,7 @@ export default function Navigation() {
   const isAboutActive =
     pathname === "/about" ||
     pathname.startsWith("/about/") ||
-    pathname === "/partners" ||
-    pathname === "/focus-areas" ||
-    pathname.startsWith("/focus-areas/")
+    pathname === "/partners"
 
   const isWhatWeDoActive = pathname.startsWith("/services") || pathname.startsWith("/focus-areas")
   const isImpactActive = pathname.startsWith("/projects")
@@ -134,10 +132,10 @@ export default function Navigation() {
 
   const triggerClass = (active: boolean, menuOpen = false) =>
     cn(
-      "relative inline-flex items-center gap-1.5 px-3 py-2 min-h-11 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer select-none",
+      "relative inline-flex min-h-11 items-center whitespace-nowrap rounded-sm px-3 py-2 text-[0.9375rem] font-semibold leading-6 tracking-normal transition-colors duration-200 motion-reduce:transition-none cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-primary after:content-['']",
       active || menuOpen
-        ? "text-primary"
-        : "text-foreground hover:text-primary",
+        ? "text-primary after:opacity-100"
+        : "text-foreground hover:text-primary after:opacity-0 hover:after:opacity-100",
     )
 
   return (
@@ -182,7 +180,7 @@ export default function Navigation() {
     >
       <div className="w-full overflow-visible">
         <div className="section-shell">
-          <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
             <Link
               href="/"
               onClick={closeNow}
@@ -198,8 +196,8 @@ export default function Navigation() {
               />
             </Link>
 
-            <div className="flex items-center gap-4">
-              <div className="hidden items-center lg:flex">
+            <div className="flex items-center gap-4 lg:gap-6">
+              <div className="hidden items-center gap-1 lg:flex xl:gap-2">
                 <button
                   type="button"
                   aria-expanded={openDesktopMenu === "about"}
@@ -242,7 +240,7 @@ export default function Navigation() {
                   }}
                   className={triggerClass(isImpactActive, openDesktopMenu === "impact")}
                 >
-                  Impact
+                  Our Impact
                 </button>
 
                 <Link
@@ -257,7 +255,7 @@ export default function Navigation() {
                 </Link>
               </div>
 
-              <Button asChild className="hidden lg:inline-flex">
+              <Button asChild className="hidden px-5 text-[0.9375rem] font-semibold lg:inline-flex">
                 <Link href="/contact" onClick={closeNow}>Get Involved</Link>
               </Button>
 

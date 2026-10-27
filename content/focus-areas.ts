@@ -23,21 +23,17 @@ export const focusAreas: FocusArea[] = [
   {
     slug: "climate-energy-environment",
     image: editorialImages["focus-climate"].src,
-    title: "Climate, Energy and Environment",
+    title: "Climate, Energy & Environment",
     summary:
-      "Powering Africa's transition to a climate-resilient, low-carbon future through scalable, high-impact solutions.",
+      "Locally led climate resilience, clean energy and circular economy solutions.",
     overview:
-      "Africa sits at the centre of the global climate and development agenda. We work with governments, organisations, donors, investors, and the private sector to design and implement programmes that strengthen community resilience, accelerate the transition to clean energy, and promote inclusive, sustainable growth. Our work translates environmental science and global policy into practical, locally viable solutions that protect natural assets, sustain livelihoods, and create green economic opportunities.",
+      "We help communities and institutions respond to climate risks, restore landscapes and use resources sustainably.",
     practiceAreas: [
-      "Climate resilience integration across agriculture, health, infrastructure, and governance",
-      "Clean energy transition and energy efficiency support",
-      "Climate policy and finance for low-carbon transitions",
-      "Nature-based solutions, including agroforestry, landscape restoration, and natural regeneration",
-      "Climate-smart agriculture and natural resource management",
-      "Environmental and climate assessments",
-      "Stakeholder engagement and inclusive environmental planning",
-      "Circular economy solutions",
-      "Climate-resilient infrastructure support",
+      "Drought and flood preparedness",
+      "School climate resilience and environmental stewardship",
+      "Clean energy and energy-saving solutions",
+      "Tree nurseries, agroforestry and land regeneration",
+      "Circular economy and solid waste management",
     ],
     outcomes: [
       "Climate resilience priorities translated into locally grounded implementation.",
@@ -50,21 +46,17 @@ export const focusAreas: FocusArea[] = [
   {
     slug: "education-lifelong-learning",
     image: editorialImages["focus-education"].src,
-    title: "Education and Lifelong Learning",
+    title: "Education, Digital Literacy & Youth Engagement",
     summary:
-      "Improving learning outcomes through stronger systems, cross-sector collaboration, and inclusive, evidence-based approaches.",
+      "Inclusive learning, digital skills and employment pathways for young people.",
     overview:
-      "We support the delivery of high-quality, inclusive education for children and young people across Africa. Our work strengthens education systems and implements locally grounded solutions aligned with global education frameworks, national priorities, and donor goals. We focus on building systems that enable foundational literacy and numeracy, 21st-century skills, STEM competencies, vocational skills, and critical thinking.",
+      "We support safe, inclusive education and help young people build skills for work and participation in the digital economy.",
     practiceAreas: [
-      "Systems strengthening and policy support",
-      "Mental health and psychosocial support in learning environments",
       "Inclusive education and education in emergencies",
-      "Peacebuilding and resilience through education",
-      "Teacher development and capacity building",
-      "Cross-sectoral programming linking education with health, nutrition, and safety",
-      "Technology and innovation for learning outcomes and system efficiency",
-      "Teacher training and professional development",
-      "Career guidance and life skills training",
+      "AI, digital literacy and youth employment skills",
+      "Blended learning, virtual labs and school connectivity",
+      "Mentorship for youth, adolescent girls and young women",
+      "School safety and climate resilience",
     ],
     outcomes: [
       "Education systems strengthened through policy, planning, and stakeholder engagement.",
@@ -77,21 +69,17 @@ export const focusAreas: FocusArea[] = [
   {
     slug: "agriculture-food-security-livelihoods",
     image: editorialImages["focus-agriculture"].src,
-    title: "Agriculture, Food Security and Sustainable Livelihoods",
+    title: "Food Security & Economic Development",
     summary:
-      "Scalable, locally driven, and climate-smart solutions that strengthen food systems, rural economies, and resilience.",
+      "Stronger food systems, livelihoods and economic opportunities for women and young people.",
     overview:
-      "Agricultural and rural development plays a critical role in reducing poverty, strengthening food security, and supporting long-term economic stability across rural communities. We work with governments, donors, private sector actors, and community stakeholders to design and implement programmes that address food insecurity at its root by strengthening agricultural systems, enhancing market access, reducing post-harvest losses, and building resilience to climate and economic shocks.",
+      "We work with communities, farmer cooperatives and enterprises to improve food security, market access and household resilience.",
     practiceAreas: [
-      "Design, implementation, and evaluation of climate-smart rural development and food security programmes",
-      "Technical assistance for programme delivery, institutional strengthening, and policy support",
-      "Public-private partnerships for investment and value chain efficiency",
-      "Agricultural value chain development across production, processing, aggregation, marketing, and distribution",
-      "Value chain and market systems analysis",
-      "Capacity building for farmer organisations, cooperatives, and agribusiness enterprises",
-      "Training in climate-smart agriculture, farm management, post-harvest handling, and agribusiness development",
-      "Youth and women empowerment for productivity, enterprise development, and market access",
-      "Support for MEL frameworks to track outcomes, impact, and value for money",
+      "Climate-smart and diversified farming",
+      "Farmer cooperative links to suppliers and markets",
+      "Savings groups, financial literacy and digital tracking",
+      "Women\u2019s enterprise and youth marketplace skills",
+      "Household resilience to shocks",
     ],
     outcomes: [
       "Food systems strengthened through climate-smart, locally driven interventions.",
@@ -104,20 +92,18 @@ export const focusAreas: FocusArea[] = [
   {
     slug: "child-rights-social-justice",
     image: editorialImages["focus-child-rights"].src,
-    title: "Child Rights and Social Justice",
+    title: "Child Rights, Safeguarding & Child Protection",
     summary:
-      "Rights-based and participatory approaches that advance child protection, safeguarding, and social justice.",
+      "Practical safeguarding systems that protect children and strengthen accountability.",
     overview:
-      "Through our advocacy pillar, we advance children's rights through holistic, rights-based, and participatory approaches aligned with the Convention on the Rights of the Child. Our work combines safeguarding, child protection, participation, and ethical communications to strengthen systems that protect children and uphold dignity.",
+      "We help partners embed safeguarding, child rights and safe participation across programmes and institutions.",
     practiceAreas: [
-      "Child rights mainstreaming",
-      "Child and adult safeguarding",
-      "Child protection in emergencies",
-      "Child participation and child-led research",
-      "Capacity building for child protection actors",
-      "Development of child-friendly IEC materials and contextualised manuals",
-      "Ethical storytelling and safeguarding-aligned communications",
-      "Support for campaigns such as rights-based ethical storytelling initiatives",
+      "Safeguarding risk assessments, audits and action plans",
+      "Prevention of sexual exploitation, abuse and harassment (PSEAH)",
+      "Online child protection and child protection in emergencies",
+      "Partner due diligence, policies and response mechanisms",
+      "Training, case management and safeguarding investigations",
+      "Child-led research and ethical storytelling",
     ],
     outcomes: [
       "Child rights and safeguarding embedded more strongly in programmes and institutions.",
@@ -142,7 +128,7 @@ export const focusAreas: FocusArea[] = [
     summary:
       "Inclusive economic growth that equips individuals and communities with skills, resources, and sustainable livelihood pathways.",
     overview:
-      "We drive inclusive economic growth by equipping individuals and communities with the skills, resources, and opportunities needed to participate meaningfully in Africa's economic transformation. Our approach addresses systemic barriers to finance, strengthens local enterprise, and creates sustainable livelihood pathways, especially for women and young people.",
+      "We help women and young people build enterprises, access finance and develop skills for sustainable livelihoods.",
     practiceAreas: [
       "Local economic development and locally driven enterprise support",
       "Youth employment and skills development",
@@ -163,23 +149,43 @@ export const focusAreas: FocusArea[] = [
     image: editorialImages["focus-wash"].src,
     title: "Water, Sanitation and Hygiene (WASH)",
     summary:
-      "Climate-resilient, inclusive, and scalable WASH solutions that improve public health and strengthen community resilience.",
+      "Community engagement and campaigns that support safer hygiene and sanitation practices.",
     overview:
-      "Water is fundamental to life, health, and economic productivity, yet millions across Africa still lack access to safe and reliable services. We partner with governments, donors, and the private sector to deliver climate-resilient, inclusive, and scalable WASH solutions that improve public health, strengthen community resilience, and drive sustainable development, especially in underserved and high-risk settings.",
+      "We help partners turn WASH priorities into clear communication and community-led behaviour change.",
     practiceAreas: [
-      "Climate-resilient water access",
-      "Inclusive sanitation solutions",
-      "Community-centred programming on handwashing, menstrual hygiene management, and disease prevention",
-      "Innovative WASH technologies, including filtration systems",
-      "Conflict-sensitive water systems",
-      "Infrastructure delivery combined with community engagement and systems strengthening",
+      "Handwashing and hygiene communication",
+      "World Water Day, Global Handwashing Day and Toilet Day campaigns",
+      "Community sanitation and open defecation campaigns",
+      "Locally adapted WASH behaviour-change programmes",
     ],
     outcomes: [
-      "Safer and more reliable water and sanitation access supported in underserved settings.",
+      "Communities supported to adopt safer hygiene and sanitation practices.",
       "Behaviour change and public health outcomes strengthened through community-centred programming.",
-      "WASH solutions designed to be scalable, locally owned, and aligned with development priorities.",
+      "WASH messaging adapted to local audiences and programme priorities.",
     ],
     relatedServiceSlugs: ["project-management", "research", "mel", "communications"],
+    featuredProjectIds: [],
+  },
+  {
+    slug: "health-nutrition",
+    title: "Health & Nutrition",
+    summary: "School meals, kitchen gardening and nutrition-sensitive programmes.",
+    overview: "We support partners to connect nutrition, education and food systems through practical, locally adapted programmes.",
+    image: editorialImages["project-health"].src,
+    practiceAreas: ["School meals programmes", "Kitchen gardening", "Nutrition-sensitive value chains", "Nutrition-sensitive programme design"],
+    outcomes: ["Nutrition priorities integrated into programme design.", "Schools and communities supported with practical food and nutrition approaches."],
+    relatedServiceSlugs: ["project-management", "research", "mel"],
+    featuredProjectIds: [],
+  },
+  {
+    slug: "gedsi",
+    title: "Gender Equality, Disability & Social Inclusion",
+    summary: "Inclusive programmes and institutions that address barriers to participation.",
+    overview: "We help partners embed gender equality, disability and social inclusion across programme design, delivery and institutional practice.",
+    image: editorialImages["service-capacity"].src,
+    practiceAreas: ["GEDSI mainstreaming and inclusive programme design", "Gender analysis, audits and assessments", "Gender action plans", "Training and institutional capacity development"],
+    outcomes: ["Barriers to participation identified and addressed.", "Inclusion embedded in programme plans and institutional practice."],
+    relatedServiceSlugs: ["research", "capacity-development", "project-management", "mel"],
     featuredProjectIds: [],
   },
 ]

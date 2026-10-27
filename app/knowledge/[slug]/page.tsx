@@ -143,7 +143,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                     <Link key={rel.slug} href={`/knowledge/${rel.slug}`} className="group block">
                       <div className="flex gap-3 items-start">
                         <div className="relative h-14 w-20 rounded-lg overflow-hidden shrink-0">
-                          <Image src={rel.image} alt={rel.title} fill sizes="(max-width: 768px) 100vw, 400px" className="object-contain" />
+                          <Image src={rel.image} alt={rel.title} fill sizes="80px" className="object-cover" />
                         </div>
                         <div>
                           <p className="text-xs font-bold text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-2">

@@ -56,7 +56,7 @@ export function ServicesMegaMenu({ open, onClose, onMouseEnter, onMouseLeave, me
                   </h3>
 
                   <p className="text-xs text-text-secondary line-clamp-2 mb-3 grow">
-                    Learn how we deploy this expertise across the continent
+                    {service.summary}
                   </p>
 
                   <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover/item:opacity-100 transition-opacity translate-x-0 group-hover/item:translate-x-1">

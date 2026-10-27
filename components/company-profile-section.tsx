@@ -9,18 +9,18 @@ export default function CompanyProfileSection() {
         <SectionHeading className="text-center mb-10" kicker="Vision, Mission and Values" title="What Guides CIDE Group" />
 
         <div className="grid lg:grid-cols-2 gap-8 mb-10">
-          <Card className="p-8 bg-white border-border">
+          <Card className="p-8 bg-surface border-border">
             <p className="section-kicker mb-3">Our Mission</p>
             <p className="text-xl leading-relaxed text-foreground">{companyProfile.mission}</p>
           </Card>
-          <Card className="p-8 bg-white border-border">
+          <Card className="p-8 bg-surface border-border">
             <p className="section-kicker mb-3">Our Vision</p>
             <p className="text-xl leading-relaxed text-foreground">{companyProfile.vision}</p>
           </Card>
         </div>
 
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8">
-          <Card className="p-8 bg-white border-border">
+          <Card className="p-8 bg-surface border-border">
             <p className="section-kicker mb-4">Values Guide Our Every Move</p>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {companyProfile.coreValues.map((value) => (

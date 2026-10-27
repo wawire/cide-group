@@ -25,8 +25,6 @@ export const metadata = {
 export default async function KnowledgeHubPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category } = await searchParams
   const articles = category ? knowledgeArticles.filter((article) => article.category === category) : knowledgeArticles
-  const featured = articles.filter((article) => article.featured)
-  const rest = articles.filter((article) => !article.featured)
 
   return (
     <main className="min-h-screen">
@@ -47,14 +45,14 @@ export default async function KnowledgeHubPage({ searchParams }: { searchParams:
       </PageHero>
 
       {/* ── Featured articles ─────────────────────────────────────────────── */}
-      {featured.length > 0 && (
+      {articles.length > 0 && (
         <section className="section-space bg-background">
           <div className="section-shell">
             <div className="flex items-end justify-between mb-10">
-              <SectionHeading kicker="Featured" title="Latest thinking" />
+              <SectionHeading kicker="Knowledge Hub" title="Latest thinking" />
             </div>
-            <div className="grid lg:grid-cols-2 gap-6">
-              {featured.map((article) => (
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              {articles.map((article) => (
                 <KnowledgeCard key={article.slug} article={article} />
               ))}
             </div>
@@ -63,16 +61,6 @@ export default async function KnowledgeHubPage({ searchParams }: { searchParams:
       )}
 
       {/* ── All articles ──────────────────────────────────────────────────── */}
-      {rest.length > 0 && (
-        <section className="section-space bg-surface-secondary border-t border-border">
-          <div className="section-shell">
-            <SectionHeading className="mb-10" kicker="More from the Hub" title="All articles" />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {rest.map((article) => <KnowledgeCard key={article.slug} article={article} />)}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       {articles.length === 0 && <section className="section-space section-shell"><EmptyState title="No articles in this category" description="Choose another category or view all insights."><Link href="/knowledge" className="mt-3 inline-block text-primary">View all insights</Link></EmptyState></section>}

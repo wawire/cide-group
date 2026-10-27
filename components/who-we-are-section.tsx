@@ -12,7 +12,7 @@ const priorities = [
 
 export default function WhoWeAreSection() {
   return (
-    <section className="section-space overflow-hidden bg-white">
+    <section className="section-space overflow-hidden bg-surface">
       <div className="section-shell">
         <div className="grid items-start gap-10 lg:items-stretch lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <WhoWeAreImageCluster />
@@ -20,14 +20,14 @@ export default function WhoWeAreSection() {
           <div>
             <p className="section-kicker mb-4">Who We Are</p>
 
-            <h2 className="mb-5 text-2xl font-semibold leading-tight tracking-tight text-foreground xl:text-[1.5rem]">Pan-African Development Advisory, Research & Programme Implementation</h2>
+            <h2 className="section-heading mb-5">Pan-African Advisory, Consulting & Implementation</h2>
 
             <p className="mb-5 text-text-secondary leading-relaxed">
-              CIDE Group (registered as <strong className="font-semibold text-foreground">COMMUNE IDEE (CIDE) GROUPE LTD</strong>) is a pan-African development advisory, research, programme design, and implementation organisation working across Anglophone, Francophone, and Lusophone Africa.
+              We help governments, businesses, civil society and development partners design, resource and deliver programmes across Africa.
             </p>
 
             <p className="mb-6 text-text-secondary leading-relaxed">
-              We specialise in delivering evidence-based, community-led, and data-driven development solutions that support governments, donors, investors, NGOs, and private sector organisations in addressing complex development, humanitarian, and market system challenges.
+              Our multidisciplinary experts combine local insight with global perspectives, adapting research and delivery to each country and institution.
             </p>
 
             <div className="grid gap-x-8 gap-y-4 md:grid-cols-2 mb-8">

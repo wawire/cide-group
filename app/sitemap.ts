@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next"
 import { focusAreas, projects, services } from "@/content"
-import { publishedResearchResources } from "@/content/research"
 import { knowledgeArticles } from "@/content/knowledge"
 
 const BASE_URL = "https://cidegroup.org"
@@ -42,18 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  const researchPages: MetadataRoute.Sitemap = publishedResearchResources
-    .map((resource) => ({
-      url: `${BASE_URL}/research#resource-${resource.id}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }))
-
   const knowledgePages: MetadataRoute.Sitemap = knowledgeArticles.map((article) => ({
     url: `${BASE_URL}/knowledge/${article.slug}`,
     changeFrequency: "monthly",
     priority: 0.6,
   }))
 
-  return [...staticPages, ...servicePages, ...focusAreaPages, ...projectPages, ...researchPages, ...knowledgePages]
+  return [...staticPages, ...servicePages, ...focusAreaPages, ...projectPages, ...knowledgePages]
 }

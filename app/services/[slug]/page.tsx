@@ -1,3 +1,4 @@
+import RelatedServices from "@/components/related-services"
 import { Button } from "@/components/ui/button"
 import PageHero from "@/components/page-hero"
 import PageCallout from "@/components/page-callout"
@@ -5,8 +6,7 @@ import { notFound } from "next/navigation"
 import { getServiceBySlug, services } from "@/content/services"
 import { siteConfig } from "@/content/site"
 import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export async function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }))
@@ -64,7 +64,6 @@ export default async function ServicePage({ params }: { params: Params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         breadcrumb={{ ancestors: [{ label: "Home", href: "/" }, { label: "Services", href: "/services" }], current: service.title }}
         title={service.title}
@@ -76,142 +75,27 @@ export default async function ServicePage({ params }: { params: Params }) {
         </Link></Button>
       </PageHero>
 
-      {/* ── Overview — two column ─────────────────────────────────────────── */}
       <section className="section-space bg-background">
-        <div className="section-shell grid lg:grid-cols-[1fr_360px] gap-12 items-start">
+        <div className="section-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-12">
           <div>
-            <p className="section-kicker mb-4">What We Do</p>
-            <h2 className="section-heading mb-6">{service.title}</h2>
-            <p className="text-xl text-text-secondary leading-relaxed">{service.description}</p>
+            <p className="section-kicker mb-3">What We Offer</p>
+            <h2 className="section-heading mb-5">Support tailored to your programme</h2>
+            <p className="max-w-2xl leading-relaxed text-text-secondary">{service.description}</p>
+            <Link href="/about" className="inline-link mt-5 inline-block text-sm">How our delivery model works</Link>
           </div>
-
-          {/* Sticky dark sidebar */}
-          <div className="lg:sticky lg:top-24">
-            <div className="rounded-xl bg-hero-background p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-5">What's Included</p>
-              <ul className="space-y-3.5 mb-7">
-                {service.capabilities.map((cap) => (
-                  <li key={cap} className="flex items-start gap-3">
-                    <CheckCircle2 size={14} className="text-accent-gold mt-0.5 shrink-0" />
-                    <span className="text-sm text-white/72 leading-snug">{cap}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark transition-colors font-bold px-5 py-3 rounded-lg text-xs uppercase tracking-wide w-full"
-              >
-                Get in Touch
-                <ArrowRight size={13} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Capabilities — editorial numbered list ────────────────────────── */}
-      <section className="section-space bg-surface-secondary border-y border-border">
-        <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
-          <div className="lg:sticky lg:top-24">
-            <p className="section-kicker mb-4">Core Capabilities</p>
-            <h2 className="text-3xl font-semibold text-foreground leading-tight">
-              How we deliver this service
-            </h2>
-          </div>
-          <div className="divide-y divide-border">
-            {service.capabilities.map((cap, i) => (
-              <div key={cap} className="py-6 grid grid-cols-[44px_1fr] gap-5 group">
-                <span className="text-2xl font-bold text-border group-hover:text-primary transition-colors tabular-nums leading-none pt-1 select-none">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug pt-1">
-                  {cap}
-                </p>
-              </div>
+          <ol className="divide-y divide-border border-y border-border">
+            {service.capabilities.map((capability, index) => (
+              <li key={capability} className="grid grid-cols-[2rem_1fr] gap-4 py-5">
+                <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-text-muted">{String(index + 1).padStart(2, "0")}</span>
+                <p className="text-base font-semibold leading-relaxed text-foreground">{capability}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* ── Approach pillars — dark strip ─────────────────────────────────── */}
-      <section className="section-space bg-hero-background">
-        <div className="section-shell">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Our Approach</p>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto leading-tight">
-              Community-led, evidence-based, and built for long-term resilience
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                num: "01",
-                title: "Locally grounded",
-                desc: "We work alongside local partners and communities from day one, ensuring every solution fits the implementation reality.",
-              },
-              {
-                num: "02",
-                title: "Evidence-driven",
-                desc: "Research, data, and applied analytics guide how we design, adapt, and evaluate our work to maximise measurable impact.",
-              },
-              {
-                num: "03",
-                title: "Built to last",
-                desc: "We plan for sustainability and local ownership so that impact — and the systems that sustain it — outlast our engagement.",
-              },
-            ].map(({ num, title, desc }) => (
-              <div key={num} className="border-l-2 border-primary pl-6">
-                <p className="text-accent-gold text-xs font-bold tabular-nums mb-3">{num}</p>
-                <h3 className="text-base font-bold text-white mb-2">{title}</h3>
-                <p className="text-sm text-white/48 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RelatedServices services={relatedServices} kicker="Explore More" title="Related Services" />
 
-      {/* ── Related services ─────────────────────────────────────────────── */}
-      <section className="section-space bg-background">
-        <div className="section-shell">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="section-kicker mb-3">Explore More</p>
-              <h2 className="text-3xl font-semibold text-foreground">Related Services</h2>
-            </div>
-            <Link
-              href="/services"
-              className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
-            >
-              All Services <ArrowRight size={15} />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {relatedServices.map((rel) => (
-              <Link key={rel.id} href={`/services/${rel.slug}`} className="group block">
-                <div className="relative h-44 rounded-xl overflow-hidden mb-4">
-                  <Image
-                    src={rel.image}
-                    alt={rel.title}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-hero-background/80 to-transparent" />
-                  <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-gold">
-                    {String(rel.order).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3 className="font-bold text-foreground group-hover:text-primary transition-colors mb-1.5 leading-snug">
-                  {rel.shortTitle}
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{rel.summary}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <PageCallout
         eyebrow="Work With Us"
         title="Ready to put this into practice?"

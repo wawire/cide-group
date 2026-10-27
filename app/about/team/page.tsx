@@ -64,7 +64,7 @@ export default function TeamPage() {
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Associate Network</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground md:text-4xl">
+                <h2 className="section-heading mt-4 text-foreground">
                   Additional sector and country depth when the assignment calls for it.
                 </h2>
                 <p className="mt-4 max-w-3xl text-base leading-relaxed text-text-secondary md:text-lg">

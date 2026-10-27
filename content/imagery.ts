@@ -1,3 +1,26 @@
+export const eventImages = {
+  stakeholderDiscussion: {
+    src: "/images/events/cancer-care-workshop/stakeholder-discussion.jpeg",
+    alt: "Two participants discussing workshop materials at a cancer-care workshop.",
+    caption: "Stakeholder discussion",
+  },
+  groupFacilitation: {
+    src: "/images/events/cancer-care-workshop/group-facilitation.jpeg",
+    alt: "A facilitator leading a group discussion at a cancer-care workshop.",
+    caption: "Facilitated group discussion",
+  },
+  participantReflection: {
+    src: "/images/events/cancer-care-workshop/participant-reflection.jpeg",
+    alt: "A workshop participant listening beside notes on cancer prevention and support.",
+    caption: "Listening and reflection",
+  },
+  workshopPresentation: {
+    src: "/images/events/cancer-care-workshop/workshop-presentation.jpeg",
+    alt: "A presenter beside the East Africa Comprehensive Women Cancer Project banner.",
+    caption: "Cancer prevention and care presentation",
+  },
+} as const
+
 export type EditorialImage = {
   src: string
   width: number

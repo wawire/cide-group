@@ -27,11 +27,10 @@ export default function ProjectsClientPage() {
 
   return (
     <>
-      {/* ── Filter bar ───────────────────────────────────────────────────── */}
       <section id="project-filters" className="scroll-mt-16 bg-background border-b border-border lg:sticky lg:top-16 z-20">
         <div className="section-shell py-4 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mr-1">Theme</span>
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-text-muted mr-1">Theme</span>
             <button type="button" aria-pressed={selectedService === null} onClick={() => setSelectedService(null)} className={filterBtn(selectedService === null)}>
               All
             </button>
@@ -42,7 +41,7 @@ export default function ProjectsClientPage() {
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mr-1">Country</span>
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-text-muted mr-1">Country</span>
             <button type="button" aria-pressed={selectedCountry === null} onClick={() => setSelectedCountry(null)} className={filterBtn(selectedCountry === null)}>
               All
             </button>
@@ -55,8 +54,7 @@ export default function ProjectsClientPage() {
         </div>
       </section>
 
-      {/* ── Project grid ─────────────────────────────────────────────────── */}
-      <section className="py-16 bg-background">
+      <section className="section-space bg-background">
         <div className="section-shell">
           {filtered.length === 0 ? (
             <EmptyState title="No projects match your filters" description="Try another theme or country, or clear both filters.">

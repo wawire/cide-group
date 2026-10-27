@@ -500,6 +500,22 @@
     line-height: 1.2;
   }
 
+  .card-heading {
+    @apply text-xl font-semibold;
+    line-height: 1.35;
+  }
+
+  .card-heading a,
+  .card-heading a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-heading a:hover,
+  .card-heading a:focus-visible {
+    color: var(--primary);
+  }
+
   .section-kicker {
     @apply text-xs font-bold uppercase tracking-[0.12em] text-primary;
   }

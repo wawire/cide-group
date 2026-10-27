@@ -52,7 +52,7 @@ const areasOfWork = [
   "Research, Evidence & Policy Advisory",
   "Monitoring, Evaluation & Learning",
   "Strategic Communications & Knowledge Management",
-  "Gender Equity, Diversity and Social Inclusion (GEDSI)",
+  "Gender Equality, Disability and Social Inclusion (GEDSI)",
   "Climate, Energy & Environment",
   "Agriculture, Food Security & Livelihoods",
   "Child Rights & Safeguarding",
@@ -84,7 +84,7 @@ export default function CareersPage() {
         <div className="section-shell grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           <div className="lg:sticky lg:top-24">
             <p className="section-kicker mb-4">Why CIDE Group</p>
-            <h2 className="text-3xl font-semibold text-foreground leading-tight">
+            <h2 className="section-heading text-foreground">
               A team built for serious development work
             </h2>
             <p className="mt-5 text-text-secondary leading-relaxed">
@@ -124,7 +124,7 @@ export default function CareersPage() {
             </p>
             <div className="grid sm:grid-cols-2 gap-2.5">
               {areasOfWork.map((area) => (
-                <div key={area} className="flex items-start gap-3 rounded-lg border border-border bg-white px-4 py-3">
+                <div key={area} className="flex items-start gap-3 rounded-lg border border-border bg-surface px-4 py-3">
                   <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0" />
                   <span className="text-sm font-medium text-foreground leading-snug">{area}</span>
                 </div>
@@ -177,7 +177,7 @@ export default function CareersPage() {
           {/* Content side */}
           <div className="bg-hero-background p-10 lg:p-16 flex flex-col justify-center">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold mb-4">Work With Us</p>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-white mb-5 leading-tight">
+            <h2 className="section-heading font-serif text-white mb-5">
               We welcome expressions of interest
             </h2>
             <p className="text-white/62 leading-relaxed mb-8">

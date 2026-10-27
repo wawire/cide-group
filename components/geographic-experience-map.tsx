@@ -183,7 +183,7 @@ export default function GeographicExperienceMap() {
       <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         {experienceLocations.map((location) => (
           <li key={location.code}>
-            <button type="button" onClick={() => selectLocation(location)} aria-pressed={selected?.code === location.code} aria-label={`Explore ${location.name}`} className={`flex w-full items-center gap-3 rounded-lg border px-3 py-3 text-left text-xs font-semibold transition-colors ${selected?.code === location.code ? "border-primary bg-primary/5 text-primary" : "border-border bg-white text-foreground hover:border-primary/50"}`}>
+            <button type="button" onClick={() => selectLocation(location)} aria-pressed={selected?.code === location.code} aria-label={`Explore ${location.name}`} className={`flex w-full items-center gap-3 rounded-lg border px-3 py-3 text-left text-xs font-semibold transition-colors ${selected?.code === location.code ? "border-primary bg-primary/5 text-primary" : "border-border bg-surface text-foreground hover:border-primary/50"}`}>
               {location.kind === "country" ? <Image src={`/flags/${location.code}.svg`} alt="" width={28} height={21} className="shrink-0 rounded-sm" /> : <Globe2 size={28} className="shrink-0 text-primary" aria-hidden="true" />}
               <span>{location.label}</span>
             </button>

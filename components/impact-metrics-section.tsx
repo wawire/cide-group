@@ -74,7 +74,7 @@ export default function ImpactMetricsSection() {
       <div className="section-shell relative z-10">
         <div className="text-center mb-10">
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-4">Proven at Scale</p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+          <h2 className="section-heading text-white mb-4">
             Our Impact Across Africa
           </h2>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">

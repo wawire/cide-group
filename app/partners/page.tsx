@@ -9,12 +9,12 @@ import PartnerLogos from "@/components/partner-logos"
 export const metadata = {
   title: "Why Partner With CIDE Group",
   description:
-    "Why partners work with CIDE Group: cost-efficient delivery, implementation strength, scalable models, evidence, and ethical practice.",
+    "Partner with CIDE Group for locally grounded programme delivery, research and MEL, with specialist finance, grants and fiduciary support when needed.",
   alternates: { canonical: `${siteConfig.url}/partners` },
   openGraph: {
     title: "Why Partner With CIDE Group",
     description:
-      "Why partners work with CIDE Group: cost-efficient delivery, implementation strength, scalable models, evidence, and ethical practice.",
+      "Partner with CIDE Group for locally grounded programme delivery, research and MEL, with specialist finance, grants and fiduciary support when needed.",
     url: `${siteConfig.url}/partners`,
   },
 }
@@ -45,6 +45,14 @@ const reasons = [
     description:
       "Safeguarding, dignified representation, and rights-based communications are embedded across all our work.",
   },
+]
+
+const jointOffers = [
+  { title: "Programme Finance & Grants", description: "Costed programme design, partner budgets, grant structures and disbursement plans." },
+  { title: "Partner Assurance & Capacity", description: "Due diligence, partner risk reviews, corrective-action plans and finance coaching." },
+  { title: "Public Financial Management & Fiduciary Controls", description: "Control diagnostics, procurement reviews and audit remediation." },
+  { title: "Finance Systems, Data & Reporting", description: "Finance workflows, system requirements, dashboards and implementation readiness." },
+  { title: "Bid Financial Architecture", description: "Compliant costing, budget narratives, partner consolidation and value-for-money analysis." },
 ]
 
 const commitments = [
@@ -125,7 +133,7 @@ export default function PartnersPage() {
               <div className="rounded-xl bg-hero-background p-7">
                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-gold mb-3">Ready to collaborate?</p>
                 <p className="text-white/65 text-sm leading-relaxed mb-5">
-                  Reach out to discuss programme design, implementation support, research, or strategic collaboration.
+                  Bring us a tender, consortium opportunity or programme challenge. We build partnerships where our combined expertise adds value.
                 </p>
                 <Link
                   href="/contact"
@@ -141,6 +149,30 @@ export default function PartnersPage() {
       </section>
 
       {/* ── Ethical commitment — full image strip ─────────────────────────── */}
+      <section className="section-space bg-surface-secondary border-y border-border">
+        <div className="section-shell grid gap-8 lg:grid-cols-2">
+          <div>
+            <p className="section-kicker mb-4">Specialist Partnership Support</p>
+            <h2 className="section-heading mb-5">Connect programme design with financial delivery</h2>
+            <p className="text-text-secondary leading-relaxed mb-4">
+              CIDE leads thematic strategy, research, local delivery, safeguarding, GEDSI and MEL.
+              Specialist finance experts lead or co-lead grants, financial controls and systems where the assignment calls for them.
+            </p>
+            <Link href="/contact" className="inline-flex items-center gap-2 text-primary font-semibold">
+              Discuss a joint opportunity <ArrowRight size={15} />
+            </Link>
+          </div>
+          <div className="divide-y divide-border">
+            {jointOffers.map((offer) => (
+              <details key={offer.title} className="py-4">
+                <summary className="cursor-pointer font-semibold text-foreground rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">{offer.title}</summary>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{offer.description}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-0">
         <div className="grid lg:grid-cols-2">
 
