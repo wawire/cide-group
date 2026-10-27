@@ -1,185 +1,71 @@
-name: Deploy → Production
+name: Deploy to Production
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
   group: production
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
+  check:
+    uses: ./.github/workflows/ci.yml
+
   deploy:
-    name: Build & Deploy
+    name: Build and deploy Docker release
+    needs: check
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     steps:
-      - name: Deploy to Vultr via SSH
+      - name: Deploy CIDE over SSH
         uses: appleboy/ssh-action@v1.2.0
-        env:
-          SUDO_PASS: ${{ secrets.VULTR_SUDO_PASS }}
         with:
           host: ${{ secrets.VULTR_HOST }}
           username: ${{ secrets.VULTR_USER }}
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           port: 22
           command_timeout: 25m
-          envs: SUDO_PASS
           script: |
-            set -e
-            APP_DIR="$HOME/cide-group"
-            APP_PORT=3001
+            set -eu
+            REVISION='${{ github.sha }}'
+            RELEASE_DIR="$HOME/cide-releases/${REVISION}-${{ github.run_id }}-${{ github.run_attempt }}"
+            CONTAINER=cide-group-web-1
+            CURRENT_DIR=$(docker inspect "$CONTAINER" --format '{{index .Config.Labels "com.docker.compose.project.working_dir"}}')
+            PREVIOUS_IMAGE=$(docker inspect "$CONTAINER" --format '{{.Image}}')
+            ROLLBACK_TAG="cidegroup-web:rollback-${REVISION}-${{ github.run_id }}-${{ github.run_attempt }}"
+            test -f "$CURRENT_DIR/.env.production.local"
+            test ! -e "$RELEASE_DIR"
 
-            echo "── Clone or update repo ─────────────────"
-            if [ ! -d "$APP_DIR/.git" ]; then
-              git clone https://github.com/wawire/cide-group.git "$APP_DIR"
-              if [ -f /var/www/cide-group/.env.production.local ]; then
-                cp /var/www/cide-group/.env.production.local "$APP_DIR/.env.production.local"
-                echo "✓ Copied .env.production.local"
-              fi
-            else
-              cd "$APP_DIR"
-              git fetch origin main
-              git reset --hard origin/main
+            git -C "$HOME/cide-group" fetch https://github.com/wawire/cide-group.git "$REVISION"
+            mkdir -p "$RELEASE_DIR"
+            git -C "$HOME/cide-group" archive "$REVISION" | tar -x -C "$RELEASE_DIR"
+            cp "$CURRENT_DIR/.env.production.local" "$RELEASE_DIR/.env.production.local"
+            chmod 600 "$RELEASE_DIR/.env.production.local"
+            cd "$RELEASE_DIR"
+            docker tag "$PREVIOUS_IMAGE" "$ROLLBACK_TAG"
+            docker compose -p cide-group build web
+
+            rollback() {
+              docker tag "$ROLLBACK_TAG" cidegroup-web:latest
+              cd "$CURRENT_DIR"
+              docker compose -p cide-group up -d --no-deps --force-recreate web
+            }
+            if ! docker compose -p cide-group up -d --no-deps web; then
+              rollback
+              exit 1
             fi
-
-            cd "$APP_DIR"
-
-            echo "── Git HEAD ─────────────────────────────"
-            git log --oneline -1
-
-            echo "── Sync env secrets ─────────────────────"
-            if [ -f /var/www/cide-group/.env.production.local ]; then
-              cp /var/www/cide-group/.env.production.local "$APP_DIR/.env.production.local"
-              echo "✓ Synced .env.production.local"
-            elif [ ! -f "$APP_DIR/.env.production.local" ]; then
-              echo "⚠ .env.production.local missing — SMTP will not work"
-            else
-              echo "✓ .env.production.local already present"
-            fi
-
-            echo "── Installing dependencies ──────────────"
-            npm ci --prefer-offline
-
-            echo "── Clean build ──────────────────────────"
-            rm -rf .next
-            npm run build
-
-            echo "── Free port $APP_PORT before starting app ──────────────────────"
-            pm2 kill 2>/dev/null || true
-            echo "$SUDO_PASS" | sudo -S bash -c "
-              PIDS=\$(ss -tlnp | grep ':${APP_PORT}' | grep -oP 'pid=\K[0-9]+' | sort -u)
-              if [ -n \"\$PIDS\" ]; then
-                echo \"Killing PIDs on port ${APP_PORT}: \$PIDS\"
-                echo \"\$PIDS\" | xargs kill -9
-              else
-                echo 'port ${APP_PORT} already free'
-              fi
-            " 2>/dev/null || true
-            sleep 2
-            echo "$SUDO_PASS" | sudo -S ss -tlnp | grep ":${APP_PORT}" || echo "✓ port $APP_PORT is free"
-
-            echo "── Start PM2 with new build ─────────────"
-            pm2 stop cidegroup-web 2>/dev/null || true
-            pm2 delete cidegroup-web 2>/dev/null || true
-            pm2 start ecosystem.config.cjs
-            pm2 save
-
-            sleep 5
-            echo "── PM2 status ───────────────────────────"
-            pm2 list
-
-            echo "── Health check on port $APP_PORT ───────"
-            for i in 1 2 3 4 5; do
-              if curl -fsS "http://127.0.0.1:${APP_PORT}/api/health"; then
-                echo "✓ App is healthy on port $APP_PORT"
+            HEALTHY=false
+            for attempt in 1 2 3 4 5 6 7 8 9 10; do
+              if curl -fsS http://127.0.0.1:3001/api/health; then
+                HEALTHY=true
                 break
               fi
-              echo "Attempt $i failed, retrying in 3s..."
               sleep 3
-              if [ "$i" = "5" ]; then
-                echo "✗ Health check failed"
-                pm2 logs cidegroup-web --lines 50 --nostream
-                exit 1
-              fi
             done
-
-            echo "── Rewrite nginx config to proxy cidegroup.org → port $APP_PORT ──"
-            CSP_VALUE="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://images.pexels.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
-
-            # Write the authoritative config to a temp file, then sudo-copy it in
-            TMPCONF=$(mktemp)
-            cat > "$TMPCONF" << CONFEOF
-            server {
-                listen 80;
-                listen [::]:80;
-                server_name cidegroup.org www.cidegroup.org;
-                return 301 https://\$host\$request_uri;
-            }
-            server {
-                listen 443 ssl;
-                listen [::]:443 ssl;
-                server_name cidegroup.org www.cidegroup.org;
-                ssl_certificate /etc/letsencrypt/live/cidegroup.org/fullchain.pem;
-                ssl_certificate_key /etc/letsencrypt/live/cidegroup.org/privkey.pem;
-                include /etc/letsencrypt/options-ssl-nginx.conf;
-                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-                location / {
-                    proxy_pass http://127.0.0.1:${APP_PORT};
-                    proxy_http_version 1.1;
-                    proxy_set_header Upgrade \$http_upgrade;
-                    proxy_set_header Connection 'upgrade';
-                    proxy_set_header Host \$host;
-                    proxy_set_header X-Real-IP \$remote_addr;
-                    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-                    proxy_set_header X-Forwarded-Proto \$scheme;
-                    proxy_cache_bypass \$http_upgrade;
-                    proxy_hide_header Content-Security-Policy;
-                    add_header Content-Security-Policy "${CSP_VALUE}" always;
-                    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-                    add_header X-Content-Type-Options "nosniff" always;
-                    add_header X-Frame-Options "DENY" always;
-                    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-                }
-            }
-            CONFEOF
-
-            echo "$SUDO_PASS" | sudo -S cp "$TMPCONF" /etc/nginx/sites-available/cidegroup.org
-            rm -f "$TMPCONF"
-            echo "✓ Wrote /etc/nginx/sites-available/cidegroup.org (port $APP_PORT)"
-
-            # Disable ALL other cidegroup.org configs in sites-enabled
-            for ENABLED in /etc/nginx/sites-enabled/*; do
-              if ! echo "$SUDO_PASS" | sudo -S test -f "$ENABLED" 2>/dev/null; then continue; fi
-              BASENAME=$(basename "$ENABLED")
-              if [ "$BASENAME" = "cidegroup.org" ]; then continue; fi
-              HAS_DOMAIN=$(echo "$SUDO_PASS" | sudo -S grep -l "server_name.*cidegroup\.org" "$ENABLED" 2>/dev/null || true)
-              if [ -n "$HAS_DOMAIN" ]; then
-                echo "  ✗ Removing duplicate: $ENABLED"
-                echo "$SUDO_PASS" | sudo -S rm -f "$ENABLED"
-              fi
-            done
-
-            # Ensure our config is symlinked
-            if ! echo "$SUDO_PASS" | sudo -S test -L "/etc/nginx/sites-enabled/cidegroup.org" 2>/dev/null; then
-              echo "$SUDO_PASS" | sudo -S ln -sf /etc/nginx/sites-available/cidegroup.org /etc/nginx/sites-enabled/cidegroup.org
-              echo "  ✓ Symlinked cidegroup.org into sites-enabled"
-            else
-              echo "  ✓ cidegroup.org already in sites-enabled"
+            if [ "$HEALTHY" != true ]; then
+              rollback
+              exit 1
             fi
-
-            echo "── nginx test & reload ───────────────────"
-            echo "$SUDO_PASS" | sudo -S nginx -t && \
-              echo "$SUDO_PASS" | sudo -S nginx -s reload && \
-              echo "✓ nginx reloaded" || \
-              echo "✗ nginx config error — check manually"
-
-            echo "── Verify /where-we-work via nginx ──────"
-            sleep 2
-            STATUS=$(curl -so /dev/null -w "%{http_code}" "http://127.0.0.1:${APP_PORT}/where-we-work" 2>/dev/null)
-            echo "/where-we-work → HTTP $STATUS"
-            [ "$STATUS" = "200" ] && echo "✓ Route confirmed" || echo "⚠ Unexpected status (may still be warming up)"
-
-            echo "✅ Deploy complete"
+            curl -fsS https://cidegroup.org/api/health
+            curl -fsS https://www.cidegroup.org/api/health
+            printf 'Deployed revision %s from %s\n' "$REVISION" "$RELEASE_DIR"
